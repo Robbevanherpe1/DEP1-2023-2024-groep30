@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import csv
 
 base_url = "https://www.voetbalkrant.com/belgie/jupiler-pro-league/geschiedenis/"
-start_year = 2004
-end_year = 2005 
+start_year = 2003
+end_year = 2023
 
 with open('matches.csv', mode='w', newline='') as file:
     writer = csv.DictWriter(file, fieldnames=['Date', 'Home Team', 'Score', 'Away Team'])
