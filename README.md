@@ -4,7 +4,7 @@ github van DEP-G30 Aalst
 
 ## Deel 1: Voetbalwedstrijdgegevens Scraper
 
-Deze Python-script haalt gegevens op van de website Voetbalkrant om informatie over voetbalwedstrijden in de Belgische Jupiler Pro League van 2002 tot 2022 te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `matches.csv`.
+Deze Python-script haalt gegevens op van de website Voetbalkrant om informatie over voetbalwedstrijden in de Belgische Jupiler Pro League van 2002 tot 2023 te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `matches.csv`.
 
 ## Vereisten
 
