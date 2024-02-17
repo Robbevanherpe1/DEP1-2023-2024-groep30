@@ -10,7 +10,7 @@ end_year = datetime.now().year - 1
 match_id = 1
 
 with open('matches.csv', mode='w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=['ID', 'Start Year', 'End Year', 'Date', 'Time', 'Home Team', 'Score', 'Away Team'])
+    writer = csv.DictWriter(file, fieldnames=['ID', 'Startjaar', 'Eindjaar', 'Datum', 'Tijd', 'Thuisploeg', 'Score', 'Uitploeg'])
     writer.writeheader()
 
     for year in range(start_year, end_year + 1):
@@ -33,17 +33,17 @@ with open('matches.csv', mode='w', newline='') as file:
 
                 writer.writerow({
                     'ID': match_id,
-                    'Start Year': year, 
-                    'End Year': year + 1, 
-                    'Date': match_date, 
-                    'Time': match_time, 
-                    'Home Team': home_team, 
+                    'Startjaar': year, 
+                    'Eindjaar': year + 1, 
+                    'Datum': match_date, 
+                    'Tijd': match_time, 
+                    'Thuisploeg': home_team, 
                     'Score': score, 
-                    'Away Team': away_team
+                    'Uitploeg': away_team
                 })
 
                 match_id += 1 # Verhoog ID
 
-            print(f"Match data for {year}-{year + 1} has been written to matches.csv.")
+            print(f"Wedstrijdgegevens voor {year}-{year + 1} zijn geschreven naar matches.csv.")
         else:
-            print(f"Failed to retrieve data for {year}-{year + 1}. Status code: {response.status_code}")
+            print(f"Fout bij het ophalen van gegevens voor {year}-{year + 1}. Statuscode: {response.status_code}")
