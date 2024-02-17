@@ -1,13 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+from datetime import datetime
 
 base_url = "https://www.voetbalkrant.com/belgie/jupiler-pro-league/geschiedenis/"
 start_year = 2002
-end_year = 2023 #inclusief dit jaar
+end_year = datetime.now().year - 1
+
+match_id = 1
 
 with open('matches.csv', mode='w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=['Date', 'Home Team', 'Score', 'Away Team'])
+    writer = csv.DictWriter(file, fieldnames=['ID', 'Start Year', 'End Year', 'Date', 'Time', 'Home Team', 'Score', 'Away Team'])
     writer.writeheader()
 
     for year in range(start_year, end_year + 1):
@@ -21,12 +24,25 @@ with open('matches.csv', mode='w', newline='') as file:
 
             for row in match_rows:
                 cells = row.find_all('td')
-                match_date = cells[0].text.strip()
+                match_date_time = cells[0].text.strip()
+                # splitsen datum en uur
+                match_date, match_time = match_date_time.split(' ', 1)
                 home_team = cells[1].text.strip()
                 score = cells[2].text.strip()
                 away_team = cells[3].text.strip()
 
-                writer.writerow({'Date': match_date, 'Home Team': home_team, 'Score': score, 'Away Team': away_team})
+                writer.writerow({
+                    'ID': match_id,
+                    'Start Year': year, 
+                    'End Year': year + 1, 
+                    'Date': match_date, 
+                    'Time': match_time, 
+                    'Home Team': home_team, 
+                    'Score': score, 
+                    'Away Team': away_team
+                })
+
+                match_id += 1 # Verhoog ID
 
             print(f"Match data for {year}-{year + 1} has been written to matches.csv.")
         else:
