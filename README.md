@@ -12,7 +12,7 @@ Voor stap 1 maakt mer gebruik van 2 scripts: `fetch_data` en `fetch_goals`
 
 Deze Python-script haalt gegevens op van de website Voetbalkrant om informatie over voetbalwedstrijden in de Belgische Jupiler Pro League van 2002 tot 2023 te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `matches.csv`.
 
-### Vereisten Game_scraper
+### Vereisten fetch_data
 
 - BeautifulSoup4
 - requests
@@ -21,7 +21,7 @@ Je kunt de vereiste bibliotheken installeren met pip:
 
 pip install beautifulsoup4 requests
 
-### Gebruik Game_scraper
+### Gebruik fetch_data
 
 1. Kloon of download de repository naar je lokale machine.
 2. Open een terminal of opdrachtprompt.
@@ -36,7 +36,7 @@ Het script begint gegevens over wedstrijden op te halen van de website Voetbalkr
 - `Score`: De score van de wedstrijd.
 - `Uitploeg`: De naam van de uitploeg.
 
-### Aanpassing Game_scraper
+### Aanpassing fetch_data
 
 Je kunt het script aanpassen door de volgende variabelen aan te passen:
 
@@ -50,7 +50,7 @@ Standaard haalt het script gegevens op van 2002 tot 2022. Je kunt de variabelen 
 
 Dit Python-script is ontwikkeld om informatie over doelpunten in voetbalwedstrijden van de Belgische Jupiler Pro League van 2007 tot 2023 te extraheren van de website `voetbalkrant.com`. Het opgeslagen bestand, `football_goals.csv`, bevat details van elk doelpunt per wedstrijd.
 
-### Vereisten Goal_scraper
+### Vereisten fetch_goals
 
 - BeautifulSoup4
 - requests
@@ -61,7 +61,7 @@ Je kunt de vereiste bibliotheken installeren met pip:
 
 pip install beautifulsoup4 requests
 
-### Gebruik Goal_scraper
+### Gebruik fetch_goals
 
 1. Kloon of download de repository naar je lokale machine.
 2. Open een terminal of opdrachtprompt.
@@ -75,7 +75,7 @@ Het script verzamelt gegevens over doelpunten van de website `voetbalkrant.com` 
 - `Minuut`: De minuut waarin het doelpunt werd gescoord.
 - `Speler`: De naam van de speler die het doelpunt heeft gescoord.
 
-### Aanpassing Goal_scraper
+### Aanpassing fetch_goals
 
 Je kunt het script aanpassen door de volgende variabelen aan te passen:
 
