@@ -1,14 +1,28 @@
 # DEP-G30
 
-github van DEP-G30 Aalst
+## Groepsleden
 
-## Deel 1
+Ayman Thomas <ayman.thomas@student.hogent.be>
+Matteo De Moor <matteo.de.moor@student.hogent.be>
+Robbe Van Herpe <robbe.vanherpe@student.hogent.be>
+
+## Jira-project
+
+link <https://dep-g30.atlassian.net/jira/software/c/projects/SEP2324G30/boards/2/>
+
+## Omschrijving
+
+zie later
+
+## Opdracht
+
+### Deel 1
 
 Hier maken we gebruik van webscraping om data te verzamelen zodat we met deze data te werk kunnen gaan.
 
 Voor stap 1 maakt men gebruik van 2 scripts: `fetch_data` en `fetch_goals`
 
-## Voetbalwedstrijdgegevens Scraper (`fetch_data`)
+### Voetbalwedstrijdgegevens Scraper (`fetch_data`)
 
 Deze Python-script haalt gegevens op van de website Voetbalkrant om informatie over voetbalwedstrijden in de Belgische Jupiler Pro League van 2002 tot 2023 te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `matches.csv`.
 
@@ -17,9 +31,7 @@ Deze Python-script haalt gegevens op van de website Voetbalkrant om informatie o
 - BeautifulSoup4
 - requests
 
-Je kunt de vereiste bibliotheken installeren met pip:
-
-pip install beautifulsoup4 requests
+Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4 requests
 
 ### Gebruik fetch_data
 
@@ -31,10 +43,14 @@ pip install beautifulsoup4 requests
 
 Het script begint gegevens over wedstrijden op te halen van de website Voetbalkrant en slaat deze op in `matches.csv`. Elke rij in het CSV-bestand vertegenwoordigt een voetbalwedstrijd en bevat de volgende kolommen:
 
-- `Datum`: De datum van de wedstrijd.
-- `Thuisploeg`: De naam van de thuisploeg.
-- `Score`: De score van de wedstrijd.
-- `Uitploeg`: De naam van de uitploeg.
+- `ID`: unieke ID per wedstrijd
+- `Start Year`: beginjaar seizoen
+- `End Year`: eindjaar seizoen
+- `Date`: datum van de wedstrijd
+- `time`: uur van de wedstrijd
+- `Home Team`: naam van de thuisploeg
+- `Score`: score van de wedstrijd
+- `Away Team`: naam van de uitploeg
 
 ### Aanpassing fetch_data
 
@@ -44,9 +60,9 @@ Je kunt het script aanpassen door de volgende variabelen aan te passen:
 - `start_year`: Het startjaar voor het ophalen van wedstrijdgegevens.
 - `end_year`: Het eindjaar voor het ophalen van wedstrijdgegevens.
 
-Standaard haalt het script gegevens op van 2002 tot 2022. Je kunt de variabelen `start_year` en `end_year` aanpassen om gegevens op te halen voor een andere reeks jaren.
+Standaard haalt het script gegevens op van 2002 tot 2023. Je kunt de variabelen `start_year` en `end_year` aanpassen om gegevens op te halen voor een andere reeks jaren.
 
-## Voetbaldoelpunten Data Scraper (`fetch_goals`)
+### Voetbaldoelpunten Data Scraper (`fetch_goals`)
 
 Dit Python-script is ontwikkeld om informatie over doelpunten in voetbalwedstrijden van de Belgische Jupiler Pro League van 2007 tot 2023 te extraheren van de website `voetbalkrant.com`. Het opgeslagen bestand, `football_goals.csv`, bevat details van elk doelpunt per wedstrijd.
 
@@ -57,9 +73,7 @@ Dit Python-script is ontwikkeld om informatie over doelpunten in voetbalwedstrij
 - csv
 - re
 
-Je kunt de vereiste bibliotheken installeren met pip:
-
-pip install beautifulsoup4 requests
+Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4 requests
 
 ### Gebruik fetch_goals
 
