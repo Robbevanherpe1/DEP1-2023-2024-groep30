@@ -4,7 +4,11 @@ github van DEP-G30 Aalst
 
 ## Deel 1
 
-## Voetbalwedstrijdgegevens Scraper
+Hier maken we gebruik van webscraping om data te verzamelen zodat we met deze data te werk kunnen gaan.
+
+Voor stap 1 maakt mer gebruik van 2 scripts: `fetch_data` en `fetch_goals`
+
+## Voetbalwedstrijdgegevens Scraper (`fetch_data`)
 
 Deze Python-script haalt gegevens op van de website Voetbalkrant om informatie over voetbalwedstrijden in de Belgische Jupiler Pro League van 2002 tot 2023 te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `matches.csv`.
 
@@ -42,7 +46,7 @@ Je kunt het script aanpassen door de volgende variabelen aan te passen:
 
 Standaard haalt het script gegevens op van 2002 tot 2022. Je kunt de variabelen `start_year` en `end_year` aanpassen om gegevens op te halen voor een andere reeks jaren.
 
-## Voetbaldoelpunten Data Scraper
+## Voetbaldoelpunten Data Scraper (`fetch_goals`)
 
 Dit Python-script is ontwikkeld om informatie over doelpunten in voetbalwedstrijden van de Belgische Jupiler Pro League van 2007 tot 2023 te extraheren van de website `voetbalkrant.com`. Het opgeslagen bestand, `football_goals.csv`, bevat details van elk doelpunt per wedstrijd.
 
