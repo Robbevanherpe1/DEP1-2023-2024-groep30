@@ -40,25 +40,29 @@ def get_goal_details(match_page_soup):
 
 data = []
 base_url = 'https://www.voetbalkrant.com'
+match_id = 0
 
 for year in range(2005, 2023):
     print(f"Processing year: {year}")
     year_url = f'{base_url}/belgie/jupiler-pro-league/geschiedenis/{year}-{year+1}/wedstrijden'
     year_soup = fetch_url(year_url)
     match_links = get_match_links(year_soup)
-
+    
+    
     for match_link in match_links:
+        match_id += 1  
         match_soup = fetch_url(base_url + match_link)
         match_goals = get_goal_details(match_soup)
         for goal in match_goals:
             data.append({
+                'ID': match_id,
                 'Year': year,
                 'Minute': goal['minute'],
                 'Player': goal['player']
             })
 
 with open('football_goals.csv', 'w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=['Year', 'Minute', 'Player'])
+    writer = csv.DictWriter(file, fieldnames=['ID', 'Year', 'Minute', 'Player'])
     writer.writeheader()
     writer.writerows(data)
 
