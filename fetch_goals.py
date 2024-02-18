@@ -40,7 +40,7 @@ def get_goal_details(match_page_soup):
 
 data = []
 base_url = 'https://www.voetbalkrant.com'
-match_id = 0
+match_id = 886
 
 for year in range(2005, 2023):
     print(f"Processing year: {year}")
