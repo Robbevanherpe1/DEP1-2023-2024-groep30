@@ -49,7 +49,7 @@ data = []
 base_url = 'https://www.voetbalkrant.com'
 match_id = 885
 
-for year in range(2005, 2006):
+for year in range(2005, 2023):
     print(f"Processing year: {year}")
     year_url = f'{base_url}/belgie/jupiler-pro-league/geschiedenis/{year}-{year+1}/wedstrijden'
     year_soup = fetch_url(year_url)
