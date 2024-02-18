@@ -27,22 +27,29 @@ def get_goal_details(match_page_soup):
         more_info = match_page_soup.find('div', class_='moreInfo')
         if more_info:
             for row in more_info.find_all('div', class_='row'):
-                for player in row.find_all('a', class_='text-white'):
-                    goal_info = {'minute': None, 'player': None}
-                    goal_minute = player.find_previous('small')
-                    if goal_minute and player:
-                        goal_text = goal_minute.get_text().strip()
-                        first_number = re.search(r'\d+', goal_text)
-                        goal_info['minute'] = first_number.group(0) if first_number else None
-                        goal_info['player'] = player.get_text().strip()
-                        goals.append(goal_info)
+                for small in row.find_all('small'):
+                    goal_info = {'minute': None, 'player_goal': None, 'player_assist': None}
+                    goal_minute = re.search(r'\d+', small.get_text())
+                    goal_info['minute'] = goal_minute.group(0) if goal_minute else None
+
+                    players = small.find_all('a', class_='text-white')
+                    for player in players:
+                        player_name = player.get_text().strip()
+                        
+                        if f"({player_name})" in small.get_text():
+                            goal_info['player_assist'] = player_name
+                        else:
+                            goal_info['player_goal'] = player_name
+
+                    goals.append(goal_info)
     return goals
+
 
 data = []
 base_url = 'https://www.voetbalkrant.com'
-match_id = 886
+match_id = 885
 
-for year in range(2005, 2023):
+for year in range(2005, 2006):
     print(f"Processing year: {year}")
     year_url = f'{base_url}/belgie/jupiler-pro-league/geschiedenis/{year}-{year+1}/wedstrijden'
     year_soup = fetch_url(year_url)
@@ -58,11 +65,12 @@ for year in range(2005, 2023):
                 'ID': match_id,
                 'Year': year,
                 'Minute': goal['minute'],
-                'Player': goal['player']
+                'player_goal': goal['player_goal'],
+                'player_Assist': goal['player_assist']
             })
 
 with open('football_goals.csv', 'w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=['ID', 'Year', 'Minute', 'Player'])
+    writer = csv.DictWriter(file, fieldnames=['ID', 'Year', 'Minute', 'player_goal','player_Assist'])
     writer.writeheader()
     writer.writerows(data)
 
