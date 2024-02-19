@@ -28,18 +28,18 @@ def get_goal_details(match_page_soup):
         if more_info:
             for row in more_info.find_all('div', class_='row'):
                 for small in row.find_all('small'):
-                    goal_info = {'minute': None, 'player_goal': None, 'player_assist': None}
+                    goal_info = {'Minuut': None, 'Speler_goal': None, 'Speler_assist': None}
                     goal_minute = re.search(r'\d+', small.get_text())
-                    goal_info['minute'] = goal_minute.group(0) if goal_minute else None
+                    goal_info['Minuut'] = goal_minute.group(0) if goal_minute else None
 
                     players = small.find_all('a', class_='text-white')
                     for player in players:
                         player_name = player.get_text().strip()
                         
                         if f"({player_name})" in small.get_text():
-                            goal_info['player_assist'] = player_name
+                            goal_info['Speler_assist'] = player_name
                         else:
-                            goal_info['player_goal'] = player_name
+                            goal_info['Speler_goal'] = player_name
 
                     goals.append(goal_info)
     return goals
@@ -63,15 +63,15 @@ for year in range(2005, 2023):
         for goal in match_goals:
             data.append({
                 'ID': match_id,
-                'Year': year,
-                'Minute': goal['minute'],
-                'player_goal': goal['player_goal'],
-                'player_Assist': goal['player_assist']
+                'Jaar': year,
+                'Minuut': goal['Minuut'],
+                'Speler_goal': goal['Speler_goal'],
+                'Speler_assist': goal['Speler_assist']
             })
 
-with open('football_goals.csv', 'w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=['ID', 'Year', 'Minute', 'player_goal','player_Assist'])
+with open('voetbal_goals.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.DictWriter(file, fieldnames=['ID', 'Jaar', 'Minuut', 'Speler_goal', 'Speler_assist'])
     writer.writeheader()
     writer.writerows(data)
 
-print("Data scraping complete. Check the football_goals.csv file.")
+print("Data scraping Voldooid. bekijk het voetbal_goals.csv bestand.")
