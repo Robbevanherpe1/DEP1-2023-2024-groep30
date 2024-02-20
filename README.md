@@ -3,7 +3,9 @@
 ## Groepsleden
 
 Ayman Thomas <ayman.thomas@student.hogent.be>
+
 Matteo De Moor <matteo.de.moor@student.hogent.be>
+
 Robbe Van Herpe <robbe.vanherpe@student.hogent.be>
 
 ## Jira-project
@@ -20,7 +22,7 @@ zie later
 
 Hier maken we gebruik van webscraping om data te verzamelen zodat we met deze data te werk kunnen gaan.
 
-Voor stap 1 maakt men gebruik van 2 scripts: `fetch_data` en `fetch_goals`
+Voor stap 1 maakt men gebruik van 2 scripts: `fetch_data` en `fetch_goals`.
 
 ### Voetbalwedstrijdgegevens Scraper (`fetch_data`)
 
