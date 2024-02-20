@@ -8,7 +8,7 @@ data = response.json()
 
 with open('api_data.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
-    writer.writerow(['Evenement ID', 'Evenementnaam', 'Starttijd', 'Thuisteam', 'Uitteam', 'Marktnaam', 'Uitslag', 'Kansen'])
+    writer.writerow(['Match_ID', 'Match_naam', 'Starttijd', 'Thuisteam', 'Uitteam', 'Vraag', 'Keuze', 'Kansen'])
 
     for sport in data['tree']:
         for competition in sport.get('competitions', []):
