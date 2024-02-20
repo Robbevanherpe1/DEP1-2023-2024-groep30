@@ -69,7 +69,7 @@ for year in range(2005, 2023):
                 'Speler_assist': goal['Speler_assist']
             })
 
-with open('voetbal_goals.csv', 'w', newline='', encoding='utf-8') as file:
+with open('goals.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.DictWriter(file, fieldnames=['ID', 'Jaar', 'Minuut', 'Speler_goal', 'Speler_assist'])
     writer.writeheader()
     writer.writerows(data)

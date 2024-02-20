@@ -6,9 +6,9 @@ api_url = 'https://api.sportify.bet/echo/v1/events?sport=voetbal&competition=bel
 response = requests.get(api_url)
 data = response.json()
 
-with open('api_data.csv', 'w', newline='', encoding='utf-8') as file:
+with open('bets.csv', 'w', newline='', encoding='utf-8') as file:
     writer = csv.writer(file)
-    writer.writerow(['Match_ID', 'Match_naam', 'Starttijd', 'Thuisteam', 'Uitteam', 'Vraag', 'Keuze', 'Kansen'])
+    writer.writerow(['ID', 'Wedstrijd', 'Starttijd', 'Thuisploeg', 'Uitploeg', 'Vraag', 'Keuze', 'Kans'])
 
     for sport in data['tree']:
         for competition in sport.get('competitions', []):
