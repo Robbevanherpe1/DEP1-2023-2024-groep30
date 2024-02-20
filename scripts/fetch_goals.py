@@ -35,7 +35,6 @@ def get_goal_details(match_page_soup):
                     players = small.find_all('a', class_='text-white')
                     for player in players:
                         player_name = player.get_text().strip()
-                        
                         if f"({player_name})" in small.get_text():
                             goal_info['Speler_assist'] = player_name
                         else:
@@ -57,7 +56,7 @@ for year in range(2005, 2023):
     
     
     for match_link in match_links:
-        match_id += 1  
+        match_id += 1
         match_soup = fetch_url(base_url + match_link)
         match_goals = get_goal_details(match_soup)
         for goal in match_goals:

@@ -24,5 +24,4 @@ with open('bets.csv', 'w', newline='', encoding='utf-8') as file:
                     for outcome in market.get('outcomes', []):
                         outcome_name = outcome.get('name')
                         odds = outcome.get('odds')
-                       
                         writer.writerow([event_id, event_name, start_time, home_team, away_team, market_name, outcome_name, odds])
