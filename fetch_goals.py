@@ -27,39 +27,51 @@ def get_goal_details(match_page_soup):
         more_info = match_page_soup.find('div', class_='moreInfo')
         if more_info:
             for row in more_info.find_all('div', class_='row'):
-                for player in row.find_all('a', class_='text-white'):
-                    goal_info = {'minute': None, 'player': None}
-                    goal_minute = player.find_previous('small')
-                    if goal_minute and player:
-                        goal_text = goal_minute.get_text().strip()
-                        first_number = re.search(r'\d+', goal_text)
-                        goal_info['minute'] = first_number.group(0) if first_number else None
-                        goal_info['player'] = player.get_text().strip()
-                        goals.append(goal_info)
+                for small in row.find_all('small'):
+                    goal_info = {'Minuut': None, 'Speler_goal': None, 'Speler_assist': None}
+                    goal_minute = re.search(r'\d+', small.get_text())
+                    goal_info['Minuut'] = goal_minute.group(0) if goal_minute else None
+
+                    players = small.find_all('a', class_='text-white')
+                    for player in players:
+                        player_name = player.get_text().strip()
+                        
+                        if f"({player_name})" in small.get_text():
+                            goal_info['Speler_assist'] = player_name
+                        else:
+                            goal_info['Speler_goal'] = player_name
+
+                    goals.append(goal_info)
     return goals
+
 
 data = []
 base_url = 'https://www.voetbalkrant.com'
+match_id = 885
 
 for year in range(2005, 2023):
     print(f"Processing year: {year}")
     year_url = f'{base_url}/belgie/jupiler-pro-league/geschiedenis/{year}-{year+1}/wedstrijden'
     year_soup = fetch_url(year_url)
     match_links = get_match_links(year_soup)
-
+    
+    
     for match_link in match_links:
+        match_id += 1  
         match_soup = fetch_url(base_url + match_link)
         match_goals = get_goal_details(match_soup)
         for goal in match_goals:
             data.append({
-                'Year': year,
-                'Minute': goal['minute'],
-                'Player': goal['player']
+                'ID': match_id,
+                'Jaar': year,
+                'Minuut': goal['Minuut'],
+                'Speler_goal': goal['Speler_goal'],
+                'Speler_assist': goal['Speler_assist']
             })
 
-with open('football_goals.csv', 'w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=['Year', 'Minute', 'Player'])
+with open('voetbal_goals.csv', 'w', newline='', encoding='utf-8') as file:
+    writer = csv.DictWriter(file, fieldnames=['ID', 'Jaar', 'Minuut', 'Speler_goal', 'Speler_assist'])
     writer.writeheader()
     writer.writerows(data)
 
-print("Data scraping complete. Check the football_goals.csv file.")
+print("Data scraping Voldooid. bekijk het voetbal_goals.csv bestand.")
