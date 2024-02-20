@@ -54,7 +54,6 @@ for year in range(2005, 2023):
     year_soup = fetch_url(year_url)
     match_links = get_match_links(year_soup)
     
-    
     for match_link in match_links:
         match_id += 1
         match_soup = fetch_url(base_url + match_link)
