@@ -15,7 +15,7 @@ with open('matches.csv', mode='w', newline='') as file:
 
     for year in range(start_year, end_year + 1):
         url = f"{base_url}{year}-{year + 1}/wedstrijden"
-        response = requests.get(url)
+        response = requests.get(url,timeout=30)
         if response.status_code == 200:
             html_content = response.content
             soup = BeautifulSoup(html_content, 'html.parser')

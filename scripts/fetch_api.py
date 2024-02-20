@@ -3,7 +3,7 @@ import csv
 
 api_url = 'https://api.sportify.bet/echo/v1/events?sport=voetbal&competition=belgium-first-division-a&_cached=true&key=market_type&lang=nl&bookmaker=bet777'
 
-response = requests.get(api_url)
+response = requests.get(api_url,timeout=30)
 data = response.json()
 
 with open('bets.csv', 'w', newline='', encoding='utf-8') as file:

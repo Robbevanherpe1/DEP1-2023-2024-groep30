@@ -5,7 +5,7 @@ import re
 
 def fetch_url(url):
     try:
-        response = requests.get(url)
+        response = requests.get(url,timeout=30)
         response.raise_for_status()  # Raises an HTTPError if the HTTP request returned an unsuccessful status code
         return BeautifulSoup(response.text, 'html.parser')
     except requests.RequestException as e:
