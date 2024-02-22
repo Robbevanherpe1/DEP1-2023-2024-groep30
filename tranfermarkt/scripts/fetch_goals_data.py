@@ -67,7 +67,7 @@ def process_all_boxes(soup):
 # Main function to process data for each year and speeldag
 def main():
     url_base = 'https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/?saison_id='
-    year_start = 2020
+    year_start = 1960
     year_end = 2023
     all_matches = []
 
