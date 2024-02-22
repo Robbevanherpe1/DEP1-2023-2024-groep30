@@ -13,7 +13,7 @@ startspeeldag = 1
 eindspeeldag = 34
 
 with open('stand.csv', mode='w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=['Stand', 'Club', 'Speeldag', 'AantalGewonnen', 'AantalGelijk', 'AantalVerloren', 
+    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Stand', 'Club', 'Speeldag', 'AantalGewonnen', 'AantalGelijk', 'AantalVerloren', 
                                               'Doelpunten', 'Doelpuntensaldo', 'Punten'])
     writer.writeheader()
 
@@ -38,6 +38,7 @@ with open('stand.csv', mode='w', newline='') as file:
                         Punten = tds[9].get_text(strip=True)
 
                         writer.writerow({
+                            'Seizoen': f"{year}-{year+1}",
                             'Stand': Stand, 
                             'Club': Club,
                             'Speeldag': Speeldag,
