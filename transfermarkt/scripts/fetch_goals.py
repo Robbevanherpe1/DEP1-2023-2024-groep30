@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 import csv
 import re
 
@@ -27,8 +28,8 @@ def get_match_data(box):
         data = {}
         team_names = row.find_all('td', class_='spieltagsansicht-vereinsname')
         if team_names:
-            data['Home_Team'] = team_names[0].get_text(strip=True)
-            data['Away_Team'] = team_names[-1].get_text(strip=True)
+            data['Home_Team'] = re.sub(r"\(.*?\)", "", team_names[0].get_text(strip=True))
+            data['Away_Team'] = re.sub(r"\(.*?\)", "", team_names[-1].get_text(strip=True))
 
         result_link = row.find('td', class_='spieltagsansicht-ergebnis').find('a', href=True)
         if result_link:
@@ -49,7 +50,7 @@ def get_match_data(box):
                 
                 goal_data['Current_Score'] = goal_details[2].get_text(strip=True)
                
-                goal_time_values = [goal_details[i].get_text(strip=True) for i in [1, 3]]
+                goal_time_values = [goal_details[i].get_text(strip=True).rstrip("'") for i in [1, 3]]
                 goal_data['Goal_Time'] = next((time for time in goal_time_values if time), None)
 
                 goal_scorers = [goal_details[i].find('a', title=True) for i in [0, 4]]
@@ -72,7 +73,7 @@ def process_all_boxes(soup):
 def main():
     url_base = 'https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/?saison_id='
     year_start = 1960
-    year_end = 2024
+    year_end = datetime.now().year
     all_matches = []
 
     for year in range(year_start, year_end):
