@@ -20,9 +20,7 @@ with open('stand.csv', mode='w', newline='') as file:
 
     for year in range(startjaar, eindjaar + 1):
         for speeldag in range(startspeeldag, eindspeeldag + 1):
-
             
-
             url = f"{base_url}BE1?saison_id={year}&spieltag={speeldag}"
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
