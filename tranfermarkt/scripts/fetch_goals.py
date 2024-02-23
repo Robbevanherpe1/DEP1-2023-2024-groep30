@@ -48,9 +48,8 @@ def get_match_data(box):
             if goal_details and len(goal_details) >= 5:
                 goal_data['Current_Score'] = goal_details[2].get_text(strip=True)
                 goal_data['Goal_Time'] = goal_details[3].get_text(strip=True)
-                goal_scorer = goal_details[4].find('a', title=True)
-                if goal_scorer:
-                    goal_data['Scorer'] = goal_scorer['title']
+                goal_scorers = [goal_details[i].find('a', title=True) for i in [0, 4]]
+                goal_data['Scorer'] = next((scorer['title'] for scorer in goal_scorers if scorer is not None), None)
                 match_data.append(goal_data)
 
     return match_data
@@ -68,7 +67,7 @@ def process_all_boxes(soup):
 def main():
     url_base = 'https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/?saison_id='
     year_start = 1960
-    year_end = 2023
+    year_end = 2024
     all_matches = []
 
     for year in range(year_start, year_end):
