@@ -29,7 +29,7 @@ with open('stand.csv', mode='w', newline='') as file:
                 trs = soup.select("#yw1 .items tbody tr")
 
                 if not soup.find('option', selected=True, value=str(speeldag)):
-                    break  # No more speeldagen for this year
+                    break  # geen speeldagen meer beschikbaar voor dit seizoen
 
                 for row in trs:
                     tds = row.find_all("td")
