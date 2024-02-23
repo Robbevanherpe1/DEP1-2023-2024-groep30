@@ -13,8 +13,9 @@ startspeeldag = 1
 eindspeeldag = 34
 
 with open('stand.csv', mode='w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Stand', 'Club', 'Speeldag', 'AantalGewonnen', 'AantalGelijk', 'AantalVerloren', 
-                                              'Doelpunten', 'Doelpuntensaldo', 'Punten'])
+    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Stand', 'Club',
+                                               'AantalGespeeld', 'AantalGewonnen', 'AantalGelijk', 
+                                               'AantalVerloren', 'Doelpunten', 'Doelpuntensaldo', 'Punten'])
     writer.writeheader()
 
     for year in range(startjaar, eindjaar + 1):
@@ -29,7 +30,7 @@ with open('stand.csv', mode='w', newline='') as file:
                     if tds:
                         Stand = tds[0].get_text(strip=True)
                         Club = tds[2].get_text(strip=True)
-                        Speeldag = tds[3].get_text(strip=True)
+                        AantalGespeeld = tds[3].get_text(strip=True)
                         AantalGewonnen = tds[4].get_text(strip=True)
                         AantalGelijk = tds[5].get_text(strip=True)
                         AantalVerloren = tds[6].get_text(strip=True)
@@ -39,9 +40,10 @@ with open('stand.csv', mode='w', newline='') as file:
 
                         writer.writerow({
                             'Seizoen': f"{year}-{year+1}",
+                            'Speeldag': speeldag,
                             'Stand': Stand, 
                             'Club': Club,
-                            'Speeldag': Speeldag,
+                            'AantalGespeeld': AantalGespeeld,
                             'AantalGewonnen': AantalGewonnen,
                             'AantalGelijk': AantalGelijk,
                             'AantalVerloren': AantalVerloren,
