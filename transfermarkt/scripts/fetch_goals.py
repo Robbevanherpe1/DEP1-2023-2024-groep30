@@ -21,11 +21,15 @@ def extract_match_id(url):
     return match_id.group(1) if match_id else None
 
 # Extracts match data from a given box
-def get_match_data(box):
+def get_match_data(box, seizoen, speeldag):
     match_data = []
     rows = box.find_all('tr', class_='table-grosse-schrift')
     for row in rows:
         data = {}
+        
+        data['Seizoen'] = str(seizoen) + '/' + str(seizoen + 1)
+        data['Speeldag'] = speeldag
+        
         team_names = row.find_all('td', class_='spieltagsansicht-vereinsname')
         if team_names:
             data['Home_Team'] = re.sub(r"\(.*?\)", "", team_names[0].get_text(strip=True))
@@ -56,16 +60,18 @@ def get_match_data(box):
                 goal_scorers = [goal_details[i].find('a', title=True) for i in [0, 4]]
                 goal_data['Scorer'] = next((scorer['title'] for scorer in goal_scorers if scorer is not None), None)
                 
+                
+                
                 match_data.append(goal_data)
 
     return match_data
 
 # Processes all boxes to get match data
-def process_all_boxes(soup):
+def process_all_boxes(soup, seizoen, speeldag):
     all_matches = []
     boxes = soup.find_all('div', class_='box')[1:]  # Skip the first box
     for box in boxes:
-        match_data = get_match_data(box)
+        match_data = get_match_data(box, seizoen, speeldag)
         all_matches.extend(match_data)
     return all_matches
 
@@ -73,7 +79,8 @@ def process_all_boxes(soup):
 def main():
     url_base = 'https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/?saison_id='
     year_start = 1960
-    year_end = datetime.now().year
+    year_end =  datetime.now().year
+    
     all_matches = []
 
     for year in range(year_start, year_end):
@@ -84,13 +91,13 @@ def main():
             soup = fetch_url(url)
             if not soup.find('option', selected=True, value=str(speeldag)):
                 break  # No more speeldagen for this year
-            matches = process_all_boxes(soup)
+            matches = process_all_boxes(soup, year, speeldag)
             all_matches.extend(matches)
             speeldag += 1
 
     # Write data to CSV
     with open('voetbal_data.csv', 'w', newline='', encoding='utf-8') as file:
-        fieldnames = ['Match_ID', 'Date', 'Time', 'Home_Team', 'Away_Team', 'Current_Score', 'Goal_Time', 'Scorer']
+        fieldnames = ['Match_ID', 'Seizoen', 'Speeldag', 'Date', 'Time', 'Home_Team', 'Away_Team', 'Current_Score', 'Goal_Time', 'Scorer']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for match in all_matches:
