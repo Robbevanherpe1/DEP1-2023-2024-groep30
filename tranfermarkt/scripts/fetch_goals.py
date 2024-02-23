@@ -46,10 +46,15 @@ def get_match_data(box):
             goal_data = data.copy()
             goal_details = goal_row.find_all('td')
             if goal_details and len(goal_details) >= 5:
+                
                 goal_data['Current_Score'] = goal_details[2].get_text(strip=True)
-                goal_data['Goal_Time'] = goal_details[3].get_text(strip=True)
+               
+                goal_time_values = [goal_details[i].get_text(strip=True) for i in [1, 3]]
+                goal_data['Goal_Time'] = next((time for time in goal_time_values if time), None)
+
                 goal_scorers = [goal_details[i].find('a', title=True) for i in [0, 4]]
                 goal_data['Scorer'] = next((scorer['title'] for scorer in goal_scorers if scorer is not None), None)
+                
                 match_data.append(goal_data)
 
     return match_data
