@@ -10,7 +10,7 @@ startjaar = 1960
 eindjaar = datetime.now().year - 1
 
 startspeeldag = 1
-eindspeeldag = 34
+eindspeeldag = 50
 
 with open('stand.csv', mode='w', newline='') as file:
     writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Stand', 'Club',
@@ -20,11 +20,19 @@ with open('stand.csv', mode='w', newline='') as file:
 
     for year in range(startjaar, eindjaar + 1):
         for speeldag in range(startspeeldag, eindspeeldag + 1):
+
+            
+
             url = f"{base_url}BE1?saison_id={year}&spieltag={speeldag}"
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
+
                 soup = BeautifulSoup(response.content, 'html.parser')
                 trs = soup.select("#yw1 .items tbody tr")
+
+                if not soup.find('option', selected=True, value=str(speeldag)):
+                    break  # No more speeldagen for this year
+
                 for row in trs:
                     tds = row.find_all("td")
                     if tds:
