@@ -96,13 +96,13 @@ def main():
             speeldag += 1
 
     # Write data to CSV
-    with open('voetbal_data.csv', 'w', newline='', encoding='utf-8') as file:
+    with open('goals.csv', 'w', newline='', encoding='utf-8') as file:
         fieldnames = ['Match_ID', 'Seizoen', 'Speeldag', 'Date', 'Time', 'Home_Team', 'Away_Team', 'Current_Score', 'Goal_Time', 'Scorer']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for match in all_matches:
             writer.writerow(match)
 
-    print("Data scraping completed. Check voetbal_data.csv file.")
+    print("Data scraping completed. Check goals.csv file.")
 
 main()
