@@ -57,6 +57,6 @@ with open('stand.csv', mode='w', newline='') as file:
                             'Doelpuntensaldo': Doelpuntensaldo,
                             'Punten': Punten
                         })
-                print(f"Wedstrijdgegevens voor seizoen {jaar}, speeldag {speeldag} zijn geschreven.")
+                print(f"Wedstrijdgegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag} zijn geschreven.")
             else:
-                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}, speeldag {speeldag}. Statuscode: {response.status_code}")
+                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag}. Statuscode: {response.status_code}")
