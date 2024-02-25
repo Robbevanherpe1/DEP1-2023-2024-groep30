@@ -3,28 +3,28 @@ from bs4 import BeautifulSoup
 import csv
 from datetime import datetime
 
-base_url = "https://www.transfermarkt.be/jupiler-pro-league/spieltagtabelle/wettbewerb/"
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
+URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltagtabelle/wettbewerb/"
+HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
-startjaar = 1960
-eindjaar = datetime.now().year - 1
+STARTJAAR = 1960
+EINDJAAR = datetime.now().year - 1
 
-startspeeldag = 1
-eindspeeldag = 50
+STARTSPEELDAG = 1
+EINDSPEELDAG = 50
 
 with open('stand.csv', mode='w', newline='') as file:
-    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Stand', 'Club',
+    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Stand', 'NaamClub',
                                                'AantalGespeeld', 'AantalGewonnen', 'AantalGelijk', 
                                                'AantalVerloren', 'Doelpunten', 'Doelpuntensaldo', 'Punten'])
     writer.writeheader()
 
-    for year in range(startjaar, eindjaar + 1):
-        for speeldag in range(startspeeldag, eindspeeldag + 1):
+    for jaar in range(STARTJAAR, EINDJAAR + 1):
+        for speeldag in range(STARTSPEELDAG, EINDSPEELDAG + 1):
             
-            url = f"{base_url}BE1?saison_id={year}&spieltag={speeldag}"
-            response = requests.get(url, headers=headers)
-            if response.status_code == 200:
+            url = f"{URL}BE1?saison_id={jaar}&spieltag={speeldag}"
+            response = requests.get(url, headers=HEADERS)
 
+            if response.status_code == 200:
                 soup = BeautifulSoup(response.content, 'html.parser')
                 trs = soup.select("#yw1 .items tbody tr")
 
@@ -35,7 +35,7 @@ with open('stand.csv', mode='w', newline='') as file:
                     tds = row.find_all("td")
                     if tds:
                         Stand = tds[0].get_text(strip=True)
-                        Club = tds[2].get_text(strip=True)
+                        NaamClub = tds[2].get_text(strip=True)
                         AantalGespeeld = tds[3].get_text(strip=True)
                         AantalGewonnen = tds[4].get_text(strip=True)
                         AantalGelijk = tds[5].get_text(strip=True)
@@ -45,10 +45,10 @@ with open('stand.csv', mode='w', newline='') as file:
                         Punten = tds[9].get_text(strip=True)
 
                         writer.writerow({
-                            'Seizoen': f"{year}-{year+1}",
+                            'Seizoen': f"{jaar}-{jaar+1}",
                             'Speeldag': speeldag,
                             'Stand': Stand, 
-                            'Club': Club,
+                            'Club': NaamClub,
                             'AantalGespeeld': AantalGespeeld,
                             'AantalGewonnen': AantalGewonnen,
                             'AantalGelijk': AantalGelijk,
@@ -57,6 +57,6 @@ with open('stand.csv', mode='w', newline='') as file:
                             'Doelpuntensaldo': Doelpuntensaldo,
                             'Punten': Punten
                         })
-                print(f"Wedstrijdgegevens voor seizoen {year}, speeldag {speeldag} zijn geschreven.")
+                print(f"Wedstrijdgegevens voor seizoen {jaar}, speeldag {speeldag} zijn geschreven.")
             else:
-                print(f"Fout bij het ophalen van gegevens voor seizoen {year}, speeldag {speeldag}. Statuscode: {response.status_code}")
+                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}, speeldag {speeldag}. Statuscode: {response.status_code}")
