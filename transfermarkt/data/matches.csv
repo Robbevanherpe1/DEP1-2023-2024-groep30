@@ -1,0 +1,357 @@
+Match_ID,Seizoen,Speeldag,Datum,Tijdstip,Thuisploeg,ResultaatThuisploeg,ResultaatUitploeg,Uitploeg
+,2023-2024,1,,,,,,
+4093105,2023-2024,1,"vrijdag,vr28 jul. 2023",20:45 uur,(1.)Union SG,2,0,RSC Anderlecht(2.)
+4093106,2023-2024,1,"zaterdag,za29 jul. 2023",16:00 uur,(15.)KAS Eupen,2,2,KVC Westerlo(10.)
+4093107,2023-2024,1,"zaterdag,za29 jul. 2023",18:15 uur,(13.)R Charleroi SC,1,1,OH Leuven(12.)
+4093108,2023-2024,1,"zaterdag,za29 jul. 2023",20:45 uur,(14.)RWDM,0,4,KRC Genk(6.)
+4093109,2023-2024,1,"zondag,zo30 jul. 2023",13:30 uur,(4.)Antwerp FC,1,0,Cercle Brugge(5.)
+4093110,2023-2024,1,"zondag,zo30 jul. 2023",16:00 uur,(7.)KAA Gent,3,2,KV Kortrijk(16.)
+4093111,2023-2024,1,"zondag,zo30 jul. 2023",18:30 uur,(3.)Club Brugge,1,1,KV Mechelen(8.)
+4093112,2023-2024,1,"zondag,zo30 jul. 2023",19:15 uur,(9.)St-Truidense VV,1,0,Standard Luik(11.)
+,2023-2024,1,,,,,,
+,2023-2024,1,,,,,,
+,2023-2024,1,,,,,,
+,2023-2024,2,,,,,,
+4098763,2023-2024,2,"vrijdag,vr4 aug. 2023",20:45 uur,(14.)Standard Luik,0,1,Union SG(2.)
+4098764,2023-2024,2,"zaterdag,za5 aug. 2023",16:00 uur,(1.)KRC Genk,0,1,KAS Eupen(9.)
+4098765,2023-2024,2,"zaterdag,za5 aug. 2023",18:15 uur,(12.)Cercle Brugge,2,0,R Charleroi SC(6.)
+4098766,2023-2024,2,"zaterdag,za5 aug. 2023",20:45 uur,(11.)OH Leuven,1,2,RWDM(16.)
+4098767,2023-2024,2,"zondag,zo6 aug. 2023",13:30 uur,(15.)RSC Anderlecht,1,0,Antwerp FC(5.)
+4098768,2023-2024,2,"zondag,zo6 aug. 2023",16:00 uur,(7.)KV Mechelen,0,1,KAA Gent(3.)
+4098769,2023-2024,2,"zondag,zo6 aug. 2023",18:30 uur,(8.)KVC Westerlo,0,1,Club Brugge(10.)
+4098770,2023-2024,2,"zondag,zo6 aug. 2023",19:15 uur,(13.)KV Kortrijk,0,1,St-Truidense VV(4.)
+,2023-2024,2,,,,,,
+,2023-2024,2,,,,,,
+,2023-2024,2,,,,,,
+,2023-2024,3,,,,,,
+4098795,2023-2024,3,"vrijdag,vr11 aug. 2023",20:45 uur,(8.)Antwerp FC,6,0,KV Kortrijk(15.)
+4098796,2023-2024,3,"zaterdag,za12 aug. 2023",16:00 uur,(10.)RWDM,1,0,KV Mechelen(11.)
+4098797,2023-2024,3,"zaterdag,za12 aug. 2023",18:15 uur,(1.)Union SG,5,1,OH Leuven(13.)
+4098799,2023-2024,3,"zondag,zo13 aug. 2023",13:30 uur,(3.)St-Truidense VV,0,1,RSC Anderlecht(9.)
+4098798,2023-2024,3,"zondag,zo13 aug. 2023",16:00 uur,(7.)Cercle Brugge,0,1,KRC Genk(6.)
+4098800,2023-2024,3,"zondag,zo13 aug. 2023",16:00 uur,(4.)KAS Eupen,0,5,Club Brugge(5.)
+4098801,2023-2024,3,"zondag,zo13 aug. 2023",18:30 uur,(14.)R Charleroi SC,1,1,Standard Luik(16.)
+4098802,2023-2024,3,"zondag,zo13 aug. 2023",19:15 uur,(12.)KVC Westerlo,1,3,KAA Gent(2.)
+,2023-2024,3,,,,,,
+,2023-2024,3,,,,,,
+,2023-2024,3,,,,,,
+,2023-2024,4,,,,,,
+4098771,2023-2024,4,"vrijdag,vr18 aug. 2023",20:45 uur,(15.)OH Leuven,1,1,Antwerp FC(4.)
+4098772,2023-2024,4,"zaterdag,za19 aug. 2023",16:00 uur,(13.)Standard Luik,0,1,Cercle Brugge(10.)
+4098774,2023-2024,4,"zaterdag,za19 aug. 2023",20:45 uur,(12.)KV Mechelen,4,0,Union SG(1.)
+4098775,2023-2024,4,"zondag,zo20 aug. 2023",13:30 uur,(7.)RSC Anderlecht,2,1,KVC Westerlo(14.)
+4098773,2023-2024,4,"zondag,zo20 aug. 2023",16:00 uur,(5.)KRC Genk,0,0,R Charleroi SC(11.)
+4098776,2023-2024,4,"zondag,zo20 aug. 2023",16:00 uur,(2.)KAA Gent,2,2,St-Truidense VV(6.)
+4098777,2023-2024,4,"zondag,zo20 aug. 2023",18:30 uur,(3.)Club Brugge,7,1,RWDM(8.)
+4098778,2023-2024,4,"zondag,zo20 aug. 2023",19:15 uur,(16.)KV Kortrijk,1,3,KAS Eupen(9.)
+,2023-2024,4,,,,,,
+,2023-2024,4,,,,,,
+,2023-2024,4,,,,,,
+,2023-2024,5,,,,,,
+4098792,2023-2024,5,"zaterdag,za26 aug. 2023",16:00 uur,(15.)KVC Westerlo,2,3,KV Mechelen(11.)
+4098789,2023-2024,5,"zaterdag,za26 aug. 2023",18:15 uur,(8.)KAS Eupen,3,1,OH Leuven(13.)
+4098790,2023-2024,5,"zaterdag,za26 aug. 2023",20:45 uur,(16.)KV Kortrijk,1,1,Standard Luik(14.)
+4098788,2023-2024,5,"zondag,zo27 aug. 2023",16:00 uur,(7.)St-Truidense VV,0,2,Cercle Brugge(9.)
+4098793,2023-2024,5,"zondag,zo27 aug. 2023",18:30 uur,(4.)RSC Anderlecht,2,1,R Charleroi SC(12.)
+4098787,2023-2024,5,"woensdag,wo27 sep. 2023",20:45 uur,(5.)Antwerp FC,0,0,KAA Gent(2.)
+4098794,2023-2024,5,"donderdag,do28 sep. 2023",18:30 uur,(10.)RWDM,2,3,Union SG(3.)
+4098791,2023-2024,5,"donderdag,do28 sep. 2023",20:45 uur,(1.)Club Brugge,1,1,KRC Genk(6.)
+,2023-2024,5,,,,,,
+,2023-2024,5,,,,,,
+,2023-2024,5,,,,,,
+,2023-2024,6,,,,,,
+4098779,2023-2024,6,"vrijdag,vr1 sep. 2023",20:45 uur,(14.)OH Leuven,3,0,KV Kortrijk(16.)
+4098780,2023-2024,6,"zaterdag,za2 sep. 2023",16:00 uur,(6.)Cercle Brugge,2,1,KVC Westerlo(15.)
+4098781,2023-2024,6,"zaterdag,za2 sep. 2023",18:15 uur,(9.)KV Mechelen,1,0,KAS Eupen(5.)
+4098782,2023-2024,6,"zaterdag,za2 sep. 2023",20:45 uur,(13.)Standard Luik,1,1,RWDM(11.)
+4098783,2023-2024,6,"zondag,zo3 sep. 2023",13:30 uur,(4.)KAA Gent,2,1,Club Brugge(3.)
+4098784,2023-2024,6,"zondag,zo3 sep. 2023",16:00 uur,(1.)Union SG,2,2,Antwerp FC(7.)
+4098785,2023-2024,6,"zondag,zo3 sep. 2023",18:30 uur,(8.)KRC Genk,1,1,RSC Anderlecht(2.)
+4098786,2023-2024,6,"zondag,zo3 sep. 2023",19:15 uur,(12.)R Charleroi SC,1,1,St-Truidense VV(10.)
+,2023-2024,6,,,,,,
+,2023-2024,6,,,,,,
+,2023-2024,6,,,,,,
+,2023-2024,7,,,,,,
+4098955,2023-2024,7,"vrijdag,vr15 sep. 2023",20:45 uur,(15.)KVC Westerlo,0,3,Antwerp FC(8.)
+4098956,2023-2024,7,"zaterdag,za16 sep. 2023",16:00 uur,(11.)RWDM,2,1,Cercle Brugge(4.)
+4098957,2023-2024,7,"zaterdag,za16 sep. 2023",18:15 uur,(2.)Union SG,0,2,KRC Genk(9.)
+4098958,2023-2024,7,"zaterdag,za16 sep. 2023",20:45 uur,(5.)Club Brugge,4,2,R Charleroi SC(13.)
+4098959,2023-2024,7,"zondag,zo17 sep. 2023",13:30 uur,(7.)KAS Eupen,1,3,Standard Luik(14.)
+4098960,2023-2024,7,"zondag,zo17 sep. 2023",16:00 uur,(16.)KV Kortrijk,2,2,RSC Anderlecht(3.)
+4098961,2023-2024,7,"zondag,zo17 sep. 2023",18:30 uur,(12.)OH Leuven,1,1,KAA Gent(1.)
+4098962,2023-2024,7,"zondag,zo17 sep. 2023",19:15 uur,(10.)St-Truidense VV,2,0,KV Mechelen(6.)
+,2023-2024,7,,,,,,
+,2023-2024,7,,,,,,
+,2023-2024,7,,,,,,
+,2023-2024,8,,,,,,
+4098972,2023-2024,8,"vrijdag,vr22 sep. 2023",20:45 uur,(12.)Standard Luik,0,0,KVC Westerlo(16.)
+4098978,2023-2024,8,"zaterdag,za23 sep. 2023",16:00 uur,(14.)R Charleroi SC,1,0,KV Kortrijk(15.)
+4098977,2023-2024,8,"zaterdag,za23 sep. 2023",18:15 uur,(9.)KV Mechelen,1,2,OH Leuven(13.)
+4098975,2023-2024,8,"zaterdag,za23 sep. 2023",20:45 uur,(6.)Antwerp FC,0,0,RWDM(11.)
+4098973,2023-2024,8,"zondag,zo24 sep. 2023",13:30 uur,(7.)KRC Genk,3,3,St-Truidense VV(8.)
+4098976,2023-2024,8,"zondag,zo24 sep. 2023",16:00 uur,(5.)Cercle Brugge,0,2,Union SG(4.)
+4098971,2023-2024,8,"zondag,zo24 sep. 2023",18:30 uur,(3.)RSC Anderlecht,1,1,Club Brugge(2.)
+4098974,2023-2024,8,"zondag,zo24 sep. 2023",19:15 uur,(1.)KAA Gent,2,1,KAS Eupen(10.)
+,2023-2024,8,,,,,,
+,2023-2024,8,,,,,,
+,2023-2024,8,,,,,,
+,2023-2024,9,,,,,,
+4098886,2023-2024,9,"vrijdag,vr29 sep. 2023",20:45 uur,(16.)KV Kortrijk,2,1,Cercle Brugge(7.)
+4098890,2023-2024,9,"zaterdag,za30 sep. 2023",16:00 uur,(11.)KAS Eupen,1,3,RSC Anderlecht(4.)
+4098885,2023-2024,9,"zaterdag,za30 sep. 2023",18:15 uur,(12.)OH Leuven,1,2,Standard Luik(13.)
+4098889,2023-2024,9,"zaterdag,za30 sep. 2023",20:45 uur,(10.)KV Mechelen,0,0,Antwerp FC(5.)
+4098888,2023-2024,9,"zondag,zo1 okt. 2023",13:30 uur,(2.)Union SG,3,1,R Charleroi SC(14.)
+4098884,2023-2024,9,"zondag,zo1 okt. 2023",16:00 uur,(6.)KRC Genk,3,3,KVC Westerlo(15.)
+4098883,2023-2024,9,"zondag,zo1 okt. 2023",18:30 uur,(3.)Club Brugge,1,1,St-Truidense VV(8.)
+4098887,2023-2024,9,"zondag,zo1 okt. 2023",19:15 uur,(9.)RWDM,1,1,KAA Gent(1.)
+,2023-2024,9,,,,,,
+,2023-2024,9,,,,,,
+,2023-2024,9,,,,,,
+,2023-2024,10,,,,,,
+4098922,2023-2024,10,"vrijdag,vr6 okt. 2023",20:45 uur,(14.)R Charleroi SC,2,1,RWDM(9.)
+4098919,2023-2024,10,"zaterdag,za7 okt. 2023",16:00 uur,(8.)Cercle Brugge,3,2,OH Leuven(13.)
+4098921,2023-2024,10,"zaterdag,za7 okt. 2023",18:15 uur,(16.)KVC Westerlo,1,0,KV Kortrijk(15.)
+4098915,2023-2024,10,"zaterdag,za7 okt. 2023",20:45 uur,(3.)RSC Anderlecht,3,1,KV Mechelen(10.)
+4098916,2023-2024,10,"zondag,zo8 okt. 2023",13:30 uur,(12.)Standard Luik,2,1,Club Brugge(4.)
+4098918,2023-2024,10,"zondag,zo8 okt. 2023",16:00 uur,(5.)Antwerp FC,4,1,KAS Eupen(11.)
+4098917,2023-2024,10,"zondag,zo8 okt. 2023",18:30 uur,(2.)KAA Gent,1,1,KRC Genk(6.)
+4098920,2023-2024,10,"zondag,zo8 okt. 2023",19:15 uur,(7.)St-Truidense VV,0,4,Union SG(1.)
+,2023-2024,10,,,,,,
+,2023-2024,10,,,,,,
+,2023-2024,10,,,,,,
+,2023-2024,11,,,,,,
+4098897,2023-2024,11,"vrijdag,vr20 okt. 2023",20:45 uur,(1.)Union SG,4,1,KAS Eupen(12.)
+4098894,2023-2024,11,"zaterdag,za21 okt. 2023",16:00 uur,(16.)KV Kortrijk,1,0,Club Brugge(5.)
+4098895,2023-2024,11,"zaterdag,za21 okt. 2023",18:15 uur,(10.)RWDM,1,1,KVC Westerlo(15.)
+4098898,2023-2024,11,"zaterdag,za21 okt. 2023",20:45 uur,(13.)R Charleroi SC,3,2,Antwerp FC(4.)
+4098892,2023-2024,11,"zondag,zo22 okt. 2023",13:30 uur,(7.)KRC Genk,4,0,KV Mechelen(11.)
+4098896,2023-2024,11,"zondag,zo22 okt. 2023",16:00 uur,(6.)Cercle Brugge,2,0,KAA Gent(3.)
+4098891,2023-2024,11,"zondag,zo22 okt. 2023",18:30 uur,(8.)Standard Luik,3,2,RSC Anderlecht(2.)
+4098893,2023-2024,11,"zondag,zo22 okt. 2023",19:15 uur,(14.)OH Leuven,4,0,St-Truidense VV(9.)
+,2023-2024,11,,,,,,
+,2023-2024,11,,,,,,
+,2023-2024,11,,,,,,
+,2023-2024,12,,,,,,
+4098944,2023-2024,12,"vrijdag,vr27 okt. 2023",20:45 uur,(10.)St-Truidense VV,2,1,RWDM(11.)
+4098943,2023-2024,12,"zaterdag,za28 okt. 2023",16:00 uur,(13.)KV Mechelen,0,2,Cercle Brugge(4.)
+4098946,2023-2024,12,"zaterdag,za28 okt. 2023",18:15 uur,(14.)KAS Eupen,2,0,R Charleroi SC(9.)
+4098940,2023-2024,12,"zaterdag,za28 okt. 2023",20:45 uur,(2.)RSC Anderlecht,5,1,OH Leuven(12.)
+4098939,2023-2024,12,"zondag,zo29 okt. 2023",13:30 uur,(7.)Club Brugge,2,1,Antwerp FC(6.)
+4098945,2023-2024,12,"zondag,zo29 okt. 2023",16:00 uur,(16.)KVC Westerlo,1,3,Union SG(1.)
+4098941,2023-2024,12,"zondag,zo29 okt. 2023",18:30 uur,(3.)KAA Gent,3,1,Standard Luik(8.)
+4098942,2023-2024,12,"zondag,zo29 okt. 2023",19:15 uur,(15.)KV Kortrijk,0,3,KRC Genk(5.)
+,2023-2024,12,,,,,,
+,2023-2024,12,,,,,,
+,2023-2024,12,,,,,,
+,2023-2024,13,,,,,,
+4098873,2023-2024,13,"vrijdag,vr3 nov. 2023",20:45 uur,(9.)St-Truidense VV,1,1,KAS Eupen(10.)
+4098870,2023-2024,13,"zaterdag,za4 nov. 2023",16:00 uur,(12.)RWDM,1,1,KV Kortrijk(15.)
+4098869,2023-2024,13,"zaterdag,za4 nov. 2023",18:15 uur,(13.)OH Leuven,0,2,KVC Westerlo(16.)
+4098868,2023-2024,13,"zaterdag,za4 nov. 2023",20:45 uur,(7.)Antwerp FC,3,2,KRC Genk(5.)
+4098871,2023-2024,13,"zondag,zo5 nov. 2023",13:30 uur,(4.)Cercle Brugge,0,3,RSC Anderlecht(2.)
+4098867,2023-2024,13,"zondag,zo5 nov. 2023",16:00 uur,(8.)Standard Luik,1,1,KV Mechelen(14.)
+4098872,2023-2024,13,"zondag,zo5 nov. 2023",18:30 uur,(1.)Union SG,2,1,Club Brugge(6.)
+4098874,2023-2024,13,"zondag,zo5 nov. 2023",19:15 uur,(11.)R Charleroi SC,1,3,KAA Gent(3.)
+,2023-2024,13,,,,,,
+,2023-2024,13,,,,,,
+,2023-2024,13,,,,,,
+,2023-2024,14,,,,,,
+4098825,2023-2024,14,"vrijdag,vr10 nov. 2023",20:45 uur,(15.)KVC Westerlo,3,3,St-Truidense VV(9.)
+4098822,2023-2024,14,"zaterdag,za11 nov. 2023",16:00 uur,(6.)Antwerp FC,6,0,Standard Luik(8.)
+4098826,2023-2024,14,"zaterdag,za11 nov. 2023",18:15 uur,(10.)KAS Eupen,1,3,RWDM(11.)
+4098824,2023-2024,14,"zaterdag,za11 nov. 2023",20:45 uur,(13.)KV Mechelen,1,0,R Charleroi SC(12.)
+4098819,2023-2024,14,"zondag,zo12 nov. 2023",13:30 uur,(7.)Club Brugge,0,0,Cercle Brugge(4.)
+4098820,2023-2024,14,"zondag,zo12 nov. 2023",16:00 uur,(5.)KRC Genk,3,1,OH Leuven(14.)
+4098821,2023-2024,14,"zondag,zo12 nov. 2023",18:30 uur,(3.)KAA Gent,1,1,RSC Anderlecht(2.)
+4098823,2023-2024,14,"zondag,zo12 nov. 2023",19:15 uur,(1.)Union SG,3,0,KV Kortrijk(16.)
+,2023-2024,14,,,,,,
+,2023-2024,14,,,,,,
+,2023-2024,14,,,,,,
+,2023-2024,15,,,,,,
+4098881,2023-2024,15,"vrijdag,vr24 nov. 2023",20:45 uur,(8.)St-Truidense VV,1,1,Antwerp FC(5.)
+4098880,2023-2024,15,"zaterdag,za25 nov. 2023",16:00 uur,(6.)Cercle Brugge,2,0,KAS Eupen(12.)
+4098882,2023-2024,15,"zaterdag,za25 nov. 2023",18:15 uur,(13.)R Charleroi SC,3,2,KVC Westerlo(15.)
+4098876,2023-2024,15,"zaterdag,za25 nov. 2023",20:45 uur,(9.)Standard Luik,1,0,KRC Genk(4.)
+4098877,2023-2024,15,"zondag,zo26 nov. 2023",13:30 uur,(3.)KAA Gent,1,1,Union SG(1.)
+4098878,2023-2024,15,"zondag,zo26 nov. 2023",16:00 uur,(14.)OH Leuven,0,1,Club Brugge(7.)
+4098875,2023-2024,15,"zondag,zo26 nov. 2023",18:30 uur,(2.)RSC Anderlecht,2,1,RWDM(10.)
+4098879,2023-2024,15,"zondag,zo26 nov. 2023",19:15 uur,(16.)KV Kortrijk,0,3,KV Mechelen(11.)
+,2023-2024,15,,,,,,
+,2023-2024,15,,,,,,
+,2023-2024,15,,,,,,
+,2023-2024,16,,,,,,
+4098937,2023-2024,16,"vrijdag,vr1 dec. 2023",20:45 uur,(15.)KVC Westerlo,1,3,RSC Anderlecht(2.)
+4098934,2023-2024,16,"zaterdag,za2 dec. 2023",16:00 uur,(11.)RWDM,0,0,R Charleroi SC(12.)
+4098938,2023-2024,16,"zaterdag,za2 dec. 2023",18:15 uur,(13.)KAS Eupen,1,1,KV Kortrijk(16.)
+4098933,2023-2024,16,"zaterdag,za2 dec. 2023",20:45 uur,(5.)Antwerp FC,1,0,OH Leuven(14.)
+4098932,2023-2024,16,"zondag,zo3 dec. 2023",13:30 uur,(6.)KRC Genk,2,2,KAA Gent(3.)
+4098936,2023-2024,16,"zondag,zo3 dec. 2023",16:00 uur,(10.)KV Mechelen,0,2,St-Truidense VV(9.)
+4098931,2023-2024,16,"zondag,zo3 dec. 2023",18:30 uur,(7.)Club Brugge,2,0,Standard Luik(8.)
+4098935,2023-2024,16,"zondag,zo3 dec. 2023",19:15 uur,(1.)Union SG,2,1,Cercle Brugge(4.)
+,2023-2024,16,,,,,,
+,2023-2024,16,,,,,,
+,2023-2024,16,,,,,,
+,2023-2024,17,,,,,,
+4098949,2023-2024,17,"vrijdag,vr8 dec. 2023",20:45 uur,(16.)KV Kortrijk,1,2,KVC Westerlo(15.)
+4098950,2023-2024,17,"zaterdag,za9 dec. 2023",16:00 uur,(6.)Cercle Brugge,1,3,Antwerp FC(4.)
+4098952,2023-2024,17,"zaterdag,za9 dec. 2023",18:15 uur,(8.)St-Truidense VV,1,1,OH Leuven(14.)
+4098948,2023-2024,17,"zaterdag,za9 dec. 2023",20:45 uur,(3.)KAA Gent,4,0,RWDM(11.)
+4098951,2023-2024,17,"zondag,zo10 dec. 2023",13:30 uur,(10.)KV Mechelen,0,0,Club Brugge(5.)
+4098954,2023-2024,17,"zondag,zo10 dec. 2023",16:00 uur,(13.)KAS Eupen,1,3,KRC Genk(7.)
+4098947,2023-2024,17,"zondag,zo10 dec. 2023",18:30 uur,(2.)RSC Anderlecht,2,2,Standard Luik(9.)
+4098953,2023-2024,17,"zondag,zo10 dec. 2023",19:15 uur,(12.)R Charleroi SC,1,3,Union SG(1.)
+,2023-2024,17,,,,,,
+,2023-2024,17,,,,,,
+,2023-2024,17,,,,,,
+,2023-2024,18,,,,,,
+4098914,2023-2024,18,"vrijdag,vr15 dec. 2023",20:45 uur,(14.)KVC Westerlo,2,0,KAS Eupen(13.)
+4098911,2023-2024,18,"zaterdag,za16 dec. 2023",16:00 uur,(15.)OH Leuven,1,2,Cercle Brugge(7.)
+4098912,2023-2024,18,"zaterdag,za16 dec. 2023",18:15 uur,(11.)RWDM,3,0,St-Truidense VV(8.)
+4098908,2023-2024,18,"zaterdag,za16 dec. 2023",20:45 uur,(9.)Standard Luik,0,0,R Charleroi SC(12.)
+4098907,2023-2024,18,"zondag,zo17 dec. 2023",13:30 uur,(6.)Club Brugge,2,0,KAA Gent(3.)
+4098913,2023-2024,18,"zondag,zo17 dec. 2023",16:00 uur,(1.)Union SG,1,0,KV Mechelen(10.)
+4098910,2023-2024,18,"zondag,zo17 dec. 2023",18:30 uur,(4.)Antwerp FC,1,1,RSC Anderlecht(2.)
+4098909,2023-2024,18,"zondag,zo17 dec. 2023",19:15 uur,(5.)KRC Genk,4,0,KV Kortrijk(16.)
+,2023-2024,18,,,,,,
+,2023-2024,18,,,,,,
+,2023-2024,18,,,,,,
+,2023-2024,19,,,,,,
+4098815,2023-2024,19,"woensdag,wo20 dec. 2023",18:30 uur,(7.)Cercle Brugge,3,0,KV Kortrijk(16.)
+4098816,2023-2024,19,"woensdag,wo20 dec. 2023",20:45 uur,(11.)KV Mechelen,3,0,Standard Luik(9.)
+4098812,2023-2024,19,"donderdag,do21 dec. 2023",20:45 uur,(3.)KAA Gent,4,0,OH Leuven(15.)
+4098814,2023-2024,19,"vrijdag,vr22 dec. 2023",20:45 uur,(10.)RWDM,1,6,Club Brugge(6.)
+4098818,2023-2024,19,"zaterdag,za23 dec. 2023",16:00 uur,(14.)KAS Eupen,1,2,Union SG(1.)
+4098813,2023-2024,19,"zaterdag,za23 dec. 2023",18:15 uur,(4.)Antwerp FC,2,2,KVC Westerlo(13.)
+4098817,2023-2024,19,"zaterdag,za23 dec. 2023",18:15 uur,(8.)St-Truidense VV,1,0,R Charleroi SC(12.)
+4098811,2023-2024,19,"zaterdag,za23 dec. 2023",20:45 uur,(2.)RSC Anderlecht,2,1,KRC Genk(5.)
+,2023-2024,19,,,,,,
+,2023-2024,19,,,,,,
+,2023-2024,19,,,,,,
+,2023-2024,20,,,,,,
+4098902,2023-2024,20,"dinsdag,di26 dec. 2023",13:30 uur,(7.)KRC Genk,3,0,Antwerp FC(5.)
+4098903,2023-2024,20,"dinsdag,di26 dec. 2023",16:00 uur,(15.)OH Leuven,3,0,KAS Eupen(14.)
+4098904,2023-2024,20,"dinsdag,di26 dec. 2023",16:00 uur,(16.)KV Kortrijk,0,2,KAA Gent(3.)
+4098905,2023-2024,20,"dinsdag,di26 dec. 2023",18:30 uur,(12.)KVC Westerlo,3,0,RWDM(11.)
+4098899,2023-2024,20,"dinsdag,di26 dec. 2023",20:45 uur,(4.)Club Brugge,1,1,Union SG(1.)
+4098901,2023-2024,20,"woensdag,wo27 dec. 2023",18:30 uur,(10.)Standard Luik,1,1,St-Truidense VV(8.)
+4098900,2023-2024,20,"woensdag,wo27 dec. 2023",20:45 uur,(2.)RSC Anderlecht,2,0,Cercle Brugge(6.)
+4098906,2023-2024,20,"woensdag,wo27 dec. 2023",20:45 uur,(13.)R Charleroi SC,3,1,KV Mechelen(9.)
+,2023-2024,20,,,,,,
+,2023-2024,20,,,,,,
+,2023-2024,20,,,,,,
+,2023-2024,21,,,,,,
+4098966,2023-2024,21,"vrijdag,vr19 jan. 2024",20:45 uur,(3.)KAA Gent,1,2,KV Mechelen(10.)
+4098965,2023-2024,21,"zaterdag,za20 jan. 2024",16:00 uur,(4.)KRC Genk,1,1,Cercle Brugge(7.)
+4098964,2023-2024,21,"zaterdag,za20 jan. 2024",18:15 uur,(9.)Standard Luik,0,1,KV Kortrijk(16.)
+4098963,2023-2024,21,"zaterdag,za20 jan. 2024",20:45 uur,(5.)Club Brugge,3,0,KVC Westerlo(11.)
+4098967,2023-2024,21,"zondag,zo21 jan. 2024",13:30 uur,(6.)Antwerp FC,4,1,R Charleroi SC(12.)
+4098970,2023-2024,21,"zondag,zo21 jan. 2024",16:00 uur,(1.)Union SG,2,1,St-Truidense VV(8.)
+4098968,2023-2024,21,"zondag,zo21 jan. 2024",18:30 uur,(14.)OH Leuven,1,1,RSC Anderlecht(2.)
+4098969,2023-2024,21,"zondag,zo21 jan. 2024",19:15 uur,(13.)RWDM,0,1,KAS Eupen(15.)
+,2023-2024,21,,,,,,
+,2023-2024,21,,,,,,
+,2023-2024,21,,,,,,
+,2023-2024,22,,,,,,
+4098830,2023-2024,22,"vrijdag,vr26 jan. 2024",20:45 uur,(7.)Cercle Brugge,1,1,Standard Luik(10.)
+4098829,2023-2024,22,"zaterdag,za27 jan. 2024",16:00 uur,(16.)KV Kortrijk,0,0,OH Leuven(15.)
+4098828,2023-2024,22,"zaterdag,za27 jan. 2024",20:45 uur,(3.)KAA Gent,2,2,KVC Westerlo(11.)
+4098833,2023-2024,22,"zaterdag,za27 jan. 2024",20:45 uur,(12.)R Charleroi SC,1,4,Club Brugge(4.)
+4098832,2023-2024,22,"zondag,zo28 jan. 2024",13:30 uur,(8.)St-Truidense VV,1,1,KRC Genk(5.)
+4098834,2023-2024,22,"zondag,zo28 jan. 2024",16:00 uur,(14.)KAS Eupen,1,0,Antwerp FC(6.)
+4098827,2023-2024,22,"zondag,zo28 jan. 2024",18:30 uur,(2.)RSC Anderlecht,2,2,Union SG(1.)
+4098831,2023-2024,22,"zondag,zo28 jan. 2024",19:15 uur,(9.)KV Mechelen,3,1,RWDM(13.)
+,2023-2024,22,,,,,,
+,2023-2024,22,,,,,,
+,2023-2024,22,,,,,,
+,2023-2024,23,,,,,,
+4098851,2023-2024,23,"dinsdag,di30 jan. 2024",20:30 uur,(3.)Club Brugge,3,3,KV Kortrijk(16.)
+4098857,2023-2024,23,"dinsdag,di30 jan. 2024",20:30 uur,(11.)KVC Westerlo,4,2,Cercle Brugge(7.)
+4098853,2023-2024,23,"woensdag,wo31 jan. 2024",18:45 uur,(15.)OH Leuven,2,1,KRC Genk(5.)
+4098858,2023-2024,23,"woensdag,wo31 jan. 2024",18:45 uur,(13.)R Charleroi SC,1,0,KAS Eupen(12.)
+4098852,2023-2024,23,"woensdag,wo31 jan. 2024",21:00 uur,(10.)Standard Luik,0,1,Antwerp FC(6.)
+4098854,2023-2024,23,"woensdag,wo31 jan. 2024",21:00 uur,(1.)Union SG,3,2,RWDM(14.)
+4098855,2023-2024,23,"donderdag,do1 feb. 2024",20:30 uur,(8.)KV Mechelen,2,2,RSC Anderlecht(2.)
+4098856,2023-2024,23,"donderdag,do1 feb. 2024",20:30 uur,(9.)St-Truidense VV,4,1,KAA Gent(4.)
+,2023-2024,23,,,,,,
+,2023-2024,23,,,,,,
+,2023-2024,23,,,,,,
+,2023-2024,24,,,,,,
+4098927,2023-2024,24,"zaterdag,za3 feb. 2024",16:00 uur,(15.)RWDM,2,2,Standard Luik(12.)
+4098926,2023-2024,24,"zaterdag,za3 feb. 2024",18:15 uur,(16.)KV Kortrijk,1,0,R Charleroi SC(11.)
+4098929,2023-2024,24,"zaterdag,za3 feb. 2024",18:15 uur,(10.)KVC Westerlo,0,3,OH Leuven(14.)
+4098924,2023-2024,24,"zaterdag,za3 feb. 2024",20:45 uur,(6.)KRC Genk,0,1,Union SG(1.)
+4098925,2023-2024,24,"zondag,zo4 feb. 2024",13:30 uur,(5.)Antwerp FC,2,1,Club Brugge(3.)
+4098930,2023-2024,24,"zondag,zo4 feb. 2024",16:00 uur,(13.)KAS Eupen,0,1,KV Mechelen(9.)
+4098923,2023-2024,24,"zondag,zo4 feb. 2024",18:30 uur,(2.)RSC Anderlecht,1,0,KAA Gent(4.)
+4098928,2023-2024,24,"zondag,zo4 feb. 2024",19:15 uur,(7.)Cercle Brugge,4,1,St-Truidense VV(8.)
+,2023-2024,24,,,,,,
+,2023-2024,24,,,,,,
+,2023-2024,24,,,,,,
+,2023-2024,25,,,,,,
+4098993,2023-2024,25,"vrijdag,vr9 feb. 2024",20:45 uur,(9.)St-Truidense VV,1,0,KV Kortrijk(16.)
+4098988,2023-2024,25,"zaterdag,za10 feb. 2024",16:00 uur,(11.)Standard Luik,1,0,OH Leuven(12.)
+4098991,2023-2024,25,"zaterdag,za10 feb. 2024",18:15 uur,(1.)Union SG,2,2,KVC Westerlo(10.)
+4098987,2023-2024,25,"zaterdag,za10 feb. 2024",20:45 uur,(3.)Club Brugge,4,0,KAS Eupen(15.)
+4098990,2023-2024,25,"zondag,zo11 feb. 2024",13:30 uur,(14.)RWDM,0,4,Antwerp FC(4.)
+4098992,2023-2024,25,"zondag,zo11 feb. 2024",16:00 uur,(8.)KV Mechelen,1,1,KRC Genk(7.)
+4098994,2023-2024,25,"zondag,zo11 feb. 2024",18:30 uur,(13.)R Charleroi SC,1,3,RSC Anderlecht(2.)
+4098989,2023-2024,25,"zondag,zo11 feb. 2024",19:15 uur,(5.)KAA Gent,1,2,Cercle Brugge(6.)
+,2023-2024,25,,,,,,
+,2023-2024,25,,,,,,
+,2023-2024,25,,,,,,
+,2023-2024,26,,,,,,
+4098865,2023-2024,26,"vrijdag,vr16 feb. 2024",20:45 uur,(11.)KVC Westerlo,2,1,Standard Luik(10.)
+4098860,2023-2024,26,"zaterdag,za17 feb. 2024",16:00 uur,(7.)KRC Genk,3,1,RWDM(14.)
+4098862,2023-2024,26,"zaterdag,za17 feb. 2024",18:15 uur,(12.)OH Leuven,0,0,R Charleroi SC(13.)
+4098861,2023-2024,26,"zaterdag,za17 feb. 2024",20:45 uur,(4.)Antwerp FC,0,1,KV Mechelen(9.)
+4098864,2023-2024,26,"zondag,zo18 feb. 2024",13:30 uur,(5.)Cercle Brugge,1,1,Club Brugge(3.)
+4098863,2023-2024,26,"zondag,zo18 feb. 2024",16:00 uur,(16.)KV Kortrijk,1,3,Union SG(1.)
+4098859,2023-2024,26,"zondag,zo18 feb. 2024",18:30 uur,(2.)RSC Anderlecht,4,1,St-Truidense VV(8.)
+4098866,2023-2024,26,"zondag,zo18 feb. 2024",19:15 uur,(15.)KAS Eupen,0,2,KAA Gent(6.)
+,2023-2024,26,,,,,,
+,2023-2024,26,,,,,,
+,2023-2024,26,,,,,,
+,2023-2024,27,,,,,,
+4098985,2023-2024,27,"vrijdag,vr23 feb. 2024",20:45 uur,(13.)R Charleroi SC,0,1,KRC Genk(7.)
+4098981,2023-2024,27,"zaterdag,za24 feb. 2024",16:00 uur,(14.)RWDM,1,1,OH Leuven(12.)
+4098984,2023-2024,27,"zaterdag,za24 feb. 2024",18:15 uur,(9.)St-Truidense VV,1,0,KVC Westerlo(10.)
+4098983,2023-2024,27,"zaterdag,za24 feb. 2024",20:45 uur,(8.)KV Mechelen,3,0,KV Kortrijk(16.)
+4098979,2023-2024,27,"zondag,zo25 feb. 2024",13:30 uur,(3.)Club Brugge,1,2,RSC Anderlecht(2.)
+4098980,2023-2024,27,"zondag,zo25 feb. 2024",16:00 uur,(5.)KAA Gent,2,2,Antwerp FC(4.)
+4098982,2023-2024,27,"zondag,zo25 feb. 2024",18:30 uur,(1.)Union SG,2,1,Standard Luik(11.)
+4098986,2023-2024,27,"zondag,zo25 feb. 2024",19:15 uur,(15.)KAS Eupen,0,2,Cercle Brugge(6.)
+,2023-2024,27,,,,,,
+,2023-2024,27,,,,,,
+,2023-2024,28,,,,,,
+,2023-2024,28,"vrijdag,vr1 mrt. 2024",20:45 uur,(10.)KVC Westerlo,,,R Charleroi SC(13.)
+,2023-2024,28,"zaterdag,za2 mrt. 2024",16:00 uur,(5.)Cercle Brugge,,,KV Mechelen(8.)
+,2023-2024,28,"zaterdag,za2 mrt. 2024",18:15 uur,(12.)OH Leuven,,,Union SG(1.)
+,2023-2024,28,"zaterdag,za2 mrt. 2024",20:45 uur,(11.)Standard Luik,,,KAA Gent(7.)
+,2023-2024,28,"zondag,zo3 mrt. 2024",13:30 uur,(6.)KRC Genk,,,Club Brugge(3.)
+,2023-2024,28,"zondag,zo3 mrt. 2024",16:00 uur,(4.)Antwerp FC,,,St-Truidense VV(9.)
+,2023-2024,28,"zondag,zo3 mrt. 2024",18:30 uur,(2.)RSC Anderlecht,,,KAS Eupen(15.)
+,2023-2024,28,"zondag,zo3 mrt. 2024",19:15 uur,(16.)KV Kortrijk,,,RWDM(14.)
+,2023-2024,28,,,,,,
+,2023-2024,28,,,,,,
+,2023-2024,29,,,,,,
+,2023-2024,29,"vrijdag,vr8 mrt. 2024",20:45 uur,(8.)KV Mechelen,,,KVC Westerlo(10.)
+,2023-2024,29,"zaterdag,za9 mrt. 2024",16:00 uur,(16.)KV Kortrijk,,,Antwerp FC(4.)
+,2023-2024,29,"zaterdag,za9 mrt. 2024",18:15 uur,(13.)R Charleroi SC,,,Cercle Brugge(5.)
+,2023-2024,29,"zaterdag,za9 mrt. 2024",20:45 uur,(14.)RWDM,,,RSC Anderlecht(2.)
+,2023-2024,29,"zondag,zo10 mrt. 2024",13:30 uur,(6.)KRC Genk,,,Standard Luik(11.)
+,2023-2024,29,"zondag,zo10 mrt. 2024",16:00 uur,(3.)Club Brugge,,,OH Leuven(12.)
+,2023-2024,29,"zondag,zo10 mrt. 2024",18:30 uur,(1.)Union SG,,,KAA Gent(7.)
+,2023-2024,29,"zondag,zo10 mrt. 2024",19:15 uur,(15.)KAS Eupen,,,St-Truidense VV(9.)
+,2023-2024,29,,,,,,
+,2023-2024,29,,,,,,
+,2023-2024,30,,,,,,
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(2.)RSC Anderlecht,,,KV Kortrijk(16.)
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(11.)Standard Luik,,,KAS Eupen(15.)
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(7.)KAA Gent,,,R Charleroi SC(13.)
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(4.)Antwerp FC,,,Union SG(1.)
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(12.)OH Leuven,,,KV Mechelen(8.)
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(5.)Cercle Brugge,,,RWDM(14.)
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(9.)St-Truidense VV,,,Club Brugge(3.)
+,2023-2024,30,"zondag,zo17 mrt. 2024",18:30 uur,(10.)KVC Westerlo,,,KRC Genk(6.)
+,2023-2024,30,,,,,,
+,2023-2024,30,,,,,,
