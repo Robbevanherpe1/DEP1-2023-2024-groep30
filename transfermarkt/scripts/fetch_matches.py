@@ -9,7 +9,7 @@ import re
 URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
 HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
-STARTJAAR = 2023
+STARTJAAR = 1960
 EINDJAAR = datetime.now().year - 1
 
 STARTSPEELDAG = 1
