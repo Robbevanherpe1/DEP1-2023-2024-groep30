@@ -1,25 +1,28 @@
+
 import requests
 import os
 from bs4 import BeautifulSoup
 import csv
 from datetime import datetime
+import re
+
 
 base_url = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
 headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
-directory = '/transfermarkt/data'
 
-csv_path = os.path.join(directory, 'alle_matches.csv')
+startjaar = 2023  # Beginjaar
+eindjaar = datetime.now().year - 1  # Huidig jaar
 
 
-startjaar = 2000  # Beginjaar
-eindjaar = datetime.now().year  # Huidig jaar
+startspeeldag = 1
+eindspeeldag = 50
 
-with open(csv_path, mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=['Seizoen','Speeldag','Datum', 'Tijdstip', 'Naam thuisploeg', 'Resultaat', 'Naam uitploeg',])
+with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
+    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Naam thuisploeg', 'Resultaat thuisploeg', 'Resultaat uitploeg', 'Naam uitploeg','Match-ID'])
     writer.writeheader()
 
     for year in range(startjaar, eindjaar + 1):
-        for speeldag in range(1, 40):  # Maximaal aantal speeldagen per seizoen (typisch ongeveer 38-40)
+        for speeldag in range(startspeeldag, eindspeeldag - 1):  # Maximaal aantal speeldagen per seizoen (typisch ongeveer 38-40)
             url = f"{base_url}?saison_id={year}&spieltag={speeldag}"
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
@@ -47,8 +50,21 @@ with open(csv_path, mode='w', newline='', encoding='utf-8') as file:
                     resultaat_element = match.find('span', class_='matchresult finished')
                     resultaat = resultaat_element.get_text(strip=True) if resultaat_element else None
 
-                     # Match-ID
-                    match_id_tag = match.find('a', class_='ergebnis-link')
+                    # Scores splitsen
+                    if resultaat:
+                        scores = resultaat.split(':')
+                        if len(scores) == 2:
+                            score_thuisploeg = scores[0].strip()
+                            score_uitploeg = scores[1].strip()
+                        else:
+                            score_thuisploeg = None
+                            score_uitploeg = None
+                    else:
+                        score_thuisploeg = None
+                        score_uitploeg = None
+
+                    # Match-ID
+                    match_id_tag = match.find('a', class_='liveLink')
                     match_id = match_id_tag['href'].split('/')[-1] if match_id_tag else None
 
                     writer.writerow({
@@ -57,10 +73,10 @@ with open(csv_path, mode='w', newline='', encoding='utf-8') as file:
                         'Datum': datum.strip() if datum else None,
                         'Tijdstip': tijdstip.strip() if tijdstip else None,
                         'Naam thuisploeg': thuisploeg,
-                        'Resultaat': resultaat,
+                        'Resultaat thuisploeg': score_thuisploeg,
+                        'Resultaat uitploeg': score_uitploeg,
                         'Naam uitploeg': uitploeg,
-
-
+                        'Match-ID': match_id,
                     })
                     print(f"Wedstrijdgegevens voor seizoen {year}, speeldag {speeldag} zijn geschreven.")
             else:
