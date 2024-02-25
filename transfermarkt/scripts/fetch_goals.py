@@ -7,8 +7,8 @@ import re
 # Fetches the URL and returns a BeautifulSoup object
 def fetch_url(url):
     try:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(url, headers=headers, timeout=30)
+        HEADERS = {'User-Agent': 'Mozilla/5.0'}
+        response = requests.get(url, headers=HEADERS, timeout=30)
         response.raise_for_status()
         return BeautifulSoup(response.text, 'html.parser')
     except requests.RequestException as e:
@@ -77,17 +77,17 @@ def process_all_boxes(soup, seizoen, speeldag):
 
 # Main function to process data for each year and speeldag
 def main():
-    url_base = 'https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/?saison_id='
-    year_start = 1960
-    year_end =  datetime.now().year
+    URL = 'https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/?saison_id='
+    STARTJAAR = 1960
+    EINDJAAR =  datetime.now().year
     
     all_matches = []
 
-    for year in range(year_start, year_end):
+    for year in range(STARTJAAR, EINDJAAR):
         print(f"Processing data for the year: {year}")
         speeldag = 1
         while True:
-            url = f'{url_base}{year}&spieltag={speeldag}'
+            url = f'{URL}{year}&spieltag={speeldag}'
             soup = fetch_url(url)
             if not soup.find('option', selected=True, value=str(speeldag)):
                 break  # No more speeldagen for this year
@@ -97,7 +97,8 @@ def main():
 
     # Write data to CSV
     with open('goals.csv', 'w', newline='', encoding='utf-8') as file:
-        fieldnames = ['Match_ID', 'Seizoen', 'Speeldag', 'Date', 'Time', 'Home_Team', 'Away_Team', 'Current_Score', 'Goal_Time', 'Scorer']
+        fieldnames = ['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Uitploeg', 
+                      'ResultaatMomenteel', 'GoalTijdstip', 'GoalMaker']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for match in all_matches:
