@@ -6,13 +6,11 @@ import csv
 from datetime import datetime
 import re
 
-
 URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
 HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
-STARTJAAR = 2023  # Beginjaar
-EINDJAAR = datetime.now().year - 1  # Huidig jaar
-
+STARTJAAR = 2023
+EINDJAAR = datetime.now().year - 1
 
 STARTSPEELDAG = 1
 EINDSPEELDAG = 50
@@ -23,7 +21,7 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
     writer.writeheader()
 
     for jaar in range(STARTJAAR, EINDJAAR + 1):
-        for speeldag in range(STARTSPEELDAG, EINDSPEELDAG - 1):  # Maximaal aantal speeldagen per seizoen (typisch ongeveer 38-40)
+        for speeldag in range(STARTSPEELDAG, EINDSPEELDAG - 1):
 
             url = f"{URL}?saison_id={jaar}&spieltag={speeldag}"
             response = requests.get(url, headers=HEADERS)
@@ -86,6 +84,6 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                         'ResultaatUitploeg': score_uitploeg,
                         'Uitploeg': uitploeg,
                     })
-                print(f"Wedstrijdgegevens voor seizoen {jaar}, speeldag {speeldag} zijn geschreven.")
+                print(f"Wedstrijdgegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag} zijn geschreven.")
             else:
-                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}, speeldag {speeldag}. Statuscode: {response.status_code}")
+                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag}. Statuscode: {response.status_code}")
