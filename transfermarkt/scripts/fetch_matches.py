@@ -72,7 +72,7 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                     match_id = match_id_tag['href'].split('/')[-1] if match_id_tag else None
 
                     writer.writerow({
-                        'Match_ID': match_id,
+                        'Match-ID': match_id,
                         'Seizoen': f"{jaar}-{jaar+1}",
                         'Speeldag': speeldag,
                         'Datum': datum.strip() if datum else None,
