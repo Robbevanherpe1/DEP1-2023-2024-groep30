@@ -20,9 +20,9 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
     writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Naam thuisploeg', 'Resultaat thuisploeg', 'Resultaat uitploeg', 'Naam uitploeg','Match-ID'])
     writer.writeheader()
 
-    for year in range(startjaar, eindjaar + 1):
+    for jaar in range(startjaar, eindjaar + 1):
         for speeldag in range(startspeeldag, eindspeeldag - 1):  # Maximaal aantal speeldagen per seizoen (typisch ongeveer 38-40)
-            url = f"{base_url}?saison_id={year}&spieltag={speeldag}"
+            url = f"{base_url}?saison_id={jaar}&spieltag={speeldag}"
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 soup = BeautifulSoup(response.content, 'html.parser')
