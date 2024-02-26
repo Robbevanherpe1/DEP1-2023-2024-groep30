@@ -13,7 +13,6 @@ headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KH
 startjaar = 2023  # Beginjaar
 eindjaar = datetime.now().year - 1  # Huidig jaar
 
-
 startspeeldag = 1
 eindspeeldag = 50
 
@@ -28,7 +27,12 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
             if response.status_code == 200:
                 soup = BeautifulSoup(response.content, 'html.parser')
                 match_rows = soup.select(".box")  # Selecteer de juiste container voor elke wedstrijd
+
+                if not soup.find('option', selected=True, value=str(speeldag)):
+                    break  # geen speeldagen meer beschikbaar voor dit seizoen
+
                 for match in match_rows:
+
                     # Thuisploeg
                     thuisploeg = match.find('td', class_='rechts hauptlink no-border-rechts hide-for-small spieltagsansicht-vereinsname')
                     thuisploeg = thuisploeg.get_text(strip=True) if thuisploeg else None
@@ -68,7 +72,8 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                     match_id = match_id_tag['href'].split('/')[-1] if match_id_tag else None
 
                     writer.writerow({
-                        'Seizoen': year,
+                        'Match_ID': match_id,
+                        'Seizoen': f"{jaar}-{jaar+1}",
                         'Speeldag': speeldag,
                         'Datum': datum.strip() if datum else None,
                         'Tijdstip': tijdstip.strip() if tijdstip else None,
@@ -78,6 +83,6 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                         'Naam uitploeg': uitploeg,
                         'Match-ID': match_id,
                     })
-                    print(f"Wedstrijdgegevens voor seizoen {year}, speeldag {speeldag} zijn geschreven.")
+                print(f"Wedstrijdgegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag} zijn geschreven.")
             else:
-                print(f"Fout bij het ophalen van gegevens voor seizoen {year}, speeldag {speeldag}. Statuscode: {response.status_code}")
+                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag}. Statuscode: {response.status_code}")
