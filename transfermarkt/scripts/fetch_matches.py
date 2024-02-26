@@ -1,4 +1,3 @@
-
 import requests
 import os
 from bs4 import BeautifulSoup
@@ -6,24 +5,24 @@ import csv
 from datetime import datetime
 import re
 
+URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
+HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
-base_url = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
+STARTJAAR = 2023
+EINDJAAR = datetime.now().year - 1
 
-startjaar = 2023  # Beginjaar
-eindjaar = datetime.now().year - 1  # Huidig jaar
-
-startspeeldag = 1
-eindspeeldag = 50
+STARTSPEELDAG = 1
+EINDSPEELDAG = 50
 
 with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Naam thuisploeg', 'Resultaat thuisploeg', 'Resultaat uitploeg', 'Naam uitploeg','Match-ID'])
+    writer = csv.DictWriter(file, fieldnames=[  'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Naam thuisploeg', 
+                                                'Resultaat thuisploeg', 'Resultaat uitploeg', 'Naam uitploeg','Match_ID'])
     writer.writeheader()
 
-    for jaar in range(startjaar, eindjaar + 1):
-        for speeldag in range(startspeeldag, eindspeeldag - 1):  # Maximaal aantal speeldagen per seizoen (typisch ongeveer 38-40)
-            url = f"{base_url}?saison_id={jaar}&spieltag={speeldag}"
-            response = requests.get(url, headers=headers)
+    for jaar in range(STARTJAAR, EINDJAAR + 1):
+        for speeldag in range(STARTSPEELDAG, EINDSPEELDAG - 1):
+            url = f"{URL}?saison_id={jaar}&spieltag={speeldag}"
+            response = requests.get(url, headers=HEADERS)
             if response.status_code == 200:
                 soup = BeautifulSoup(response.content, 'html.parser')
                 match_rows = soup.select(".box")  # Selecteer de juiste container voor elke wedstrijd
@@ -72,7 +71,6 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                     match_id = match_id_tag['href'].split('/')[-1] if match_id_tag else None
 
                     writer.writerow({
-                        'Match-ID': match_id,
                         'Seizoen': f"{jaar}-{jaar+1}",
                         'Speeldag': speeldag,
                         'Datum': datum.strip() if datum else None,
@@ -81,7 +79,7 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                         'Resultaat thuisploeg': score_thuisploeg,
                         'Resultaat uitploeg': score_uitploeg,
                         'Naam uitploeg': uitploeg,
-                        'Match-ID': match_id,
+                        'Match_ID': match_id,
                     })
                 print(f"Wedstrijdgegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag} zijn geschreven.")
             else:
