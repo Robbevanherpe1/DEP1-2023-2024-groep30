@@ -52,7 +52,11 @@ def get_match_data(box, seizoen, speeldag):
             goal_details = goal_row.find_all('td')
             if goal_details and len(goal_details) >= 5:
                 
-                goal_data['ResultaatMomenteel'] = goal_details[2].get_text(strip=True)
+                ResultaatMomenteel = goal_details[2].get_text(strip=True)
+                if ":" in ResultaatMomenteel:
+                    goal_data["StandThuisploeg"], goal_data["StandUitploeg"] = ResultaatMomenteel.split(":")
+                else:
+                    continue
                
                 goal_time_values = [goal_details[i].get_text(strip=True).rstrip("'") for i in [1, 3]]
                 goal_data['GoalTijdstip'] = next((time for time in goal_time_values if time), None)
@@ -60,11 +64,16 @@ def get_match_data(box, seizoen, speeldag):
                 goal_scorers = [goal_details[i].find('a', title=True) for i in [0, 4]]
                 goal_data['GoalScorer'] = next((scorer['title'] for scorer in goal_scorers if scorer is not None), None)
                 
-                
+                # Determine the scoring team based on the last goal
+                if goal_details[0].find('a', title=True):  # Als de doelpuntmaker in de eerste kolom staat, scoort de thuisploeg
+                    goal_data['NaamScorendePloeg'] = goal_data['Thuisploeg']
+                elif goal_details[4].find('a', title=True):  # Als de doelpuntmaker in de laatste kolom staat, scoort de uitploeg
+                    goal_data['NaamScorendePloeg'] = goal_data['Uitploeg']
                 
                 match_data.append(goal_data)
 
     return match_data
+
 
 # Processes all boxes to get match data
 def process_all_boxes(soup, seizoen, speeldag):
@@ -78,7 +87,7 @@ def process_all_boxes(soup, seizoen, speeldag):
 # Main function to process data for each year and speeldag
 def main():
     URL = 'https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/?saison_id='
-    STARTJAAR = 1960
+    STARTJAAR = 2023
     EINDJAAR =  datetime.now().year
     
     all_matches = []
@@ -97,8 +106,8 @@ def main():
 
     # Write data to CSV
     with open('goals.csv', 'w', newline='', encoding='utf-8') as file:
-        fieldnames = ['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Uitploeg',
-                       'GoalTijdstip', 'GoalScorer', 'ResultaatMomenteel']
+        fieldnames = ['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Uitploeg','NaamScorendePloeg',
+                       'GoalTijdstip', 'GoalScorer', 'StandThuisploeg', 'StandUitploeg']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
         writer.writeheader()
         for match in all_matches:
