@@ -1,58 +1,41 @@
 import requests
+import os
 from bs4 import BeautifulSoup
 import csv
 from datetime import datetime
-import re
 
-URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
-HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
-STARTJAAR = 1960
-EINDJAAR = 1960
+base_url = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
+headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
-STARTSPEELDAG = 1
-EINDSPEELDAG = 50
+startjaar = 1960  # Beginjaar
+eindjaar = datetime.now().year - 1  # Huidig jaar
 
-# Functie toegevoegd om match_id te extraheren
-def extract_match_id(url):
-    match_id = re.search(r'/spielbericht/index/spielbericht/(\d+)', url)
-    return match_id.group(1) if match_id else None
-
+startspeeldag = 1
+eindspeeldag = 50
 
 with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=[ 'Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip',
-                                               'Thuisploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Uitploeg'])
+    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Match-ID', 'Datum', 'Tijdstip', 'Naam thuisploeg', 'Resultaat thuisploeg', 'Resultaat uitploeg', 'Naam uitploeg'])
     writer.writeheader()
 
-    for jaar in range(STARTJAAR, EINDJAAR + 1):
-        for speeldag in range(STARTSPEELDAG, EINDSPEELDAG + 1):
-
-            url = f"{URL}?saison_id={jaar}&spieltag={speeldag}"
-            response = requests.get(url, headers=HEADERS)
+    for year in range(startjaar, eindjaar + 1):
+        for speeldag in range(startspeeldag, eindspeeldag - 1):  # Maximaal aantal speeldagen per seizoen (typisch ongeveer 38-40)
+            url = f"{base_url}?saison_id={year}&spieltag={speeldag}"
+            response = requests.get(url, headers=headers)
             if response.status_code == 200:
-                
                 soup = BeautifulSoup(response.content, 'html.parser')
-                trs = soup.select(".box")  # Selecteer de juiste container voor elke wedstrijd
-
-                if not soup.find('option', selected=True, value=str(speeldag)):
-                    break  # geen speeldagen meer beschikbaar voor dit seizoen
-
-                for row in trs:
-                    # Match-ID
-                    # Implementeer de logica zoals voorheen maar gebruik de extract_match_id voor het ophalen van match_id
-                    result_link = row.find('a', class_='liveLink', href=True)
-                    match_id = extract_match_id(result_link['href']) if result_link else None
-
+                match_rows = soup.select(".box")  # Selecteer de juiste container voor elke wedstrijd
+                for match in match_rows:
                     # Thuisploeg
-                    thuisploeg = row.find('td', class_='rechts hauptlink no-border-rechts hide-for-small spieltagsansicht-vereinsname')
+                    thuisploeg = match.find('td', class_='rechts hauptlink no-border-rechts hide-for-small spieltagsansicht-vereinsname')
                     thuisploeg = thuisploeg.get_text(strip=True) if thuisploeg else None
 
                     # Uitploeg
-                    uitploeg = row.find('td', class_='hauptlink no-border-links no-border-rechts hide-for-small spieltagsansicht-vereinsname')
+                    uitploeg = match.find('td', class_='hauptlink no-border-links no-border-rechts hide-for-small spieltagsansicht-vereinsname')
                     uitploeg = uitploeg.get_text(strip=True) if uitploeg else None
 
                     # Datum en tijdstip van de match
-                    datum_tijdstip_tag = row.find('td', class_='zentriert no-border')
+                    datum_tijdstip_tag = match.find('td', class_='zentriert no-border')
                     if datum_tijdstip_tag:
                         datum_tijdstip = datum_tijdstip_tag.get_text(strip=True)
                         datum, tijdstip = datum_tijdstip.split('-')
@@ -61,7 +44,7 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                         tijdstip = None
 
                     # Resultaat van de wedstrijd
-                    resultaat_element = row.find('span', class_='matchresult finished')
+                    resultaat_element = match.find('span', class_='matchresult finished')
                     resultaat = resultaat_element.get_text(strip=True) if resultaat_element else None
 
                     # Scores splitsen
@@ -77,19 +60,27 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                         score_thuisploeg = None
                         score_uitploeg = None
                    
+                    # Match-ID
+                    match_id_element = match.find('a', title=lambda title: title in ['Wedstrijdverslag', 'Voorbeschouwing'])  # Zoek naar de anker tag met de titel 'Wedstrijdverslag' of 'Voorbeschouwing'
+                    if match_id_element:  # Controleer of het element bestaat
+                        match_id_url = match_id_element['href']  # Haal de waarde van het 'href'-attribuut op
+                        match_id = match_id_url.split('/')[-1]  # Split de URL op '/' en neem het laatste deel, dat de Match-ID bevat
+                    else:
+                        match_id = None
                    
-                    if any([ match_id, datum, tijdstip, thuisploeg, score_thuisploeg, score_uitploeg, uitploeg]):
+                    # Check if any of the fields contain data before writing the row
+                    if any([match_id, datum, tijdstip, thuisploeg, score_thuisploeg, score_uitploeg, uitploeg]):
                         writer.writerow({
-                            'Match_ID': match_id,
-                            'Seizoen': f"{jaar}-{jaar+1}",
+                            'Seizoen': f"{year}-{year+1}",
                             'Speeldag': speeldag,
+                            'Match-ID': match_id,
                             'Datum': datum.strip() if datum else None,
                             'Tijdstip': tijdstip.strip() if tijdstip else None,
-                            'Thuisploeg': thuisploeg,
-                            'Resultaat_Thuisploeg': score_thuisploeg,
-                            'Resultaat_Uitploeg': score_uitploeg,
-                            'Uitploeg': uitploeg,
+                            'Naam thuisploeg': thuisploeg,
+                            'Resultaat thuisploeg': score_thuisploeg,
+                            'Resultaat uitploeg': score_uitploeg,
+                            'Naam uitploeg': uitploeg,
                         })
-                print(f"Wedstrijdgegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag} zijn geschreven.")
+                        print(f"Wedstrijdgegevens voor seizoen {year}, speeldag {speeldag} zijn geschreven.")
             else:
-                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag}. Statuscode: {response.status_code}")
+                print(f"Fout bij het ophalen van gegevens voor seizoen {year}, speeldag {speeldag}. Statuscode: {response.status_code}")
