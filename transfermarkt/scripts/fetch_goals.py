@@ -32,8 +32,14 @@ def get_match_data(box, seizoen, speeldag):
         
         team_names = row.find_all('td', class_='spieltagsansicht-vereinsname')
         if team_names:
+            # For Thuisploeg, use the text directly
             data['Thuisploeg'] = re.sub(r"\(.*?\)", "", team_names[0].get_text(strip=True))
-            data['Uitploeg'] = re.sub(r"\(.*?\)", "", team_names[-1].get_text(strip=True))
+            # For Uitploeg, find the <a> tag and use its title attribute
+            uitploeg_a_tag = team_names[-1].find('a', title=True)
+            if uitploeg_a_tag and uitploeg_a_tag.has_attr('title'):
+                data['Uitploeg'] = uitploeg_a_tag['title']
+            else:
+                data['Uitploeg'] = "Unknown"
 
         result_link = row.find('td', class_='spieltagsansicht-ergebnis').find('a', href=True)
         if result_link:
