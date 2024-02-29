@@ -1,30 +1,36 @@
 import requests
-import os
 from bs4 import BeautifulSoup
 import csv
 from datetime import datetime
 
 
-base_url = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
-headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
+URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
+HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
 
-startjaar = 1960  # Beginjaar
-eindjaar = datetime.now().year - 1  # Huidig jaar
+STARTJAAR = 2023
+EINDJAAR = datetime.now().year - 1
 
-startspeeldag = 1
-eindspeeldag = 50
+STARTSPEELDAG = 1
+EINDSPEELDAG = 50
 
 with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.DictWriter(file, fieldnames=['Seizoen', 'Speeldag', 'Match-ID', 'Datum', 'Tijdstip', 'Naam thuisploeg', 'Resultaat thuisploeg', 'Resultaat uitploeg', 'Naam uitploeg'])
+    writer = csv.DictWriter(file, fieldnames=['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Uitploeg'])
     writer.writeheader()
 
-    for year in range(startjaar, eindjaar + 1):
-        for speeldag in range(startspeeldag, eindspeeldag - 1):  # Maximaal aantal speeldagen per seizoen (typisch ongeveer 38-40)
-            url = f"{base_url}?saison_id={year}&spieltag={speeldag}"
-            response = requests.get(url, headers=headers)
+    for jaar in range(STARTJAAR, EINDJAAR + 1):
+        for speeldag in range(STARTSPEELDAG, EINDSPEELDAG - 1):
+
+            url = f"{URL}?saison_id={jaar}&spieltag={speeldag}"
+            response = requests.get(url, headers=HEADERS)
+
             if response.status_code == 200:
+
                 soup = BeautifulSoup(response.content, 'html.parser')
                 match_rows = soup.select(".box")  # Selecteer de juiste container voor elke wedstrijd
+
+                if not soup.find('option', selected=True, value=str(speeldag)):
+                    break  # geen speeldagen meer beschikbaar voor dit seizoen
+
                 for match in match_rows:
                     # Thuisploeg
                     thuisploeg = match.find('td', class_='rechts hauptlink no-border-rechts hide-for-small spieltagsansicht-vereinsname')
@@ -71,16 +77,16 @@ with open('matches.csv', mode='w', newline='', encoding='utf-8') as file:
                     # Check if any of the fields contain data before writing the row
                     if any([match_id, datum, tijdstip, thuisploeg, score_thuisploeg, score_uitploeg, uitploeg]):
                         writer.writerow({
-                            'Seizoen': f"{year}-{year+1}",
+                            'Match_ID': match_id,
+                            'Seizoen': f"{jaar}-{jaar+1}",
                             'Speeldag': speeldag,
-                            'Match-ID': match_id,
                             'Datum': datum.strip() if datum else None,
                             'Tijdstip': tijdstip.strip() if tijdstip else None,
-                            'Naam thuisploeg': thuisploeg,
-                            'Resultaat thuisploeg': score_thuisploeg,
-                            'Resultaat uitploeg': score_uitploeg,
-                            'Naam uitploeg': uitploeg,
+                            'Thuisploeg': thuisploeg,
+                            'Resultaat_Thuisploeg': score_thuisploeg,
+                            'Resultaat_Uitploeg': score_uitploeg,
+                            'Uitploeg': uitploeg,
                         })
-                        print(f"Wedstrijdgegevens voor seizoen {year}, speeldag {speeldag} zijn geschreven.")
+                print(f"Wedstrijdgegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag} zijn geschreven.")
             else:
-                print(f"Fout bij het ophalen van gegevens voor seizoen {year}, speeldag {speeldag}. Statuscode: {response.status_code}")
+                print(f"Fout bij het ophalen van gegevens voor seizoen {jaar}-{jaar+1}, speeldag {speeldag}. Statuscode: {response.status_code}")
