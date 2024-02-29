@@ -1,10 +1,19 @@
 import pandas as pd
-import os
 
-csv_path = '../data/stand.csv'
+def clean_data(file_path):
+    # Load the CSV file with a specified encoding to handle non-UTF-8 characters
+    try:
+        data = pd.read_csv(file_path, encoding='utf-8')
+    except UnicodeDecodeError:
+        data = pd.read_csv(file_path, encoding='ISO-8859-1')
+    
+    # data cleaning
+    
+    return data
 
-if os.path.exists(csv_path):
-    stand = pd.read_csv(csv_path)
-    print(stand.head(10))
-else:
-    print(f"File not found: {csv_path}")
+# Example usage
+file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stand.csv'
+cleaned_data = clean_data(file_path)
+
+# Save the cleaned data to a new CSV
+cleaned_data.to_csv('stand_cleaned.csv', index=False)
