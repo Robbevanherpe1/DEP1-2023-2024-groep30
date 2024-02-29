@@ -22,18 +22,20 @@ zie later
 
 Hier maken we gebruik van webscraping om data te verzamelen zodat we met deze data te werk kunnen gaan.
 
-Voor stap 1 maakt men gebruik van 2 scripts: `fetch_matches` en `fetch_goals`.
+Voor stap 1 maakt men gebruik van 3 scripts: `fetch_stand`, `fetch_matches` en `fetch_goals`.
 
 ### Voetbalwedstrijdgegevens Scraper (`fetch_matches`)
 
-Deze Python-script haalt gegevens op van de website Voetbalkrant om informatie over voetbalwedstrijden in de Belgische Jupiler Pro League van 2002 tot 2023 te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `matches.csv`.
+Deze Python-script haalt gegevens op van de website Transfermarkt om informatie over voetbalwedstrijden in de Belgische Jupiler Pro League van 1960 tot de huidige datum te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `matches.csv`.
 
 ### Vereisten fetch_matches
 
 - BeautifulSoup4
 - requests
+- csv
+- datetime
 
-Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4 requests
+Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4 requests csv datetime
 
 ### Gebruik fetch_matches
 
@@ -41,41 +43,68 @@ Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4
 2. Open een terminal of opdrachtprompt.
 3. Navigeer naar de map met het script.
 4. Voer het script uit met Python:
-   python fetch_data.py
+   python fetch_matches.py
 
-Het script begint gegevens over wedstrijden op te halen van de website Voetbalkrant en slaat deze op in `matches.csv`. Elke rij in het CSV-bestand vertegenwoordigt een voetbalwedstrijd en bevat de volgende kolommen:
+Het script begint gegevens over wedstrijden op te halen van de website transfermarkt en slaat deze op in `matches.csv`. Elke rij in het CSV-bestand vertegenwoordigt een voetbalwedstrijd en bevat de volgende kolommen:
 
-- `ID`: unieke ID per wedstrijd
-- `Start Year`: beginjaar seizoen
-- `End Year`: eindjaar seizoen
-- `Date`: datum van de wedstrijd
-- `time`: uur van de wedstrijd
-- `Home Team`: naam van de thuisploeg
-- `Score`: score van de wedstrijd
-- `Away Team`: naam van de uitploeg
+- `Match_ID`: unieke ID per wedstrijd
+- `Seizoen`: beginjaar en eindjaar seizoen
+- `Speeldag`: de speeldag
+- `Datum`: datum van de wedstrijd
+- `Tijdstip`: uur van de wedstrijd
+- `Thuisploeg`: naam van de thuisploeg
+- `Resultaat_Thuisploeg`: score van de thuisploeg
+- `Resultaat_Uitploeg`: score van de uitploeg
+- `Uitploeg`: naam van de uitploeg
 
-### Aanpassing fetch_matches
+### Voetbalwedstrijdstand Scraper (`fetch_stand`)
 
-Je kunt het script aanpassen door de volgende variabelen aan te passen:
+Deze Python-script haalt gegevens op van de website Transfermarkt om informatie over de stand in de Belgische Jupiler Pro League van 1960 tot de huidige datum te extraheren. Het slaat de geëxtraheerde gegevens op in een CSV-bestand met de naam `stand.csv`.
 
-- `base_url`: De basis-URL van de website Voetbalkrant.
-- `start_year`: Het startjaar voor het ophalen van wedstrijdgegevens.
-- `end_year`: Het eindjaar voor het ophalen van wedstrijdgegevens.
-
-Standaard haalt het script gegevens op van 2002 tot 2023. Je kunt de variabelen `start_year` en `end_year` aanpassen om gegevens op te halen voor een andere reeks jaren.
-
-### Voetbaldoelpunten Data Scraper (`fetch_goals`)
-
-Dit Python-script is ontwikkeld om informatie over doelpunten in voetbalwedstrijden van de Belgische Jupiler Pro League van 2007 tot 2023 te extraheren van de website `voetbalkrant.com`. Het opgeslagen bestand, `goals.csv`, bevat details van elk doelpunt per wedstrijd.
-
-### Vereisten fetch_goals
+### Vereisten fetch_stand
 
 - BeautifulSoup4
 - requests
 - csv
+- datetime
+
+Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4 requests csv datetime
+
+### Gebruik fetch_stand
+
+1. Kloon of download de repository naar je lokale machine.
+2. Open een terminal of opdrachtprompt.
+3. Navigeer naar de map met het script.
+4. Voer het script uit met Python:
+   python fetch_stand.py
+
+Het script begint gegevens over de stand op te halen van de website transfermarkt en slaat deze op in `stand.csv`. Elke rij in het CSV-bestand vertegenwoordigt een voetbalwedstrijd en bevat de volgende kolommen:
+
+- `Seizoen`: beginjaar en eindjaar seizoen
+- `Speeldag`: de speeldag
+- `Stand`: plaats in stand
+- `Club`: naam van de club
+- `AantalGespeeld`: aantal matchen gespeeld
+- `AantalGewonnen`: aantal matchen gewonnen
+- `AantalGelijk`: aantal matchen gelijk gespeeld
+- `AantalVerloren`: aantal matchen verloren
+- `Doelpunten`: aantal doelpunten
+- `Doelpuntensaldo`: het doelpunten saldo
+- `Punten`: aantal punten
+
+### Voetbaldoelpunten Data Scraper (`fetch_goals`)
+
+Dit Python-script is ontwikkeld om informatie over doelpunten in Transfermarkt van de Belgische Jupiler Pro League van 2007 tot de huidige datum te extraheren van de website `Transfermarkt.com`. Het opgeslagen bestand, `goals.csv`, bevat details van elk doelpunt per wedstrijd.
+
+### Vereisten fetch_goals
+
+- BeautifulSoup4
+- datetime
+- requests
+- csv
 - re
 
-Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4 requests
+Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4 requests datetime
 
 ### Gebruik fetch_goals
 
@@ -83,20 +112,19 @@ Je kunt de vereiste bibliotheken installeren met pip: pip install beautifulsoup4
 2. Open een terminal of opdrachtprompt.
 3. Navigeer naar de map met het script.
 4. Voer het script uit met Python:
-   python fetch_data.py
+   python fetch_goals.py
 
-Het script verzamelt gegevens over doelpunten van de website `voetbalkrant.com` en slaat deze op in `football_goals.csv`. Elke rij in het CSV-bestand vertegenwoordigt een doelpunt in een voetbalwedstrijd en bevat de volgende kolommen:
+Het script verzamelt gegevens over doelpunten van de website `Transfermarkt.com` en slaat deze op in `goals.csv`. Elke rij in het CSV-bestand vertegenwoordigt een doelpunt in een voetbalwedstrijd en bevat de volgende kolommen:
 
-- `Jaar`: Het jaar van de wedstrijd.
-- `Minuut`: De minuut waarin het doelpunt werd gescoord.
-- `Speler`: De naam van de speler die het doelpunt heeft gescoord.
-
-### Aanpassing fetch_goals
-
-Je kunt het script aanpassen door de volgende variabelen aan te passen:
-
-- `base_url`: De basis-URL van de website `voetbalkrant.com`.
-- `start_year`: Het startjaar voor het ophalen van wedstrijdgegevens.
-- `end_year`: Het eindjaar voor het ophalen van wedstrijdgegevens.
-
-Standaard haalt het script gegevens op van 2007 tot 2022. Je kunt de variabelen `start_year` en `end_year` aanpassen om gegevens op te halen voor een andere reeks jaren.
+- `Match_ID`: unieke ID per wedstrijd
+- `Seizoen`: beginjaar en eindjaar seizoen
+- `Speeldag`: de speeldag
+- `Datum`: datum van de wedstrijd
+- `Tijdstip`: uur van de wedstrijd
+- `Thuisploeg`: naam van de thuisploeg
+- `Uitploeg`: naam van de uitploeg
+- `NaamScorendePloeg`: naam van de ploeg die scoort
+- `GoalTijdstip`: tijdstip goal
+- `GoalScorer`: naam van goal scorer
+- `StandThuisploeg`: stand van thuisploeg
+- `StandUitploeg`: stand van uitploeg
