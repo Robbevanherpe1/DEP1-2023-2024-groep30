@@ -7,7 +7,8 @@ def control_data(file_path):
     except UnicodeDecodeError:
         data = pd.read_csv(file_path, encoding='ISO-8859-1')
 
-    jaarTallen2puntensysteem = set(range(1960, 1995) - {1964})
+    jaarTallen2puntensysteem = set(range(1960, 1995)) - {1964}
+
     
     # Initialize a counter for errors
     error_count = 0
