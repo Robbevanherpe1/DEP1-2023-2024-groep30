@@ -31,5 +31,5 @@ def control_data(file_path):
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
 controlled_data = control_data(file_path)
 
-# Optionally, you can still save the controlled data to a new CSV, including the 'SaldoCheck' column for review
-# controlled_data.to_csv('stand_controlled.csv', index=False)
+# Save the controlled data to a new CSV
+controlled_data.to_csv('stand_controlled.csv', index=False)
