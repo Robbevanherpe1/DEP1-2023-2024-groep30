@@ -16,4 +16,4 @@ file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\tr
 cleaned_data = clean_data(file_path)
 
 # Save the cleaned data to a new CSV
-cleaned_data.to_csv('matches_cleaned.csv', index=False)
+cleaned_data.to_csv('matches_clean.csv', index=False)
