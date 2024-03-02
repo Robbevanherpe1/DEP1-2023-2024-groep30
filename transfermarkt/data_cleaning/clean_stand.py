@@ -25,8 +25,8 @@ def clean_data(file_path):
     
     # Calculate 'PuntenTegen' for seasons after 1995-1996
     for i, row in data.iterrows():
-        seizoens_einde = int(row['SeizoensEinde'])
-        if seizoens_einde > 1996:
+        seizoens_einde = int(row['SeizoensBegin'])
+        if seizoens_einde >= 1995:
             data.at[i, 'PuntenTegen'] = row['AantalGelijk'] * 1 + row['AantalVerloren'] * 3
 
     # Remove the original 'Seizoen', 'Punten', and 'Doelpunten' columns
