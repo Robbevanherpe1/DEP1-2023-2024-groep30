@@ -12,8 +12,8 @@ def control_data(file_path):
     return data
 
 # Example usage
-file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_cleaned.csv'
+file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv'
 cleaned_data = control_data(file_path)
 
 # Save the controlled data to a new CSV
-cleaned_data.to_csv('stand_cleaned.csv', index=False)
+cleaned_data.to_csv('matches_controlled.csv', index=False)
