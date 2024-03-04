@@ -38,6 +38,7 @@ def get_match_data(box, seizoen, speeldag):
             uitploeg_a_tag = team_names[-1].find('a', title=True)
             if uitploeg_a_tag and uitploeg_a_tag.has_attr('title'):
                 data['Uitploeg'] = uitploeg_a_tag['title']
+                data['Uitploeg'] = re.sub(r"\(.*?\)", "", data['Uitploeg'])
             else:
                 data['Uitploeg'] = "Unknown"
 
