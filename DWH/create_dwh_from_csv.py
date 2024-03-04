@@ -7,7 +7,7 @@ db_user = 'root'
 db_password = 'root'
 db_host = 'localhost'
 db_port = '3306'
-db_name = 'testdb'
+db_name = 'DEP_G30_DWH'
 
 # MySQL connectie string
 engine = create_engine(f'mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
@@ -18,10 +18,9 @@ metadata = MetaData()
 # Define tables
 Fact_JPL = Table('Fact_JPL', metadata,
                   Column('JPLKey', Integer, primary_key=True),
-                  Column('TeamKey', Integer, ForeignKey('Dim_Team.TeamKey')),
-                  Column('SpelerKey', Integer, ForeignKey('Dim_Speler.SpelerKey')),
-                  Column('DoelpuntKey', Integer, ForeignKey('Dim_Doelpunt.DoelpuntKey')),
-                  Column('DatumKey', Integer, ForeignKey('Dim_Datum.DatumKey')),
+                  Column('StandKey', Integer, ForeignKey('Dim_Stand.StandKey')),
+                  Column('GoalKey', Integer, ForeignKey('Dim_Goal.GoalKey')),
+                  Column('WeddenschapKey', Integer, ForeignKey('Dim_Weddenschap.WeddenschapKey')),
                   Column('MatchID', String(50)),
                   Column('Seizoen', String(50)),
                   Column('Speeldag', String(50)),
