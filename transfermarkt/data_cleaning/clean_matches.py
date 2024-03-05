@@ -2,7 +2,7 @@ import pandas as pd
 import re
 
 # Laden van het bestand "matches.csv"
-df = pd.read_csv(r'DEP-G30\transfermarkt\data\scraped_data\matches.csv')
+df = pd.read_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\matches.csv')
 
 # Aanpassen van de kolomnamen
 df.columns = ['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Uitploeg']
@@ -76,4 +76,4 @@ df['Thuisploeg'] = df['Thuisploeg'].apply(clean_team)
 df['Uitploeg'] = df['Uitploeg'].apply(clean_team)
 
 # Opslaan van de aangepaste gegevens naar "clean_matches.csv"
-df.to_csv(r'DEP-G30\transfermarkt\data\cleaned_data\matches_clean.csv', index=False, header=True)
+df.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv', index=False, header=True)
