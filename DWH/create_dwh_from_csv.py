@@ -29,9 +29,6 @@ Fact_JPL = Table('Fact_JPL', metadata,
                   Column('GoalKey', Integer, ForeignKey('Dim_Goal.GoalKey')),
                   Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
                   Column('WeddenschapKey', Integer, ForeignKey('Dim_Weddenschap.WeddenschapKey')),
-                  Column('MatchID', String(50)),
-                  Column('Seizoen', String(50)),
-                  Column('Speeldag', String(50)),
                   )
 
 Dim_Stand = Table('Dim_Stand', metadata,
@@ -117,10 +114,11 @@ def load_data_from_csv_list(csv_file_paths):
         session.close()
 
 # Lijst van CSV bestanden en hun overeenstemmende tabelnamen
-csv_file_paths = [
-    (r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\stand_controlled.csv', 'Dim_Stand'),
-    (r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv', 'Dim_Match'),
-    (r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\goals_clean.csv', 'Dim_Goal'),
+csv_file_paths = 
+[
+    (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Stand'),
+    (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv', 'Dim_Match'),
+    (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Goal'),
     (r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\bet777\data\bets.csv', 'Dim_Weddenschap'),
 ]
 
