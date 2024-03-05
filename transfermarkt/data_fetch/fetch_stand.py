@@ -12,7 +12,7 @@ EINDJAAR = datetime.now().year - 1
 STARTSPEELDAG = 1
 EINDSPEELDAG = 50
 
-with open('stand.csv', mode='w', newline='') as file:
+with open(r'DEP-G30\transfermarkt\data\scraped_data\stand.csv', mode='w', newline='') as file:
     writer = csv.DictWriter(file, fieldnames=   [  
                                                 'Seizoen', 'Speeldag', 'Stand', 'Club',
                                                 'AantalGespeeld', 'AantalGewonnen', 'AantalGelijk', 

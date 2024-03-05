@@ -1,10 +1,10 @@
 import pandas as pd
 
 # CSV-bestanden laden
-stamnummer_df = pd.read_csv(r'DEP-G30\transfermarkt\data_controlling\stamnummer_controle\stamnummers_data\stamnummer.csv')
-goals_df = pd.read_csv(r'DEP-G30\transfermarkt\data\cleaned_data\goals_clean.csv')
-matches_df = pd.read_csv(r'DEP-G30\transfermarkt\data\cleaned_data\matches_clean.csv')
-stand_df = pd.read_csv(r'DEP-G30\transfermarkt\data\cleaned_data\stand_clean.csv')
+stamnummer_df = pd.read_csv(r'DEP-G30\transfermarkt\data\scraped_data\stamnummer.csv')
+goals_df = pd.read_csv(r'DEP-G30\transfermarkt\data\scraped_data\goals.csv')
+matches_df = pd.read_csv(r'DEP-G30\transfermarkt\data\scraped_data\matches_clean.csv')
+stand_df = pd.read_csv(r'DEP-G30\transfermarkt\data\scraped_data\stand_clean.csv')
 
 # Een mapping creëren van teamnamen naar stamnummers
 # Ervan uitgaande dat 'Thuisploeg' en 'Uitploeg' in stamnummer.csv identiek zijn en alle teamvarianten dekken
@@ -23,6 +23,6 @@ matches_df['Uitploeg_stamnummer'] = matches_df['Uitploeg'].map(team_to_stamnumme
 stand_df['Ploeg_stamnummer'] = stand_df['Club'].map(team_to_stamnummer).astype(pd.Int64Dtype())
 
 # De bijgewerkte dataframes opslaan
-goals_df.to_csv(r'DEP-G30\transfermarkt\data\controlled_data\controlled_data_stamnummer\goals_stamnummer.csv', index=False)
-matches_df.to_csv(r'DEP-G30\transfermarkt\data\controlled_data\controlled_data_stamnummer\matches_stamnummer.csv', index=False)
-stand_df.to_csv(r'DEP-G30\transfermarkt\data\controlled_data\controlled_data_stamnummer\stand_stamnummer.csv', index=False)
+goals_df.to_csv(r'DEP-G30\transfermarkt\data\controlled_data_stamnummer\goals_stamnummer.csv', index=False)
+matches_df.to_csv(r'DEP-G30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv', index=False)
+stand_df.to_csv(r'DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', index=False)

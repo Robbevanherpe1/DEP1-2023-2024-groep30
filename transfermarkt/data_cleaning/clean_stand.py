@@ -32,8 +32,8 @@ def clean_data(file_path):
 
 
 # Replace this with your actual file path
-file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stand.csv'
+file_path = r'DEP-G30\transfermarkt\data\scraped_data\stand.csv'
 cleaned_data = clean_data(file_path)
 
 # Save the cleaned data to a new CSV
-cleaned_data.to_csv('stand_clean.csv', index=False)
+cleaned_data.to_csv(r'DEP-G30\transfermarkt\data\cleaned_data\stand_clean.csv', index=False)

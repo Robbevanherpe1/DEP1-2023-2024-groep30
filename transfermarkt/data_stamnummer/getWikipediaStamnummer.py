@@ -35,7 +35,7 @@ def write_to_csv(clubs_info, output_file):
 
 # URL van de pagina die je wilt bekijken
 url = "https://nl.wikipedia.org/wiki/Lijst_van_voetbalclubs_in_Belgi%C3%AB_naar_stamnummer"
-output_file = 'DEP-G30\\transfermarkt\\data_controlling\\stamnummer_controle\\stamnummers_data\\stamnummer.csv'
+output_file = r'DEP-G30\transfermarkt\data\scraped_data\stamnummer.csv'
 
 # Haal op, parse, en schrijf de clubinformatie
 html_content = fetch_clubs_info(url)

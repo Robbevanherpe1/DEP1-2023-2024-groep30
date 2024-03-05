@@ -112,7 +112,7 @@ def main():
             speeldag += 1
 
     # Write data to CSV
-    with open('goals.csv', 'w', newline='', encoding='utf-8') as file:
+    with open(r'DEP-G30\transfermarkt\data\scraped_data\goals.csv', 'w', newline='', encoding='utf-8') as file:
         fieldnames = ['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Uitploeg','NaamScorendePloeg',
                        'GoalTijdstip', 'GoalScorer', 'StandThuisploeg', 'StandUitploeg']
         writer = csv.DictWriter(file, fieldnames=fieldnames)
