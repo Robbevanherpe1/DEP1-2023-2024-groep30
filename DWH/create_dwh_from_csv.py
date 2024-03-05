@@ -115,10 +115,10 @@ def load_data_from_csv_list(csv_file_paths):
 
 # Lijst van CSV bestanden en hun overeenstemmende tabelnamen
 csv_file_paths = [
-    (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Stand'),
-    (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv', 'Dim_Match'),
-    (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Goal'),
-    (r'D:\Hogent\Visual Studio Code\DEP\DEP-G30\DEP1-2023-2024-groep30\bet777\data\bets.csv', 'Dim_Weddenschap'),
+    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Stand'),
+    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv', 'Dim_Match'),
+    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Goal'),
+    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\bet777\data\bets.csv', 'Dim_Weddenschap'),
 ]
 
 # Laad data in vanuit de opgegeven CSV bestanden naar de overeenstemmende tabellen
