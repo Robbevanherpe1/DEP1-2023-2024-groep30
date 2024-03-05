@@ -50,6 +50,7 @@ Dim_Stand = Table('Dim_Stand', metadata,
                   Column('Doelpuntensaldo', Integer),
                   Column('PuntenVoor', Integer),
                   Column('PuntenTegen', Integer),
+                  Column('Ploeg_stamnummer', Integer),
                   )
 
 Dim_Goal = Table('Dim_Goal', metadata,
@@ -65,7 +66,9 @@ Dim_Goal = Table('Dim_Goal', metadata,
                   Column('GoalTijdstip', Time),
                   Column('GoalScorer', String(255)),
                   Column('StandThuisploeg', Integer),
-                  Column('StandUitploeg', Integer)
+                  Column('StandUitploeg', Integer),
+                  Column('Thuisploeg_stamnummer', String(255)),
+                  Column('Uitploeg_stamnummer', String(255)),
                   )
 
 Dim_Match = Table('Dim_Match', metadata,
@@ -78,7 +81,9 @@ Dim_Match = Table('Dim_Match', metadata,
                     Column('Thuisploeg', String(255)),
                     Column('Resultaat_Thuisploeg', Integer),
                     Column('Resultaat_Uitploeg', Integer),
-                    Column('Uitploeg', String(255))
+                    Column('Uitploeg', String(255)),
+                    Column('Thuisploeg_stamnummer', String(255)),
+                    Column('Uitploeg_stamnummer', String(255)),
                     )
 
 Dim_Weddenschap = Table('Dim_Weddenschap', metadata,
@@ -90,7 +95,7 @@ Dim_Weddenschap = Table('Dim_Weddenschap', metadata,
                         Column('Uitploeg', String(255)),
                         Column('Vraag', String(255)),
                         Column('Keuze', String(255)),
-                        Column('Kans', Float)
+                        Column('Kans', Float),
                         )
 
 # Creëer alle tabellen in de database
