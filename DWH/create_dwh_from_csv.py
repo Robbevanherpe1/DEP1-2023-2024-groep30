@@ -2,7 +2,7 @@ import pandas as pd
 from sqlalchemy import Date, DateTime, Float, Time, create_engine, Table, Column, Integer, String, MetaData, ForeignKey
 from sqlalchemy.exc import SQLAlchemyError
 
-# Vervang deze variabelen door je werkelijke database connectie informatie
+# Database connectie informatie
 db_user = 'root'
 db_password = 'root'
 db_host = 'localhost'
@@ -15,7 +15,7 @@ engine = create_engine(f'mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_p
 # Aanmaken van een MetaData instantie
 metadata = MetaData()
 
-# Define tables
+# Tabellen aanmaken
 Fact_JPL = Table('Fact_JPL', metadata,
                   Column('JPLKey', Integer, primary_key=True),
                   Column('StandKey', Integer, ForeignKey('Dim_Stand.StandKey')),
