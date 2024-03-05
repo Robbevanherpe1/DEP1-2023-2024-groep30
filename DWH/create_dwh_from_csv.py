@@ -114,8 +114,7 @@ def load_data_from_csv_list(csv_file_paths):
         session.close()
 
 # Lijst van CSV bestanden en hun overeenstemmende tabelnamen
-csv_file_paths = 
-[
+csv_file_paths = [
     (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Stand'),
     (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv', 'Dim_Match'),
     (r'D:\Hogent\Visual Studio Code\DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv', 'Dim_Goal'),
