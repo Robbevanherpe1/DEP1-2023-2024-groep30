@@ -1,6 +1,23 @@
 import pandas as pd
+from fuzzywuzzy import process
+from tqdm.auto import tqdm
+from concurrent.futures import ThreadPoolExecutor
 
-def clean_data(file_path):
+def match_name(name, list_names, min_score=0):
+    max_score = -1
+    best_match = None
+    for x in list_names:
+        score = process.extractOne(name, [x], score_cutoff=min_score)
+        if score:
+            if score[1] > max_score:
+                max_score = score[1]
+                best_match = x
+    return best_match
+
+def match_name_wrapper(args):
+    return match_name(*args)
+
+def clean_data(file_path, stamnummer_path):
     try:
         data = pd.read_csv(file_path, encoding='utf-8')
     except UnicodeDecodeError:
@@ -28,12 +45,29 @@ def clean_data(file_path):
     columns_after = ['Doelpuntensaldo', 'PuntenVoor', 'PuntenTegen']
     data = data[columns_before + ['DoelpuntenVoor', 'DoelpuntenTegen'] + columns_after]
     
+    # Lees de stamnummer data in
+    stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
+    stamnummer_names = stamnummer_data['Thuisploeg'].tolist()
+    
+    unique_clubs = data['Club'].unique()
+    match_args = [(club, stamnummer_names, 85) for club in unique_clubs]
+    
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        results = list(tqdm(executor.map(match_name_wrapper, match_args), total=len(match_args)))
+    
+    club_to_matched_club = dict(zip(unique_clubs, results))
+    
+    # Maak een nieuwe kolom 'Stamnummer' gebaseerd op de gevonden matches
+    data['Stamnummer'] = data['Club'].apply(lambda club: stamnummer_data.loc[stamnummer_data['Thuisploeg'] == club_to_matched_club[club], 'Stamnummer'].values[0] if club_to_matched_club[club] else None)
+    
+    data['Stamnummer'] = pd.to_numeric(data['Stamnummer'], errors='coerce').fillna(0).astype(int)
+    
     return data
 
-
-# Replace this with your actual file path
+# Vervang deze paden door jouw werkelijke bestandspaden
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stand.csv'
-cleaned_data = clean_data(file_path)
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stamnummer.csv'
+cleaned_data = clean_data(file_path, stamnummer_path)
 
-# Save the cleaned data to a new CSV
+# Opslaan van de opgeschoonde data
 cleaned_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv', index=False)
