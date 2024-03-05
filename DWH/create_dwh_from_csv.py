@@ -47,7 +47,7 @@ Dim_Stand = Table('Dim_Stand', metadata,
                   Column('Doelpuntensaldo', Integer),
                   Column('PuntenVoor', Integer),
                   Column('PuntenTegen', Integer),
-                  Column('Ploeg_stamnummer', Integer),
+                  Column('Stamnummer', Integer),
                   )
 
 Dim_Goal = Table('Dim_Goal', metadata,
