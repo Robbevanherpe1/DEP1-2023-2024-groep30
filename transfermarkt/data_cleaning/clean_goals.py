@@ -72,8 +72,8 @@ def clean_data(file_path):
     return data
 
 # Example usage
-file_path = r'C:\Users\Robbe\Documents\School_jaar_2\sem2\DEP\development\goals.csv'
+file_path = r'DEP-G30\transfermarkt\data\scraped_data\goals.csv'
 cleaned_data = clean_data(file_path)
 
 # Save the cleaned data to a new CSV
-cleaned_data.to_csv('goals_clean.csv', index=False)
+cleaned_data.to_csv(r'DEP-G30\transfermarkt\data\cleaned_data\goals_clean.csv', index=False)
