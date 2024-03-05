@@ -8,7 +8,7 @@ try:
     response.raise_for_status()  # Raise an exception for 4xx and 5xx status codes
     data = response.json()
 
-    with open(r'DEP-G30\bet777\data\bets.csv', 'w', newline='', encoding='utf-8') as file:
+    with open(r'DEP\DEP1-2023-2024-groep30\bet777\data\bets.csv', 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
         writer.writerow(['ID', 'Wedstrijd', 'Starttijd', 'Thuisploeg', 'Uitploeg', 'Vraag', 'Keuze', 'Kans'])
 
