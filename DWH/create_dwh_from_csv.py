@@ -1,16 +1,23 @@
 import pandas as pd
-from sqlalchemy import Date, DateTime, Float, Time, create_engine, Table, Column, Integer, String, MetaData, ForeignKey
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, ForeignKey, Date, Time, Float, DateTime
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.orm import sessionmaker, scoped_session
+import os
+import logging
 
-# Database connectie informatie
-db_user = 'root'
-db_password = 'root'
-db_host = 'localhost'
-db_port = '3306'
-db_name = 'DEP_G30_DWH'
+# Logging configureren
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-# MySQL connectie string
+# Gebruik Environment Variabelen voor gevoelige informatie
+db_user = os.getenv('DB_USER', 'root')
+db_password = os.getenv('DB_PASSWORD', 'root')
+db_host = os.getenv('DB_HOST', 'localhost')
+db_port = os.getenv('DB_PORT', '3306')
+db_name = os.getenv('DB_NAME', 'DEP_G30_DWH')
+
+# Database connectie string
 engine = create_engine(f'mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
+Session = scoped_session(sessionmaker(bind=engine))
 
 # Aanmaken van een MetaData instantie
 metadata = MetaData()
@@ -20,6 +27,7 @@ Fact_JPL = Table('Fact_JPL', metadata,
                   Column('JPLKey', Integer, primary_key=True),
                   Column('StandKey', Integer, ForeignKey('Dim_Stand.StandKey')),
                   Column('GoalKey', Integer, ForeignKey('Dim_Goal.GoalKey')),
+                  Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
                   Column('WeddenschapKey', Integer, ForeignKey('Dim_Weddenschap.WeddenschapKey')),
                   Column('MatchID', String(50)),
                   Column('Seizoen', String(50)),
@@ -88,17 +96,20 @@ Dim_Weddenschap = Table('Dim_Weddenschap', metadata,
 # Creëer alle tabellen in de database
 metadata.create_all(engine)
 
-# Verbeterde functie om data te laden vanuit een lijst van CSV bestanden naar overeenstemmende tabellen
+# Functie om data te laden vanuit een lijst van CSV bestanden naar overeenstemmende tabellen
 def load_data_from_csv_list(csv_file_paths):
-  for file_path, table_name in csv_file_paths:
+    session = Session()
     try:
-      df = pd.read_csv(file_path)
-      df.to_sql(table_name, con=engine, if_exists='append', index=False)
-      print(f"Data from {file_path} successfully loaded into {table_name}")
-    except IOError:
-      print(f"Error: File {file_path} does not exist or could not be read.")
+        for file_path, table_name in csv_file_paths:
+            df = pd.read_csv(file_path)
+            df.to_sql(table_name, con=engine, if_exists='append', index=False)
+            logging.info(f"Data from {file_path} successfully loaded into {table_name}")
+    except IOError as e:
+        logging.error(f"File error: {e}")
     except SQLAlchemyError as e:
-      print(f"Error loading data into {table_name}: {str(e)}")
+        logging.error(f"Database error: {e}")
+    finally:
+        session.close()
 
 # Lijst van CSV bestanden en hun overeenstemmende tabelnamen
 csv_file_paths = [
