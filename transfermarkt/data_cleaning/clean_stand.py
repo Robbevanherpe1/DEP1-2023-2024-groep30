@@ -66,7 +66,8 @@ def clean_data(file_path, stamnummer_path):
 
 # Vervang deze paden door jouw werkelijke bestandspaden
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stand.csv'
-stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stamnummer.csv'
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer.csv'
+
 cleaned_data = clean_data(file_path, stamnummer_path)
 
 # Opslaan van de opgeschoonde data

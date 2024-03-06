@@ -124,7 +124,7 @@ def clean_data(file_path, stamnummer_path):
 
 # File paths
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\matches.csv'
-stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stamnummer.csv'
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer.csv'
 
 cleaned_data = clean_data(file_path, stamnummer_path)
 
