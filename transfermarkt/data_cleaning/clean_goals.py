@@ -1,6 +1,23 @@
 import pandas as pd
 from datetime import datetime, timedelta
 import re
+from fuzzywuzzy import process
+from tqdm.auto import tqdm
+from concurrent.futures import ThreadPoolExecutor
+
+def match_name(name, list_names, min_score=0):
+    max_score = -1
+    best_match = None
+    for x in list_names:
+        score = process.extractOne(name, [x], score_cutoff=min_score)
+        if score:
+            if score[1] > max_score:
+                max_score = score[1]
+                best_match = x
+    return best_match
+
+def match_name_wrapper(args):
+    return match_name(*args)
 
 def clean_date(d):
     # Extract the numeric part of the date
@@ -32,6 +49,7 @@ def clean_date(d):
     date_obj = datetime.strptime(date_str, '%d %b %Y')
     return date_obj.strftime('%Y/%m/%d')
 
+
 def adjust_goal_time(match_start, goal_minute):
     # Check for NaN values and handle them
     if pd.isna(goal_minute):
@@ -56,7 +74,7 @@ def adjust_goal_time(match_start, goal_minute):
     # Return the goal time formatted as HH:MM
     return goal_time.strftime('%H:%M')
 
-def clean_data(file_path):
+def clean_data(file_path, stamnummer_path):
     # Load the CSV file
     data = pd.read_csv(file_path)
     
@@ -69,11 +87,37 @@ def clean_data(file_path):
     # Adjust the GoalTijdstip to reflect the actual time a goal is scored
     data['GoalTijdstip'] = data.apply(lambda x: adjust_goal_time(x['Tijdstip'].strftime('%H:%M:%S'), x['GoalTijdstip']), axis=1)
     
+    # Laad het stamnummer data
+    stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
+    stamnummer_names = stamnummer_data['Thuisploeg'].tolist()
+    
+    # Match both home and away teams
+    home_teams = data['Thuisploeg'].unique()
+    away_teams = data['Uitploeg'].unique()
+    
+    # Combine unique home and away teams for matching
+    unique_teams = set(home_teams) | set(away_teams)
+    match_args = [(team, stamnummer_names, 85) for team in unique_teams]
+    
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        results = list(tqdm(executor.map(match_name_wrapper, match_args), total=len(match_args)))
+    
+    team_to_stamnummer = {team: stamnummer_data.loc[stamnummer_data['Thuisploeg'] == matched_team, 'Stamnummer'].values[0] if matched_team else None for team, matched_team in zip(unique_teams, results)}
+    
+    # Create new columns for home and away team stamnummers
+    data['Thuisploeg_stamnummer'] = data['Thuisploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
+    data['Uitploeg_stamnummer'] = data['Uitploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
+    
+    # Ensure stamnummer columns are integers, fill missing with 0
+    data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']] = data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']].fillna(0).astype(int)
+    
     return data
 
-# Example usage
+# File paths
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\goals.csv'
-cleaned_data = clean_data(file_path)
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stamnummer.csv'
+
+cleaned_data = clean_data(file_path, stamnummer_path)
 
 # Save the cleaned data to a new CSV
 cleaned_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\goals_clean.csv', index=False)
