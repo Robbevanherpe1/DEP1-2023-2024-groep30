@@ -1,13 +1,24 @@
 import pandas as pd
 import re
+from fuzzywuzzy import process
+from tqdm.auto import tqdm
+from concurrent.futures import ThreadPoolExecutor
 
-# Laden van het bestand "matches.csv"
-df = pd.read_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\matches.csv')
 
-# Aanpassen van de kolomnamen
-df.columns = ['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Uitploeg']
+def match_name(name, list_names, min_score=0):
+    max_score = -1
+    best_match = None
+    for x in list_names:
+        score = process.extractOne(name, [x], score_cutoff=min_score)
+        if score:
+            if score[1] > max_score:
+                max_score = score[1]
+                best_match = x
+    return best_match
 
-# Functie om de datum te parsen en om te zetten naar het juiste formaat
+def match_name_wrapper(args):
+    return match_name(*args)
+
 def parse_date(date_str):
     parts = date_str.split(',')
     if len(parts) >= 2:  # Controleren of de lijst voldoende elementen heeft
@@ -34,11 +45,7 @@ def parse_date(date_str):
         return f"{year}/{month}/{day}"
     else:
         return date_str  # Als het formaat niet kan worden geparseerd, retourneren we de originele waarde
-
-# Functie om het tijdstip te formatteren
-def parse_time(time_str):
-    return time_str.split()[0]  # Het tijdstip is het eerste deel van de string
-
+    
 # Functie om het resultaat op te schonen en alleen de score te behouden
 def clean_result(result_str):
     if pd.isna(result_str):  # Controleren of de waarde NaN is
@@ -54,26 +61,72 @@ def clean_result(result_str):
 def clean_team(team_str):
     return re.sub(r'\([^)]*\)', '', team_str).strip()
 
-# Omzetten van de datum naar het juiste formaat
-df['Datum'] = df['Datum'].apply(parse_date)
+# Functie om het tijdstip te formatteren
+def parse_time(time_str):
+    return time_str.split()[0]  # Het tijdstip is het eerste deel van de string
 
-# Omzetten van het tijdstip naar het juiste formaat
-df['Tijdstip'] = df['Tijdstip'].apply(parse_time)
+def clean_data(file_path, stamnummer_path):
 
-# Opschonen van de resultaatkolommen en converteren naar gehele getallen
-df['Resultaat_Thuisploeg'] = df['Resultaat_Thuisploeg'].apply(clean_result)
-df['Resultaat_Uitploeg'] = df['Resultaat_Uitploeg'].apply(clean_result)
+    # Load the CSV file
+    data = pd.read_csv(file_path)
 
-# Verwijderen van NaN-waarden in de resultaatkolommen
-df.dropna(subset=['Resultaat_Thuisploeg', 'Resultaat_Uitploeg'], inplace=True)
+    # Adjust column names as before
+    data.columns = ['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Uitploeg']
 
-# Converteren naar gehele getallen
-df['Resultaat_Thuisploeg'] = df['Resultaat_Thuisploeg'].astype(int)
-df['Resultaat_Uitploeg'] = df['Resultaat_Uitploeg'].astype(int)
+    # Omzetten van de datum naar het juiste formaat
+    data['Datum'] = data['Datum'].apply(parse_date)
 
-# Opschonen van de teamnamen
-df['Thuisploeg'] = df['Thuisploeg'].apply(clean_team)
-df['Uitploeg'] = df['Uitploeg'].apply(clean_team)
+    # Omzetten van het tijdstip naar het juiste formaat
+    data['Tijdstip'] = data['Tijdstip'].apply(parse_time)
 
-# Opslaan van de aangepaste gegevens naar "clean_matches.csv"
-df.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv', index=False, header=True)
+    # Opschonen van de resultaatkolommen en converteren naar gehele getallen
+    data['Resultaat_Thuisploeg'] = data['Resultaat_Thuisploeg'].apply(clean_result)
+    data['Resultaat_Uitploeg'] = data['Resultaat_Uitploeg'].apply(clean_result)
+
+    # Verwijderen van NaN-waarden in de resultaatkolommen
+    data.dropna(subset=['Resultaat_Thuisploeg', 'Resultaat_Uitploeg'], inplace=True)
+
+    # Converteren naar gehele getallen
+    data['Resultaat_Thuisploeg'] = data['Resultaat_Thuisploeg'].astype(int)
+    data['Resultaat_Uitploeg'] = data['Resultaat_Uitploeg'].astype(int)
+
+    # Opschonen van de teamnamen
+    data['Thuisploeg'] = data['Thuisploeg'].apply(clean_team)
+    data['Uitploeg'] = data['Uitploeg'].apply(clean_team)
+
+    # Laad het stamnummer data
+    stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
+    stamnummer_names = stamnummer_data['Thuisploeg'].tolist()
+
+    # Prepare to match both home and away teams
+    home_teams = data['Thuisploeg'].unique()
+    away_teams = data['Uitploeg'].unique()
+
+    # Combine unique home and away teams for matching
+    unique_teams = set(home_teams) | set(away_teams)
+    match_args = [(team, stamnummer_names, 85) for team in unique_teams]
+
+    # Perform the matching in parallel
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        results = list(tqdm(executor.map(match_name_wrapper, match_args), total=len(match_args)))
+
+    team_to_stamnummer = {team: stamnummer_data.loc[stamnummer_data['Thuisploeg'] == matched_team, 'Stamnummer'].values[0] if matched_team else None for team, matched_team in zip(unique_teams, results)}
+
+    # Create new columns for home and away team stamnummers
+    data['Thuisploeg_stamnummer'] = data['Thuisploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
+    data['Uitploeg_stamnummer'] = data['Uitploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
+
+    # Ensure stamnummer columns are integers, fill missing with 0
+    data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']] = data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']].fillna(0).astype(int)
+
+    return data
+
+
+# File paths
+file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\matches.csv'
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stamnummer.csv'
+
+cleaned_data = clean_data(file_path, stamnummer_path)
+
+# Save the cleaned data to a new CSV
+cleaned_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv', index=False)
