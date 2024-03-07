@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from datetime import datetime
+import re
 
 
 URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
@@ -13,7 +14,7 @@ EINDJAAR = datetime.now().year - 1
 STARTSPEELDAG = 1
 EINDSPEELDAG = 50
 
-with open(r'DEP-G30\transfermarkt\data\scraped_data\matches.csv', mode='w', newline='', encoding='utf-8') as file:
+with open(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\matches.csv', mode='w', newline='', encoding='utf-8') as file:
     writer = csv.DictWriter(file, fieldnames=['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Uitploeg'])
     writer.writeheader()
 
@@ -48,6 +49,19 @@ with open(r'DEP-G30\transfermarkt\data\scraped_data\matches.csv', mode='w', newl
                     else:
                         datum = None
                         tijdstip = None
+
+                    # Extraheren van de thuisploeg en uitploeg:
+                    # Thuisploeg
+                    thuisploeg_tag = match.find('td', class_='rechts hauptlink no-border-rechts hide-for-small spieltagsansicht-vereinsname')
+                    thuisploeg = thuisploeg_tag.get_text(strip=True) if thuisploeg_tag else None
+                    if thuisploeg:
+                        thuisploeg = re.sub(r"\d|\(.*?\)", "", thuisploeg).strip()
+
+                    # Uitploeg
+                    uitploeg_tag = match.find('td', class_='hauptlink no-border-links no-border-rechts hide-for-small spieltagsansicht-vereinsname')
+                    uitploeg = uitploeg_tag.get_text(strip=True) if uitploeg_tag else None
+                    if uitploeg:
+                        uitploeg = re.sub(r"\d|\(.*?\)", "", uitploeg).strip()
 
                     # Resultaat van de wedstrijd
                     resultaat_element = match.find('span', class_='matchresult finished')
