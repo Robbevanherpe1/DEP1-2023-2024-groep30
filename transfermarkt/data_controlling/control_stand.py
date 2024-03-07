@@ -1,6 +1,7 @@
 import pandas as pd
+from tqdm.auto import tqdm
 
-def control_data(file_path, voetbalkrant_file_path):
+def control_data(file_path, clean_matches_file_path):
     # Load the CSV file
     try:
         data = pd.read_csv(file_path, encoding='utf-8')
@@ -14,13 +15,12 @@ def control_data(file_path, voetbalkrant_file_path):
 
     # Load the voetbalkrant CSV file
     try:
-        voetbalkrant_data = pd.read_csv(voetbalkrant_file_path, encoding='utf-8')
+        data2 = pd.read_csv(clean_matches_file_path, encoding='utf-8')
     except UnicodeDecodeError:
-        voetbalkrant_data = pd.read_csv(voetbalkrant_file_path, encoding='ISO-8859-1')
+        data2 = pd.read_csv(clean_matches_file_path, encoding='ISO-8859-1')
 
     # Iterate over each row in DataFrame
-    for index, row in data.iterrows():
-
+    for index, row in tqdm(data.iterrows(), total=data.shape[0], desc="Verwerking van gegevens"):
         # Check doelpuntensaldo
         if (row['DoelpuntenVoor'] - row['DoelpuntenTegen']) != row['Doelpuntensaldo']:
             print(f"Fout in rij {index + 2}: Doelpuntensaldo klopt niet.")
@@ -28,22 +28,26 @@ def control_data(file_path, voetbalkrant_file_path):
         
         # Determine if season uses 2-point or 3-point system
         if row['SeizoensBegin'] in jaarTallen2puntensysteem:
-            # Check puntenVoor and puntenTegen for 2-point system
-            if row['AantalGewonnen'] * 2 + row['AantalGelijk'] != row['PuntenVoor']:
-                print(f"Fout in rij {index + 2}: PuntenVoor klopt niet met 2-puntensysteem.")
-                error_count += 1
-            if row['AantalVerloren'] * 2 + row['AantalGelijk'] != row['PuntenTegen']:
-                print(f"Fout in rij {index + 2}: PuntenTegen klopt niet met 2-puntensysteem.")
-                error_count += 1
+            points_for_win = 2
         else:
-            # Check puntenVoor and puntenTegen for 3-point system
-            if row['AantalGewonnen'] * 3 + row['AantalGelijk'] != row['PuntenVoor']:
-                print(f"Fout in rij {index + 2}: PuntenVoor klopt niet met 3-puntensysteem.")
-                error_count += 1
-            if row['AantalVerloren'] * 3 + row['AantalGelijk'] != row['PuntenTegen']:
-                print(f"Fout in rij {index+ 2}: PuntenTegen klopt niet met 3-puntensysteem.")
-                error_count += 1
+            points_for_win = 3
 
+        # Initialize expected points
+        expected_points = row['AantalGewonnen'] * points_for_win + row['AantalGelijk']
+        
+        # Check if expected points match the actual points
+        if expected_points != row['PuntenVoor']:
+            print(f"Fout in rij {index + 2}: PuntenVoor klopt niet met verwachte punten.")
+            error_count += 1
+
+        # Additional checks based on match results
+        matches = data2[(data2['Thuisploeg_stamnummer'] == row['Stamnummer']) | (data2['Uitploeg_stamnummer'] == row['Stamnummer'])]
+        for _, match in matches.iterrows():
+            seizoen = f"{row['SeizoensBegin']}-{row['SeizoensEinde']}"
+            if match['Seizoen'] == seizoen and match['Speeldag'] == row['Speeldag']:
+                continue
+                
+    
     if error_count == 0:
         print("Alle checks zijn succesvol. Geen fouten gevonden.")
     else:
@@ -53,9 +57,10 @@ def control_data(file_path, voetbalkrant_file_path):
 
 
 # Path to your cleaned CSV file
-file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv'
-voetbalkrant_file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv'
-controlled_data = control_data(file_path, voetbalkrant_file_path)
+file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
+clean_matches_file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv'
+
+controlled_data = control_data(file_path, clean_matches_file_path)
 
 # Save the controlled data to a new CSV
 controlled_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\stand_controlled.csv', index=False)
