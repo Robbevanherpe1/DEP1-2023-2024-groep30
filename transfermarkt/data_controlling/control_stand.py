@@ -53,9 +53,9 @@ def control_data(file_path, voetbalkrant_file_path):
 
 
 # Path to your cleaned CSV file
-file_path = r'DEP-G30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv'
-voetbalkrant_file_path = r'DEP-G30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv'
+file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv'
+voetbalkrant_file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv'
 controlled_data = control_data(file_path, voetbalkrant_file_path)
 
 # Save the controlled data to a new CSV
-controlled_data.to_csv(r'DEP-G30\transfermarkt\data\controlled_data\stand_controlled.csv', index=False)
+controlled_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\stand_controlled.csv', index=False)
