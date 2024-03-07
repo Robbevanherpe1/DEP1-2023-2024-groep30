@@ -84,15 +84,16 @@ Dim_Match = Table('Dim_Match', metadata,
                   )
 
 Dim_Kansen = Table('Dim_Kansen', metadata,
-                   Column('KansKey', Integer, primary_key=True),
+                   Column('KansKey', Integer, primary_key=True, autoincrement=True),
                    Column('Waarde', Float, unique=True),
                    )
 
 # Fact tabellen
 Fact_Score = Table('Fact_Score', metadata,
-                   Column('Id', Integer, primary_key=True),
+                   Column('Id', Integer, primary_key=True, autoincrement=True),
                    Column('PloegKey', Integer, ForeignKey('Dim_Ploeg.PloegKey')),
                    Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
+                   Column('KansKey', Integer, ForeignKey('Dim_Kansen.KansKey')),
                    Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
                    Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
                    Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
@@ -104,7 +105,7 @@ Fact_Score = Table('Fact_Score', metadata,
                    )
 
 Fact_Weddenschap = Table('Fact_Weddenschap', metadata,
-                         Column('Id', Integer, primary_key=True),
+                         Column('Id', Integer, primary_key=True, autoincrement=True),
                          Column('PloegKey', Integer, ForeignKey('Dim_Ploeg.PloegKey')),
                          Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
                          Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
@@ -114,8 +115,8 @@ Fact_Weddenschap = Table('Fact_Weddenschap', metadata,
                          Column('OddsUitWint', Float),
                          Column('OddsBeideTeamsScoren', Float),
                          Column('OddsNietBeideTeamsScoren', Float),
-                         Column('OddsMeerDan2_5', Float),
-                         Column('OddsMinderDan2_5', Float),
+                         Column('OddsMeerDanX', Float),
+                         Column('OddsMinderDanX', Float),
                          )
 
 # Creëer alle tabellen in de database
@@ -144,26 +145,11 @@ def insert_dim_kansen_values():
     finally:
         session.close()
 
-# Functie om data te laden vanuit een lijst van CSV bestanden naar overeenstemmende tabellen
-def load_data_from_csv_list(csv_file_paths):
-    session = Session()
-    try:
-        for file_path, table_name in csv_file_paths:
-            df = pd.read_csv(file_path)
-            df.to_sql(table_name, con=engine, if_exists='append', index=False)
-            logging.info(f"Data from {file_path} successfully loaded into {table_name}")
-    except IOError as e:
-        logging.error(f"File error: {e}")
-    except SQLAlchemyError as e:
-        logging.error(f"Database error: {e}")
-    finally:
-        session.close()
-
 # Lijst van CSV bestanden en hun overeenstemmende tabelnamen
 csv_file_paths = [
-    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv'),
-    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\matches_stamnummer.csv',),
-    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data_stamnummer\stand_stamnummer.csv'),
+    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\goals_controlled.csv'),
+    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\stand_controlled.csv'),
+    (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\matches_controlled.csv'),
     (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\bet777\data\bets.csv'),
 ]
 
@@ -171,4 +157,4 @@ csv_file_paths = [
 insert_dim_kansen_values()
 
 # Laad data in vanuit de opgegeven CSV bestanden naar de overeenstemmende tabellen
-# load_data_from_csv_list(csv_file_paths)
+# load_data_from_csv_list(csv_file_paths) TO DO 
