@@ -85,18 +85,18 @@ Dim_Match = Table('Dim_Match', metadata,
 
 Dim_Kansen = Table('Dim_Kansen', metadata,
                    Column('KansKey', Integer, primary_key=True, autoincrement=True),
-                   Column('Waarde', Float, unique=True),
+                   Column('OddsWaarde', Float, unique=True),
                    )
 
 # Fact tabellen
 Fact_Score = Table('Fact_Score', metadata,
-                   Column('Id', Integer, primary_key=True, autoincrement=True),
+                   Column('ScoreID', Integer, primary_key=True, autoincrement=True),
                    Column('PloegKey', Integer, ForeignKey('Dim_Ploeg.PloegKey')),
-                   Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
-                   Column('KansKey', Integer, ForeignKey('Dim_Kansen.KansKey')),
+                   Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')), 
                    Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
                    Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
                    Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
+                   Column('KansKey', Integer, ForeignKey('Dim_Kansen.KansKey')),
                    Column('ScoreThuis', Integer),
                    Column('ScoreUit', Integer),
                    Column('EindscoreThuis', Integer),
@@ -105,12 +105,13 @@ Fact_Score = Table('Fact_Score', metadata,
                    )
 
 Fact_Weddenschap = Table('Fact_Weddenschap', metadata,
-                         Column('Id', Integer, primary_key=True, autoincrement=True),
+                         Column('WeddenschapID', Integer, primary_key=True, autoincrement=True),
                          Column('PloegKey', Integer, ForeignKey('Dim_Ploeg.PloegKey')),
                          Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
                          Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
                          Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
                          Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
+                         Column('KansKey', Integer, ForeignKey('Dim_Kansen.KansKey')),
                          Column('OddsThuisWint', Float),
                          Column('OddsUitWint', Float),
                          Column('OddsBeideTeamsScoren', Float),
@@ -122,19 +123,19 @@ Fact_Weddenschap = Table('Fact_Weddenschap', metadata,
 # Creëer alle tabellen in de database
 metadata.create_all(engine)
 
-# Functie om de vaste waarden in Dim_Kansen in te voegen
+# Functie om de vaste OddsWaarde in Dim_Kansen in te voegen
 def insert_dim_kansen_values():
     session = Session()
     try:
-        # Check of waarden al bestaan om duplicaten te voorkomen
-        existing_values = session.query(Dim_Kansen.c.Waarde).all()
+        # Check of OddsWaarde al bestaan om duplicaten te voorkomen
+        existing_values = session.query(Dim_Kansen.c.OddsWaarde).all()
         existing_values = [value[0] for value in existing_values]
         
         # Te inserten waarden
         kansen_values = [1.5, 2.5, 3.5]
         for value in kansen_values:
             if value not in existing_values:
-                insert_stmt = insert(Dim_Kansen).values(Waarde=value)
+                insert_stmt = insert(Dim_Kansen).values(OddsWaarde=value)
                 session.execute(insert_stmt)
                 
         session.commit()
@@ -153,7 +154,7 @@ csv_file_paths = [
     (r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\bet777\data\bets.csv'),
 ]
 
-# Voeg de vaste waarden toe aan Dim_Kansen
+# Voeg de vaste OddsWaarden toe aan Dim_Kansen
 insert_dim_kansen_values()
 
 # Laad data in vanuit de opgegeven CSV bestanden naar de overeenstemmende tabellen
