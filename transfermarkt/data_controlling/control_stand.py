@@ -1,66 +1,63 @@
 import pandas as pd
-from tqdm.auto import tqdm
 
-def control_data(file_path, clean_matches_file_path):
-    # Load the CSV file
-    try:
-        data = pd.read_csv(file_path, encoding='utf-8')
-    except UnicodeDecodeError:
-        data = pd.read_csv(file_path, encoding='ISO-8859-1')
+def validate_standings_order(group):
+    # Sort the group based on the criteria
+    sorted_group = group.sort_values(by=['PuntenVoor', 'AantalGewonnen', 'AantalGelijk', 'Doelpuntensaldo', 'DoelpuntenVoor'], ascending=[False, False, False, False, False])
+    # Generate a new 'Stand' based on the correct order
+    sorted_group['CorrectStand'] = range(1, len(sorted_group) + 1)
+    # Check if the new 'Stand' matches the original 'Stand'
+    group['StandCorrect'] = (sorted_group['Stand'] == sorted_group['CorrectStand'])
+    return group
 
+def load_data(file_path, encoding_list=['utf-8', 'ISO-8859-1']):
+    for encoding in encoding_list:
+        try:
+            return pd.read_csv(file_path, encoding=encoding)
+        except UnicodeDecodeError:
+            continue
+    raise ValueError(f"Failed to load the file {file_path} with provided encodings.")
+
+def control_data(file_path):
+    # Load the CSV files
+    data = load_data(file_path)
+    
+    # Set up the points system
     jaarTallen2puntensysteem = set(range(1960, 1995)) - {1964}
+    data['PointsForWin'] = data['SeizoensBegin'].apply(lambda x: 2 if x in jaarTallen2puntensysteem else 3)
+
+    # Calculate expected points
+    data['ExpectedPoints'] = data['AantalGewonnen'] * data['PointsForWin'] + data['AantalGelijk']
     
-    # Initialize a counter for errors
-    error_count = 0
-
-    # Load the voetbalkrant CSV file
-    try:
-        data2 = pd.read_csv(clean_matches_file_path, encoding='utf-8')
-    except UnicodeDecodeError:
-        data2 = pd.read_csv(clean_matches_file_path, encoding='ISO-8859-1')
-
-    # Iterate over each row in DataFrame
-    for index, row in tqdm(data.iterrows(), total=data.shape[0], desc="Verwerking van gegevens"):
-        # Check doelpuntensaldo
-        if (row['DoelpuntenVoor'] - row['DoelpuntenTegen']) != row['Doelpuntensaldo']:
-            print(f"Fout in rij {index + 2}: Doelpuntensaldo klopt niet.")
-            error_count += 1
-        
-        # Determine if season uses 2-point or 3-point system
-        if row['SeizoensBegin'] in jaarTallen2puntensysteem:
-            points_for_win = 2
-        else:
-            points_for_win = 3
-
-        # Initialize expected points
-        expected_points = row['AantalGewonnen'] * points_for_win + row['AantalGelijk']
-        
-        # Check if expected points match the actual points
-        if expected_points != row['PuntenVoor']:
-            print(f"Fout in rij {index + 2}: PuntenVoor klopt niet met verwachte punten.")
-            error_count += 1
-
-        # Additional checks based on match results
-        matches = data2[(data2['Thuisploeg_stamnummer'] == row['Stamnummer']) | (data2['Uitploeg_stamnummer'] == row['Stamnummer'])]
-        for _, match in matches.iterrows():
-            seizoen = f"{row['SeizoensBegin']}-{row['SeizoensEinde']}"
-            if match['Seizoen'] == seizoen and match['Speeldag'] == row['Speeldag']:
-                continue
-                
+    # Doelpuntensaldo check
+    data['CorrectDoelpuntensaldo'] = (data['DoelpuntenVoor'] - data['DoelpuntenTegen']) == data['Doelpuntensaldo']
     
-    if error_count == 0:
-        print("Alle checks zijn succesvol. Geen fouten gevonden.")
+    # Expected points check
+    data['CorrectExpectedPoints'] = data['ExpectedPoints'] == data['PuntenVoor']
+
+    validated_data = data.groupby(['SeizoensBegin', 'Speeldag']).apply(validate_standings_order)
+    
+    # Find and report errors for Doelpuntensaldo and Verwachte Punten
+    for error_type, error_df in [('Doelpuntensaldo', data[~data['CorrectDoelpuntensaldo']]), ('Verwachte Punten', data[~data['CorrectExpectedPoints']])]:
+        if not error_df.empty:
+            error_info = error_df[['SeizoensBegin', 'Speeldag']].drop_duplicates()
+            for _, row in error_info.iterrows():
+                print(f"Fouten gevonden in {error_type} voor Seizoen {row['SeizoensBegin']}, Speeldag {row['Speeldag']}: {len(error_df[(error_df['SeizoensBegin'] == row['SeizoensBegin']) & (error_df['Speeldag'] == row['Speeldag'])])} rijen")
+
+    # Check if any incorrect standings were found and report them
+    incorrect_standings = validated_data[~validated_data['StandCorrect']]
+    if not incorrect_standings.empty:
+        incorrect_info = incorrect_standings[['SeizoensBegin', 'Speeldag']].drop_duplicates()
+        for _, row in incorrect_info.iterrows():
+            print(f"Incorrect standings found in Season {row['SeizoensBegin']}, Matchday {row['Speeldag']}: {len(incorrect_standings[(incorrect_standings['SeizoensBegin'] == row['SeizoensBegin']) & (incorrect_standings['Speeldag'] == row['Speeldag'])])} rows.")
     else:
-        print(f"Aantal fouten gevonden: {error_count}")
-
-    return data
-
+        print("All standings are correct.")
+        
+    return validated_data
 
 # Path to your cleaned CSV file
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
-clean_matches_file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv'
 
-controlled_data = control_data(file_path, clean_matches_file_path)
+controlled_data = control_data(file_path)
 
 # Save the controlled data to a new CSV
 controlled_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\stand_controlled.csv', index=False)
