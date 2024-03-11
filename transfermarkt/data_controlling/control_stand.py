@@ -1,6 +1,5 @@
 import pandas as pd
 
-
 def load_data(file_path, encoding_list=['utf-8', 'ISO-8859-1']):
     for encoding in encoding_list:
         try:
@@ -25,6 +24,7 @@ def validate_standings_order(group):
     group['Club'] = sorted_group['Club']
     return group
 
+
 def print_errors(data, error_type, condition):
     error_df = data[~condition]
     if not error_df.empty:
@@ -42,8 +42,11 @@ def control_data(file_path):
     jaarTallen2puntensysteem = set(range(1960, 1995)) - {1964}
     data['PuntenVoorOverwinning'] = data['SeizoensBegin'].apply(lambda x: 2 if x in jaarTallen2puntensysteem else 3)
 
+    # Geen enkel record met meer wedstrijden dan speeldagen
+    data['GeenEnkelRecordMeerWedstrijdenDanSpeeldagen'] = data['Speeldag'] >= data['AantalGespeeld']
+
     # Controle op aantal wedstrijden
-    data['AantalWedstrijdenCorrect'] = data['AantalGewonnen'] + data['AantalGelijk'] + data['AantalVerloren'] == data['Speeldag']
+    data['AantalWedstrijdenCorrect'] = data['AantalGespeeld'] == data['Speeldag']
 
     # Bereken verwachte punten
     data['VerwachtePunten'] = data['AantalGewonnen'] * data['PuntenVoorOverwinning'] + data['AantalGelijk']
@@ -53,16 +56,15 @@ def control_data(file_path):
     
     # Check op correcte verwachte punten
     data['CorrectVerwachtePunten'] = data['VerwachtePunten'] == data['PuntenVoor']
-
-    validated_data = data.groupby(['SeizoensBegin', 'Speeldag']).apply(validate_standings_order)
     
     # Fouten rapporteren
-    print_errors(data, 'DOELPUNTENSALDO', data['CorrectDoelpuntensaldo'])
-    print_errors(data, 'VERWACHTE PUNTEN', data['CorrectVerwachtePunten'])
-    print_errors(data, 'AANTAL WEDSTRIJDEN', data['AantalWedstrijdenCorrect'])
+    print_errors(data, 'MEER WEDSTRIJDEN DAN SPEELDAGEN', data['GeenEnkelRecordMeerWedstrijdenDanSpeeldagen'])
+    print_errors(data, 'DOELPUNTENSALDO INCORRECT', data['CorrectDoelpuntensaldo'])
+    print_errors(data, 'VERWACHTE PUNTEN INCORRECT', data['CorrectVerwachtePunten'])
+    print_errors(data, 'AANTAL WEDSTRIJDEN INCORRECT', data['AantalWedstrijdenCorrect'])
 
     validated_data = data.groupby(['SeizoensBegin', 'Speeldag']).apply(validate_standings_order)
-    print_errors(validated_data, 'KLASSEMENT', validated_data['StandCorrect'])
+    print_errors(validated_data, 'KLASSEMENT INCORRECT', validated_data['StandCorrect'])
   
     return validated_data
 
