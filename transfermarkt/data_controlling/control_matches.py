@@ -44,6 +44,36 @@ if not inconsistent_teams.empty:
 print("\nMatch DataFrame:")
 print(matches_df)
 
+
+# groepeer de gegevens op seizoen, speeldag en ploeg
+grouped_data_thuis = matches_df.groupby(['Seizoen', 'Speeldag', 'Match_ID'])
+grouped_data_uit = matches_df.groupby(['Seizoen', 'Speeldag', 'Match_ID'])
+
+# bereken het totaal aantal gewonnen wedstrijden per seizoen en per ploeg voor thuis- en uitploeg
+totaal_gewonnen_thuis = grouped_data_thuis['Resultaat_Thuisploeg'].sum()
+totaal_gewonnen_uit = grouped_data_uit['Resultaat_Uitploeg'].sum()
+
+# Zet de resultaten om in DataFrames en reset de index voor een betere weergave
+totaal_gewonnen_thuis_df = totaal_gewonnen_thuis.reset_index()
+totaal_gewonnen_uit_df = totaal_gewonnen_uit.reset_index()
+
+if 'Verschil' not in matches_df.columns:
+    matches_df['Verschil'] = matches_df['Resultaat_Thuisploeg'] - matches_df['Resultaat_Uitploeg']
+
+# Check Resultaten of juist zijn en =! verschil
+controle_aantal_wedstrijden = matches_df[(matches_df['Resultaat_Thuisploeg'] - matches_df['Resultaat_Uitploeg']) != matches_df['Verschil']]
+if not controle_aantal_wedstrijden.empty:
+    print("\nRecords gevonden waar (Thuisploeg - Uitploeg) niet gelijk is aan Verschil:")
+    print(controle_aantal_wedstrijden)
+
+# Voeg de resultaten voor thuis- en uitploeg samen
+merged_results = pd.merge(totaal_gewonnen_thuis_df, totaal_gewonnen_uit_df, on=['Seizoen', 'Speeldag'])
+
+# Hernoem de kolommen
+merged_results.columns = ['Seizoen', 'Speeldag', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Uitploeg', 'Resultaat_Uitploeg']
+
+# Opslaan van de gecontroleerde gegevens in matches_controlled.csv
+merged_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\gesorteerde_matches.csv', index=False)
 # Opslaan van gecontroleerde resultaten
 controlled_matches_filename = r'C:\Users\ayman\OneDrive\Bureaublad\Backup\matches_controlled.csv'
 matches_df.to_csv(controlled_matches_filename, index=False)
