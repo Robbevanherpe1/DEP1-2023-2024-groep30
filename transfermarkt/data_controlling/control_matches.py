@@ -1,85 +1,50 @@
 import pandas as pd
-from sklearn.model_selection import cross_val_score
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import IsolationForest
-from sklearn.preprocessing import LabelEncoder
 
-def controleerdatatypes_ml(file_path):
-    # Het inlezen van de dataset
-    data = pd.read_csv(file_path)
+# Bestand inlezen
+matches_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_matches.csv')
 
-    # Gewenste datatypes
-    gewenste_dtypes = {
-        'Seizoen': 'object',
-        'Speeldag': 'int64',
-        'Resultaat_Thuisploeg': 'int64',
-        'Resultaat_Uitploeg': 'int64',
-        'Thuisploeg_stamnummer': 'int64',
-        'Uitploeg_stamnummer': 'int64'
-    }
+# Controle op ontbrekende waarden
+missing_values = matches_df.isnull().sum()
+print("Ontbrekende waarden:")
+print(missing_values)
 
-    # Controleren van huidige datatypes en vergelijken met gewenste datatypes
-    verschillen = []
-    for kolom in data.columns:
-        if kolom in gewenste_dtypes and data.dtypes[kolom] != gewenste_dtypes[kolom]:
-            verschillen.append(kolom)
-    
-    if verschillen:
-        for kolom in verschillen:
-            # Probeer te converteren naar het gewenste datatype
-            try:
-                data[kolom] = pd.to_numeric(data[kolom], errors='coerce')
-                data[kolom] = data[kolom].astype(gewenste_dtypes[kolom])
-            except ValueError:
-                print(f"Kon kolom '{kolom}' niet converteren naar het gewenste datatype '{gewenste_dtypes[kolom]}'.")
-                return None
-        print("Alle datatypes zijn aangepast naar de gewenste datatypes.")
-        return data
-    else:
-        return data
+# Controle op unieke identificatie (Match_ID)
+duplicate_match_ids = matches_df[matches_df.duplicated(subset=['Match_ID'], keep=False)]
+if not duplicate_match_ids.empty:
+    print("\nDuplicaat Match_ID's gevonden:")
+    print(duplicate_match_ids[['Match_ID']])
 
-def remove_records_with_more_matches_than_matchdays(data):
-    # Get the number of unique matchdays
-    num_matchdays = data['Seizoen'].nunique()
-    
-    # Get the total number of matches
-    num_matches = len(data)
-    
-    # Selecteer alleen numerieke kolommen
-    numeric_columns = ['Seizoen', 'Speeldag', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 
-                       'Thuisploeg_stamnummer', 'Uitploeg_stamnummer']
-    
-    features = data[numeric_columns]
-    
-    # Fit Isolation Forest model
-    model = IsolationForest(contamination='auto', random_state=42)
-    model.fit(features)
-    
-    # Voorspel outliers
-    outliers = model.predict(features)
-    
-    # Filter records with more matches than matchdays
-    records_with_more_matches = data[outliers == 1]  # 1 represents inliers
-    
-    # Verwijder records met meer wedstrijden dan matchdagen
-    data = records_with_more_matches
-    
-    num_deleted_records = len(data)
-        
-    if num_deleted_records == num_matches:
-        print("Er zijn geen records verwijderd. Data is OK.")
-    else:
-        print(f"{num_deleted_records} records zijn verwijderd.")
-    
-    return data
+# Controle op consistentie van datatypes
+data_types = matches_df.dtypes
+print("\nDatatypes:")
+print(data_types)
 
-# Voorbeeldgebruik
-file_path = r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_matches.csv'
-cleaned_data = controleerdatatypes_ml(file_path)
+# Controle op outlier detectie met Isolation Forest
+outlier_detector = IsolationForest(contamination=0.5)  # Controle op 10% van de data als outlier
+outlier_detector.fit(matches_df[['Resultaat_Thuisploeg', 'Resultaat_Uitploeg']])
 
-if cleaned_data is not None:
-    cleaned_data = remove_records_with_more_matches_than_matchdays(cleaned_data)
+outliers = outlier_detector.predict(matches_df[['Resultaat_Thuisploeg', 'Resultaat_Uitploeg']])
+matches_df['Outlier'] = outliers
 
-    if cleaned_data is not None:
-        # Opslaan van de gecontroleerde gegevens naar een nieuwe CSV
-        cleaned_data.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\matches_controlled.csv', index=False)
+# Selecteer de rijen die als outliers zijn geclassificeerd
+outliers_resultaten = matches_df[matches_df['Outlier'] == -1]
+if not outliers_resultaten.empty:
+    print("\nOutliers in resultaten gevonden:")
+    print(outliers_resultaten[['Match_ID', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg']])
+
+# Controle op consistentie tussen gerelateerde velden
+inconsistent_teams = matches_df[(matches_df['Thuisploeg_stamnummer'] == 0) & (matches_df['Thuisploeg'] != 'Onbekend')]
+inconsistent_teams = inconsistent_teams._append(matches_df[(matches_df['Uitploeg_stamnummer'] == 0) & (matches_df['Uitploeg'] != 'Onbekend')], ignore_index=True)
+if not inconsistent_teams.empty:
+    print("\nInconsistentie in teams gevonden:")
+    print(inconsistent_teams[['Match_ID', 'Thuisploeg', 'Thuisploeg_stamnummer', 'Uitploeg', 'Uitploeg_stamnummer']])
+
+# Uitvoer weergeven
+print("\nMatch DataFrame:")
+print(matches_df)
+
+# Opslaan van gecontroleerde resultaten
+controlled_matches_filename = r'C:\Users\ayman\OneDrive\Bureaublad\Backup\matches_controlled.csv'
+matches_df.to_csv(controlled_matches_filename, index=False)
+print(f"\nGecontroleerde resultaten opgeslagen in {controlled_matches_filename}")
