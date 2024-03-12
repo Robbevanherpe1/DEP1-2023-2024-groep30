@@ -24,11 +24,16 @@ Session = scoped_session(sessionmaker(bind=engine))
 metadata = MetaData()
 
 # Dimensie tabellen
+Dim_Kansen = Table('Dim_Kansen', metadata,
+                   Column('KansKey', Integer, primary_key=True, autoincrement=True),
+                   Column('OddsWaarde', Float, unique=True),
+                   )
+
 Dim_Ploeg = Table('Dim_Ploeg', metadata,
                   Column('PloegKey', Integer, primary_key=True),
                   Column('Id', String(255)),
                   Column('Stamnummer', String(255)),
-                  Column('Naam', String(255)),
+                  Column('PloegNaam', String(255)),
                   )
 
 Dim_Date = Table('Dim_Date', metadata,
@@ -49,9 +54,6 @@ Dim_Time = Table('Dim_Time', metadata,
                  Column('Uur', Integer),
                  Column('Minuten', Integer),
                  Column('Seconden', Integer),
-                 Column('AMofPM', String(255)),
-                 Column('UurVanDeDag', String(255)),
-                 Column('MinuutVanHetUur', Integer),
                  )
 
 Dim_Klassement = Table('Dim_Klassement', metadata,
@@ -71,28 +73,15 @@ Dim_Klassement = Table('Dim_Klassement', metadata,
 Dim_Match = Table('Dim_Match', metadata,
                   Column('MatchKey', Integer, primary_key=True),
                   Column('MatchID', Integer),
-                  Column('Seizoen', String(255)),
-                  Column('Speeldag', Integer),
-                  Column('Datum', Date),
-                  Column('Tijdstip', Time),
-                  Column('Thuisploeg', String(255)),
                   Column('Uitploeg', String(255)),
-                  Column('Resultaat_Thuisploeg', Integer),
-                  Column('Resultaat_Uitploeg', Integer),
-                  Column('Thuisploeg_stamnummer', String(255)),
-                  Column('Uitploeg_stamnummer', String(255)),
+                  Column('Thuisploeg', String(255)),
                   )
-
-Dim_Kansen = Table('Dim_Kansen', metadata,
-                   Column('KansKey', Integer, primary_key=True, autoincrement=True),
-                   Column('OddsWaarde', Float, unique=True),
-                   )
 
 # Fact tabellen
 Fact_Score = Table('Fact_Score', metadata,
                    Column('ScoreID', Integer, primary_key=True, autoincrement=True),
                    Column('PloegKey', Integer, ForeignKey('Dim_Ploeg.PloegKey')),
-                   Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')), 
+                   Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
                    Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
                    Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
                    Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
@@ -101,7 +90,8 @@ Fact_Score = Table('Fact_Score', metadata,
                    Column('ScoreUit', Integer),
                    Column('EindscoreThuis', Integer),
                    Column('EindscoreUit', Integer),
-                   Column('ScoreIndicator', String(255)),
+                   Column('ScorendePloegIndicator', String(255)),
+                   Column('GoalScorer', String(255)),
                    )
 
 Fact_Weddenschap = Table('Fact_Weddenschap', metadata,
