@@ -78,6 +78,14 @@ merged_results = pd.merge(totaal_gewonnen_thuis_df, totaal_gewonnen_uit_df, on=[
 # Hernoem de kolommen
 merged_results.columns = ['Seizoen', 'Speeldag', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Uitploeg', 'Resultaat_Uitploeg']
 
+
+#Ongeldige Speeldagen
+invalid_matchdays = matches_df[matches_df['Speeldag'] < 1]  # aanname: speeldag begint vanaf 1
+if not invalid_matchdays.empty:
+    print("\nOngeldige speeldagen gevonden:")
+    print(invalid_matchdays[['Match_ID', 'Speeldag']])
+
+
 # Opslaan van de gecontroleerde gegevens in matches_controlled.csv
 merged_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\gesorteerde_matches.csv', index=False)
 # Opslaan van gecontroleerde resultaten
