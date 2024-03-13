@@ -15,13 +15,11 @@ def validate_standings_order(group):
                                      ascending=[False, False, False, False])
     
     # Genereer een nieuwe 'CorrectStand' gebaseerd op de juiste volgorde
-    sorted_group['CorrectStand'] = range(1, len(sorted_group) + 1)
+    group['CorrectStand'] = sorted_group['Stand'].values
 
     # Check of de nieuwe 'CorrectStand' overeenkomt met de originele 'Stand'
-    group['StandCorrect'] = (group['Stand'].values == sorted_group['CorrectStand'].values)
+    group['StandCorrect'] = (group['Stand'] == group['CorrectStand'])
 
-    # Houd de clubnamen bij tijdens het sorteren voor het geval we ze nodig hebben voor rapportage
-    group['Club'] = sorted_group['Club']
     return group
 
 
@@ -45,9 +43,6 @@ def control_data(file_path):
     # Geen enkel record met meer wedstrijden dan speeldagen
     data['GeenEnkelRecordMeerWedstrijdenDanSpeeldagen'] = data['Speeldag'] >= data['AantalGespeeld']
 
-    # Controle op aantal wedstrijden
-    data['AantalWedstrijdenCorrect'] = data['AantalGespeeld'] == data['Speeldag']
-
     # Bereken verwachte punten
     data['VerwachtePunten'] = data['AantalGewonnen'] * data['PuntenVoorOverwinning'] + data['AantalGelijk']
     
@@ -61,7 +56,6 @@ def control_data(file_path):
     print_errors(data, 'MEER WEDSTRIJDEN DAN SPEELDAGEN', data['GeenEnkelRecordMeerWedstrijdenDanSpeeldagen'])
     print_errors(data, 'DOELPUNTENSALDO INCORRECT', data['CorrectDoelpuntensaldo'])
     print_errors(data, 'VERWACHTE PUNTEN INCORRECT', data['CorrectVerwachtePunten'])
-    print_errors(data, 'AANTAL WEDSTRIJDEN INCORRECT', data['AantalWedstrijdenCorrect'])
 
     validated_data = data.groupby(['SeizoensBegin', 'Speeldag']).apply(validate_standings_order)
     print_errors(validated_data, 'KLASSEMENT INCORRECT', validated_data['StandCorrect'])
@@ -69,9 +63,9 @@ def control_data(file_path):
     return validated_data
 
 
-# pad naar csv-bestand
+# pad naar stand_clean.csv
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
 controlled_data = control_data(file_path)
 
-# Gecontroleerde csv opslaan
+# stand_controlled.csv opslaan
 controlled_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\stand_controlled.csv', index=False)
