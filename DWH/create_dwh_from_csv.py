@@ -24,91 +24,91 @@ Session = scoped_session(sessionmaker(bind=engine))
 metadata = MetaData()
 
 # Dimensie tabellen
-Dim_Kansen = Table('Dim_Kansen', metadata,
-                   Column('KansKey', Integer, primary_key=True, autoincrement=True),
-                   Column('OddsWaarde', Float, unique=True),
-                   )
+Dim_Kans = Table('Dim_Kans', metadata,
+                    Column('KansKey', Integer, primary_key=True, autoincrement=True),
+                    Column('OddsWaarde', Float, unique=True),
+                    )
 
-Dim_Ploeg = Table('Dim_Ploeg', metadata,
-                  Column('PloegKey', Integer, primary_key=True),
-                  Column('Id', String(255)),
-                  Column('Stamnummer', String(255)),
-                  Column('PloegNaam', String(255)),
-                  )
+Dim_Team = Table('Dim_Team', metadata,
+                    Column('Teamkey', Integer, primary_key=True),
+                    Column('Id', String(255)),
+                    Column('Stamnummer', String(255)),
+                    Column('PloegNaam', String(255)),
+                    )
 
 Dim_Date = Table('Dim_Date', metadata,
-                 Column('DateKey', Integer, primary_key=True),
-                 Column('Speeldag', Integer),
-                 Column('Seizoen', String(255)),
-                 Column('DagVanDeMaand', Integer),
-                 Column('DagVanDeWeek', String(255)),
-                 Column('DagVanHetJaar', Integer),
-                 Column('WeekVanHetJaar', Integer),
-                 Column('Maand', Integer),
-                 Column('Jaar', Integer),
-                 Column('DDMMJJJJ', String(255)),
-                 )
+                    Column('DateKey', Integer, primary_key=True),
+                    Column('Speeldag', Integer),
+                    Column('Seizoen', String(255)),
+                    Column('DagVanDeMaand', Integer),
+                    Column('DagVanDeWeek', String(255)),
+                    Column('DagVanHetJaar', Integer),
+                    Column('WeekVanHetJaar', Integer),
+                    Column('Maand', Integer),
+                    Column('Jaar', Integer),
+                    Column('DDMMJJJJ', String(255)),
+                    )
 
 Dim_Time = Table('Dim_Time', metadata,
-                 Column('TimeKey', Integer, primary_key=True),
-                 Column('Uur', Integer),
-                 Column('Minuten', Integer),
-                 Column('Seconden', Integer),
-                 )
+                    Column('TimeKey', Integer, primary_key=True),
+                    Column('Uur', Integer),
+                    Column('Minuten', Integer),
+                    Column('Seconden', Integer),
+                    )
 
 Dim_Klassement = Table('Dim_Klassement', metadata,
-                       Column('KlassementKey', Integer, primary_key=True),
-                       Column('Stand', Integer),
-                       Column('AantalGespeeld', Integer),
-                       Column('AantalGewonnen', Integer),
-                       Column('AantalGelijk', Integer),
-                       Column('AantalVerloren', Integer),
-                       Column('DoelpuntenVoor', Integer),
-                       Column('DoelpuntenTegen', Integer),
-                       Column('DoelpuntenSaldo', Integer),
-                       Column('PuntenVoor', Integer),
-                       Column('PuntenTegen', Integer),
-                       )
+                        Column('KlassementKey', Integer, primary_key=True),
+                        Column('Stand', Integer),
+                        Column('AantalGespeeld', Integer),
+                        Column('AantalGewonnen', Integer),
+                        Column('AantalGelijk', Integer),
+                        Column('AantalVerloren', Integer),
+                        Column('DoelpuntenVoor', Integer),
+                        Column('DoelpuntenTegen', Integer),
+                        Column('DoelpuntenSaldo', Integer),
+                        Column('PuntenVoor', Integer),
+                        Column('PuntenTegen', Integer),
+                        )
 
-Dim_Match = Table('Dim_Match', metadata,
-                  Column('MatchKey', Integer, primary_key=True),
-                  Column('MatchID', Integer),
-                  Column('Uitploeg', String(255)),
-                  Column('Thuisploeg', String(255)),
-                  )
+Dim_Wedstrijd = Table('Dim_Wedstrijd', metadata,
+                    Column('WedstrijdKey', Integer, primary_key=True),
+                    Column('MatchID', Integer),
+                    Column('Uitploeg', String(255)),
+                    Column('Thuisploeg', String(255)),
+                    )
 
 # Fact tabellen
-Fact_Score = Table('Fact_Score', metadata,
-                   Column('ScoreID', Integer, primary_key=True, autoincrement=True),
-                   Column('PloegKey', Integer, ForeignKey('Dim_Ploeg.PloegKey')),
-                   Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
-                   Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
-                   Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
-                   Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
-                   Column('KansKey', Integer, ForeignKey('Dim_Kansen.KansKey')),
-                   Column('ScoreThuis', Integer),
-                   Column('ScoreUit', Integer),
-                   Column('EindscoreThuis', Integer),
-                   Column('EindscoreUit', Integer),
-                   Column('ScorendePloegIndicator', String(255)),
-                   Column('GoalScorer', String(255)),
-                   )
+Fact_WedstrijdScore = Table('Fact_WedstrijdScore', metadata,
+                            Column('WedstrijdScoreID', Integer, primary_key=True, autoincrement=True),
+                            Column('Teamkey', Integer, ForeignKey('Dim_Team.Teamkey')),
+                            Column('WedstrijdKey', Integer, ForeignKey('Dim_Wedstrijd.WedstrijdKey')),
+                            Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
+                            Column('KansKey', Integer, ForeignKey('Dim_Kans.KansKey')),
+                            Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
+                            Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
+                            Column('ScoreThuis', Integer),
+                            Column('ScoreUit', Integer),
+                            Column('EindscoreThuis', Integer),
+                            Column('EindscoreUit', Integer),
+                            Column('ScorendePloegIndicator', String(255)),
+                            Column('DoelpuntenMaker', String(255)),
+                            )
 
 Fact_Weddenschap = Table('Fact_Weddenschap', metadata,
-                         Column('WeddenschapID', Integer, primary_key=True, autoincrement=True),
-                         Column('PloegKey', Integer, ForeignKey('Dim_Ploeg.PloegKey')),
-                         Column('MatchKey', Integer, ForeignKey('Dim_Match.MatchKey')),
-                         Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
-                         Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
-                         Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
-                         Column('KansKey', Integer, ForeignKey('Dim_Kansen.KansKey')),
-                         Column('OddsThuisWint', Float),
-                         Column('OddsUitWint', Float),
-                         Column('OddsBeideTeamsScoren', Float),
-                         Column('OddsNietBeideTeamsScoren', Float),
-                         Column('OddsMeerDanX', Float),
-                         Column('OddsMinderDanX', Float),
-                         )
+                            Column('WeddenschapID', Integer, primary_key=True, autoincrement=True),
+                            Column('Teamkey', Integer, ForeignKey('Dim_Team.Teamkey')),
+                            Column('WedstrijdKey', Integer, ForeignKey('Dim_Wedstrijd.WedstrijdKey')),
+                            Column('KlassementKey', Integer, ForeignKey('Dim_Klassement.KlassementKey')),
+                            Column('KansKey', Integer, ForeignKey('Dim_Kans.KansKey')),
+                            Column('DateKey', Integer, ForeignKey('Dim_Date.DateKey')),
+                            Column('TimeKey', Integer, ForeignKey('Dim_Time.TimeKey')),
+                            Column('OddsThuisWint', Float),
+                            Column('OddsUitWint', Float),
+                            Column('OddsBeideTeamsScoren', Float),
+                            Column('OddsNietBeideTeamsScoren', Float),
+                            Column('OddsMeerDanX', Float),
+                            Column('OddsMinderDanX', Float),
+                            )
 
 # Creëer alle tabellen in de database
 metadata.create_all(engine)
@@ -118,18 +118,18 @@ def insert_dim_kansen_values():
     session = Session()
     try:
         # Check of OddsWaarde al bestaan om duplicaten te voorkomen
-        existing_values = session.query(Dim_Kansen.c.OddsWaarde).all()
+        existing_values = session.query(Dim_Kans.c.OddsWaarde).all()
         existing_values = [value[0] for value in existing_values]
         
         # Te inserten waarden
         kansen_values = [1.5, 2.5, 3.5]
         for value in kansen_values:
             if value not in existing_values:
-                insert_stmt = insert(Dim_Kansen).values(OddsWaarde=value)
+                insert_stmt = insert(Dim_Kans).values(OddsWaarde=value)
                 session.execute(insert_stmt)
                 
         session.commit()
-        logging.info("Vaste waarden succesvol ingevoegd in Dim_Kansen")
+        logging.info("Vaste waarden succesvol ingevoegd in Dim_Kans")
     except SQLAlchemyError as e:
         session.rollback()
         logging.error(f"Database error: {e}")
