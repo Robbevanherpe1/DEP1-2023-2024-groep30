@@ -9,6 +9,12 @@ missing_values = matches_df.isnull().sum()
 print("Ontbrekende waarden:")
 print(missing_values)
 
+#Ongeldige Resultaten
+invalid_results = matches_df[(matches_df['Resultaat_Thuisploeg'] < 0) | (matches_df['Resultaat_Uitploeg'] < 0)]
+if not invalid_results.empty:
+    print("\nOngeldige resultaten gevonden:")
+    print(invalid_results[['Match_ID', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg']])
+
 # Controle op unieke identificatie (Match_ID)
 duplicate_match_ids = matches_df[matches_df.duplicated(subset=['Match_ID'], keep=False)]
 if not duplicate_match_ids.empty:
