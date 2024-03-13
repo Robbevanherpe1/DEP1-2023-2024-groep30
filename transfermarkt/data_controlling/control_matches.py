@@ -85,6 +85,13 @@ if not invalid_matchdays.empty:
     print("\nOngeldige speeldagen gevonden:")
     print(invalid_matchdays[['Match_ID', 'Speeldag']])
 
+#Ongeldig Seizoen
+invalid_seasons = matches_df[~matches_df['Seizoen'].astype(str).str.match(r'\d{4}-\d{4}')]
+if not invalid_seasons.empty:
+    print("\nOngeldige seizoenen gevonden:")
+    print(invalid_seasons[['Match_ID', 'Seizoen']])
+
+
 
 # Opslaan van de gecontroleerde gegevens in matches_controlled.csv
 merged_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\gesorteerde_matches.csv', index=False)
