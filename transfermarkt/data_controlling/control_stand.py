@@ -16,12 +16,12 @@ def control_data(file_path):
     jaarTallen2puntensysteem = set(range(1960, 1995)) - {1964}
     data['PuntenVoorOverwinning'] = data['SeizoensBegin'].apply(lambda x: 2 if x in jaarTallen2puntensysteem else 3)
     
-    # Bereken verwachte punten op basis van winsten en gelijke spelen.
+    # berekenen verwachte punten
     data['VerwachtePunten'] = data['AantalGewonnen'] * data['PuntenVoorOverwinning'] + data['AantalGelijk']
     
     errors = pd.DataFrame()
     
-    # Definieer condities voor verschillende validatiechecks.
+    # Condites van de checks
     conditions = {
         'MeerWedstrijdenDanSpeeldagen': data['Speeldag'] >= data['AantalGespeeld'],
         'CorrectDoelpuntensaldo': (data['DoelpuntenVoor'] - data['DoelpuntenTegen']) == data['Doelpuntensaldo'],
@@ -30,25 +30,25 @@ def control_data(file_path):
         'AantalGespeeldCorrect': data['AantalGespeeld'] == (data['AantalGewonnen'] + data['AantalGelijk'] + data['AantalVerloren'])
     }
     
-    # Doorloop condities om fouten te detecteren en vast te leggen.
+    # Controleer op fouten en registreer deze.
     for error_type, condition in conditions.items():
         error_data = data[~condition]
         errors = pd.concat([errors, error_data.groupby(['SeizoensBegin', 'Speeldag', 'Club']).size().reset_index(name='AantalFouten').assign(FoutType=error_type)])
     
-    # Corrigeer stand en controleer op discrepanties.
+    # Corrigeer stand en controleer op fouten
     data = data.assign(
         CorrectStand=data.groupby(['SeizoensBegin', 'Speeldag']).cumcount() + 1,
         StandCorrect=lambda x: x['Stand'] == x['CorrectStand']
     )
     
-    # Registreer fouten gerelateerd aan onjuiste stand.
+    # Registreer fouten gerelateerd aan onjuiste stand
     validation_errors = data[~data['StandCorrect']].groupby(['SeizoensBegin', 'Speeldag', 'Club']).size().reset_index(name='AantalFouten').assign(FoutType='KLASSEMENT INCORRECT')
     errors = pd.concat([errors, validation_errors])
 
-    # Lijst van kolommen om te verwijderen uit de uiteindelijke dataset.
+    # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
     columns_to_remove = ['ConsistentSeizoen','AantalGespeeldCorrect', 'PuntenVoorOverwinning', 'MeerWedstrijdenDanSpeeldagen', 'VerwachtePunten', 'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
     
-    # Retourneer de opgeschoonde en gevalideerde gegevens, samen met een DataFrame van fouten.
+    # Retourneer de opgeschoonde en gevalideerde gegevens, samen met een DataFrame van fouten
     return data.drop(columns=columns_to_remove, errors='ignore'), errors
 
 # Bestandspaden voor csv-bestanden
