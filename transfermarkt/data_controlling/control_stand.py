@@ -72,6 +72,11 @@ def control_data(file_path):
 
     errors = pd.concat([errors, validation_errors])
 
+    # Remove specified columns before returning
+    columns_to_remove = ['PuntenVoorOverwinning', 'GeenEnkelRecordMeerWedstrijdenDanSpeeldagen', 'VerwachtePunten',
+                         'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
+    validated_data = validated_data.drop(columns=columns_to_remove, errors='ignore')
+
     return validated_data, errors
 
 file_path_cleaned_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
