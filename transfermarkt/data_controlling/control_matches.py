@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.ensemble import IsolationForest
+import re
 
 # Bestand inlezen
 matches_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_matches.csv')
@@ -9,7 +10,7 @@ missing_values = matches_df.isnull().sum()
 print("Ontbrekende waarden:")
 print(missing_values)
 
-#Ongeldige Resultaten
+# Ongeldige Resultaten
 invalid_results = matches_df[(matches_df['Resultaat_Thuisploeg'] < 0) | (matches_df['Resultaat_Uitploeg'] < 0)]
 if not invalid_results.empty:
     print("\nOngeldige resultaten gevonden:")
@@ -26,8 +27,14 @@ data_types = matches_df.dtypes
 print("\nDatatypes:")
 print(data_types)
 
+# Check for non-numeric entries in columns expected to be numeric
+numeric_columns = ['Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Thuisploeg_stamnummer', 'Uitploeg_stamnummer']
+for col in numeric_columns:
+    if matches_df[col].dtype != 'int64':
+        print(f"Column {col} contains non-numeric entries.")
+
 # Controle op outlier detectie met Isolation Forest
-outlier_detector = IsolationForest(contamination=0.5)  # Controle op 10% van de data als outlier
+outlier_detector = IsolationForest(contamination=0.5) # Controle op 10% van de data als outlier
 outlier_detector.fit(matches_df[['Resultaat_Thuisploeg', 'Resultaat_Uitploeg']])
 
 outliers = outlier_detector.predict(matches_df[['Resultaat_Thuisploeg', 'Resultaat_Uitploeg']])
@@ -41,15 +48,35 @@ if not outliers_resultaten.empty:
 
 # Controle op consistentie tussen gerelateerde velden
 inconsistent_teams = matches_df[(matches_df['Thuisploeg_stamnummer'] == 0) & (matches_df['Thuisploeg'] != 'Onbekend')]
-inconsistent_teams = inconsistent_teams._append(matches_df[(matches_df['Uitploeg_stamnummer'] == 0) & (matches_df['Uitploeg'] != 'Onbekend')], ignore_index=True)
+inconsistent_teams = pd.concat([inconsistent_teams, matches_df[(matches_df['Uitploeg_stamnummer'] == 0) & (matches_df['Uitploeg'] != 'Onbekend')]], ignore_index=True)
+
 if not inconsistent_teams.empty:
     print("\nInconsistentie in teams gevonden:")
     print(inconsistent_teams[['Match_ID', 'Thuisploeg', 'Thuisploeg_stamnummer', 'Uitploeg', 'Uitploeg_stamnummer']])
 
+# Check for missing values in key columns
+key_columns = ['Match_ID', 'Seizoen', 'Speeldag']
+for col in key_columns:
+    if matches_df[col].isnull().sum() > 0:
+        print(f"Missing values found in {col}.")
+
+# Check for duplicate entries based on 'Seizoen', 'Speeldag', and 'Match_ID'
+duplicate_entries = matches_df.duplicated(subset=['Seizoen', 'Speeldag', 'Match_ID'], keep=False)
+if duplicate_entries.any():
+    print("\nDuplicate entries found:")
+    print(matches_df[duplicate_entries][['Match_ID', 'Seizoen', 'Speeldag']])
+
+# Check for inconsistent data entries
+inconsistent_entries = matches_df[(matches_df['Thuisploeg_stamnummer'] == 0) & (matches_df['Thuisploeg'] != 'Onbekend')]
+inconsistent_entries = pd.concat([inconsistent_entries, matches_df[(matches_df['Uitploeg_stamnummer'] == 0) & (matches_df['Uitploeg'] != 'Onbekend')]], ignore_index=True)
+
+if not inconsistent_entries.empty:
+    print("\nInconsistent data entries found:")
+    print(inconsistent_entries[['Match_ID', 'Thuisploeg', 'Thuisploeg_stamnummer', 'Uitploeg', 'Uitploeg_stamnummer']])
+
 # Uitvoer weergeven
 print("\nMatch DataFrame:")
 print(matches_df)
-
 
 # groepeer de gegevens op seizoen, speeldag en ploeg
 grouped_data_thuis = matches_df.groupby(['Seizoen', 'Speeldag', 'Match_ID'])
@@ -78,20 +105,17 @@ merged_results = pd.merge(totaal_gewonnen_thuis_df, totaal_gewonnen_uit_df, on=[
 # Hernoem de kolommen
 merged_results.columns = ['Seizoen', 'Speeldag', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Uitploeg', 'Resultaat_Uitploeg']
 
-
-#Ongeldige Speeldagen
-invalid_matchdays = matches_df[matches_df['Speeldag'] < 1]  # aanname: speeldag begint vanaf 1
+# Ongeldige Speeldagen
+invalid_matchdays = matches_df[matches_df['Speeldag'] < 1] # aanname: speeldag begint vanaf 1
 if not invalid_matchdays.empty:
     print("\nOngeldige speeldagen gevonden:")
     print(invalid_matchdays[['Match_ID', 'Speeldag']])
 
-#Ongeldig Seizoen
+# Ongeldig Seizoen
 invalid_seasons = matches_df[~matches_df['Seizoen'].astype(str).str.match(r'\d{4}-\d{4}')]
 if not invalid_seasons.empty:
     print("\nOngeldige seizoenen gevonden:")
     print(invalid_seasons[['Match_ID', 'Seizoen']])
-
-
 
 # Opslaan van de gecontroleerde gegevens in matches_controlled.csv
 merged_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\gesorteerde_matches.csv', index=False)
