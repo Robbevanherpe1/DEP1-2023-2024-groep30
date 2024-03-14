@@ -60,7 +60,7 @@ def control_data(file_path):
         (data['GeenEnkelRecordMeerWedstrijdenDanSpeeldagen'], 'MEER WEDSTRIJDEN DAN SPEELDAGEN'),
         (data['CorrectDoelpuntensaldo'], 'DOELPUNTENSALDO INCORRECT'),
         (data['CorrectVerwachtePunten'], 'VERWACHTE PUNTEN INCORRECT'),
-        (data['UniekeStamnummerPerClub'], 'GEEN UNEIK STAMNUMMER PER CLUB'),
+        (data['UniekeStamnummerPerClub'], 'GEEN UNIEKE STAMNUMMER PER CLUB'),
         (data['ConsistentSeizoen'], 'INCONSISTENT SEIZOEN'),
         (data['AantalGespeeld'], 'AANTAL GESPEELDE WEDSTRIJDEN INCORRECT'),
     ]:
