@@ -123,3 +123,10 @@ merged_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\gesorteerde_ma
 controlled_matches_filename = r'C:\Users\ayman\OneDrive\Bureaublad\Backup\matches_controlled.csv'
 matches_df.to_csv(controlled_matches_filename, index=False)
 print(f"\nGecontroleerde resultaten opgeslagen in {controlled_matches_filename}")
+
+# Saving different DataFrames to different CSV files
+matches_df.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\matches_df.csv', index=False)
+outliers_resultaten.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\outliers_df.csv', index=False)
+inconsistent_teams.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\inconsistent_teams_df.csv', index=False)
+inconsistent_entries.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\inconsistent_entries_df.csv', index=False)
+merged_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\merged_results_df.csv', index=False)
