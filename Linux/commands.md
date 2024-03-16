@@ -15,4 +15,26 @@
 
 ## Install the SQL Server command-line tools
 - curl https://packages.microsoft.com/config/rhel/9/prod.repo | sudo tee /etc/yum.repos.d/mssql-release.repo (Red Hat 9- sudo - yum remove mssql-tools unixODBC-utf16 unixODBC-utf16-devel
-- sudo yum install -y mssql-tools18 unixODBC-devel
+- sudo yum install -y mssql-tools18 unixODBC-develyze
+- sudo yum check-update sudo yum update mssql-tools18
+echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bash_profile
+echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc source ~/.bashrc
+
+## Connect locally
+- sqlcmd -S localhost -U sa -P 'VMdepgroup30' -C
+
+## Create and query data
+- CREATE DATABASE TestDB;
+- SELECT Name from sys.databases;
+- GO
+
+- USE TestDB;
+- CREATE TABLE dbo.Inventory ( id INT, name NVARCHAR(50), quantity INT, PRIMARY KEY (id) );
+- INSERT INTO dbo.Inventory VALUES (1, 'banana', 150);
+- INSERT INTO dbo.Inventory VALUES (2, 'orange', 154);
+- GO
+
+- SELECT * FROM dbo.Inventory WHERE quantity > 152;
+- GO
+
+- QUIT
