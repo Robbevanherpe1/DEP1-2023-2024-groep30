@@ -23,7 +23,7 @@
 - echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc source ~/.bashrc
 
 ### Connect locally
-- sqlcmd -S localhost -U sa -P 'VMdepgroup30' -C
+- sqlcmd -S localhost -U sa -P 'VMdepgroup30' -Ce
 
 ### Create and query data
 - CREATE DATABASE TestDB;
