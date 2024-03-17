@@ -49,7 +49,12 @@ invalid_seasons = matches_df[~matches_df['Seizoen'].astype(str).str.match(r'\d{4
 print("\nOngeldige seizoenen gevonden:")
 print(invalid_seasons[['Match_ID', 'Seizoen']])
 
+# Ongeldige datums
+matches_df['Datum'] = pd.to_datetime(matches_df['Datum'])
+invalid_dates = matches_df[matches_df['Datum'] > pd.Timestamp.now()]
 
+print("\nMatches with invalid dates:")
+print(invalid_dates[['Match_ID', 'Datum']])
 
 
 
@@ -83,33 +88,27 @@ inconsistent_teams = matches_df[(matches_df['Thuisploeg_stamnummer'] == 0) & (ma
 inconsistent_teams = pd.concat([inconsistent_teams, matches_df[(matches_df['Uitploeg_stamnummer'] == 0) & (matches_df['Uitploeg'] != 'Onbekend')]], ignore_index=True)
 
 
-# Check op stamnummer.csv
-# Voeg de kolomnamen toe
-# Verander de kolomnamen
-# Rename the columns in stamnummer_df to match the column names in matches_df
-stamnummer_df.columns = ['stamnummer', 'club_naam', 'stamnummer_copy', 'roepnaam']
-
-# Merge on 'stamnummer' for Thuisploeg
+# Checkt for stamnummer matches
 merged_thuisploeg = pd.merge(matches_df, stamnummer_df, left_on='Thuisploeg_stamnummer', right_on='stamnummer', how='left')
 
-# Merge on 'stamnummer' for Uitploeg
 merged_uitploeg = pd.merge(merged_thuisploeg, stamnummer_df, left_on='Uitploeg_stamnummer', right_on='stamnummer', how='left', suffixes=('_thuis', '_uit'))
 
-# Update the 'Thuisploeg' and 'Uitploeg' columns
 merged_uitploeg['Thuisploeg'] = merged_uitploeg['club_naam_thuis']
 merged_uitploeg['Uitploeg'] = merged_uitploeg['club_naam_uit']
 
-# Drop unnecessary columns
 merged_uitploeg.drop(['club_naam_thuis', 'club_naam_uit', 'stamnummer_thuis', 'stamnummer_uit'], axis=1, inplace=True)
 
-# Check for valid matches
-# Ensure both Thuisploeg and Uitploeg match their respective stamnummers
-valid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] == merged_uitploeg['Thuisploeg_stamnummer']) & (merged_uitploeg['Uitploeg'] == merged_uitploeg['Uitploeg_stamnummer'])]
-invalid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] != merged_uitploeg['Thuisploeg_stamnummer']) | (merged_uitploeg['Uitploeg'] != merged_uitploeg['Uitploeg_stamnummer'])]
+valid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] == merged_uitploeg['roepnaam_thuis']) & (merged_uitploeg['Uitploeg'] == merged_uitploeg['roepnaam_uit'])]
+invalid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] != merged_uitploeg['roepnaam_thuis']) | (merged_uitploeg['Uitploeg'] != merged_uitploeg['roepnaam_uit'])]
 
-# Save the valid and invalid matches to CSV files
-valid_matches.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\valid_matches.csv', index=False)
-invalid_matches.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\invalid_matches.csv', index=False)
+for index, row in invalid_matches.iterrows():
+    if row['Thuisploeg'] != row['roepnaam_thuis']:
+        matches_df.loc[matches_df['Match_ID'] == row['Match_ID'], 'Thuisploeg'] = row['roepnaam_thuis']
+    if row['Uitploeg'] != row['roepnaam_uit']:
+        matches_df.loc[matches_df['Match_ID'] == row['Match_ID'], 'Uitploeg'] = row['roepnaam_uit']
+
+
+matches_df.to_csv('valid_matches.csv', index=False)
 
 # Save the filtered DataFrames to CSV files
 invalid_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\invalid_results.csv', index=False)
