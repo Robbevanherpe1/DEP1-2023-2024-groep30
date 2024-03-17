@@ -24,6 +24,8 @@ def parse_date(date_str):
     if len(parts) >= 2:  # Controleren of de lijst voldoende elementen heeft
         day_month_year = parts[1].split()  # Verdelen van de dag, maand en jaar
         day = day_month_year[0][2:]  # Dag uit 'zo4'
+        if len(day) == 1:  # 0 toevoegen als dag 1 diget is
+            day = '0' + day
         month_str = day_month_year[1]  # Maand uit 'sep.'
         # Maanden afkorten naar hun volledige naam
         months = {
