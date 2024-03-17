@@ -23,7 +23,7 @@
 - echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.bashrc source ~/.bashrc
 
 ### Connect locally
-- sqlcmd -S localhost -U sa -P 'VMdepgroup30' -Ce
+- sqlcmd -S localhost -U sa -P 'VMdepgroup30' -C
 
 ### Create and query data
 - CREATE DATABASE TestDB;
@@ -44,3 +44,4 @@
 ## Connecteren met SQL Server
 
 - ssh -L 1500:localhost:1433 10.11.11.30
+- ssh -vv -L 1500:localhost:1433 vichogent.be -o ConnectTimeout=100 -p 40197
