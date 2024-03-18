@@ -37,7 +37,8 @@ def control_data(file_path):
     errors = pd.concat([errors, validation_errors])
 
     # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
-    columns_to_remove = ['AantalGespeeldCorrect', 'PuntenVoorOverwinning', 'MeerWedstrijdenDanSpeeldagen', 'VerwachtePunten', 'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
+    columns_to_remove = ['AantalGespeeldCorrect', 'PuntenVoorOverwinning', 'MeerWedstrijdenDanSpeeldagen', 'VerwachtePunten', 
+                         'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
 
     # Retourneer de opgeschoonde en gevalideerde gegevens, samen met een DataFrame van fouten
     return data.drop(columns=columns_to_remove, errors='ignore'), errors
