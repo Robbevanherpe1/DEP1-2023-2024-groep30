@@ -2,7 +2,7 @@ import pandas as pd
 
 # Bestanden inlezen
 wedstrijden_df = pd.read_csv('matches_clean2.csv')
-doelpunten_df = pd.read_csv('goals_clean3.csv')
+doelpunten_df = pd.read_csv('goals_clean2.csv')
 
 # Datum- en tijdstipformaten corrigeren en samenvoegen tot één datetime kolom
 wedstrijden_df['DateTime'] = pd.to_datetime(wedstrijden_df['Datum'] + ' ' + wedstrijden_df['Tijdstip'])
