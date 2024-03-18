@@ -47,7 +47,7 @@ def clean_data(file_path, stamnummer_path):
     
     # Lees de stamnummer data in
     stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
-    stamnummer_names = stamnummer_data['Thuisploeg'].tolist()
+    stamnummer_names = stamnummer_data['Ploegnaam'].tolist()
     
     unique_clubs = data['Club'].unique()
     match_args = [(club, stamnummer_names, 85) for club in unique_clubs]
@@ -58,7 +58,7 @@ def clean_data(file_path, stamnummer_path):
     club_to_matched_club = dict(zip(unique_clubs, results))
     
     # Maak een nieuwe kolom 'Stamnummer' gebaseerd op de gevonden matches
-    data['Stamnummer'] = data['Club'].apply(lambda club: stamnummer_data.loc[stamnummer_data['Thuisploeg'] == club_to_matched_club[club], 'Stamnummer'].values[0] if club_to_matched_club[club] else None)
+    data['Stamnummer'] = data['Club'].apply(lambda club: stamnummer_data.loc[stamnummer_data['Ploegnaam'] == club_to_matched_club[club], 'Stamnummer'].values[0] if club_to_matched_club[club] else None)
     
     data['Stamnummer'] = pd.to_numeric(data['Stamnummer'], errors='coerce').fillna(0).astype(int)
     
@@ -66,7 +66,7 @@ def clean_data(file_path, stamnummer_path):
 
 # Vervang deze paden door jouw werkelijke bestandspaden
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stand.csv'
-stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer.csv'
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer2.csv'
 
 cleaned_data = clean_data(file_path, stamnummer_path)
 
