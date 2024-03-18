@@ -81,6 +81,9 @@ def adjust_goal_time(match_start, goal_minute):
 def clean_data(file_path, stamnummer_path):
     # Load the CSV file
     data = pd.read_csv(file_path)
+
+    # Convert Match_ID from float to integer
+    data['Match_ID'] = data['Match_ID'].fillna(0).astype(int)
     
     # Clean the "Datum" column
     data['Datum'] = data['Datum'].apply(clean_date)
