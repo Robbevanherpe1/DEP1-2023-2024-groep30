@@ -113,12 +113,18 @@ for index, row in invalid_matches.iterrows():
         matches_df.loc[matches_df['Match_ID'] == row['Match_ID'], 'Uitploeg'] = row['roepnaam_uit']
 
 
-# Drop unnecessary columns na de controle
+
+
 matches_df.drop(['verschil', 'Outlier'], axis=1, inplace=True)
 matches_df.drop(['Thuisploeg_roepnaam','Uitploeg_roepnaam' ], axis=1, inplace=True)
 # Print the valid and invalid matches
 matches_df.to_csv('valid_matches.csv', index=False)
 
+# Geeft de kolommen de correcte volgorde
+new_columns_order = ['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Match_ID', 'Thuisploeg_stamnummer', 'Thuisploeg', 'Uitploeg_stamnummer', 'Uitploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg']
+reordered_df = matches_df[new_columns_order]
+
+reordered_df.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\reordered_matches.csv', sep=',', index=False)
 # Save the filtered DataFrames to CSV files
 invalid_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\invalid_results.csv', index=False)
 duplicate_match_ids.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\duplicate_match_ids.csv', index=False)
