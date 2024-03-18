@@ -60,6 +60,9 @@ def clean_data(file_path, stamnummer_path):
     # Maak een nieuwe kolom 'Stamnummer' gebaseerd op de gevonden matches
     data['Stamnummer'] = data['Club'].apply(lambda club: stamnummer_data.loc[stamnummer_data['Ploegnaam'] == club_to_matched_club[club], 'Stamnummer'].values[0] if club_to_matched_club[club] else None)
     
+    # Maak een nieuwe kolom 'Stamnummer' gebaseerd op de gevonden matches
+    data['Roepnaam'] = data['Club'].apply(lambda club: stamnummer_data.loc[stamnummer_data['Ploegnaam'] == club_to_matched_club[club], 'Roepnaam'].values[0] if club_to_matched_club[club] else None)
+
     data['Stamnummer'] = pd.to_numeric(data['Stamnummer'], errors='coerce').fillna(0).astype(int)
     
     return data
