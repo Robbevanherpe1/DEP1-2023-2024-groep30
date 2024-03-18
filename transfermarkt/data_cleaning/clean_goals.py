@@ -91,22 +91,22 @@ def clean_data(file_path, stamnummer_path):
     # Adjust the GoalTijdstip to reflect the actual time a goal is scored
     data['GoalTijdstip'] = data.apply(lambda x: adjust_goal_time(x['Tijdstip'].strftime('%H:%M:%S'), x['GoalTijdstip']), axis=1)
     
-    # Laad het stamnummer data
+    # Load the stamnummer data
     stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
-    stamnummer_names = stamnummer_data['Thuisploeg'].tolist()
     
-    # Match both home and away teams
+    # Match both home and away teams using the corrected column names from your data
     home_teams = data['Thuisploeg'].unique()
     away_teams = data['Uitploeg'].unique()
     
     # Combine unique home and away teams for matching
     unique_teams = set(home_teams) | set(away_teams)
-    match_args = [(team, stamnummer_names, 85) for team in unique_teams]
+    match_args = [(team, stamnummer_data['Ploegnaam'].tolist(), 85) for team in unique_teams]
     
     with ThreadPoolExecutor(max_workers=10) as executor:
         results = list(tqdm(executor.map(match_name_wrapper, match_args), total=len(match_args)))
     
-    team_to_stamnummer = {team: stamnummer_data.loc[stamnummer_data['Thuisploeg'] == matched_team, 'Stamnummer'].values[0] if matched_team else None for team, matched_team in zip(unique_teams, results)}
+    # Map matched team names to their stamnummer
+    team_to_stamnummer = {team: stamnummer_data.loc[stamnummer_data['Ploegnaam'] == matched_team, 'Stamnummer'].values[0] if matched_team else None for team, matched_team in zip(unique_teams, results)}
     
     # Create new columns for home and away team stamnummers
     data['Thuisploeg_stamnummer'] = data['Thuisploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
@@ -119,7 +119,7 @@ def clean_data(file_path, stamnummer_path):
 
 # File paths
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\goals.csv'
-stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer.csv'
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer2.csv'
 
 cleaned_data = clean_data(file_path, stamnummer_path)
 
