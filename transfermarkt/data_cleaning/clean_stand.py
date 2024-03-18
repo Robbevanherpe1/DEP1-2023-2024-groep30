@@ -25,7 +25,7 @@ def clean_data(file_path, stamnummer_path):
     
     # Seizoenbegin halen uit Seizoen
     seizoen_split = data['Seizoen'].str.split('-', expand=True)
-    data['SeizoensBegin'] = seizoen_split[0].astype(int)
+    data['Seizoen'] = seizoen_split[0].astype(int)
     
     # Doelpunten splitsen in DoelpuntenVoor en DoelpuntenTegen
     doelpunten_split = data['Doelpunten'].str.split(':', expand=True)
@@ -36,11 +36,12 @@ def clean_data(file_path, stamnummer_path):
     data['Links_Tweepuntensysteem'] = data['AantalGewonnen'] * 2 + data['AantalGelijk']
     data['Rechts_Tweepuntensysteem'] = data['AantalVerloren'] * 2 + data['AantalGelijk']
     data['Driepuntensysteem'] = data['AantalGewonnen'] * 3 + data['AantalGelijk']
-    
+
     # Lees de stamnummer data in
     stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
     stamnummer_names = stamnummer_data['Ploegnaam'].tolist()
     
+    # Unieke clubs ophalen voor stamnummer te berekenen
     unique_clubs = data['Club'].unique()
     match_args = [(club, stamnummer_names, 85) for club in unique_clubs]
     
@@ -57,8 +58,9 @@ def clean_data(file_path, stamnummer_path):
 
     data['Stamnummer'] = pd.to_numeric(data['Stamnummer'], errors='coerce').fillna(0).astype(int)
 
+    # Kolommen in juiste volgorde zetten
     reordered_list = [
-        'SeizoensBegin',
+        'Seizoen',
         'Speeldag',
         'Stand',
         'Stamnummer',
