@@ -116,12 +116,12 @@ for index, row in invalid_matches.iterrows():
 
 
 matches_df.drop(['verschil', 'Outlier'], axis=1, inplace=True)
-matches_df.drop(['Thuisploeg_roepnaam','Uitploeg_roepnaam' ], axis=1, inplace=True)
+matches_df.drop(['Thuisploeg','Uitploeg' ], axis=1, inplace=True)
 # Print the valid and invalid matches
 matches_df.to_csv('valid_matches.csv', index=False)
 
 # Geeft de kolommen de correcte volgorde
-new_columns_order = ['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Match_ID', 'Thuisploeg_stamnummer', 'Thuisploeg', 'Uitploeg_stamnummer', 'Uitploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg']
+new_columns_order = ['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Match_ID', 'Thuisploeg_stamnummer', 'Thuisploeg_roepnaam', 'Uitploeg_stamnummer', 'Uitploeg_roepnaam', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg']
 reordered_df = matches_df[new_columns_order]
 
 reordered_df.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\reordered_matches.csv', sep=',', index=False)

@@ -1,4 +1,4 @@
-Seizoen,Speeldag,Datum,Tijdstip,Match_ID,Thuisploeg_stamnummer,Thuisploeg,Uitploeg_stamnummer,Uitploeg,Resultaat_Thuisploeg,Resultaat_Uitploeg
+Seizoen,Speeldag,Datum,Tijdstip,Match_ID,Thuisploeg_stamnummer,Thuisploeg_roepnaam,Uitploeg_stamnummer,Uitploeg_roepnaam,Resultaat_Thuisploeg,Resultaat_Uitploeg
 1960-1961,1,1960-09-04,15:00,4008203,373,Sint-Truidense VV,16,Standard Luik,0,2
 1960-1961,1,1960-09-04,15:00,4008204,90,Eendracht Aalst,1,Royal Antwerp FC,3,2
 1960-1961,1,1960-09-04,15:00,4008205,246,Olympic Charleroi,35,RSC Anderlecht,0,7
