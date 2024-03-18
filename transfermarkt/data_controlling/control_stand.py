@@ -46,9 +46,10 @@ def control_data(file_path):
 
     # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
     columns_to_remove = ['AantalGespeeldCorrect', 'PuntenVoorOverwinning', 'MeerWedstrijdenDanSpeeldagen', 'VerwachtePunten', 'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
-    
+
     # Retourneer de opgeschoonde en gevalideerde gegevens, samen met een DataFrame van fouten
-    return data.drop(columns=columns_to_remove, errors='ignore'), errors
+    return controlled_data.drop(columns=columns_to_remove, errors='ignore'), errors
+
 
 # Bestandspaden voor csv-bestanden
 file_path_cleaned_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
@@ -57,5 +58,6 @@ file_path_errors_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep3
 
 # Uitvoeren van de functies
 controlled_data, errors = control_data(file_path_cleaned_data)
-controlled_data.to_csv(file_path_controlled_data, index=False)
+
+controlled_data.to_csv(file_path_controlled_data, index=False, sep=';')
 errors.to_csv(file_path_errors_data, index=False)

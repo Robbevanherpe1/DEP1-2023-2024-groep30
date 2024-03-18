@@ -23,26 +23,19 @@ def clean_data(file_path, stamnummer_path):
     except UnicodeDecodeError:
         data = pd.read_csv(file_path, encoding='ISO-8859-1')
     
+    # Seizoenbegin halen uit Seizoen
     seizoen_split = data['Seizoen'].str.split('-', expand=True)
     data['SeizoensBegin'] = seizoen_split[0].astype(int)
     
-    punten_split = data['Punten'].str.split(':', expand=True)
-    data['PuntenVoor'] = punten_split[0]
-    data['PuntenTegen'] = punten_split[1]
-    
+    # Doelpunten splitsen in DoelpuntenVoor en DoelpuntenTegen
     doelpunten_split = data['Doelpunten'].str.split(':', expand=True)
     data['DoelpuntenVoor'] = doelpunten_split[0]
     data['DoelpuntenTegen'] = doelpunten_split[1]
     
-    # Correctly calculate 'PuntenTegen' for seasons after 1995-1996 using a vectorized approach
-    condition = (data['SeizoensBegin'] >= 1995) | (data['SeizoensBegin'] == 1964) 
-    data.loc[condition, 'PuntenTegen'] = data['AantalGelijk'] * 1 + data['AantalVerloren'] * 3
-
-    data.drop(['Seizoen', 'Punten', 'Doelpunten'], axis=1, inplace=True)
-    
-    columns_before = ['SeizoensBegin', 'Speeldag', 'Stand', 'Club', 'AantalGespeeld', 'AantalGewonnen', 'AantalGelijk', 'AantalVerloren']
-    columns_after = ['Doelpuntensaldo', 'PuntenVoor', 'PuntenTegen']
-    data = data[columns_before + ['DoelpuntenVoor', 'DoelpuntenTegen'] + columns_after]
+    # Punten twee- en driepuntensysteem berekenen
+    data['Links_Tweepuntensysteem'] = data['AantalGewonnen'] * 2 + data['AantalGelijk']
+    data['Rechts_Tweepuntensysteem'] = data['AantalVerloren'] * 2 + data['AantalGelijk']
+    data['Driepuntensysteem'] = data['AantalGewonnen'] * 3 + data['AantalGelijk']
     
     # Lees de stamnummer data in
     stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
@@ -63,8 +56,29 @@ def clean_data(file_path, stamnummer_path):
     data['Roepnaam'] = data['Club'].apply(lambda club: stamnummer_data.loc[stamnummer_data['Ploegnaam'] == club_to_matched_club[club], 'Roepnaam'].values[0] if club_to_matched_club[club] else None)
 
     data['Stamnummer'] = pd.to_numeric(data['Stamnummer'], errors='coerce').fillna(0).astype(int)
+
+    reordered_list = [
+        'SeizoensBegin',
+        'Speeldag',
+        'Stand',
+        'Stamnummer',
+        'Roepnaam',
+        'AantalGespeeld',
+        'AantalGewonnen',
+        'AantalGelijk',
+        'AantalVerloren',
+        'DoelpuntenVoor',
+        'DoelpuntenTegen',
+        'Doelpuntensaldo',
+        'Links_Tweepuntensysteem',
+        'Rechts_Tweepuntensysteem',
+        'Driepuntensysteem',
+    ]
+
+    # Selecteer en ordeneer de gegevens volgens de opgegeven volgorde
+    controlled_data = data[reordered_list]
     
-    return data
+    return controlled_data
 
 # Vervang deze paden door jouw werkelijke bestandspaden
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\stand.csv'
