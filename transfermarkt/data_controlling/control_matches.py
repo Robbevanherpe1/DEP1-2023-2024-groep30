@@ -88,16 +88,21 @@ inconsistent_teams = matches_df[(matches_df['Thuisploeg_stamnummer'] == 0) & (ma
 inconsistent_teams = pd.concat([inconsistent_teams, matches_df[(matches_df['Uitploeg_stamnummer'] == 0) & (matches_df['Uitploeg'] != 'Onbekend')]], ignore_index=True)
 
 
-# Checkt for stamnummer matches
+# Merge matches_df with stamnummer_df on Thuisploeg_stamnummer
 merged_thuisploeg = pd.merge(matches_df, stamnummer_df, left_on='Thuisploeg_stamnummer', right_on='stamnummer', how='left')
 
+# Merge the result with stamnummer_df on Uitploeg_stamnummer
 merged_uitploeg = pd.merge(merged_thuisploeg, stamnummer_df, left_on='Uitploeg_stamnummer', right_on='stamnummer', how='left', suffixes=('_thuis', '_uit'))
 
+# Update the 'Thuisploeg' and 'Uitploeg' columns
 merged_uitploeg['Thuisploeg'] = merged_uitploeg['club_naam_thuis']
 merged_uitploeg['Uitploeg'] = merged_uitploeg['club_naam_uit']
 
+# Drop unnecessary columns
 merged_uitploeg.drop(['club_naam_thuis', 'club_naam_uit', 'stamnummer_thuis', 'stamnummer_uit'], axis=1, inplace=True)
 
+# Check for valid matches
+# Ensure both Thuisploeg and Uitploeg match their respective stamnummers
 valid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] == merged_uitploeg['roepnaam_thuis']) & (merged_uitploeg['Uitploeg'] == merged_uitploeg['roepnaam_uit'])]
 invalid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] != merged_uitploeg['roepnaam_thuis']) | (merged_uitploeg['Uitploeg'] != merged_uitploeg['roepnaam_uit'])]
 
@@ -106,8 +111,9 @@ for index, row in invalid_matches.iterrows():
         matches_df.loc[matches_df['Match_ID'] == row['Match_ID'], 'Thuisploeg'] = row['roepnaam_thuis']
     if row['Uitploeg'] != row['roepnaam_uit']:
         matches_df.loc[matches_df['Match_ID'] == row['Match_ID'], 'Uitploeg'] = row['roepnaam_uit']
-
-
+matches_df.drop(['verschil', 'Outlier'], axis=1, inplace=True)
+matches_df.drop(['Thuisploeg_roepnaam','Uitploeg_roepnaam' ], axis=1, inplace=True)
+# Print the valid and invalid matches
 matches_df.to_csv('valid_matches.csv', index=False)
 
 # Save the filtered DataFrames to CSV files
