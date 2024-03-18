@@ -96,37 +96,36 @@ def clean_data(file_path, stamnummer_path):
     data['Thuisploeg'] = data['Thuisploeg'].apply(clean_team)
     data['Uitploeg'] = data['Uitploeg'].apply(clean_team)
 
-    # Laad het stamnummer data
+    # Load the stamnummer data
     stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
-    stamnummer_names = stamnummer_data['Thuisploeg'].tolist()
-
-    # Prepare to match both home and away teams
+    
+    # Match both home and away teams using the corrected column names from your data
     home_teams = data['Thuisploeg'].unique()
     away_teams = data['Uitploeg'].unique()
-
+    
     # Combine unique home and away teams for matching
     unique_teams = set(home_teams) | set(away_teams)
-    match_args = [(team, stamnummer_names, 85) for team in unique_teams]
-
-    # Perform the matching in parallel
+    match_args = [(team, stamnummer_data['Ploegnaam'].tolist(), 85) for team in unique_teams]
+    
     with ThreadPoolExecutor(max_workers=10) as executor:
         results = list(tqdm(executor.map(match_name_wrapper, match_args), total=len(match_args)))
-
-    team_to_stamnummer = {team: stamnummer_data.loc[stamnummer_data['Thuisploeg'] == matched_team, 'Stamnummer'].values[0] if matched_team else None for team, matched_team in zip(unique_teams, results)}
-
+    
+    # Map matched team names to their stamnummer
+    team_to_stamnummer = {team: stamnummer_data.loc[stamnummer_data['Ploegnaam'] == matched_team, 'Stamnummer'].values[0] if matched_team else None for team, matched_team in zip(unique_teams, results)}
+    
     # Create new columns for home and away team stamnummers
     data['Thuisploeg_stamnummer'] = data['Thuisploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
     data['Uitploeg_stamnummer'] = data['Uitploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
-
+    
     # Ensure stamnummer columns are integers, fill missing with 0
     data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']] = data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']].fillna(0).astype(int)
-
+    
     return data
 
 
 # File paths
 file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\matches.csv'
-stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer.csv'
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer2.csv'
 
 cleaned_data = clean_data(file_path, stamnummer_path)
 
