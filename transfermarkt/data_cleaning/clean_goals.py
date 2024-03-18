@@ -104,11 +104,14 @@ def clean_data(file_path, stamnummer_path):
         results = list(tqdm(executor.map(match_name_wrapper, match_args), total=len(match_args)))
     
     # Map matched team names to their stamnummer
-    team_to_stamnummer = {team: stamnummer_data.loc[stamnummer_data['Ploegnaam'] == matched_team, 'Stamnummer'].values[0] if matched_team else None for team, matched_team in zip(unique_teams, results)}
+    team_to_stamnummer_and_roepnaam = {team: (stamnummer_data.loc[stamnummer_data['Ploegnaam'] == matched_team, 'Stamnummer'].values[0], stamnummer_data.loc[stamnummer_data['Ploegnaam'] == matched_team, 'Roepnaam'].values[0]) if matched_team else (None, None) for team, matched_team in zip(unique_teams, results)}
     
     # Create new columns for home and away team stamnummers
-    data['Thuisploeg_stamnummer'] = data['Thuisploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
-    data['Uitploeg_stamnummer'] = data['Uitploeg'].apply(lambda team: team_to_stamnummer.get(team, None))
+    data['Thuisploeg_stamnummer'] = data['Thuisploeg'].apply(lambda team: team_to_stamnummer_and_roepnaam.get(team, (0, None))[0])
+    data['Uitploeg_stamnummer'] = data['Uitploeg'].apply(lambda team: team_to_stamnummer_and_roepnaam.get(team, (0, None))[0])
+    data['Thuisploeg_roepnaam'] = data['Thuisploeg'].apply(lambda team: team_to_stamnummer_and_roepnaam.get(team, (None, None))[1])
+    data['Uitploeg_roepnaam'] = data['Uitploeg'].apply(lambda team: team_to_stamnummer_and_roepnaam.get(team, (None, None))[1])
+    
     
     # Ensure stamnummer columns are integers, fill missing with 0
     data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']] = data[['Thuisploeg_stamnummer', 'Uitploeg_stamnummer']].fillna(0).astype(int)
@@ -116,10 +119,10 @@ def clean_data(file_path, stamnummer_path):
     return data
 
 # File paths
-file_path = 'goals.csv'
-stamnummer_path = 'stamnummer2.csv'
+file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\goals.csv'
+stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer2.csv'
 
 cleaned_data = clean_data(file_path, stamnummer_path)
 
 # Save the cleaned data to a new CSV
-cleaned_data.to_csv('goals_clean10.csv', index=False)
+cleaned_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\goals_clean.csv', index=False)
