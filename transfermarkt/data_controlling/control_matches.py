@@ -111,6 +111,9 @@ for index, row in invalid_matches.iterrows():
         matches_df.loc[matches_df['Match_ID'] == row['Match_ID'], 'Thuisploeg'] = row['roepnaam_thuis']
     if row['Uitploeg'] != row['roepnaam_uit']:
         matches_df.loc[matches_df['Match_ID'] == row['Match_ID'], 'Uitploeg'] = row['roepnaam_uit']
+
+
+# Drop unnecessary columns na de controle
 matches_df.drop(['verschil', 'Outlier'], axis=1, inplace=True)
 matches_df.drop(['Thuisploeg_roepnaam','Uitploeg_roepnaam' ], axis=1, inplace=True)
 # Print the valid and invalid matches
