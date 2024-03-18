@@ -25,7 +25,6 @@ def clean_data(file_path, stamnummer_path):
     
     seizoen_split = data['Seizoen'].str.split('-', expand=True)
     data['SeizoensBegin'] = seizoen_split[0].astype(int)
-    data['SeizoensEinde'] = seizoen_split[1].astype(int)
     
     punten_split = data['Punten'].str.split(':', expand=True)
     data['PuntenVoor'] = punten_split[0]
@@ -36,12 +35,12 @@ def clean_data(file_path, stamnummer_path):
     data['DoelpuntenTegen'] = doelpunten_split[1]
     
     # Correctly calculate 'PuntenTegen' for seasons after 1995-1996 using a vectorized approach
-    condition = (data['SeizoensBegin'] >= 1995) | ((data['SeizoensBegin'] == 1964) & (data['SeizoensEinde'] == 1965))
+    condition = (data['SeizoensBegin'] >= 1995) | (data['SeizoensBegin'] == 1964) 
     data.loc[condition, 'PuntenTegen'] = data['AantalGelijk'] * 1 + data['AantalVerloren'] * 3
 
     data.drop(['Seizoen', 'Punten', 'Doelpunten'], axis=1, inplace=True)
     
-    columns_before = ['SeizoensBegin', 'SeizoensEinde', 'Speeldag', 'Stand', 'Club', 'AantalGespeeld', 'AantalGewonnen', 'AantalGelijk', 'AantalVerloren']
+    columns_before = ['SeizoensBegin', 'Speeldag', 'Stand', 'Club', 'AantalGespeeld', 'AantalGewonnen', 'AantalGelijk', 'AantalVerloren']
     columns_after = ['Doelpuntensaldo', 'PuntenVoor', 'PuntenTegen']
     data = data[columns_before + ['DoelpuntenVoor', 'DoelpuntenTegen'] + columns_after]
     

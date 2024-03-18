@@ -11,7 +11,7 @@ def load_data(file_path, encoding_list=['utf-8', 'ISO-8859-1']):
 
 def control_data(file_path):
     data = load_data(file_path)
-    
+
     # Stel puntensysteem in op basis van het beginjaar
     jaarTallen2puntensysteem = set(range(1960, 1995)) - {1964}
     data['PuntenVoorOverwinning'] = data['SeizoensBegin'].apply(lambda x: 2 if x in jaarTallen2puntensysteem else 3)
@@ -26,7 +26,6 @@ def control_data(file_path):
         'MeerWedstrijdenDanSpeeldagen': data['Speeldag'] >= data['AantalGespeeld'],
         'CorrectDoelpuntensaldo': (data['DoelpuntenVoor'] - data['DoelpuntenTegen']) == data['Doelpuntensaldo'],
         'CorrectVerwachtePunten': data['VerwachtePunten'] == data['PuntenVoor'],
-        'ConsistentSeizoen': data['SeizoensEinde'] > data['SeizoensBegin'],
         'AantalGespeeldCorrect': data['AantalGespeeld'] == (data['AantalGewonnen'] + data['AantalGelijk'] + data['AantalVerloren'])
     }
     
@@ -46,7 +45,7 @@ def control_data(file_path):
     errors = pd.concat([errors, validation_errors])
 
     # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
-    columns_to_remove = ['ConsistentSeizoen','AantalGespeeldCorrect', 'PuntenVoorOverwinning', 'MeerWedstrijdenDanSpeeldagen', 'VerwachtePunten', 'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
+    columns_to_remove = ['AantalGespeeldCorrect', 'PuntenVoorOverwinning', 'MeerWedstrijdenDanSpeeldagen', 'VerwachtePunten', 'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
     
     # Retourneer de opgeschoonde en gevalideerde gegevens, samen met een DataFrame van fouten
     return data.drop(columns=columns_to_remove, errors='ignore'), errors

@@ -1,7 +1,8 @@
 import pandas as pd
 
 # Load the data
-data = pd.read_csv('stand_clean.csv')
+file_path_cleaned_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
+data = pd.read_csv(file_path_cleaned_data, encoding='utf-8')
 
 # Correct points calculation, accounting for the different points system before and after 1995, excluding 1964
 data['CorrectPoints'] = data.apply(
@@ -30,7 +31,7 @@ incorrect_standings_no_duplicates = incorrect_standings.drop_duplicates(subset=[
 incorrect_standings_output_no_duplicates = incorrect_standings_no_duplicates[['SeizoensBegin', 'SeizoensEinde', 'Speeldag', 'Club', 'Stand', 'FinalStandReset']]
 
 # Define the output path for the CSV file
-output_path_incorrect_no_duplicates = 'incorrect_standings.csv'
+output_path_incorrect_no_duplicates = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\data_errors\errors_stand.csv'
 
 # Save to CSV
 incorrect_standings_output_no_duplicates.to_csv(output_path_incorrect_no_duplicates, index=False)
