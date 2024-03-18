@@ -20,38 +20,33 @@ def match_name_wrapper(args):
     return match_name(*args)
 
 def clean_date(d):
-     # First attempt: Matching the "zondag,zo2 mei 1965" format
-    match = re.search(r'\w+,\w+(\d+)\s(\w+)\s(\d{4})', d)
-    if match:
-        day, month_str, year = match.groups()
-        # Dutch month abbreviations to numerical
-        dutch_to_month_num = {
-            'jan.': '01', 'feb.': '02', 'mrt.': '03', 'apr.': '04',
-            'mei': '05', 'jun.': '06', 'jul.': '07', 'aug.': '08',
-            'sep.': '09', 'okt.': '10', 'nov.': '11', 'dec.': '12'
+    parts = d.split(',')
+    if len(parts) >= 2:  # Controleren of de lijst voldoende elementen heeft
+        day_month_year = parts[1].split()  # Verdelen van de dag, maand en jaar
+        day = day_month_year[0][2:]  # Dag uit 'zo4'
+        if len(day) == 1:  # 0 toevoegen als dag 1 diget is
+            day = '0' + day
+        month_str = day_month_year[1]  # Maand uit 'sep.'
+        # Maanden afkorten naar hun volledige naam
+        months = {
+            'jan.': '01',
+            'feb.': '02',
+            'mrt.': '03',
+            'apr.': '04',
+            'mei': '05',
+            'jun.': '06',
+            'jul.': '07',
+            'aug.': '08',
+            'sep.': '09',
+            'okt.': '10',
+            'nov.': '11',
+            'dec.': '12'
         }
-        month = dutch_to_month_num.get(month_str.lower(), '01')  # Default to January if not found
-        day = day.zfill(2)  # Ensure day is in two-digit format
+        month = months.get(month_str.lower(), month_str)  # Controleren of de afkorting in de dictionary voorkomt
+        year = day_month_year[2]  # Jaar
         return f"{year}/{month}/{day}"
     else:
-        # Second attempt: Extracting the numeric part of the date and converting Dutch months to English
-        match = re.search(r'\d+\s[a-z]+\.\s\d{4}', d, re.IGNORECASE)
-        if not match:
-            return None  # Return None if no match is found in both patterns
-
-        dutch_to_english_months = {
-            'jan.': 'Jan', 'feb.': 'Feb', 'mrt.': 'Mar', 'apr.': 'Apr',
-            'mei': 'May', 'jun.': 'Jun', 'jul.': 'Jul', 'aug.': 'Aug',
-            'sep.': 'Sep', 'okt.': 'Oct', 'nov.': 'Nov', 'dec.': 'Dec'
-        }
-        
-        date_str = match.group(0)
-        for nl, en in dutch_to_english_months.items():
-            date_str = date_str.replace(nl, en)
-
-        # Parse the date
-        date_obj = datetime.strptime(date_str, '%d %b %Y')
-        return date_obj.strftime('%Y/%m/%d')
+        return d
 
 
 def adjust_goal_time(match_start, goal_minute):
@@ -121,10 +116,10 @@ def clean_data(file_path, stamnummer_path):
     return data
 
 # File paths
-file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\goals.csv'
-stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer2.csv'
+file_path = 'goals.csv'
+stamnummer_path = 'stamnummer2.csv'
 
 cleaned_data = clean_data(file_path, stamnummer_path)
 
 # Save the cleaned data to a new CSV
-cleaned_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\goals_clean.csv', index=False)
+cleaned_data.to_csv('goals_clean10.csv', index=False)
