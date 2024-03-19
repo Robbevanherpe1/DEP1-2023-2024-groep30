@@ -18,7 +18,9 @@ def control_data(file_path):
     conditions = {
         'MeerWedstrijdenDanSpeeldagen': data['Speeldag'] >= data['AantalGespeeld'],
         'CorrectDoelpuntensaldo': (data['DoelpuntenVoor'] - data['DoelpuntenTegen']) == data['Doelpuntensaldo'],
-        'AantalGespeeldCorrect': data['AantalGespeeld'] == (data['AantalGewonnen'] + data['AantalGelijk'] + data['AantalVerloren'])
+        'AantalGespeeldCorrect': data['AantalGespeeld'] == (data['AantalGewonnen'] + data['AantalGelijk'] + data['AantalVerloren']),
+        'Links_TweepuntensysteemCorrect': data['Links_Tweepuntensysteem'] == (data['AantalGewonnen'] * 2 + data['AantalGelijk']),
+        'Rechts_TweepuntensysteemCorrect': data['Rechts_Tweepuntensysteem'] == (data['AantalVerloren'] * 2 + data['AantalGelijk'])
     }
     
     # Controleer op fouten en registreer deze.
@@ -37,8 +39,7 @@ def control_data(file_path):
     errors = pd.concat([errors, validation_errors])
 
     # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
-    columns_to_remove = ['AantalGespeeldCorrect', 'PuntenVoorOverwinning', 'MeerWedstrijdenDanSpeeldagen', 'VerwachtePunten', 
-                         'CorrectDoelpuntensaldo', 'CorrectVerwachtePunten', 'CorrectStand', 'StandCorrect']
+    columns_to_remove = ['CorrectStand', 'StandCorrect']
 
     # Retourneer de opgeschoonde en gevalideerde gegevens, samen met een DataFrame van fouten
     return data.drop(columns=columns_to_remove, errors='ignore'), errors
