@@ -9,9 +9,14 @@ def load_data(file_path, encoding_list=['utf-8', 'ISO-8859-1']):
             continue
     raise ValueError(f"Kon het bestand {file_path} niet laden met de opgegeven coderingen.")
 
+# Functie om doelpuntengegevens te laden uit een CSV-bestand
+def load_goals_data(file_path):
+    return pd.read_csv(file_path)
+
 # Functie om gegevens te controleren en te valideren
-def control_data(file_path):
+def control_data(file_path,goals_file_path):
     data = load_data(file_path)
+    goals_data = load_goals_data(goals_file_path)
 
     # Zet de betreffende kolommen om naar numerieke typen, forceer niet-numerieke waarden naar NaN
     data['DoelpuntenVoor'] = pd.to_numeric(data['DoelpuntenVoor'], errors='coerce')
@@ -20,6 +25,17 @@ def control_data(file_path):
     data['Seizoen'] = pd.to_numeric(data['Seizoen'], errors='coerce')
 
     errors = pd.DataFrame()
+
+
+    
+# Checkt voor 0-0 matches met doelpunten
+    zero_zero_matches = data[(data['DoelpuntenVoor'] == 0) & (data['DoelpuntenTegen'] == 0)]
+    zero_zero_goals = goals_data[goals_data['Match_ID'].isin(zero_zero_matches['Match_ID'])] # Corrected 'Match_ID' to 'MatchID'
+
+    zero_zero_matches_with_goals = zero_zero_matches.merge(goals_data, on='Match_ID', how='left')
+    zero_zero_matches_with_goals = zero_zero_matches_with_goals[zero_zero_matches_with_goals['DoelpuntenVoor'].notna() | zero_zero_matches_with_goals['DoelpuntenTegen'].notna()]
+    errors = pd.concat([errors, zero_zero_matches_with_goals.assign(FoutType='Doelpunten voor 0-0 matchen')])
+
 
     # Bereken punten op basis van het driepuntensysteem voor wedstrijden na 1995
     data.loc[data['Seizoen'] >= 1995, 'CalculatedPunten'] = data.loc[data['Seizoen'] >= 1995].apply(lambda row: 3 if row['AantalGewonnen'] > row['AantalVerloren'] else (1 if row['AantalGewonnen'] == row['AantalVerloren'] else 0), axis=1)
@@ -69,6 +85,7 @@ file_path_controlled_data = 'controlled_data.csv'
 file_path_errors_data = 'errors_stand.csv'
 # Uitvoeren van de functies
 controlled_data, errors = control_data(file_path_cleaned_data, file_path_doelpunten)
+
 
 # Opslaan van gecontroleerde data en errors
 controlled_data.to_csv(file_path_controlled_data, index=False, header=False, sep=';')
