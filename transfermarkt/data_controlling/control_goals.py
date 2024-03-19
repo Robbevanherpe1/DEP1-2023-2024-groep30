@@ -31,7 +31,7 @@ invalid_goals_output.to_csv('invalid_goals.csv', index=False)
 date_mismatches_output = date_mismatches.drop(columns=['GoalDateTime', 'DateTime', 'TimeDelta'])
 date_mismatches_output.to_csv('date_mismatches_goals.csv', index=False)
 
-merged_thuisploeg = pd.merge(wedstrijden_df, stamnummer_df, left_on='Thuisploeg_stamnummer', right_on='stamnummer', how='left')
+merged_thuisploeg = pd.merge(doelpunten_df, stamnummer_df, left_on='Thuisploeg_stamnummer', right_on='stamnummer', how='left')
 
 merged_uitploeg = pd.merge(merged_thuisploeg, stamnummer_df, left_on='Uitploeg_stamnummer', right_on='stamnummer', how='left', suffixes=('_thuis', '_uit'))
 
@@ -48,8 +48,8 @@ invalid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] != merged_uitpl
 
 for index, row in invalid_matches.iterrows():
     if row['Thuisploeg'] != row['roepnaam_thuis']:
-        wedstrijden_df.loc[wedstrijden_df['Match_ID'] == row['Match_ID'], 'Thuisploeg'] = row['roepnaam_thuis']
+        doelpunten_df.loc[doelpunten_df['Match_ID'] == row['Match_ID'], 'Thuisploeg'] = row['roepnaam_thuis']
     if row['Uitploeg'] != row['roepnaam_uit']:
-        wedstrijden_df.loc[wedstrijden_df['Match_ID'] == row['Match_ID'], 'Uitploeg'] = row['roepnaam_uit']
+        doelpunten_df.loc[doelpunten_df['Match_ID'] == row['Match_ID'], 'Uitploeg'] = row['roepnaam_uit']
 
-wedstrijden_df.to_csv('valid_matches.csv', index=False)
+doelpunten_df.to_csv('valid_matches.csv', index=False)
