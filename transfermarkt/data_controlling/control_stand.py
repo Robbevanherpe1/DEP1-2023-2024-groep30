@@ -11,6 +11,12 @@ def load_data(file_path, encoding_list=['utf-8', 'ISO-8859-1']):
 
 def control_data(file_path):
     data = load_data(file_path)
+
+    # Zet de betreffende kolommen om naar numerieke typen, forceer niet-numerieke waarden naar NaN
+    data['DoelpuntenVoor'] = pd.to_numeric(data['DoelpuntenVoor'], errors='coerce')
+    data['DoelpuntenTegen'] = pd.to_numeric(data['DoelpuntenTegen'], errors='coerce')
+    data['Doelpuntensaldo'] = pd.to_numeric(data['Doelpuntensaldo'], errors='coerce')
+    
     
     errors = pd.DataFrame()
     
@@ -47,12 +53,12 @@ def control_data(file_path):
 
 # Bestandspaden voor csv-bestanden
 file_path_cleaned_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
-file_path_controlled_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\wedstrijden.csv'
+file_path_controlled_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\klassement.csv'
 file_path_errors_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\data_errors\errors_stand.csv'
 
 # Uitvoeren van de functies
 controlled_data, errors = control_data(file_path_cleaned_data)
 
 # Oplsaan van gecrontroleerde data en errors
-controlled_data.to_csv(file_path_controlled_data, index=False)
+controlled_data.to_csv(file_path_controlled_data, index=False, header=False, sep=';')
 errors.to_csv(file_path_errors_data, index=False)

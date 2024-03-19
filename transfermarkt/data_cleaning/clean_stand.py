@@ -106,4 +106,4 @@ cleaned_data = clean_data(file_path, stamnummer_path)
 
 # Opslaan van de opgeschoonde data
 cleaned_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv',
-                     index=False, header=False, sep=';')
+                     index=False)
