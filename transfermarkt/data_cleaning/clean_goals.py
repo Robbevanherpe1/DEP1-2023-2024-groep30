@@ -94,8 +94,56 @@ def clean_and_process_data(file_path, stamnummer_path):
     df_final.sort_values(by=['Seizoen', 'Speeldag'], inplace=True)
     
     # Save the processed DataFrame
-    output_path = 'goals_clean.csv'
+    output_path = 'combined_output.csv'
     df_final.to_csv(output_path, index=False, header=False, sep=';')
+
+    # Perform additional operations on the combined output
+    df = pd.read_csv(output_path, sep=';', header=None)
+    
+    # Convert the time columns to datetime objects
+    df[3] = pd.to_datetime(df[3], format='%H:%M', errors='coerce')
+    df[10] = pd.to_datetime(df[10], format='%H:%M', errors='coerce')
+    
+    # Calculate the difference between goal time and start match time
+    df['goal_time_diff'] = (df[3] - df[10]).dt.total_seconds() / 60
+    
+    # Update the goal minute if it doesn't match the actual goal time
+    df[13] = df.apply(lambda x: int(x[13]) if pd.isnull(x[10]) or x[12] == x['goal_time_diff'] else int((x[10] + pd.Timedelta(minutes=abs(x[12]))).strftime('%M')), axis=1)
+    
+    # Format the time columns
+    df[3] = df[3].dt.strftime('%H:%M')
+    df[10] = df[10].dt.strftime('%H:%M')
+    
+    # Save the last given row
+    last_row = df.iloc[-1].copy()
+    
+    # Append a new row containing the absolute difference value
+    abs_diff_row = df['goal_time_diff'].abs().tolist()
+    df.loc[len(df)] = df.iloc[0].apply(lambda x: abs_diff_row[0] if pd.isnull(x) else '')
+    df.loc[len(df)-1, 12] = abs_diff_row[0]
+    
+    # Restore the last given row
+    df.iloc[-1] = last_row
+    
+    # Select only the last column
+    last_added_column = df.iloc[:, -1]
+    
+    # Save the last column as a CSV file
+    last_added_column.to_csv("final_output.csv", sep=';', index=False, header=False)
+
+    # Read the first input CSV file
+    df1 = pd.read_csv(output_path, sep=';', header=None)
+
+    # Read the second input CSV file
+    df2 = pd.read_csv("final_output.csv", header=None)
+
+    df2_abs = df2.abs()
+
+    # Replace the values in column 9 of df1 with the absolute values from df2
+    df1[9] = df2_abs[0].astype(str).str.replace('\.0', '', regex=True)
+
+    # Save the updated dataframe to a new CSV file
+    df1.to_csv("clean_goals.csv", sep=';', index=False, header=False)
 
 # File paths
 file_path = 'goals.csv'
