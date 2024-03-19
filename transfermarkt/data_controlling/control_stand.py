@@ -54,5 +54,5 @@ file_path_errors_data = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep3
 controlled_data, errors = control_data(file_path_cleaned_data)
 
 # Oplsaan van gecrontroleerde data en errors
-controlled_data.to_csv(file_path_controlled_data, index=False, sep=';', header=False)
+controlled_data.to_csv(file_path_controlled_data, index=False)
 errors.to_csv(file_path_errors_data, index=False)
