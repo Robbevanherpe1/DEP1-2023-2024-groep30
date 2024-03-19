@@ -1,8 +1,12 @@
 import pandas as pd
 
 # Bestanden inlezen
-wedstrijden_df = pd.read_csv('matches_clean2.csv')
-doelpunten_df = pd.read_csv('goals_clean2.csv')
+wedstrijden_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_matches.csv', sep=',' )
+doelpunten_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_goals.csv' , sep=';')
+stamnummer_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\stamnummers.csv', sep=';')
+print(wedstrijden_df.columns)
+print(wedstrijden_df.columns)
+
 
 # Datum- en tijdstipformaten corrigeren en samenvoegen tot één datetime kolom
 wedstrijden_df['DateTime'] = pd.to_datetime(wedstrijden_df['Datum'] + ' ' + wedstrijden_df['Tijdstip'])
@@ -26,3 +30,26 @@ invalid_goals_output.to_csv('invalid_goals.csv', index=False)
 # Datum mismatches zonder ongewenste kolommen
 date_mismatches_output = date_mismatches.drop(columns=['GoalDateTime', 'DateTime', 'TimeDelta'])
 date_mismatches_output.to_csv('date_mismatches_goals.csv', index=False)
+
+merged_thuisploeg = pd.merge(wedstrijden_df, stamnummer_df, left_on='Thuisploeg_stamnummer', right_on='stamnummer', how='left')
+
+merged_uitploeg = pd.merge(merged_thuisploeg, stamnummer_df, left_on='Uitploeg_stamnummer', right_on='stamnummer', how='left', suffixes=('_thuis', '_uit'))
+
+merged_uitploeg['Thuisploeg'] = merged_uitploeg['club_naam_thuis']
+merged_uitploeg['Uitploeg'] = merged_uitploeg['club_naam_uit']
+
+
+merged_uitploeg.drop(['club_naam_thuis', 'club_naam_uit', 'stamnummer_thuis', 'stamnummer_uit'], axis=1, inplace=True)
+
+# Check for valid matches
+# Ensure both Thuisploeg and Uitploeg match their respective stamnummers
+valid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] == merged_uitploeg['roepnaam_thuis']) & (merged_uitploeg['Uitploeg'] == merged_uitploeg['roepnaam_uit'])]
+invalid_matches = merged_uitploeg[(merged_uitploeg['Thuisploeg'] != merged_uitploeg['roepnaam_thuis']) | (merged_uitploeg['Uitploeg'] != merged_uitploeg['roepnaam_uit'])]
+
+for index, row in invalid_matches.iterrows():
+    if row['Thuisploeg'] != row['roepnaam_thuis']:
+        wedstrijden_df.loc[wedstrijden_df['Match_ID'] == row['Match_ID'], 'Thuisploeg'] = row['roepnaam_thuis']
+    if row['Uitploeg'] != row['roepnaam_uit']:
+        wedstrijden_df.loc[wedstrijden_df['Match_ID'] == row['Match_ID'], 'Uitploeg'] = row['roepnaam_uit']
+
+wedstrijden_df.to_csv('valid_matches.csv', index=False)
