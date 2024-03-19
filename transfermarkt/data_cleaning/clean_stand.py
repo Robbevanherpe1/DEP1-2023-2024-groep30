@@ -23,6 +23,14 @@ def clean_data(file_path, stamnummer_path):
     except UnicodeDecodeError:
         data = pd.read_csv(file_path, encoding='ISO-8859-1')
     
+    # Ensure 'Seizoen' column is a string to avoid any conversion issues
+    data['Seizoen'] = data['Seizoen'].astype(str)
+
+    # Remove rows where 'Seizoen' cannot be converted to an integer
+    # This step tries to convert 'Seizoen' to integer and keeps only the rows where the conversion is successful
+    data = data[data['Seizoen'].str.split('-', expand=True)[0].str.isdigit()]
+
+    # Now safely convert 'Seizoen' to integer
     # Seizoenbegin halen uit Seizoen
     seizoen_split = data['Seizoen'].str.split('-', expand=True)
     data['Seizoen'] = seizoen_split[0].astype(int)
