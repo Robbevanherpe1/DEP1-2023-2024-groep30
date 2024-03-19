@@ -68,7 +68,7 @@ file_path_doelpunten = 'clean_goals.csv' # Corrected to be a file path string
 file_path_controlled_data = 'controlled_data.csv'
 file_path_errors_data = 'errors_stand.csv'
 # Uitvoeren van de functies
-controlled_data, errors = control_data(file_path_cleaned_data)
+controlled_data, errors = control_data(file_path_cleaned_data, file_path_doelpunten)
 
 # Opslaan van gecontroleerde data en errors
 controlled_data.to_csv(file_path_controlled_data, index=False, header=False, sep=';')
