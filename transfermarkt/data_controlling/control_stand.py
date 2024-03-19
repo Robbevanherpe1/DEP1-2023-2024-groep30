@@ -24,37 +24,17 @@ def control_data(file_path,goals_file_path):
     data['Doelpuntensaldo'] = pd.to_numeric(data['Doelpuntensaldo'], errors='coerce')
     data['Seizoen'] = pd.to_numeric(data['Seizoen'], errors='coerce')
 
+    # Maak een DataFrame om fouten te registreren
     errors = pd.DataFrame()
-
-
     
-# Checkt voor 0-0 matches met doelpunten
-    zero_zero_matches = data[(data['DoelpuntenVoor'] == 0) & (data['DoelpuntenTegen'] == 0)]
-    zero_zero_goals = goals_data[goals_data['Match_ID'].isin(zero_zero_matches['Match_ID'])] # Corrected 'Match_ID' to 'MatchID'
-
-    zero_zero_matches_with_goals = zero_zero_matches.merge(goals_data, on='Match_ID', how='left')
-    zero_zero_matches_with_goals = zero_zero_matches_with_goals[zero_zero_matches_with_goals['DoelpuntenVoor'].notna() | zero_zero_matches_with_goals['DoelpuntenTegen'].notna()]
-    errors = pd.concat([errors, zero_zero_matches_with_goals.assign(FoutType='Doelpunten voor 0-0 matchen')])
-
-
-    # Bereken punten op basis van het driepuntensysteem voor wedstrijden na 1995
-    data.loc[data['Seizoen'] >= 1995, 'CalculatedPunten'] = data.loc[data['Seizoen'] >= 1995].apply(lambda row: 3 if row['AantalGewonnen'] > row['AantalVerloren'] else (1 if row['AantalGewonnen'] == row['AantalVerloren'] else 0), axis=1)
-
-    # Bereken punten voor wedstrijden voor 1995
-    data.loc[data['Seizoen'] < 1995, 'CalculatedPunten'] = data.loc[data['Seizoen'] < 1995].apply(lambda row: 2 if row['AantalGewonnen'] > row['AantalVerloren'] else (1 if row['AantalGewonnen'] == row['AantalVerloren'] else 0), axis=1)
-
-    # Controleer of de puntenkolom overeenkomt met de berekende punten
-    points_mismatch = data[data['Doelpuntensaldo'] != data['CalculatedPunten']]
-    if not points_mismatch.empty:
-        errors = pd.concat([errors, points_mismatch.assign(FoutType='Punten kloppen niet')])
-
     # Bestaande condities checks
     conditions = {
         'MeerWedstrijdenDanSpeeldagen': data['Speeldag'] >= data['AantalGespeeld'],
         'CorrectDoelpuntensaldo': (data['DoelpuntenVoor'] - data['DoelpuntenTegen']) == data['Doelpuntensaldo'],
         'AantalGespeeldCorrect': data['AantalGespeeld'] == (data['AantalGewonnen'] + data['AantalGelijk'] + data['AantalVerloren']),
         'Links_TweepuntensysteemCorrect': data['Links_Tweepuntensysteem'] == (data['AantalGewonnen'] * 2 + data['AantalGelijk']),
-        'Rechts_TweepuntensysteemCorrect': data['Rechts_Tweepuntensysteem'] == (data['AantalVerloren'] * 2 + data['AantalGelijk'])
+        'Rechts_TweepuntensysteemCorrect': data['Rechts_Tweepuntensysteem'] == (data['AantalVerloren'] * 2 + data['AantalGelijk']),
+        'DriepuntensysteemCorrect': data['Driepuntensysteem'] == (data['AantalGewonnen'] * 3 + data['AantalGelijk']),
     }
 
     # Controleer op fouten en registreer deze.
@@ -69,7 +49,7 @@ def control_data(file_path,goals_file_path):
     )
 
     # Registreer fouten gerelateerd aan onjuiste stand
-    validation_errors = data[~data['StandCorrect']].groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType='KLASSEMENT INCORRECT')
+    validation_errors = data[~data['StandCorrect']].groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType='klassement incorrect')
     errors = pd.concat([errors, validation_errors])
 
     # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
@@ -79,14 +59,14 @@ def control_data(file_path,goals_file_path):
     return data.drop(columns=columns_to_remove, errors='ignore'), errors
 
 # Bestandspaden voor csv-bestanden
-file_path_cleaned_data = 'clean_stand.csv' # Corrected to be a file path string
-file_path_doelpunten = 'clean_goals.csv' # Corrected to be a file path string
-file_path_controlled_data = 'controlled_data.csv'
-file_path_errors_data = 'errors_stand.csv'
-# Uitvoeren van de functies
-controlled_data, errors = control_data(file_path_cleaned_data, file_path_doelpunten)
+file_path_cleaned_stand = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\stand_clean.csv'
+file_path_cleaned_goals = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\goals_clean.csv'
+file_path_controlled_stand = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\stand_controlled.csv'
+file_path_errors_stand = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\data_errors\errors_stand.csv'
 
+# Uitvoeren van de functies
+controlled_data, errors = control_data(file_path_cleaned_stand, file_path_cleaned_goals)
 
 # Opslaan van gecontroleerde data en errors
-controlled_data.to_csv(file_path_controlled_data, index=False, header=False, sep=';')
-errors.to_csv(file_path_errors_data, index=False)
+controlled_data.to_csv(file_path_controlled_stand, index=False, header=False, sep=';')
+errors.to_csv(file_path_errors_stand, index=False)
