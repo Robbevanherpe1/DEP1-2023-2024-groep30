@@ -126,10 +126,39 @@ def clean_data(file_path, stamnummer_path):
     return data
 
 # File paths
-file_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\scraped_data\matches.csv'
-stamnummer_path = r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\stamnummer\data\stamnummer2.csv'
+file_path = 'matches.csv'
+stamnummer_path = 'stamnummer2.csv'
 
 cleaned_data = clean_data(file_path, stamnummer_path)
 
 # Save the cleaned data to a new CSV
-cleaned_data.to_csv(r'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\matches_clean.csv', index=False)
+cleaned_data.to_csv('matches_clean.csv', index=False)
+
+
+
+
+  # Code from the second file
+df = pd.read_csv('matches_clean.csv')
+
+  # Data preprocessing steps
+df['Seizoen'] = df['Seizoen'].apply(lambda x: x.split('-')[0])
+df['Datum'] = pd.to_datetime(df['Datum']).dt.strftime('%Y-%m-%d')
+
+  # Remove seconds from 'Tijdstip'
+df['Tijdstip'] = df['Tijdstip'].apply(lambda x: x.split(':')[0] + ':' + x.split(':')[1])
+
+  # Ensure the data is sorted by Match_ID and GoalTijdstip to accurately track score changes
+df.sort_values(by=['Match_ID'], inplace=True)
+
+  # Selecting and reordering the necessary columns for final output
+columns_order = ['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Match_ID', 'Thuisploeg_stamnummer', 'Thuisploeg_roepnaam', 'Uitploeg_stamnummer', 'Uitploeg_roepnaam', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg']
+df_final = df[columns_order].copy()
+
+  # Now, sort df_final by 'Seizoen' and 'Speeldag' before saving
+df_final.sort_values(by=['Seizoen', 'Speeldag'], inplace=True)
+
+  # Define the output path where the CSV file will be saved
+output_path = 'wedstrijden.csv'
+
+  # Save the DataFrame to CSV with index, headers included, separated by semicolons
+df_final.to_csv(output_path, index=False, header=False, sep=';')
