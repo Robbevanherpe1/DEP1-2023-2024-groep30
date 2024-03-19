@@ -31,12 +31,23 @@ def clean_data(file_path, stamnummer_path):
     doelpunten_split = data['Doelpunten'].str.split(':', expand=True)
     data['DoelpuntenVoor'] = doelpunten_split[0]
     data['DoelpuntenTegen'] = doelpunten_split[1]
-    
-    # Punten twee- en driepuntensysteem berekenen
-    data['Links_Tweepuntensysteem'] = data['AantalGewonnen'] * 2 + data['AantalGelijk']
-    data['Rechts_Tweepuntensysteem'] = data['AantalVerloren'] * 2 + data['AantalGelijk']
-    data['Driepuntensysteem'] = data['AantalGewonnen'] * 3 + data['AantalGelijk']
 
+    # Berekenen tweepuntensysteem
+    if ":" in data["Punten"]:
+        # Splits de 'punten' kolom in twee waarden gebaseerd op de ":" en converteer ze naar integers
+        punten_split = data['Punten'].str.split(':', expand=True)
+        
+        # Bereken Links_Tweepuntensysteem en Rechts_Tweepuntensysteem op basis van de gesplitste waarden
+        data['Links_Tweepuntensysteem'] = punten_split[0].astype(int)
+        data['Rechts_Tweepuntensysteem'] = punten_split[1].astype(int)
+    else:
+        # Bereken Links_Tweepuntensysteem en Rechts_Tweepuntensysteem
+        data['Links_Tweepuntensysteem'] = data['AantalGewonnen'] * 2 + data['AantalGelijk']
+        data['Rechts_Tweepuntensysteem'] = data['AantalVerloren'] * 2 + data['AantalGelijk']
+
+    # Berekenen driepuntensysteem
+    data['Driepuntensysteem'] = data['AantalGewonnen'] * 3 + data['AantalGelijk']
+    
     # Lees de stamnummer data in
     stamnummer_data = pd.read_csv(stamnummer_path, encoding='utf-8')
     stamnummer_names = stamnummer_data['Ploegnaam'].tolist()
