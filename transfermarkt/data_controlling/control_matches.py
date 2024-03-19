@@ -3,8 +3,8 @@ from sklearn.ensemble import IsolationForest
 import pandas as pd
 
 #Laad de dataset
-matches_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_matches.csv', sep=',', header=0)
-stamnummer_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\stamnummers.csv', sep=';', header=0)
+matches_df = pd.read_csv(r'C:\DEP1-2023-2024-groep30\transfermarkt\data\cleaned_data\wedstrijden.csv', sep=',', header=0)
+stamnummer_df = pd.read_csv(r'C:\DEP1-2023-2024-groep30\stamnummer\data\stamnummer2.csv', sep=';', header=0)
 # Checkt voor de juiste data types
 expected_dtypes = {
     'Seizoen': 'int64',
@@ -124,11 +124,15 @@ matches_df.to_csv('valid_matches.csv', index=False)
 new_columns_order = ['Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Match_ID', 'Thuisploeg_stamnummer', 'Thuisploeg_roepnaam', 'Uitploeg_stamnummer', 'Uitploeg_roepnaam', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg']
 reordered_df = matches_df[new_columns_order]
 
-reordered_df.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\reordered_matches.csv', sep=',', index=False)
+# Verwijder alle kolomnamen 
+
+
+
+reordered_df.to_csv(r'C:\DEP1-2023-2024-groep30\transfermarkt\data\controlled_data\matches_controlled.csv', sep=';', index=False)
 # Save the filtered DataFrames to CSV files
-invalid_results.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\invalid_results.csv', index=False)
-duplicate_match_ids.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\duplicate_match_ids.csv', index=False)
-inconsistent_teams.to_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\inconsistent_teams.csv', index=False)
+invalid_results.to_csv(r'C:\DEP1-2023-2024-groep30\transfermarkt\data\data_errors\invalidresults.csv', index=False)
+duplicate_match_ids.to_csv(r'C:\DEP1-2023-2024-groep30\transfermarkt\data\data_errors\duplicate_matches.csv', index=False)
+inconsistent_teams.to_csv(r'C:\DEP1-2023-2024-groep30\transfermarkt\data\data_errors\inconsistent_teams.csv', index=False)
 
 # For checks that require logical conditions, we'll keep the traditional approach
 # For example, checking if a value is less than 0 or if a column's dtype is not 'int64'
