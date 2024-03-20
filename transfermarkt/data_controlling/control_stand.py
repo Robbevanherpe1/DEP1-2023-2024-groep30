@@ -24,8 +24,7 @@ def control_data(file_path,goals_file_path):
     data['Doelpuntensaldo'] = pd.to_numeric(data['Doelpuntensaldo'], errors='coerce')
     data['Seizoen'] = pd.to_numeric(data['Seizoen'], errors='coerce')
 
-    # Maak een DataFrame om fouten te registreren
-    errors = pd.DataFrame()
+
     
     # Bestaande condities checks
     conditions = {
@@ -40,16 +39,21 @@ def control_data(file_path,goals_file_path):
     # Controleer op fouten en registreer deze.
     for error_type, condition in conditions.items():
         error_data = data[~condition]
+        errors = pd.DataFrame()
         errors = pd.concat([errors, error_data.groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType=error_type)])
 
-    # Corrigeer stand en controleer op fouten
-    data = data.assign(
-        CorrectStand=data.groupby(['Seizoen', 'Speeldag']).cumcount() + 1,
-        StandCorrect=lambda x: x['Stand'] == x['CorrectStand']
-    )
+    # Sorteer data voor juiste klassement berekening
+    data_sorted = data.sort_values(by=['Seizoen', 'Speeldag', 'Driepuntensysteem', 'AantalGewonnen', 'Doelpuntensaldo', 'DoelpuntenVoor', 
+                                       'DoelpuntenVoor'], ascending=[True, True, False, False, False, False, False])
+
+    # Bereken de juiste stand
+    data_sorted['CalculatedRank'] = data_sorted.groupby(['Seizoen', 'Speeldag']).cumcount() + 1
+
+    # Controleer of de stand overeenkomt met de berekende stand
+    data_sorted['StandCorrect'] = data_sorted['Stand'] == data_sorted['CalculatedRank']
 
     # Registreer fouten gerelateerd aan onjuiste stand
-    validation_errors = data[~data['StandCorrect']].groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType='klassement incorrect')
+    validation_errors = data_sorted[~data_sorted['StandCorrect']].groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType='klassement incorrect')
     errors = pd.concat([errors, validation_errors])
 
     # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
