@@ -44,4 +44,4 @@
 ## Connecteren met SQL Server
 
 - ssh -L 1500:localhost:1433 10.11.11.30
-- ssh -vv -L 1500:localhost:1433 vichogent.be -o ConnectTimeout=100 -p 40197
+- ssh -vv -L 1500:127.0.0.1:1433 vichogent.be -o ConnectTimeout=100 -p 40197
