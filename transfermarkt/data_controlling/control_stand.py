@@ -23,8 +23,6 @@ def control_data(file_path,goals_file_path):
     data['DoelpuntenTegen'] = pd.to_numeric(data['DoelpuntenTegen'], errors='coerce')
     data['Doelpuntensaldo'] = pd.to_numeric(data['Doelpuntensaldo'], errors='coerce')
     data['Seizoen'] = pd.to_numeric(data['Seizoen'], errors='coerce')
-
-
     
     # Bestaande condities checks
     conditions = {
