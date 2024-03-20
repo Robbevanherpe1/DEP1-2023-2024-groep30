@@ -38,7 +38,8 @@ def control_data(file_path,goals_file_path):
     for error_type, condition in conditions.items():
         error_data = data[~condition]
         errors = pd.DataFrame()
-        errors = pd.concat([errors, error_data.groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType=error_type)])
+        errors = pd.concat([errors, error_data.groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten')
+                            .assign(FoutType=error_type)])
 
     # Sorteer data voor juiste klassement berekening
     data_sorted = data.sort_values(by=['Seizoen', 'Speeldag', 'Driepuntensysteem', 'AantalGewonnen', 'Doelpuntensaldo', 'DoelpuntenVoor', 
@@ -51,7 +52,8 @@ def control_data(file_path,goals_file_path):
     data_sorted['StandCorrect'] = data_sorted['Stand'] == data_sorted['CalculatedRank']
 
     # Registreer fouten gerelateerd aan onjuiste stand
-    validation_errors = data_sorted[~data_sorted['StandCorrect']].groupby(['Seizoen', 'Speeldag', 'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType='klassement incorrect')
+    validation_errors = data_sorted[~data_sorted['StandCorrect']].groupby(['Seizoen', 'Speeldag',
+                            'Roepnaam']).size().reset_index(name='AantalFouten').assign(FoutType='klassement incorrect')
     errors = pd.concat([errors, validation_errors])
 
     # Lijst van kolommen om te verwijderen uit de uiteindelijke csv
