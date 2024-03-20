@@ -4,8 +4,6 @@ import pandas as pd
 wedstrijden_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_matches.csv', sep=',' )
 doelpunten_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\clean_goals.csv' , sep=';')
 stamnummer_df = pd.read_csv(r'C:\Users\ayman\OneDrive\Bureaublad\Backup\stamnummers.csv', sep=';')
-print(wedstrijden_df.columns)
-print(wedstrijden_df.columns)
 
 
 # Datum- en tijdstipformaten corrigeren en samenvoegen tot één datetime kolom
