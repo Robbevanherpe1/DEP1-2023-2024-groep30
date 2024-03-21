@@ -46,3 +46,13 @@
 - ssh -L 1500:localhost:1433 10.11.11.30
 - ssh -vv -L 1500:localhost:1433 vichogent.be -o ConnectTimeout=100 -p 40197
 - sqlcmd -H "127.0.0.1,1500" -U sa -P VMdepgroup30
+
+## Het schedulen van de scripts
+
+### De weddenschappen
+- nano fetch_bets.py
+- chmod +x fetch_bets.py
+
+### De wedstrijduitslagen
+- nano fetch_wedstrijden.py
+- chmod +x fetch_wedstrijden.py
