@@ -56,3 +56,15 @@
 ### De wedstrijduitslagen
 - nano fetch_wedstrijden.py
 - chmod +x fetch_wedstrijden.py
+
+### Crontab
+- rpm -q cronie
+- sudo yum install cronie
+- sudo systemctl status crond.service
+
+- nano c.txt
+- crontab < c.txt
+- crontab -l
+
+0 0 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_bets.py
+0 0 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_wedstrijden.py
