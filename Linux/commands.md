@@ -41,6 +41,108 @@
 
 - QUIT
 
+### Create DWH
+CREATE DATABASE DEP_DWH_G30;
+GO
+
+USE DEP_DWH_G30;
+GO
+
+DROP TABLE IF EXISTS factwedstrijdscore, factweddenschap, factklassement;
+DROP TABLE IF EXISTS dimkans, dimteam, dimtime, dimwedstrijd;
+DROP TABLE IF EXISTS dimdate;
+GO
+
+CREATE TABLE DimKans(KansKey INT PRIMARY KEY IDENTITY(1,1),OddsWaarde DECIMAL(5,2) NOT NULL);
+GO
+
+CREATE TABLE DimTeam(TeamKey INT PRIMARY KEY IDENTITY(1,1),Stamnummer INT NOT NULL,PloegNaam NVARCHAR(50) NOT NULL);
+GO
+
+CREATE TABLE DimDate(DateKey INT PRIMARY KEY IDENTITY(1,1),VolledigeDatumAlternatieveSleutel NVARCHAR(50) NOT NULL,
+    Datum DATE NOT NULL,DagVanDeMaand INT NOT NULL,DagVanHetJaar INT NOT NULL,WeekVanHetJaar INT NOT NULL,
+    DagVanDeWeekInMaand INT NOT NULL,DagVanDeWeekInJaar INT NOT NULL,Maand INT NOT NULL,Kwartaal INT NOT NULL,
+    Jaar INT NOT NULL,EngelseDag NVARCHAR(50) NOT NULL,EngelseMaand NVARCHAR(50) NOT NULL,EngelsJaar NVARCHAR(50) NOT NULL,
+    DDMMJJJJ NVARCHAR(50) NOT NULL);
+GO
+
+CREATE TABLE DimTime(TimeKey INT PRIMARY KEY IDENTITY(1,1),Uur INT NOT NULL,Minuten INT NOT NULL,VolledigeTijd TIME NOT NULL
+);
+GO
+
+CREATE TABLE DimWedstrijd(WedstrijdKey INT PRIMARY KEY IDENTITY(1,1),MatchID INT NOT NULL);
+GO
+
+CREATE TABLE FactWedstrijdScore(
+    ScoreID INT PRIMARY KEY IDENTITY(1,1),
+    TeamKeyUit INT NOT NULL,
+    TeamKeyThuis INT NOT NULL,
+    WedstrijdKey INT NOT NULL,
+    DateKey INT NOT NULL,
+    TimeKey INT NOT NULL,
+    ScoreThuis INT NOT NULL,
+    ScoreUit INT NOT NULL,
+    EindscoreThuis INT NOT NULL,
+    EindscoreUit INT NOT NULL,
+    ScorendePloegKey INT NOT NULL,
+    FOREIGN KEY (TeamKeyUit) REFERENCES DimTeam(TeamKey),
+    FOREIGN KEY (TeamKeyThuis) REFERENCES DimTeam(TeamKey),
+    FOREIGN KEY (WedstrijdKey) REFERENCES DimWedstrijd(WedstrijdKey),
+    FOREIGN KEY (DateKey) REFERENCES DimDate(DateKey),
+    FOREIGN KEY (TimeKey) REFERENCES DimTime(TimeKey)
+);
+GO
+
+CREATE TABLE FactWeddenschap(
+    WeddenschapID INT PRIMARY KEY IDENTITY(1,1),
+    TeamKeyUit INT NOT NULL,
+    TeamKeyThuis INT NOT NULL,
+    WedstrijdKey INT NOT NULL,
+    KansKey INT NOT NULL,
+    DateKeyScrape INT NOT NULL,
+    TimeKeyScrape INT NOT NULL,
+    DateKeySpeeldatum INT NOT NULL,
+    TimeKeySpeeldatum INT NOT NULL,
+    OddsThuisWint DECIMAL(5,2),
+    OddsUitWint DECIMAL(5,2),
+    OddsGelijk DECIMAL(5,2),
+    OddsBeideTeamsScoren DECIMAL(5,2),
+    OddsNietBeideTeamsScoren DECIMAL(5,2),
+    OddsMeerDanXGoals DECIMAL(5,2),
+    OddsMinderDanXGoals DECIMAL(5,2),
+    FOREIGN KEY (TeamKeyUit) REFERENCES DimTeam(TeamKey),
+    FOREIGN KEY (TeamKeyThuis) REFERENCES DimTeam(TeamKey),
+    FOREIGN KEY (WedstrijdKey) REFERENCES DimWedstrijd(WedstrijdKey),
+    FOREIGN KEY (KansKey) REFERENCES DimKans(KansKey),
+    FOREIGN KEY (DateKeyScrape) REFERENCES DimDate(DateKey),
+    FOREIGN KEY (TimeKeyScrape) REFERENCES DimTime(TimeKey),
+    FOREIGN KEY (DateKeySpeeldatum) REFERENCES DimDate(DateKey),
+    FOREIGN KEY (TimeKeySpeeldatum) REFERENCES DimTime(TimeKey)
+);
+GO
+
+CREATE TABLE FactKlassement(
+    KlassementKey INT PRIMARY KEY IDENTITY(1,1),
+    BeginDateKey INT NOT NULL,
+    EindeDateKey INT NOT NULL,
+    TeamKey INT NOT NULL,
+    Stand INT NOT NULL,
+    AantalGespeeld INT NOT NULL,
+    AantalGewonnen INT NOT NULL,
+    AantalGelijk INT NOT NULL,
+    AantalVerloren INT NOT NULL,
+    DoelpuntenVoor INT NOT NULL,
+    DoelpuntenTegen INT NOT NULL,
+    DoelpuntenSaldo INT NOT NULL,
+    PuntenVoor INT NOT NULL,
+    PuntenTegen INT NOT NULL,
+    FOREIGN KEY (BeginDateKey) REFERENCES DimDate(DateKey),
+    FOREIGN KEY (EindeDateKey) REFERENCES DimDate(DateKey),
+    FOREIGN KEY (TeamKey) REFERENCES DimTeam(TeamKey)
+);
+GO
+
+
 ## Connecteren met SQL Server
 
 - ssh -L 1500:localhost:1433 10.11.11.30
