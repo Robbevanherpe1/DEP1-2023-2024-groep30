@@ -41,111 +41,11 @@
 
 - QUIT
 
-### Create DWH
-CREATE DATABASE DEP_DWH_G30;
-GO
-
-USE DEP_DWH_G30;
-GO
-
-DROP TABLE IF EXISTS factwedstrijdscore, factweddenschap, factklassement;
-DROP TABLE IF EXISTS dimkans, dimteam, dimtime, dimwedstrijd;
-DROP TABLE IF EXISTS dimdate;
-GO
-
-CREATE TABLE DimKans(KansKey INT PRIMARY KEY IDENTITY(1,1),OddsWaarde DECIMAL(5,2) NOT NULL);
-GO
-
-CREATE TABLE DimTeam(TeamKey INT PRIMARY KEY IDENTITY(1,1),Stamnummer INT NOT NULL,PloegNaam NVARCHAR(50) NOT NULL);
-GO
-
-CREATE TABLE DimDate(DateKey INT PRIMARY KEY IDENTITY(1,1),VolledigeDatumAlternatieveSleutel NVARCHAR(50) NOT NULL,
-    Datum DATE NOT NULL,DagVanDeMaand INT NOT NULL,DagVanHetJaar INT NOT NULL,WeekVanHetJaar INT NOT NULL,
-    DagVanDeWeekInMaand INT NOT NULL,DagVanDeWeekInJaar INT NOT NULL,Maand INT NOT NULL,Kwartaal INT NOT NULL,
-    Jaar INT NOT NULL,EngelseDag NVARCHAR(50) NOT NULL,EngelseMaand NVARCHAR(50) NOT NULL,EngelsJaar NVARCHAR(50) NOT NULL,
-    DDMMJJJJ NVARCHAR(50) NOT NULL);
-GO
-
-CREATE TABLE DimTime(TimeKey INT PRIMARY KEY IDENTITY(1,1),Uur INT NOT NULL,Minuten INT NOT NULL,VolledigeTijd TIME NOT NULL
-);
-GO
-
-CREATE TABLE DimWedstrijd(WedstrijdKey INT PRIMARY KEY IDENTITY(1,1),MatchID INT NOT NULL);
-GO
-
-CREATE TABLE FactWedstrijdScore(
-    ScoreID INT PRIMARY KEY IDENTITY(1,1),
-    TeamKeyUit INT NOT NULL,
-    TeamKeyThuis INT NOT NULL,
-    WedstrijdKey INT NOT NULL,
-    DateKey INT NOT NULL,
-    TimeKey INT NOT NULL,
-    ScoreThuis INT NOT NULL,
-    ScoreUit INT NOT NULL,
-    EindscoreThuis INT NOT NULL,
-    EindscoreUit INT NOT NULL,
-    ScorendePloegKey INT NOT NULL,
-    FOREIGN KEY (TeamKeyUit) REFERENCES DimTeam(TeamKey),
-    FOREIGN KEY (TeamKeyThuis) REFERENCES DimTeam(TeamKey),
-    FOREIGN KEY (WedstrijdKey) REFERENCES DimWedstrijd(WedstrijdKey),
-    FOREIGN KEY (DateKey) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (TimeKey) REFERENCES DimTime(TimeKey)
-);
-GO
-
-CREATE TABLE FactWeddenschap(
-    WeddenschapID INT PRIMARY KEY IDENTITY(1,1),
-    TeamKeyUit INT NOT NULL,
-    TeamKeyThuis INT NOT NULL,
-    WedstrijdKey INT NOT NULL,
-    KansKey INT NOT NULL,
-    DateKeyScrape INT NOT NULL,
-    TimeKeyScrape INT NOT NULL,
-    DateKeySpeeldatum INT NOT NULL,
-    TimeKeySpeeldatum INT NOT NULL,
-    OddsThuisWint DECIMAL(5,2),
-    OddsUitWint DECIMAL(5,2),
-    OddsGelijk DECIMAL(5,2),
-    OddsBeideTeamsScoren DECIMAL(5,2),
-    OddsNietBeideTeamsScoren DECIMAL(5,2),
-    OddsMeerDanXGoals DECIMAL(5,2),
-    OddsMinderDanXGoals DECIMAL(5,2),
-    FOREIGN KEY (TeamKeyUit) REFERENCES DimTeam(TeamKey),
-    FOREIGN KEY (TeamKeyThuis) REFERENCES DimTeam(TeamKey),
-    FOREIGN KEY (WedstrijdKey) REFERENCES DimWedstrijd(WedstrijdKey),
-    FOREIGN KEY (KansKey) REFERENCES DimKans(KansKey),
-    FOREIGN KEY (DateKeyScrape) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (TimeKeyScrape) REFERENCES DimTime(TimeKey),
-    FOREIGN KEY (DateKeySpeeldatum) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (TimeKeySpeeldatum) REFERENCES DimTime(TimeKey)
-);
-GO
-
-CREATE TABLE FactKlassement(
-    KlassementKey INT PRIMARY KEY IDENTITY(1,1),
-    BeginDateKey INT NOT NULL,
-    EindeDateKey INT NOT NULL,
-    TeamKey INT NOT NULL,
-    Stand INT NOT NULL,
-    AantalGespeeld INT NOT NULL,
-    AantalGewonnen INT NOT NULL,
-    AantalGelijk INT NOT NULL,
-    AantalVerloren INT NOT NULL,
-    DoelpuntenVoor INT NOT NULL,
-    DoelpuntenTegen INT NOT NULL,
-    DoelpuntenSaldo INT NOT NULL,
-    PuntenVoor INT NOT NULL,
-    PuntenTegen INT NOT NULL,
-    FOREIGN KEY (BeginDateKey) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (EindeDateKey) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (TeamKey) REFERENCES DimTeam(TeamKey)
-);
-GO
-
 ## Connecteren met SQL Server
 
 - ssh -L 1500:localhost:1433 10.11.11.30
 - ssh -vv -L 1500:localhost:1433 vichogent.be -o ConnectTimeout=100 -p 40197
+- sqlcmd -H "127.0.0.1,1500" -U sa -P VMdepgroup30
 
 ## Het schedulen van de scripts
 
@@ -168,3 +68,60 @@ GO
 
 0 0 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_bets.py
 0 0 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_wedstrijden.py
+
+#### Kafka 
+
+
+## 1. Java Installeren
+
+1. **Download de Java LTS-versie**: Ga naar de [officiële Oracle Java downloadpagina](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) en download de LTS-versie voor je systeem.
+
+2. **Installeer Java**: Volg de instructies op de downloadpagina om Java te installeren.
+
+3. **Controleer de installatie**: Open een Command Prompt en voer het volgende commando uit om te controleren of Java correct is geïnstalleerd:
+powershell java -version
+
+Je zou de versie van de geïnstalleerde Java moeten zien.
+2. Apache Kafka Installeren
+## 2. Apache Kafka Installeren
+
+1. **Download Apache Kafka**: Ga naar de [Apache Kafka downloadpagina](https://kafka.apache.org/downloads) en download de nieuwste versie.
+
+2. **Unzip Kafka**: Unzip het gedownloade bestand naar een gewenste locatie.
+
+3. **Start ZooKeeper**: Apache Kafka gebruikt ZooKeeper voor clustercoördinatie. Start ZooKeeper met het volgende commando:
+powershell .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+   Laat dit commando draaien in een venster.
+
+4. **Start Kafka Broker**: Open een nieuw Command Prompt of PowerShell-venster en start de Kafka broker met het volgende commando:
+powershell .\bin\windows\kafka-server-start.bat .\config\server.properties
+
+Laat dit commando ook draaien in een venster.
+3. Topics Aanmaken
+## 3. Topics Aanmaken
+
+Nu Kafka en ZooKeeper draaien, kun je topics aanmaken.
+
+1. **Open een nieuw Command Prompt of PowerShell-venster**: Dit is nodig omdat we de Kafka broker en ZooKeeper in de achtergrond laten draaien.
+
+2. **Maak de topics aan**: Gebruik het volgende commando om de twee gevraagde topics aan te maken:
+powershell .\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic oweddenschap_winstkansen .\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic owedstrijduitslag
+
+4. Controleren van Berichten in een Topic
+## 4. Controleren van Berichten in een Topic
+
+Om te controleren hoeveel berichten er momenteel in een topic staan, kun je het `kafka-console-consumer` commando gebruiken. Dit commando leest berichten van een topic en toont ze in de terminal.
+
+Voorbeeld om berichten van de `oweddenschap_winstkansen` topic te lezen:
+
+powershell .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic oweddenschap_winstkansen --from-beginning
+
+
+De optie `--from-beginning` zorgt ervoor dat alle berichten in de topic worden gelezen, vanaf het begin. Als je alleen de nieuwste berichten wilt lezen, kun je deze optie weglaten.
+Let op
+## Let op
+
+- Zorg ervoor dat je de juiste versies van Java en Apache Kafka gebruikt die compatibel zijn met elkaar.
+- De commando's kunnen variëren afhankelijk van je specifieke systeemconfiguratie en de versies van de software die je gebruikt.
+- Voor productieomgevingen is het aanbevolen om Kafka en ZooKeeper te configureren voor hoge beschikbaarheid en veiligheid.
