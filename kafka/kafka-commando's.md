@@ -49,8 +49,3 @@ powershell .\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost
 
 De optie `--from-beginning` zorgt ervoor dat alle berichten in de topic worden gelezen, vanaf het begin. Als je alleen de nieuwste berichten wilt lezen, kun je deze optie weglaten.
 Let op
-## Let op
-
-- Zorg ervoor dat je de juiste versies van Java en Apache Kafka gebruikt die compatibel zijn met elkaar.
-- De commando's kunnen variëren afhankelijk van je specifieke systeemconfiguratie en de versies van de software die je gebruikt.
-- Voor productieomgevingen is het aanbevolen om Kafka en ZooKeeper te configureren voor hoge beschikbaarheid en veiligheid.
