@@ -150,27 +150,3 @@ insert_dim_kansen_values()
 # Laad data in vanuit de opgegeven CSV bestanden naar de overeenstemmende tabellen
 # load_data_from_csv_list(csv_file_paths) TO DO 
 
-def load_data_from_csv_list(csv_file_paths):
-    session = Session()
-    try:
-        for file_path in csv_file_paths:
-            # Lees het CSV-bestand met Pandas
-            df = pd.read_csv(file_path)
-            
-            # Bepaal de tabelnaam op basis van het bestandspath
-            table_name = os.path.basename(file_path).split('.')[0] # Haal de bestandsnaam zonder extensie
-            table = Table(table_name, metadata, autoload_with=engine)
-            
-            # Converteer de DataFrame naar een lijst van dictionaries
-            records = df.to_dict(orient='records')
-            
-            # Voeg de records toe aan de database met bulk insert
-            session.bulk_insert_mappings(table, records)
-        
-        session.commit()
-        logging.info("Gegevens succesvol geladen in de database")
-    except SQLAlchemyError as e:
-        session.rollback()
-        logging.error(f"Database error: {e}")
-    finally:
-        session.close()
