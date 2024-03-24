@@ -11,7 +11,7 @@ def connect_to_sqlserver():
         return None
 
 
-def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
+def load_data_to_sqlserver_bulk(data, table_name, column_mapping, cnxn):
     if cnxn:
         try:
             cursor = cnxn.cursor()
@@ -105,7 +105,7 @@ def process_and_load_csv(csv_path, cnxn):
         
     }
     for table_name, mapping in mappings.items():
-        load_data_to_sqlserver(df, table_name, mapping, cnxn)
+        load_data_to_sqlserver_bulk(df, table_name, mapping, cnxn)
   
 
 def main():
