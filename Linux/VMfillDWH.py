@@ -1,40 +1,40 @@
 import pandas as pd
 from datetime import datetime
 import pyodbc
+from tqdm import tqdm
 
 def connect_to_sqlserver():
-    server = 'localhost'
-    database = 'DEP_DWH_G30'
-    username = 'sa'
-    password = 'VMdepgroup30'
     try:
-        cnxn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
-        return cnxn
+        return pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=localhost;DATABASE=DEP_DWH_G30;UID=sa;PWD=VMdepgroup30')
     except Exception as e:
         print(f"Error connecting to SQL Server: {e}")
         return None
 
+
 def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
-    if cnxn is None:
-        print("Connection to SQL Server is not established.")
-        return
-    try:
-        with cnxn.cursor() as cursor:
+    if cnxn:
+        try:
+            cursor = cnxn.cursor()
             columns = ', '.join(column_mapping.values())
             placeholders = ', '.join(['?'] * len(column_mapping))
             query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
-            for _, row in data.iterrows():
-                values = tuple(row[key] for key in column_mapping.keys())
-                cursor.execute(query, values)
+            # Prepare data as a list of tuples for the executemany method
+            data_tuples = [tuple(row[key] for key in column_mapping.keys()) for _, row in data.iterrows()]
+            # Use executemany for bulk insert
+            cursor.executemany(query, data_tuples)
             cnxn.commit()
-    except Exception as e:
-        print(f"Error loading data into {table_name}: {e}")
+        except pyodbc.DatabaseError as db_err:
+            print(f"Database error while loading data into {table_name}: {db_err}")
+        except Exception as e:
+            print(f"Unexpected error while loading data into {table_name}: {e}")
+    else:
+        print("Connection to SQL Server is not established.")
+
 
 def calculate_date_fields(datum_str):
     datum_obj = datetime.strptime(datum_str, '%Y-%m-%d')
-    volledigeDatum = datum_obj.strftime('%Y-%m-%d')
     return {
-        'VolledigeDatumAlternatieveSleutel': volledigeDatum,
+        'VolledigeDatumAlternatieveSleutel': datum_obj.strftime('%Y-%m-%d'),
         'Datum': datum_str,
         'DagVanDeMaand': datum_obj.day,
         'DagVanHetJaar': datum_obj.timetuple().tm_yday,
@@ -50,132 +50,90 @@ def calculate_date_fields(datum_str):
         'DDMMJJJJ': datum_obj.strftime('%d%m%Y')
     }
 
+
 def process_and_load_csv(csv_path, cnxn):
     df = pd.read_csv(csv_path)
-    if 'Datum' in df:
-        transformed_dates = df['Datum'].apply(calculate_date_fields).apply(pd.Series)
-        df = pd.concat([df.drop(columns=['Datum']), transformed_dates], axis=1)
+    if 'Datum' in df.columns:
+        df = pd.concat([df.drop(columns=['Datum']), df['Datum'].apply(calculate_date_fields).apply(pd.DataFrame)], axis=1)
     
-    # Linkse waarden zijn van de CSV, rechtse waarden zijn de kolommen in de DWH-tabellen
-    # Mapping voor DimTeam
-    dim_team_mapping = {
-        'Stamnummer': 'Stamnummer',
-        'RoepNaam': 'PloegNaam'
+    mappings = {
+        'DimTeam': {'Stamnummer': 'Stamnummer', 'RoepNaam': 'PloegNaam'},
+        'DimDate': {k: k for k in calculate_date_fields('2023-01-01').keys()},
+        'DimTime': {'Uur': 'Uur', 'Minuten': 'Minuten', 'VolledigeTijd': 'VolledigeTijd'},
+        'DimWedstrijd': {'Id': 'MatchID'},
+        'DimKans': {'OddsWaarde': 'OddsWaarde'},
+        
+        'FactWedstrijdScore': {'TeamKeyUit': 'TeamKeyUit',
+                               'TeamKeyThuis': 'TeamKeyThuis',
+                               'WedstrijdKey': 'WedstrijdKey',
+                               'DateKey': 'DateKey',
+                               'TimeKey': 'TimeKey',
+                               'ScoreThuis': 'ScoreThuis',
+                               'ScoreUit': 'ScoreUit',
+                               'FinaleStandThuisploeg': 'EindscoreThuis',
+                               'FinaleStandUitploeg': 'EindscoreUit',
+                               'RoepnaamScorendePloeg': 'ScorendePloegKey'},
+        
+        'FactWeddenschap': {'TeamKeyUit': 'TeamKeyUit',
+                            'TeamKeyThuis': 'TeamKeyThuis',
+                            'WedstrijdKey': 'WedstrijdKey',
+                            'KansKey': 'KansKey',
+                            'DateKeyScrape': 'DateKeyScrape',
+                            'TimeKeyScrape': 'TimeKeyScrape',
+                            'DateKeySpeeldatum': 'DateKeySpeeldatum',
+                            'TimeKeySpeeldatum': 'TimeKeySpeeldatum',
+                            'OddsThuisWint': 'OddsThuisWint',
+                            'OddsUitWint': 'OddsUitWint',
+                            'OddsGelijk': 'OddsGelijk',
+                            'OddsBeideTeamsScoren': 'OddsBeideTeamsScoren',
+                            'OddsNietBeideTeamsScoren': 'OddsNietBeideTeamsScoren',
+                            'OddsMeerDanXGoals': 'OddsMeerDanXGoals',
+                            'OddsMinderDanXGoals': 'OddsMinderDanXGoals'},
+       
+        'FactKlassement': {'BeginDateKey': 'BeginDateKey',
+                           'EindeDateKey': 'EindeDateKey',
+                           'TeamKey': 'TeamKey', 'Stand': 'Stand',
+                           'AantalGespeeld': 'AantalGespeeld',
+                           'AantalGewonnen': 'AantalGewonnen',
+                           'AantalGelijk': 'AantalGelijk',
+                           'AantalVerloren': 'AantalVerloren',
+                           'DoelpuntenVoor': 'DoelpuntenVoor',
+                           'DoelpuntenTegen': 'DoelpuntenTegen',
+                           'DoelpuntenSaldo': 'DoelpuntenSaldo',
+                           'PuntenVoor': 'PuntenVoor',
+                           'PuntenTegen': 'PuntenTegen'}
+        
     }
-    # Aangepaste mapping voor DimDate die overeenkomt met de berekende datumvelden
-    dim_date_mapping = {
-        'VolledigeDatumAlternatieveSleutel': 'VolledigeDatumAlternatieveSleutel',
-        'DagVanDeMaand': 'DagVanDeMaand',
-        'DagVanHetJaar': 'DagVanHetJaar',
-        'WeekVanHetJaar': 'WeekVanHetJaar',
-        'DagVanDeWeekInMaand': 'DagVanDeWeekInMaand',
-        'DagVanDeWeekInJaar': 'DagVanDeWeekInJaar',
-        'Maand': 'Maand',
-        'Kwartaal': 'Kwartaal',
-        'Jaar': 'Jaar',
-        'EngelseDag': 'EngelseDag',
-        'EngelseMaand': 'EngelseMaand',
-        'EngelsJaar': 'EngelsJaar',
-        'DDMMJJJJ': 'DDMMJJJJ'
-    }
-
-    # Mapping voor DimTime
-    dim_time_mapping = {
-        'Uur': 'Uur',
-        'Minuten': 'Minuten',
-        'VolledigeTijd': 'VolledigeTijd'
-    }
-
-    # Mapping voor DimWedstrijd
-    dim_wedstrijd_mapping = {
-        'Id': 'MatchID'
-    }
-
-    # Mapping voor DimKans
-    dim_kans_mapping = {
-        'OddsWaarde': 'OddsWaarde'
-    }
-
-    # Mapping voor FactWedstrijdScore
-    fact_wedstrijd_score_mapping = {
-        'TeamKeyUit': 'TeamKeyUit',
-        'TeamKeyThuis': 'TeamKeyThuis',
-        'WedstrijdKey': 'WedstrijdKey',
-        'DateKey': 'DateKey',
-        'TimeKey': 'TimeKey',
-        'ScoreThuis': 'ScoreThuis',
-        'ScoreUit': 'ScoreUit',
-        'FinaleStandThuisploeg': 'EindscoreThuis',
-        'FinaleStandUitploeg': 'EindscoreUit',
-        'RoepnaamScorendePloeg': 'ScorendePloegKey'
-    }
-
-    # Mapping voor FactWeddenschap
-    fact_weddenschap_mapping = {
-        'TeamKeyUit': 'TeamKeyUit',
-        'TeamKeyThuis': 'TeamKeyThuis',
-        'WedstrijdKey': 'WedstrijdKey',
-        'KansKey': 'KansKey',
-        'DateKeyScrape': 'DateKeyScrape',
-        'TimeKeyScrape': 'TimeKeyScrape',
-        'DateKeySpeeldatum': 'DateKeySpeeldatum',
-        'TimeKeySpeeldatum': 'TimeKeySpeeldatum',
-        'OddsThuisWint': 'OddsThuisWint',
-        'OddsUitWint': 'OddsUitWint',
-        'OddsGelijk': 'OddsGelijk',
-        'OddsBeideTeamsScoren': 'OddsBeideTeamsScoren',
-        'OddsNietBeideTeamsScoren': 'OddsNietBeideTeamsScoren',
-        'OddsMeerDanXGoals': 'OddsMeerDanXGoals',
-        'OddsMinderDanXGoals': 'OddsMinderDanXGoals'
-    }
-
-    # Mapping voor FactKlassement
-    fact_klassement_mapping = {
-        'BeginDateKey': 'BeginDateKey',
-        'EindeDateKey': 'EindeDateKey',
-        'TeamKey': 'TeamKey',
-        'Stand': 'Stand',
-        'AantalGespeeld': 'AantalGespeeld',
-        'AantalGewonnen': 'AantalGewonnen',
-        'AantalGelijk': 'AantalGelijk',
-        'AantalVerloren': 'AantalVerloren',
-        'DoelpuntenVoor': 'DoelpuntenVoor',
-        'DoelpuntenTegen': 'DoelpuntenTegen',
-        'DoelpuntenSaldo': 'DoelpuntenSaldo',
-        'PuntenVoor': 'PuntenVoor',
-        'PuntenTegen': 'PuntenTegen'
-    }
-
-    try:
-        load_data_to_sqlserver(df, 'DimTeam', dim_team_mapping, cnxn)
-        load_data_to_sqlserver(transformed_dates.drop_duplicates(subset=['Datum']), 'DimDate', dim_date_mapping, cnxn)
-        load_data_to_sqlserver(df, 'DimTime', dim_time_mapping, cnxn)
-        load_data_to_sqlserver(df, 'DimWedstrijd', dim_wedstrijd_mapping, cnxn)
-        load_data_to_sqlserver(df, 'DimKans', dim_kans_mapping, cnxn)
-        load_data_to_sqlserver(df, 'FactWedstrijdScore', fact_wedstrijd_score_mapping, cnxn)
-        load_data_to_sqlserver(df, 'FactWeddenschap', fact_weddenschap_mapping, cnxn)
-        load_data_to_sqlserver(df, 'FactKlassement', fact_klassement_mapping, cnxn)
-        pass
-    except Exception as e:
-        print(f"Error processing file {csv_path}: {e}")
+    for table_name, mapping in mappings.items():
+        load_data_to_sqlserver(df, table_name, mapping, cnxn)
+  
 
 def main():
-    cnxn = connect_to_sqlserver()
-    if cnxn is None:
-        return
+    try:
+        cnxn = connect_to_sqlserver()
+        if not cnxn:
+            print("Failed to connect to SQL Server.")
+            return
 
-    csv_paths = [
-        '/home/vicuser/data/klassementCorrect.csv', 
-        '/home/vicuser/data/wedstrijdenCorrect.csv', 
-        '/home/vicuser/data/doelpuntenCorrect.csv', 
-        '/home/vicuser/data/bets.csv'
-    ]
+        csv_paths = [
+            '/home/vicuser/data/klassementCorrect.csv', 
+            '/home/vicuser/data/wedstrijdenCorrect.csv', 
+            '/home/vicuser/data/doelpuntenCorrect.csv', 
+            '/home/vicuser/data/bets.csv'
+        ]
 
-    for path in csv_paths:
-        process_and_load_csv(path, cnxn)
+        for path in csv_paths:
+            try:
+                process_and_load_csv(path, cnxn)
+            except Exception as e:
+                print(f"Error processing file {path}: {e}")
 
-    print("Data loading complete.")
-    cnxn.close()
+        print("Data loading complete.")
+    except Exception as e:
+        print(f"Unexpected error in main function: {e}")
+    finally:
+        if cnxn:
+            cnxn.close()
 
 if __name__ == '__main__':
     main()
