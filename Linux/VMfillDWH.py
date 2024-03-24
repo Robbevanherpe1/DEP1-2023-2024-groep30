@@ -32,8 +32,9 @@ def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
 
 def calculate_date_fields(datum_str):
     datum_obj = datetime.strptime(datum_str, '%Y-%m-%d')
+    volledigeDatum = datum_obj.strftime('%Y-%m-%d')
     return {
-        'VolledigeDatumAlternatieveSleutel': datum_obj.strftime('%Y-%m-%d'),
+        'VolledigeDatumAlternatieveSleutel': volledigeDatum,
         'Datum': datum_str,
         'DagVanDeMaand': datum_obj.day,
         'DagVanHetJaar': datum_obj.timetuple().tm_yday,
