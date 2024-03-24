@@ -46,7 +46,7 @@ def calculate_date_fields(datum_str):
         'Jaar': datum_obj.year,
         'EngelseDag': datum_obj.strftime('%A'),
         'EngelseMaand': datum_obj.strftime('%B'),
-        'EngelseJaar': datum_obj.strftime('%Y'),
+        'EngelsJaar': datum_obj.strftime('%Y'),
         'DDMMJJJJ': datum_obj.strftime('%d%m%Y')
     }
 
@@ -75,7 +75,7 @@ def process_and_load_csv(csv_path, cnxn):
         'Jaar': 'Jaar',
         'EngelseDag': 'EngelseDag',
         'EngelseMaand': 'EngelseMaand',
-        'EngelsJaar': 'EngelseJaar',
+        'EngelsJaar': 'EngelsJaar',
         'DDMMJJJJ': 'DDMMJJJJ'
     }
 
@@ -174,6 +174,7 @@ def main():
     for path in csv_paths:
         process_and_load_csv(path, cnxn)
 
+    print("Data loading complete.")
     cnxn.close()
 
 if __name__ == '__main__':
