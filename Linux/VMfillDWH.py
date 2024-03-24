@@ -1,12 +1,16 @@
 import pandas as pd
 from datetime import datetime
 import pyodbc
+from dotenv import load_dotenv
+import os
 
 def connect_to_sqlserver():
-    server = 'localhost'
-    database = 'DEP_DWH_G30'
-    username = 'sa'
-    password = 'VMdepgroup30'
+    load_dotenv('config.env')
+    
+    server = os.getenv('SQL_SERVER')
+    database = os.getenv('SQL_DATABASE')
+    username = os.getenv('SQL_USERNAME')
+    password = os.getenv('SQL_PASSWORD')
     try:
         cnxn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
         return cnxn
