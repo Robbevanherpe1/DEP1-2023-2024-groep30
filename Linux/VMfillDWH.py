@@ -11,7 +11,7 @@ def connect_to_sqlserver():
         return None
 
 
-def load_data_to_sqlserver_bulk(data, table_name, column_mapping, cnxn):
+def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
     if cnxn:
         try:
             cursor = cnxn.cursor()
@@ -51,18 +51,37 @@ def calculate_date_fields(datum_str):
     }
 
 
+def calculate_time_fields(time_str):
+    # Parse the input time string (expected format "HH:MM")
+    time_obj = datetime.strptime(time_str, '%H:%M')
+    
+    return {
+        'VolledigeTijdAlternatieveSleutel': time_obj.strftime('%H:%M'),
+        'Uur': time_obj.hour,
+        'Minuten': time_obj.minute,
+        'VolledigeTijd': time_obj.strftime('%H%M')
+    }
+
 def process_and_load_csv(csv_path, cnxn):
     df = pd.read_csv(csv_path)
     if 'Datum' in df.columns:
         df = pd.concat([df.drop(columns=['Datum']), df['Datum'].apply(calculate_date_fields).apply(pd.DataFrame)], axis=1)
     
+    # Nieuw: Voor Tijdstip
+    if 'Tijdstip' in df.columns:
+        df = pd.concat([df.drop(columns=['Tijdstip']), df['Tijdstip'].apply(calculate_time_fields).apply(pd.Series)], axis=1)
+    
     mappings = {
         'DimTeam': {'Stamnummer': 'Stamnummer', 'RoepNaam': 'PloegNaam'},
-        'DimDate': {k: k for k in calculate_date_fields('2023-01-01').keys()},
-        'DimTime': {'Uur': 'Uur', 'Minuten': 'Minuten', 'VolledigeTijd': 'VolledigeTijd'},
+
+        'DimDate': {k: k for k in calculate_date_fields('Datum').keys()},
+
+        'DimTime': {k: k for k in calculate_time_fields('Tijdstip').keys()},
+
         'DimWedstrijd': {'Id': 'MatchID'},
+
         'DimKans': {'OddsWaarde': 'OddsWaarde'},
-        
+
         'FactWedstrijdScore': {'TeamKeyUit': 'TeamKeyUit',
                                'TeamKeyThuis': 'TeamKeyThuis',
                                'WedstrijdKey': 'WedstrijdKey',
@@ -73,7 +92,7 @@ def process_and_load_csv(csv_path, cnxn):
                                'FinaleStandThuisploeg': 'EindscoreThuis',
                                'FinaleStandUitploeg': 'EindscoreUit',
                                'RoepnaamScorendePloeg': 'ScorendePloegKey'},
-        
+
         'FactWeddenschap': {'TeamKeyUit': 'TeamKeyUit',
                             'TeamKeyThuis': 'TeamKeyThuis',
                             'WedstrijdKey': 'WedstrijdKey',
@@ -89,7 +108,7 @@ def process_and_load_csv(csv_path, cnxn):
                             'OddsNietBeideTeamsScoren': 'OddsNietBeideTeamsScoren',
                             'OddsMeerDanXGoals': 'OddsMeerDanXGoals',
                             'OddsMinderDanXGoals': 'OddsMinderDanXGoals'},
-       
+
         'FactKlassement': {'BeginDateKey': 'BeginDateKey',
                            'EindeDateKey': 'EindeDateKey',
                            'TeamKey': 'TeamKey', 'Stand': 'Stand',
@@ -102,11 +121,11 @@ def process_and_load_csv(csv_path, cnxn):
                            'DoelpuntenSaldo': 'DoelpuntenSaldo',
                            'PuntenVoor': 'PuntenVoor',
                            'PuntenTegen': 'PuntenTegen'}
-        
     }
+
     for table_name, mapping in mappings.items():
-        load_data_to_sqlserver_bulk(df, table_name, mapping, cnxn)
-  
+        load_data_to_sqlserver(df, table_name, mapping, cnxn)
+
 
 def main():
     try:
@@ -119,7 +138,7 @@ def main():
             '/home/vicuser/data/klassementCorrect.csv', 
             '/home/vicuser/data/wedstrijdenCorrect.csv', 
             '/home/vicuser/data/doelpuntenCorrect.csv', 
-            '/home/vicuser/data/bets.csv'
+            '/home/vicuser/data/betsCorrect.csv'
         ]
 
         for path in csv_paths:
