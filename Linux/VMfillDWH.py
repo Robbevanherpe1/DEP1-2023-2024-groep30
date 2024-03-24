@@ -2,34 +2,38 @@ import pandas as pd
 from datetime import datetime
 import pyodbc
 
-# Verbinding maken met SQL Server
 def connect_to_sqlserver():
     server = 'localhost'
     database = 'DEP_DWH_G30'
     username = 'sa'
     password = 'VMdepgroup30'
-    cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=' + server + ';DATABASE=' + database + ';UID=' + username + ';PWD=' + password)
-    
-    return cnxn
+    try:
+        cnxn = pyodbc.connect(f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}')
+        return cnxn
+    except Exception as e:
+        print(f"Error connecting to SQL Server: {e}")
+        return None
 
-# Functie om specifieke data van een CSV naar SQL Server te laden
 def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
-    cursor = cnxn.cursor()
-    columns = ', '.join(column_mapping.values()) # Kolommen in de tabel
-    placeholders = ', '.join(['?'] * len(column_mapping)) # Placeholders voor waarden
-    query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
-
-    for _, row in data.iterrows():
-        values = tuple(row[key] for key in column_mapping.keys())
-        cursor.execute(query, values)
-
-    cnxn.commit()
-    cursor.close()
-
+    if cnxn is None:
+        print("Connection to SQL Server is not established.")
+        return
+    try:
+        with cnxn.cursor() as cursor:
+            columns = ', '.join(column_mapping.values())
+            placeholders = ', '.join(['?'] * len(column_mapping))
+            query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+            for _, row in data.iterrows():
+                values = tuple(row[key] for key in column_mapping.keys())
+                cursor.execute(query, values)
+            cnxn.commit()
+    except Exception as e:
+        print(f"Error loading data into {table_name}: {e}")
 
 def calculate_date_fields(datum_str):
     datum_obj = datetime.strptime(datum_str, '%Y-%m-%d')
     return {
+        'VolledigeDatumAlternatieveSleutel': datum_obj.strftime('%Y-%m-%d'),
         'Datum': datum_str,
         'DagVanDeMaand': datum_obj.day,
         'DagVanHetJaar': datum_obj.timetuple().tm_yday,
@@ -41,29 +45,25 @@ def calculate_date_fields(datum_str):
         'Jaar': datum_obj.year,
         'EngelseDag': datum_obj.strftime('%A'),
         'EngelseMaand': datum_obj.strftime('%B'),
-        'EngelsJaar': datum_obj.strftime('%Y'),
+        'EngelseJaar': datum_obj.strftime('%Y'),
         'DDMMJJJJ': datum_obj.strftime('%d%m%Y')
     }
 
-# Hoofdfunctie om CSV-data te verwerken en te laden
 def process_and_load_csv(csv_path, cnxn):
     df = pd.read_csv(csv_path)
-
+    if 'Datum' in df:
+        transformed_dates = df['Datum'].apply(calculate_date_fields).apply(pd.Series)
+        df = pd.concat([df.drop(columns=['Datum']), transformed_dates], axis=1)
+    
     # Linkse waarden zijn van de CSV, rechtse waarden zijn de kolommen in de DWH-tabellen
     # Mapping voor DimTeam
     dim_team_mapping = {
         'Stamnummer': 'Stamnummer',
         'RoepNaam': 'PloegNaam'
     }
-
-    if 'Datum' in df:
-        transformed_dates = df['Datum'].apply(calculate_date_fields).apply(pd.Series)
-        # Voeg de berekende velden toe aan df voor andere doeleinden, indien nodig
-        df = pd.concat([df.drop(columns=['Datum']), transformed_dates], axis=1)
-    
     # Aangepaste mapping voor DimDate die overeenkomt met de berekende datumvelden
     dim_date_mapping = {
-        'Datum': 'Datum',
+        'VolledigeDatumAlternatieveSleutel': 'VolledigeDatumAlternatieveSleutel',
         'DagVanDeMaand': 'DagVanDeMaand',
         'DagVanHetJaar': 'DagVanHetJaar',
         'WeekVanHetJaar': 'WeekVanHetJaar',
@@ -74,7 +74,7 @@ def process_and_load_csv(csv_path, cnxn):
         'Jaar': 'Jaar',
         'EngelseDag': 'EngelseDag',
         'EngelseMaand': 'EngelseMaand',
-        'EngelsJaar': 'EngelsJaar',
+        'EngelsJaar': 'EngelseJaar',
         'DDMMJJJJ': 'DDMMJJJJ'
     }
 
@@ -145,26 +145,35 @@ def process_and_load_csv(csv_path, cnxn):
         'PuntenTegen': 'PuntenTegen'
     }
 
-    load_data_to_sqlserver(df, 'DimTeam', dim_team_mapping, cnxn)
-    load_data_to_sqlserver(transformed_dates.drop_duplicates(subset=['Datum']), 'DimDate', dim_date_mapping, cnxn)
-    load_data_to_sqlserver(df, 'DimTime', dim_time_mapping, cnxn)
-    load_data_to_sqlserver(df, 'DimWedstrijd', dim_wedstrijd_mapping, cnxn)
-    load_data_to_sqlserver(df, 'DimKans', dim_kans_mapping, cnxn)
-    load_data_to_sqlserver(df, 'FactWedstrijdScore', fact_wedstrijd_score_mapping, cnxn)
-    load_data_to_sqlserver(df, 'FactWeddenschap', fact_weddenschap_mapping, cnxn)
-    load_data_to_sqlserver(df, 'FactKlassement', fact_klassement_mapping, cnxn)
+    try:
+        load_data_to_sqlserver(df, 'DimTeam', dim_team_mapping, cnxn)
+        load_data_to_sqlserver(transformed_dates.drop_duplicates(subset=['Datum']), 'DimDate', dim_date_mapping, cnxn)
+        load_data_to_sqlserver(df, 'DimTime', dim_time_mapping, cnxn)
+        load_data_to_sqlserver(df, 'DimWedstrijd', dim_wedstrijd_mapping, cnxn)
+        load_data_to_sqlserver(df, 'DimKans', dim_kans_mapping, cnxn)
+        load_data_to_sqlserver(df, 'FactWedstrijdScore', fact_wedstrijd_score_mapping, cnxn)
+        load_data_to_sqlserver(df, 'FactWeddenschap', fact_weddenschap_mapping, cnxn)
+        load_data_to_sqlserver(df, 'FactKlassement', fact_klassement_mapping, cnxn)
+        pass
+    except Exception as e:
+        print(f"Error processing file {csv_path}: {e}")
 
 def main():
-  cnxn = connect_to_sqlserver()
+    cnxn = connect_to_sqlserver()
+    if cnxn is None:
+        return
 
-  # Pas paden aan naar je CSV-bestanden
-  csv_paths = ['/home/vicuser/data/klassementCorrect.csv', '/home/vicuser/data/wedstrijdenCorrect.csv', 
-               '/home/vicuser/data/doelpuntenCorrect.csv', '/home/vicuser/data/bets.csv']
+    csv_paths = [
+        '/home/vicuser/data/klassementCorrect.csv', 
+        '/home/vicuser/data/wedstrijdenCorrect.csv', 
+        '/home/vicuser/data/doelpuntenCorrect.csv', 
+        '/home/vicuser/data/bets.csv'
+    ]
 
-  for path in csv_paths:
-    process_and_load_csv(path, cnxn)
+    for path in csv_paths:
+        process_and_load_csv(path, cnxn)
 
-  cnxn.close()
+    cnxn.close()
 
 if __name__ == '__main__':
     main()
