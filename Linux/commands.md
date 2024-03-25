@@ -4,6 +4,14 @@
 
 - ssh -p 40197 vicuser@vichogent.be
 
+- sudo dnf install python3
+- sudo dnf install python3-pip
+- pip3 install pandas
+- pip3 --version
+- sudo dnf install unixODBC unixODBC-devel
+- pip3 install pyodbc
+- pip3 install tqdm
+
 ## Microsoft SQL Server
 
 ### Install SQL Server
@@ -107,6 +115,10 @@ GO
 
 - ssh -L 1500:localhost:1433 10.11.11.30
 - ssh -vv -L 1500:localhost:1433 vichogent.be -o ConnectTimeout=100 -p 40197
+
+## Fill DWH
+- nano fillDWH.py
+- chmod +x fillDWH.py
 
 ## Het schedulen van de scripts
 
