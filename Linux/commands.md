@@ -11,6 +11,7 @@
 - sudo dnf install unixODBC unixODBC-devel
 - pip3 install pyodbc
 - pip3 install tqdm
+- pip install beautifulsoup4
 
 ## Microsoft SQL Server
 
