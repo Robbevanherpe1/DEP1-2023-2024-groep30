@@ -141,5 +141,5 @@ GO
 - crontab -l
 
 0 8,14,20 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_bets.py
-0 0 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_wedstrijden.py
+0 8,14,20 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_wedstrijden.py
 
