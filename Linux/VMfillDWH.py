@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import pandas as pd
 from datetime import datetime
 import pyodbc
@@ -5,13 +7,11 @@ from tqdm import tqdm
 from datetime import time
 import logging
 
-
 logging.basicConfig(level=logging.INFO)
-
 
 def connect_to_sqlserver():
     try:
-        return pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER=localhost;DATABASE=DEP_DWH_G30;UID=root;PWD=root')
+        return pyodbc.connect('DRIVER={ODBC Driver 18 for SQL Server};SERVER=localhost;DATABASE=DEP_DWH_G30;UID=sa;PWD=VMdepgroup30;TrustServerCertificate=yes')
     except Exception as e:
         print(f"Error connecting to SQL Server: {e}")
         return None
@@ -38,48 +38,47 @@ def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
 
 
 def calculate_date_fields(datum_str):
-
-    datum_obj = time.fromisoformat(datum_str)
-    
-   
-    dag_van_de_maand = datum_obj.day
-    maand = datum_obj.month
-    jaar = datum_obj.year
-    
-    return {
-        'VolledigeDatumAlternatieveSleutel': datum_obj.strftime('%Y-%m-%d'),
-        'Datum': datum_str,
-        'DagVanDeMaand': dag_van_de_maand,
-        'DagVanHetJaar': datum_obj.timetuple().tm_yday,
-        'WeekVanHetJaar': datum_obj.isocalendar()[1],
-        'DagVanDeWeekInMaand': (dag_van_de_maand - 1) // 7 + 1,
-        'DagVanDeWeekInJaar': datum_obj.isocalendar()[2],
-        'Maand': maand,
-        'Kwartaal': (maand - 1) // 3 + 1,
-        'Jaar': jaar,
-        'EngelseDag': datum_obj.strftime('%A'),
-        'EngelseMaand': datum_obj.strftime('%B'),
-        'EngelsJaar': datum_obj.strftime('%Y'),
-        'DDMMJJJJ': datum_obj.strftime('%d%m%Y')
-    }
+    try:
+        datum_obj = datetime.strptime(datum_str, '%Y-%m-%d').date()
+        return {
+            'VolledigeDatumAlternatieveSleutel': datum_obj.strftime('%Y-%m-%d'),
+            'Datum': datum_str,
+            'DagVanDeMaand': datum_obj.day,
+            'DagVanHetJaar': datum_obj.timetuple().tm_yday,
+            'WeekVanHetJaar': datum_obj.isocalendar()[1],
+            'DagVanDeWeekInMaand': (datum_obj.day - 1) // 7 + 1,
+            'DagVanDeWeekInJaar': datum_obj.isocalendar()[2],
+            'Maand': datum_obj.month,
+            'Kwartaal': (datum_obj.month - 1) // 3 + 1,
+            'Jaar': datum_obj.year,
+            'EngelseDag': datum_obj.strftime('%A'),
+            'EngelseMaand': datum_obj.strftime('%B'),
+            'EngelsJaar': datum_obj.strftime('%Y'),
+            'DDMMJJJJ': datum_obj.strftime('%d%m%Y')
+        }
+    except ValueError:
+        logging.error(f"Invalid date format for {datum_str}, expected 'YYYY-MM-DD'")
+        return {}
 
 
 def calculate_time_fields(time_str):
-       
-    tijd_obj = time.fromisoformat(time_str)
-    
-    return {
-        'VolledigeTijdAlternatieveSleutel': tijd_obj.strftime('%H:%M'),
-        'Uur': tijd_obj.hour,
-        'Minuten': tijd_obj.minute,
-        'VolledigeTijd': tijd_obj.strftime('%H%M')
-    }
+    try:
+        tijd_obj = time.fromisoformat(time_str)
+        return {
+            'VolledigeTijdAlternatieveSleutel': tijd_obj.strftime('%H:%M'),
+            'Uur': tijd_obj.hour,
+            'Minuten': tijd_obj.minute,
+            'VolledigeTijd': tijd_obj.strftime('%H%M')
+        }
+    except ValueError:
+        logging.error(f"Invalid time format for {time_str}, expected 'HH:MM'")
+        return {}
     
 
 def process_and_load_csv(csv_path, cnxn):
-    df = pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path, sep=';') # Lees de CSV in met de juiste scheidingsteken
     if 'Datum' in df.columns:
-        df = pd.concat([df.drop(columns=['Datum']), df['Datum'].apply(calculate_date_fields).apply(pd.DataFrame)], axis=1)
+        df = pd.concat([df.drop(columns=['Datum']), df['Datum'].apply(lambda x: calculate_date_fields(x)).apply(pd.Series)], axis=1)
     
     # Nieuw: Voor Tijdstip
     if 'Tijdstip' in df.columns:
@@ -97,63 +96,70 @@ def process_and_load_csv(csv_path, cnxn):
 
     #Mappings voor de kolomnamen
     mappings = {
-    DIM_TEAM: {
-        'Stamnummer': 'Stamnummer',
-        'RoepNaam': 'PloegNaam'
-    },
-    DIM_DATE: {k: k for k in calculate_date_fields('Datum').keys()},
-    DIM_TIME: {k: k for k in calculate_time_fields('Tijdstip').keys()},
-    DIM_WEDSTRIJD: {
-        'Id': 'MatchID'
-    },
-    DIM_KANS: {
-        'OddsWaarde': 'OddsWaarde'
-    },
-    FACT_WEDSTRIJDSCORE: {
-        'TeamKeyUit': 'TeamKeyUit',
-        'TeamKeyThuis': 'TeamKeyThuis',
-        'WedstrijdKey': 'WedstrijdKey',
-        'DateKey': 'DateKey',
-        'TimeKey': 'TimeKey',
-        'ScoreThuis': 'ScoreThuis',
-        'ScoreUit': 'ScoreUit',
-        'FinaleStandThuisploeg': 'EindscoreThuis',
-        'FinaleStandUitploeg': 'EindscoreUit',
-        'RoepnaamScorendePloeg': 'ScorendePloegKey'
-    },
-    FACT_WEDDENSCHAP: {
-        'TeamKeyUit': 'TeamKeyUit',
-        'TeamKeyThuis': 'TeamKeyThuis',
-        'WedstrijdKey': 'WedstrijdKey',
-        'KansKey': 'KansKey',
-        'DateKeyScrape': 'DateKeyScrape',
-        'TimeKeyScrape': 'TimeKeyScrape',
-        'DateKeySpeeldatum': 'DateKeySpeeldatum',
-        'TimeKeySpeeldatum': 'TimeKeySpeeldatum',
-        'OddsThuisWint': 'OddsThuisWint',
-        'OddsUitWint': 'OddsUitWint',
-        'OddsGelijk': 'OddsGelijk',
-        'OddsBeideTeamsScoren': 'OddsBeideTeamsScoren',
-        'OddsNietBeideTeamsScoren': 'OddsNietBeideTeamsScoren',
-        'OddsMeerDanXGoals': 'OddsMeerDanXGoals',
-        'OddsMinderDanXGoals': 'OddsMinderDanXGoals'
-    },
-    FACT_KLASSERING: {
-        'BeginDateKey': 'BeginDateKey',
-        'EindeDateKey': 'EindeDateKey',
-        'TeamKey': 'TeamKey',
-        'Stand': 'Stand',
-        'AantalGespeeld': 'AantalGespeeld',
-        'AantalGewonnen': 'AantalGewonnen',
-        'AantalGelijk': 'AantalGelijk',
-        'AantalVerloren': 'AantalVerloren',
-        'DoelpuntenVoor': 'DoelpuntenVoor',
-        'DoelpuntenTegen': 'DoelpuntenTegen',
-        'DoelpuntenSaldo': 'DoelpuntenSaldo',
-        'PuntenVoor': 'PuntenVoor',
-        'PuntenTegen': 'PuntenTegen'
+        DIM_TEAM: {
+            'Stamnummer': 'Stamnummer',
+            'RoepNaam': 'PloegNaam'
+        },
+
+        DIM_DATE: {k: k for k in calculate_date_fields('Datum').keys()},
+
+        DIM_TIME: {k: k for k in calculate_time_fields('Tijdstip').keys()},
+
+        DIM_WEDSTRIJD: {
+            'Id': 'MatchID'
+        },
+
+        DIM_KANS: {
+            'OddsWaarde': 'OddsWaarde'
+        },
+
+        FACT_WEDSTRIJDSCORE: {
+            'TeamKeyUit': 'TeamKeyUit',
+            'TeamKeyThuis': 'TeamKeyThuis',
+            'WedstrijdKey': 'WedstrijdKey',
+            'DateKey': 'DateKey',
+            'TimeKey': 'TimeKey',
+            'ScoreThuis': 'ScoreThuis',
+            'ScoreUit': 'ScoreUit',
+            'FinaleStandThuisploeg': 'EindscoreThuis',
+            'FinaleStandUitploeg': 'EindscoreUit',
+            'RoepnaamScorendePloeg': 'ScorendePloegKey'
+        },
+
+        FACT_WEDDENSCHAP: {
+            'TeamKeyUit': 'TeamKeyUit',
+            'TeamKeyThuis': 'TeamKeyThuis',
+            'WedstrijdKey': 'WedstrijdKey',
+            'KansKey': 'KansKey',
+            'DateKeyScrape': 'DateKeyScrape',
+            'TimeKeyScrape': 'TimeKeyScrape',
+            'DateKeySpeeldatum': 'DateKeySpeeldatum',
+            'TimeKeySpeeldatum': 'TimeKeySpeeldatum',
+            'OddsThuisWint': 'OddsThuisWint',
+            'OddsUitWint': 'OddsUitWint',
+            'OddsGelijk': 'OddsGelijk',
+            'OddsBeideTeamsScoren': 'OddsBeideTeamsScoren',
+            'OddsNietBeideTeamsScoren': 'OddsNietBeideTeamsScoren',
+            'OddsMeerDanXGoals': 'OddsMeerDanXGoals',
+            'OddsMinderDanXGoals': 'OddsMinderDanXGoals'
+        },
+        
+        FACT_KLASSERING: {
+            'BeginDateKey': 'BeginDateKey',
+            'EindeDateKey': 'EindeDateKey',
+            'TeamKey': 'TeamKey',
+            'Stand': 'Stand',
+            'AantalGespeeld': 'AantalGespeeld',
+            'AantalGewonnen': 'AantalGewonnen',
+            'AantalGelijk': 'AantalGelijk',
+            'AantalVerloren': 'AantalVerloren',
+            'DoelpuntenVoor': 'DoelpuntenVoor',
+            'DoelpuntenTegen': 'DoelpuntenTegen',
+            'DoelpuntenSaldo': 'DoelpuntenSaldo',
+            'PuntenVoor': 'PuntenVoor',
+            'PuntenTegen': 'PuntenTegen'
+        }
     }
-}
 
     # Iterate over de mappings en laad de gegevens in SQL Server
     for table_name, mapping in mappings.items():
@@ -164,7 +170,6 @@ def process_and_load_csv(csv_path, cnxn):
         
 def main():
     try:
-        
         cnxn = connect_to_sqlserver()
         if not cnxn:
             logging.error("Failed to connect to SQL Server.")
@@ -177,7 +182,7 @@ def main():
             '/home/vicuser/data/betsCorrect.csv'
         ]
 
-        for path in csv_paths:
+        for path in tqdm(csv_paths, desc="Processing CSV files"):
             try:
                 process_and_load_csv(path, cnxn)
             except Exception as e:
