@@ -6,6 +6,9 @@ import csv
 from datetime import datetime
 import re
 
+# Leeg het bestand aan het begin
+with open('/home/vicuser/data/wedstrijden.csv', mode='w', newline='', encoding='utf-8') as file:
+    pass
 
 URL = "https://www.transfermarkt.be/jupiler-pro-league/spieltag/wettbewerb/BE1/plus/"
 HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux armv7l) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36'}
@@ -16,9 +19,10 @@ EINDJAAR = datetime.now().year - 1
 STARTSPEELDAG = 30
 EINDSPEELDAG = 50
 
-with open(r'/home/vicuser/data/wedstrijden.csv', mode='w', newline='', encoding='utf-8') as file:
+with open('/home/vicuser/data/wedstrijden.csv', mode='a', newline='', encoding='utf-8') as file:
     writer = csv.DictWriter(file, fieldnames=['Match_ID', 'Seizoen', 'Speeldag', 'Datum', 'Tijdstip', 'Thuisploeg', 'Resultaat_Thuisploeg', 'Resultaat_Uitploeg', 'Uitploeg'])
     writer.writeheader()
+
 
     for jaar in range(STARTJAAR, EINDJAAR + 1):
         for speeldag in range(STARTSPEELDAG, EINDSPEELDAG - 1):
