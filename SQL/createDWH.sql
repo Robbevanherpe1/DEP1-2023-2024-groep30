@@ -60,7 +60,7 @@ CREATE TABLE DimWedstrijd (
 GO
 
 CREATE TABLE FactWedstrijdScore (
-    ScoreID INT PRIMARY KEY,
+    WedstrijdScoreKey INT PRIMARY KEY,
     TeamKeyUit INT NOT NULL,
     TeamKeyThuis INT NOT NULL,
     WedstrijdKey INT NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE FactWedstrijdScore (
 GO
 
 CREATE TABLE FactWeddenschap (
-    WeddenschapID INT PRIMARY KEY,
+    WeddenschapKey INT PRIMARY KEY,
     TeamKeyUit INT NOT NULL,
     TeamKeyThuis INT NOT NULL,
     WedstrijdKey INT NOT NULL,
@@ -120,8 +120,9 @@ CREATE TABLE FactKlassement (
     DoelpuntenVoor INT NOT NULL,
     DoelpuntenTegen INT NOT NULL,
     DoelpuntenSaldo INT NOT NULL,
-    PuntenVoor INT NOT NULL,
-    PuntenTegen INT NOT NULL,
+    PuntenVoor2ptn INT NOT NULL,
+    PuntenTegen2ptn INT NOT NULL,
+	PuntenVoor3ptn INT NOT NULL,
     FOREIGN KEY (BeginDateKey) REFERENCES DimDate(DateKey),
     FOREIGN KEY (EindeDateKey) REFERENCES DimDate(DateKey),
     FOREIGN KEY (TeamKey) REFERENCES DimTeam(TeamKey)
