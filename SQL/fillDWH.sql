@@ -75,8 +75,6 @@ create sequence seq_dk start with 1 increment by 1;
 delete from dbo.DimKans;
 go
 
-SET IDENTITY_INSERT dbo.DimKans ON;
-
 INSERT INTO dbo.DimKans(KansKey, OddsWaarde)
 SELECT 
     NEXT VALUE FOR seq_dk, 

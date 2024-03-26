@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS DimDate;
 GO
 
 CREATE TABLE DimKans (
-    KansKey INT PRIMARY KEY IDENTITY(1,1),
+    KansKey INT PRIMARY KEY,
     OddsWaarde DECIMAL(5,2) NOT NULL
 );
 GO
@@ -46,7 +46,7 @@ CREATE TABLE DimDate (
 GO
 
 CREATE TABLE DimTime (
-    TimeKey INT PRIMARY KEY IDENTITY(1,1),
+    TimeKey INT PRIMARY KEY,
     Uur INT NOT NULL,
     Minuten INT NOT NULL,
     VolledigeTijd TIME NOT NULL
@@ -54,13 +54,13 @@ CREATE TABLE DimTime (
 GO
 
 CREATE TABLE DimWedstrijd (
-    WedstrijdKey INT PRIMARY KEY IDENTITY(1,1),
+    WedstrijdKey INT PRIMARY KEY,
     MatchID INT NOT NULL
 );
 GO
 
 CREATE TABLE FactWedstrijdScore (
-    ScoreID INT PRIMARY KEY IDENTITY(1,1),
+    ScoreID INT PRIMARY KEY,
     TeamKeyUit INT NOT NULL,
     TeamKeyThuis INT NOT NULL,
     WedstrijdKey INT NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE FactWedstrijdScore (
 GO
 
 CREATE TABLE FactWeddenschap (
-    WeddenschapID INT PRIMARY KEY IDENTITY(1,1),
+    WeddenschapID INT PRIMARY KEY,
     TeamKeyUit INT NOT NULL,
     TeamKeyThuis INT NOT NULL,
     WedstrijdKey INT NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE FactWeddenschap (
 GO
 
 CREATE TABLE FactKlassement (
-    KlassementKey INT PRIMARY KEY IDENTITY(1,1),
+    KlassementKey INT PRIMARY KEY,
     BeginDateKey INT NOT NULL,
     EindeDateKey INT NOT NULL,
     TeamKey INT NOT NULL,
