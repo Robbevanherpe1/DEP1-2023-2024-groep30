@@ -4,15 +4,41 @@ import requests
 import csv
 from datetime import datetime
 
-# Function to check if a row (except for the timestamp) already exists in the CSV
-def row_exists(filename, row):
-    with open(filename, 'r', newline='', encoding='utf-8') as file:
-        reader = csv.reader(file)
-        existing_rows = [line[:-1] for line in reader]  # Exclude the timestamp column
-        return row[:-1] in existing_rows
+def filter_bets():
+    input_filename = '/home/vicuser/data/bets.csv'
+    output_filename = '/home/vicuser/data/betsCorrect.csv'
 
-# Function to write data to the CSV, including a new timestamp column
-def write_data_to_csv(data):
+    # Lees de data en sla de unieke regels op, met uitzondering van de timestamp
+    unique_rows = set()
+    with open(input_filename, 'r', newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        header = next(reader)  # Sla de kopregel op
+        for row in reader:
+            # Negeer de timestamp (laatste kolom) voor uniciteit check
+            unique_key = tuple(row[:-1])
+            unique_rows.add(unique_key)
+
+    with open(output_filename, 'w', newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(header + ['Timestamp'])  # Voeg 'Timestamp' toe aan de kopregel
+        current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        for row in sorted(unique_rows, key=lambda x: (x[0], x[2])):  # Sorteer op ID en Starttijd
+            writer.writerow(row + (current_timestamp,))  # Voeg de huidige timestamp toe aan elke rij
+
+    print(f'{len(unique_rows)} unieke regels zijn geschreven naar {output_filename}.')
+
+def write_unique_data_to_csv(unique_rows):
+    output_filename = '/home/vicuser/data/betsCorrect.csv'
+    with open(output_filename, 'w', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        # Voeg 'Timestamp' toe aan de header
+        writer.writerow(['ID', 'Wedstrijd', 'Starttijd', 'Thuisploeg', 'Uitploeg', 'Vraag', 'Keuze', 'Kans', 'Timestamp'])
+        for row in sorted(unique_rows, key=lambda x: (x[0], x[2])):  # Sorteer op ID en Starttijd
+            # Voeg de huidige timestamp toe aan elke rij
+            current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            writer.writerow(list(row) + [current_timestamp])  # Voeg de timestamp toe aan het einde van elke rij
+
+def process_and_write_data(data):
     filename = '/home/vicuser/data/bets.csv'
     with open(filename, 'a', newline='', encoding='utf-8') as file:  # Change mode to 'a' for append
         writer = csv.writer(file)
@@ -37,11 +63,9 @@ def write_data_to_csv(data):
                             # Append the current timestamp
                             current_time = datetime.now().strftime('%d-%m-%Y %H:%M:%S')
                             row = [event_id, event_name, start_time, home_team, away_team, market_name, outcome_name, odds, current_time]
-                            # Only write if the row doesn't already exist
-                            if not row_exists(filename, row):
-                                writer.writerow(row)
+                            writer.writerow(row)
 
-# API call and data processing
+# API-aanroep en gegevensverwerking
 api_url = 'https://api.sportify.bet/echo/v1/events?sport=voetbal&competition=belgium-first-division-a&_cached=true&key=market_type&lang=nl&bookmaker=bet777'
 
 try:
@@ -49,9 +73,10 @@ try:
     response.raise_for_status()
     data = response.json()
 
-    # Write the data to CSV
-    write_data_to_csv(data)
-    print("Data has been successfully written to bets.csv.")
+    # Verwerk en schrijf de data naar CSV
+    process_and_write_data(data)
+    print("Data is succesvol geschreven naar betsCorrect.csv.")
+    filter_bets()
 
 except requests.exceptions.RequestException as e:
-    print(f"Error fetching data: {e}")
+    print(f"Fout bij het ophalen van gegevens: {e}")
