@@ -22,12 +22,11 @@ def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
     if cnxn:
         try:
             with cnxn.cursor() as cursor:
-                columns = ', '.join(column_mapping.values())
+                columns = ', '.join([f'[{col}]' for col in column_mapping.values()])
                 placeholders = ', '.join(['?'] * len(column_mapping))
                 query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
-                # Prepare data as a list of tuples for the executemany method
+                logging.info(f"Executing query: {query}")
                 data_tuples = [tuple(row[key] for key in column_mapping.keys()) for _, row in data.iterrows()]
-                # Use executemany for bulk insert
                 cursor.executemany(query, data_tuples)
                 cnxn.commit()
         except pyodbc.DatabaseError as db_err:
@@ -77,48 +76,35 @@ def calculate_time_fields(time_str):
     
 
 def process_and_load_csv(csv_path, cnxn):
-    df = pd.read_csv(csv_path, sep=';') # Lees de CSV in met de juiste scheidingsteken
+    df = pd.read_csv(csv_path, sep=';')
     if 'Datum' in df.columns:
-        df = pd.concat([df.drop(columns=['Datum']), df['Datum'].apply(lambda x: calculate_date_fields(x)).apply(pd.Series)], axis=1)
+        date_fields_df = df['Datum'].apply(calculate_date_fields).apply(pd.Series)
+        df = pd.concat([df.drop(columns=['Datum']), date_fields_df], axis=1)
     
-    # Nieuw: Voor Tijdstip
     if 'Tijdstip' in df.columns:
-        df = pd.concat([df.drop(columns=['Tijdstip']), df['Tijdstip'].apply(calculate_time_fields).apply(pd.Series)], axis=1)
+        time_fields_df = df['Tijdstip'].apply(calculate_time_fields).apply(pd.Series)
+        df = pd.concat([df.drop(columns=['Tijdstip']), time_fields_df], axis=1)
 
-    
-    # Combineer stamnummers
-    df['Stamnummer'] = df['StamnummerThuisploeg'].astype(str) + df['StamnummerUitploeg'].astype(str)
-    
-    # Constanten voor de namen van de tabellen
-    DIM_TEAM = 'DimTeam'
-    DIM_DATE = 'DimDate'
-    DIM_TIME = 'DimTime'
-    DIM_WEDSTRIJD = 'DimWedstrijd'
-    DIM_KANS = 'DimKans'
-    FACT_WEDSTRIJDSCORE = 'FactWedstrijdScore'
-    FACT_WEDDENSCHAP = 'FactWeddenschap'
-    FACT_KLASSERING = 'FactKlassement'
-
-    #Mappings voor de kolomnamen
+    # Mappings voor de kolomnamen, links zijn de kolomnamen in de CSV, rechts zijn de kolomnamen in de database
     mappings = {
-        DIM_TEAM: {
-            'Stamnummer': 'Stamnummer',
-            'RoepNaam': 'PloegNaam'
+        'DimTeam': {
+            'StamnummerThuisploeg': 'Stamnummer',
+            'RoepNaamThuisploeg': 'PloegNaam'
         },  
 
-        DIM_DATE: {k: k for k in calculate_date_fields('Datum').keys()},
+        'DimDate': {k: k for k in calculate_date_fields('Datum').keys()},
 
-        DIM_TIME: {k: k for k in calculate_time_fields('Tijdstip').keys()},
+        'DimTime': {k: k for k in calculate_time_fields('Tijdstip').keys()},
 
-        DIM_WEDSTRIJD: {
+        'DimWedstrijd': {
             'Id': 'MatchID'
         },
 
-        DIM_KANS: {
+        'DimKans': {
             'OddsWaarde': 'OddsWaarde'
         },
 
-        FACT_WEDSTRIJDSCORE: {
+        'FactWedstrijdScore': {
             'TeamKeyUit': 'TeamKeyUit',
             'TeamKeyThuis': 'TeamKeyThuis',
             'WedstrijdKey': 'WedstrijdKey',
@@ -131,7 +117,7 @@ def process_and_load_csv(csv_path, cnxn):
             'RoepnaamScorendePloeg': 'ScorendePloegKey'
         },
 
-        FACT_WEDDENSCHAP: {
+        'FactWeddenschap': {
             'TeamKeyUit': 'TeamKeyUit',
             'TeamKeyThuis': 'TeamKeyThuis',
             'WedstrijdKey': 'WedstrijdKey',
@@ -149,7 +135,7 @@ def process_and_load_csv(csv_path, cnxn):
             'OddsMinderDanXGoals': 'OddsMinderDanXGoals'
         },
         
-        FACT_KLASSERING: {
+        'FactKlassement': {
             'BeginDateKey': 'BeginDateKey',
             'EindeDateKey': 'EindeDateKey',
             'TeamKey': 'TeamKey',
