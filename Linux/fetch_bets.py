@@ -8,22 +8,23 @@ def filter_bets():
     input_filename = '/home/vicuser/data/bets.csv'
     output_filename = '/home/vicuser/data/betsCorrect.csv'
 
-    # Read the data and save unique rows, excluding the timestamp
-    unique_rows = set()
+    # Read the data and save unique rows
+    unique_rows = {}
     with open(input_filename, 'r', newline='') as csvfile:
         reader = csv.reader(csvfile)
         header = next(reader) # Save the header row
         for row in reader:
-            # Ignore the timestamp (last column) for uniqueness check
-            unique_key = tuple(row[:-1])
-            unique_rows.add(unique_key)
+            unique_key = tuple(row[:-1]) # Use all except the timestamp as the key
+            timestamp = row[-1] # Save the original timestamp
+            # If the row is not in unique_rows or if it is but the new timestamp is later, update it
+            if unique_key not in unique_rows or unique_rows[unique_key] < timestamp:
+                unique_rows[unique_key] = timestamp
 
     with open(output_filename, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(header + ['Timestamp']) # Add 'Timestamp' to the header row
-        current_timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        for row in sorted(unique_rows, key=lambda x: (x[0], x[2])): # Sort by ID and Starttijd
-            writer.writerow(row + (current_timestamp,)) # Add the current timestamp to each row
+        writer.writerow(header) # Write the original header row
+        for row, timestamp in sorted(unique_rows.items(), key=lambda x: (x[0][0], x[0][2])): # Sort by ID and Starttijd
+            writer.writerow(row + (timestamp,)) # Use the original timestamp
 
     print(f'{len(unique_rows)} unique rows have been written to {output_filename}.')
 
