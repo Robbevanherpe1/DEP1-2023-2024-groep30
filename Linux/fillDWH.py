@@ -6,6 +6,7 @@ import pyodbc
 from tqdm import tqdm
 from datetime import time
 import logging
+from dateutil.parser import parse
 
 logging.basicConfig(level=logging.INFO)
 
@@ -39,7 +40,7 @@ def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
 
 def calculate_date_fields(datum_str):
     try:
-        datum_obj = datetime.strptime(datum_str, '%Y-%m-%d').date()
+        datum_obj = parse(datum_str).date()
         return {
             'VolledigeDatumAlternatieveSleutel': datum_obj.strftime('%Y-%m-%d'),
             'Datum': datum_str,
@@ -63,7 +64,7 @@ def calculate_date_fields(datum_str):
 
 def calculate_time_fields(time_str):
     try:
-        tijd_obj = time.fromisoformat(time_str)
+        tijd_obj = parse(time_str).time()
         return {
             'VolledigeTijdAlternatieveSleutel': tijd_obj.strftime('%H:%M'),
             'Uur': tijd_obj.hour,
