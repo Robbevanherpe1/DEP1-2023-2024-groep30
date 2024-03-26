@@ -40,7 +40,7 @@ def load_data_to_sqlserver(data, table_name, column_mapping, cnxn):
 
 def calculate_date_fields(datum_str):
     try:
-        datum_obj = parse(datum_str).date()
+        datum_obj = datetime.strptime(datum_str, '%Y-%m-%d').date()
         return {
             'VolledigeDatumAlternatieveSleutel': datum_obj.strftime('%Y-%m-%d'),
             'Datum': datum_str,
@@ -64,7 +64,7 @@ def calculate_date_fields(datum_str):
 
 def calculate_time_fields(time_str):
     try:
-        tijd_obj = parse(time_str).time()
+        tijd_obj = time.fromisoformat(time_str)
         return {
             'VolledigeTijdAlternatieveSleutel': tijd_obj.strftime('%H:%M'),
             'Uur': tijd_obj.hour,
@@ -84,6 +84,10 @@ def process_and_load_csv(csv_path, cnxn):
     # Nieuw: Voor Tijdstip
     if 'Tijdstip' in df.columns:
         df = pd.concat([df.drop(columns=['Tijdstip']), df['Tijdstip'].apply(calculate_time_fields).apply(pd.Series)], axis=1)
+
+    
+    # Combineer stamnummers
+    df['Stamnummer'] = df['StamnummerThuisploeg'].astype(str) + df['StamnummerUitploeg'].astype(str)
     
     # Constanten voor de namen van de tabellen
     DIM_TEAM = 'DimTeam'
@@ -100,7 +104,7 @@ def process_and_load_csv(csv_path, cnxn):
         DIM_TEAM: {
             'Stamnummer': 'Stamnummer',
             'RoepNaam': 'PloegNaam'
-        },
+        },  
 
         DIM_DATE: {k: k for k in calculate_date_fields('Datum').keys()},
 
