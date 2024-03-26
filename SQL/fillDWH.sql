@@ -20,8 +20,6 @@ FROM (
 ) AS a;
 
 
-
-
 -- fill DimDate
 drop sequence if exists seq_dd;
 create sequence seq_dd start with 1 increment by 1;
@@ -67,7 +65,6 @@ FROM (
 ) AS b;
 
 
-
 -- fill DimKans
 drop sequence if exists seq_dk;
 create sequence seq_dk start with 1 increment by 1;
@@ -86,3 +83,22 @@ FROM (
     (3.5)
 ) AS c(OddsWaarde);
 
+
+-- fill DimTime
+drop sequence if exists seq_dt;
+create sequence seq_dt start with 1 increment by 1;
+
+delete from dbo.DimTime;
+go
+
+INSERT INTO dbo.DimTime(TimeKey, Uur, Minuten, VolledigeTijd)
+SELECT 
+    NEXT VALUE FOR seq_dt, 
+    CAST(LEFT(tijdstip, CHARINDEX(':', tijdstip) - 1) AS INT),
+    CAST(SUBSTRING(tijdstip, CHARINDEX(':', tijdstip) + 1, 2) AS INT), 
+	Tijdstip
+FROM (
+    SELECT DISTINCT 
+        tijdstip
+    FROM dbo.wedstrijden
+) AS d;
