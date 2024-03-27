@@ -33,15 +33,14 @@ CREATE TABLE DimDate (
     DagVanDeMaand INT NOT NULL,
     DagVanHetJaar INT NOT NULL,
     WeekVanHetJaar INT NOT NULL,
-    DagVanDeWeekInMaand INT NOT NULL,
-    DagVanDeWeekInJaar INT NOT NULL,
+    DagVanDeWeek INT NOT NULL,
     Maand INT NOT NULL,
+	Semester INT NOT NULL,
     Kwartaal INT NOT NULL,
     Jaar INT NOT NULL,
     EngelseDag NVARCHAR(50) NOT NULL,
     EngelseMaand NVARCHAR(50) NOT NULL,
-    EngelsJaar NVARCHAR(50) NOT NULL,
-    DDMMJJJJ NVARCHAR(50) NOT NULL
+    DDMMJJJJ NVARCHAR(50) NOT NULL,
 );
 GO
 
@@ -49,13 +48,16 @@ CREATE TABLE DimTime (
     TimeKey INT PRIMARY KEY,
     Uur INT NOT NULL,
     Minuten INT NOT NULL,
-    VolledigeTijd TIME NOT NULL
+    VolledigeTijd NVARCHAR(50) NOT NULL,
+	AMPMIndicator NVARCHAR(50) NOT NULL,
+	UurVanDeDagInMinuten INT NOT NULL,
+	UurVanDeDagInSeconden INT NOT NULL,
 );
 GO
 
 CREATE TABLE DimWedstrijd (
     WedstrijdKey INT PRIMARY KEY,
-    MatchID INT NOT NULL
+    MatchID INT NOT NULL,
 );
 GO
 
