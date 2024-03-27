@@ -298,8 +298,8 @@ CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
 DELETE FROM dbo.FactWeddenschap;
 GO
 
-INSERT INTO dbo.FactWeddenschapOddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
-
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
+								OddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
 SELECT
     NEXT VALUE FOR seq_fws,
     uit.TeamKey AS TeamKeyUit,
