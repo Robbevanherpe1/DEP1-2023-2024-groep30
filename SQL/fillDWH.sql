@@ -1,7 +1,7 @@
 USE DEP_DWH_G30;
 
 
-
+-- Aanmaken tabellen voor bulk insert
 CREATE TABLE dbo.klassement (
     Seizoen INT,
     Speeldag INT,
@@ -20,7 +20,6 @@ CREATE TABLE dbo.klassement (
     Driepuntensysteem INT
 );
 
--- Tabel voor Doelpunten
 CREATE TABLE dbo.doelpunten (
     Seizoen INT,
     Speeldag INT,
@@ -39,7 +38,6 @@ CREATE TABLE dbo.doelpunten (
     StandUit INT
 );
 
--- Tabel voor Wedstrijden
 CREATE TABLE dbo.wedstrijden (
     Seizoen INT,
     Speeldag INT,
@@ -57,19 +55,18 @@ CREATE TABLE dbo.wedstrijden (
 CREATE TABLE dbo.bets (
     ID NVARCHAR(255),
     Wedstrijd NVARCHAR(255),
-    Starttijd DATETIME2, -- Gebruik DATETIME2 voor flexibiliteit
+    Starttijd DATETIME2,
     Thuisploeg NVARCHAR(255),
     Uitploeg NVARCHAR(255),
     Vraag NVARCHAR(255),
     Keuze NVARCHAR(255),
     Kans FLOAT,
-    Timestamp DATETIME2 -- Gebruik DATETIME2 voor flexibiliteit
+    Timestamp DATETIME2
 );
 
 
--- Importeer CSV-bestanden
--- Importeer Klassement
-BULK INSERT dbo.Klassement
+-- Bulk insert van de CSV-bestanden
+BULK INSERT dbo.klassement
 FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\klassement.csv'
 WITH
 (
@@ -78,8 +75,7 @@ WITH
     FIRSTROW = 2
 );
 
--- Importeer Doelpunten
-BULK INSERT dbo.Doelpunten
+BULK INSERT dbo.doelpunten
 FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\doelpunten.csv'
 WITH
 (
@@ -88,8 +84,7 @@ WITH
     FIRSTROW = 2
 );
 
--- Importeer Wedstrijden
-BULK INSERT dbo.Wedstrijden
+BULK INSERT dbo.wedstrijden
 FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\wedstrijden.csv'
 WITH
 (
@@ -98,8 +93,7 @@ WITH
     FIRSTROW = 2
 );
 
--- Importeer Bets
-BULK INSERT dbo.Bets
+BULK INSERT dbo.bets
 FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\bets.csv'
 WITH
 (
@@ -109,10 +103,16 @@ WITH
 );
 
 
-
-
-
-
+-- Alle tabellen leeg maken
+DELETE FROM dbo.FactKlassement;
+DELETE FROM dbo.FactWeddenschap;
+DELETE FROM dbo.FactWedstrijdScore;
+DELETE FROM dbo.DimTeam;
+DELETE FROM dbo.DimKans;
+DELETE FROM dbo.DimTime;
+DELETE FROM dbo.DimDate;
+DELETE FROM dbo.DimWedstrijd;
+GO
 
 
 -- Vul DimTeam
@@ -133,6 +133,7 @@ SELECT DISTINCT
 	ploeg
 FROM dbo.klassement
 ) AS a;
+
 
 -- Vul DimDate
 DROP SEQUENCE IF EXISTS seq_dd;
@@ -176,6 +177,7 @@ FROM (
     FROM dbo.wedstrijden
 ) AS b;
 
+
 -- Vul DimKans
 DROP SEQUENCE IF EXISTS seq_dk;
 CREATE SEQUENCE seq_dk START WITH 1 INCREMENT BY 1;
@@ -193,6 +195,7 @@ FROM (
     (2.5), 
     (3.5)
 ) AS c(OddsWaarde);
+
 
 -- Vul DimTime
 DROP SEQUENCE IF EXISTS seq_dt;
@@ -216,6 +219,7 @@ FROM (
     FROM dbo.wedstrijden
 ) AS d;
 
+
 -- Vul DimWedstrijd
 DROP SEQUENCE IF EXISTS seq_dw;
 CREATE SEQUENCE seq_dw START WITH 1 INCREMENT BY 1;
@@ -232,6 +236,7 @@ FROM (
 		Id
     FROM dbo.wedstrijden
 ) AS e;
+
 
 -- Vul FactWedstrijdScore
 DROP SEQUENCE IF EXISTS seq_fw;
@@ -262,6 +267,8 @@ FROM dbo.wedstrijden w
 	left join dbo.DimTeam uit on w.RoepnaamUitploeg = uit.PloegNaam
 	left join dbo.DimTeam thuis on w.RoepnaamThuisploeg = thuis.PloegNaam
 
+
+
 -- Vul FactKlassement
 DROP SEQUENCE IF EXISTS seq_fk;
 CREATE SEQUENCE seq_fk START WITH 1 INCREMENT BY 1;
@@ -269,7 +276,6 @@ CREATE SEQUENCE seq_fk START WITH 1 INCREMENT BY 1;
 DELETE FROM dbo.FactKlassement;
 GO
 
--- Insert into FactKlassement
 INSERT INTO dbo.FactKlassement(KlassementKey, BeginDateKey, EindeDateKey, TeamKey, Stand, AantalGespeeld, AantalGewonnen, AantalGelijk, 
 								AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, DoelpuntenSaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn)
 SELECT
@@ -291,6 +297,7 @@ SELECT
 FROM dbo.klassement k
 	left join dbo.DimTeam t on t.PloegNaam = k.Ploeg
 
+
 -- Vul FactWeddenschap
 DROP SEQUENCE IF EXISTS seq_fws;
 CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
@@ -301,27 +308,34 @@ GO
 INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
 								OddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
 SELECT
-    NEXT VALUE FOR seq_fws,
-    uit.TeamKey AS TeamKeyUit,
-    thuis.TeamKey AS TeamKeyThuis,
+	NEXT VALUE FOR seq_fws,
+	ISNULL(uit.TeamKey, 0),
+    ISNULL(thuis.TeamKey, 0),
     '0' AS WedstrijdKey,
-    '0' AS KansKey,
-    '0' AS DateKeyScrape,
-    '0' AS TimeKeyScrape,
-    CONVERT(INT, REPLACE(CONVERT(VARCHAR, b.Starttijd, 112), '-', '')) AS DateKeySpeeldatum,
-    REPLACE(CONVERT(VARCHAR, b.Starttijd, 108), ':', '') AS TimeKeySpeeldatum,
-    MAX(CASE WHEN b.Vraag = 'Wedstrijduitslag' AND b.Keuze = '1' THEN b.Kans ELSE NULL END) AS OddsThuisWint,
-    MAX(CASE WHEN b.Vraag = 'Wedstrijduitslag' AND b.Keuze = '2' THEN b.Kans ELSE NULL END) AS OddsUitWint,
-    MAX(CASE WHEN b.Vraag = 'Wedstrijduitslag' AND b.Keuze = 'Gelijkspel' THEN b.Kans ELSE NULL END) AS OddsGelijk,
-    MAX(CASE WHEN b.Vraag = 'Beide teams zullen scoren' AND b.Keuze = 'Ja' THEN b.Kans ELSE NULL END) AS OddsBeideTeamsScoren,
-    MAX(CASE WHEN b.Vraag = 'Beide teams zullen scoren' AND b.Keuze = 'Nee' THEN b.Kans ELSE NULL END) AS OddsNietBeideTeamsScoren,
-    MAX(CASE WHEN b.Vraag = 'Totaal aantal goals' AND b.Keuze LIKE 'Meer dan%' THEN b.Kans ELSE NULL END) AS OddsMeerDanXGoals,
-    MAX(CASE WHEN b.Vraag = 'Totaal aantal goals' AND b.Keuze LIKE 'Onder%' THEN b.Kans ELSE NULL END) AS OddsMinderDanXGoals
+    2 AS KansKey,
+	ISNULL(d.datekey, 0),
+	ISNULL(t.timekey, 0),
+	ISNULL(d2.datekey, 0),
+	ISNULL(t2.timekey, 0),
+	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Wedstrijduitslag' AND b.Keuze = '1' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
+	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsThuisWint,
+	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Wedstrijduitslag' AND b.Keuze = '2' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
+	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsUitWint,
+	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Wedstrijduitslag' AND b.Keuze = '2' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
+	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsGelijk,
+	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Beide teams zullen scoren' AND b.Keuze = 'Ja' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
+	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsBeideTeamsScoren,
+	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Beide teams zullen scoren' AND b.Keuze = 'Nee' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
+	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsNietBeideTeamsScoren,
+	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Totaal aantal goals' AND b.Keuze LIKE 'Meer dan%' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
+	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsMeerDanXGoals,
+	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Totaal aantal goals' AND  b.Keuze LIKE 'Onder%' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
+	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsMinderDanXGoals
 FROM
     dbo.bets b
     LEFT JOIN dbo.DimTeam uit ON uit.PloegNaam = b.Uitploeg
     LEFT JOIN dbo.DimTeam thuis ON thuis.PloegNaam = b.Thuisploeg
-GROUP BY
-    uit.TeamKey,
-    thuis.TeamKey,
-    b.Starttijd
+	LEFT JOIN dbo.DimDate d ON RIGHT('0' + CONVERT(VARCHAR, DAY(b.starttijd)), 2) + RIGHT('0' + CONVERT(VARCHAR, MONTH(b.starttijd)), 2) + CONVERT(VARCHAR, YEAR(b.starttijd)) = d.DDMMJJJJ
+	LEFT JOIN dbo.DimTime t ON DATEDIFF(MINUTE, CAST(b.starttijd AS DATE), b.starttijd) = t.UurVanDeDagInMinuten
+	LEFT JOIN dbo.DimDate d2 ON FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ
+	LEFT JOIN dbo.DimTime t2 ON DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) = t2.UurVanDeDagInMinuten
