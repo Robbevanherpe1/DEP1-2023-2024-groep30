@@ -130,10 +130,3 @@ CREATE TABLE FactKlassement (
     FOREIGN KEY (TeamKey) REFERENCES DimTeam(TeamKey)
 );
 GO
--- SELECT * FROM DimKans;
--- SELECT * FROM DimTeam;
--- SELECT * FROM DimDate;
--- SELECT * FROM DimWedstrijd;
--- SELECT * FROM FactWedstrijdScore;
--- SELECT * FROM FactWeddenschap;
--- SELECT * FROM FactKlassement;
