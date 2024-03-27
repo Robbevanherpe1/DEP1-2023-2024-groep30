@@ -141,11 +141,11 @@ SELECT
    we.WedstrijdKey,
    da.DateKey,
    t.TimeKey,
-   d.StandThuis,
-   d.StandUit,
+   ISNULL(d.StandThuis, 0),
+   ISNULL(d.StandUit, 0),
    w.FinaleStandThuisploeg,
    w.FinaleStandUitploeg,
-   d.RoepnaamScorendePloeg
+   ISNULL(d.RoepnaamScorendePloeg, 0)
 FROM dbo.wedstrijden w
 	left join dbo.doelpunten d on d.Id = w.Id
 	left join dbo.DimDate da on da.Datum = w.datum
@@ -156,11 +156,11 @@ FROM dbo.wedstrijden w
 
 
 -- fill FactKlassement
-drop sequence if exists seq_fk;
-create sequence seq_fk start with 1 increment by 1;
+DROP SEQUENCE IF EXISTS seq_fk;
+CREATE SEQUENCE seq_fk START WITH 1 INCREMENT BY 1;
 
-delete from dbo.FactKlassement;
-go
+DELETE FROM dbo.FactKlassement;
+GO
 
 -- Insert into FactKlassement
 INSERT INTO dbo.FactKlassement(KlassementKey, BeginDateKey, EindeDateKey, TeamKey, Stand, AantalGespeeld, AantalGewonnen, AantalGelijk, 
@@ -168,7 +168,7 @@ INSERT INTO dbo.FactKlassement(KlassementKey, BeginDateKey, EindeDateKey, TeamKe
 SELECT
     NEXT VALUE FOR seq_fk,
 	k.Seizoen,
-    k.Seizoen,
+    k.Seizoen + 1,
 	t.TeamKey,
 	k.Stand,
 	k.AantalGespeeld,
@@ -186,11 +186,11 @@ FROM dbo.klassement k
 
 
 -- fill FactWeddenschap
-drop sequence if exists seq_fws;
-create sequence seq_fws start with 1 increment by 1;
+DROP SEQUENCE IF EXISTS seq_fws;
+CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
 
-delete from dbo.FactWeddenschap;
-go
+DELETE FROM dbo.FactWeddenschap;
+GO
 
 INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
 								OddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
@@ -198,10 +198,10 @@ SELECT
     NEXT VALUE FOR seq_fws,
     uit.TeamKey AS TeamKeyUit,
     thuis.TeamKey AS TeamKeyThuis,
-    '0' AS WedstrijdKey, -- Placeholder for actual WedstrijdKey if applicable
-    '0' AS KansKey, -- Placeholder for actual KansKey if applicable
-    '0' AS DateKeyScrape, -- Placeholder for actual DateKeyScrape if applicable
-    '0' AS TimeKeyScrape, -- Placeholder for actual TimeKeyScrape if applicable
+    '0' AS WedstrijdKey,
+    '0' AS KansKey,
+    '0' AS DateKeyScrape,
+    '0' AS TimeKeyScrape,
     CONVERT(INT, REPLACE(CONVERT(VARCHAR, b.Starttijd, 112), '-', '')) AS DateKeySpeeldatum,
     REPLACE(CONVERT(VARCHAR, b.Starttijd, 108), ':', '') AS TimeKeySpeeldatum,
     MAX(CASE WHEN b.Vraag = 'Wedstrijduitslag' AND b.Keuze = '1' THEN b.Kans ELSE NULL END) AS OddsThuisWint,
