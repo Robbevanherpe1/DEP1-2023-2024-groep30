@@ -271,7 +271,7 @@ GO
 
 -- Insert into FactKlassement
 INSERT INTO dbo.FactKlassement(KlassementKey, BeginDateKey, EindeDateKey, TeamKey, Stand, AantalGespeeld, AantalGewonnen, AantalGelijk, 
-								AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, Doelpuntensaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn)
+								AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, DoelpuntenSaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn)
 SELECT
     NEXT VALUE FOR seq_fk,
 	k.Seizoen,
@@ -298,8 +298,7 @@ CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
 DELETE FROM dbo.FactWeddenschap;
 GO
 
-INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
-								OddsThuisWint, OddsUitWint, Odds```
+INSERT INTO dbo.FactWeddenschapOddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
 
 SELECT
     NEXT VALUE FOR seq_fws,
