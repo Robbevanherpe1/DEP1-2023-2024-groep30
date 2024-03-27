@@ -1,6 +1,122 @@
 USE DEP_DWH_G30;
 
--- fill DimTeam
+
+
+CREATE TABLE dbo.klassement (
+    Seizoen INT,
+    Speeldag INT,
+    Stand INT,
+    Stamnummer INT,
+    Ploeg NVARCHAR(255),
+    AantalGespeeld INT,
+    AantalGewonnen INT,
+    AantalGelijk INT,
+    AantalVerloren INT,
+    DoelpuntenVoor INT,
+    DoelpuntenTegen INT,
+    Doelpuntensaldo INT,
+    Links_Tweepuntensysteem INT,
+    Rechts_Tweepuntensysteem INT,
+    Driepuntensysteem INT
+);
+
+-- Tabel voor Doelpunten
+CREATE TABLE dbo.doelpunten (
+    Seizoen INT,
+    Speeldag INT,
+    Datum DATE,
+    Tijdstip TIME,
+    Id INT,
+    StamnummerThuisploeg INT,
+    RoepnaamThuisploeg NVARCHAR(255),
+    StamnummerUitploeg INT,
+    RoepnaamUitploeg NVARCHAR(255),
+    MinDoelpunt INT,
+    TijdstipDoelpunt TIME,
+    StamnummerScorendePloeg INT,
+    RoepnaamScorendePloeg NVARCHAR(255),
+    StandThuis INT,
+    StandUit INT
+);
+
+-- Tabel voor Wedstrijden
+CREATE TABLE dbo.wedstrijden (
+    Seizoen INT,
+    Speeldag INT,
+    Datum DATE,
+    Tijdstip TIME,
+    Id INT,
+    StamnummerThuisploeg INT,
+    RoepnaamThuisploeg NVARCHAR(255),
+    StamnummerUitploeg INT,
+    RoepnaamUitploeg NVARCHAR(255),
+    FinaleStandThuisploeg INT,
+    FinaleStandUitploeg INT
+);
+
+CREATE TABLE dbo.bets (
+    ID NVARCHAR(255),
+    Wedstrijd NVARCHAR(255),
+    Starttijd DATETIME2, -- Gebruik DATETIME2 voor flexibiliteit
+    Thuisploeg NVARCHAR(255),
+    Uitploeg NVARCHAR(255),
+    Vraag NVARCHAR(255),
+    Keuze NVARCHAR(255),
+    Kans FLOAT,
+    Timestamp DATETIME2 -- Gebruik DATETIME2 voor flexibiliteit
+);
+
+
+-- Importeer CSV-bestanden
+-- Importeer Klassement
+BULK INSERT dbo.Klassement
+FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\klassement.csv'
+WITH
+(
+    FIELDTERMINATOR = ';',
+    ROWTERMINATOR = '\n',
+    FIRSTROW = 2
+);
+
+-- Importeer Doelpunten
+BULK INSERT dbo.Doelpunten
+FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\doelpunten.csv'
+WITH
+(
+    FIELDTERMINATOR = ';',
+    ROWTERMINATOR = '\n',
+    FIRSTROW = 2
+);
+
+-- Importeer Wedstrijden
+BULK INSERT dbo.Wedstrijden
+FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\wedstrijden.csv'
+WITH
+(
+    FIELDTERMINATOR = ';',
+    ROWTERMINATOR = '\n',
+    FIRSTROW = 2
+);
+
+-- Importeer Bets
+BULK INSERT dbo.Bets
+FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\bets.csv'
+WITH
+(
+    FIELDTERMINATOR = ',',
+    ROWTERMINATOR = '\n',
+    FIRSTROW = 1
+);
+
+
+
+SELECT * FROM sys.tables WHERE name = 'wedstrijden';
+SELECT * FROM sys.tables WHERE name = 'klassement';
+
+
+
+
+-- Vul DimTeam
 DROP SEQUENCE IF EXISTS seq_dt;
 CREATE SEQUENCE seq_dt START WITH 1 INCREMENT BY 1;
 
@@ -19,8 +135,7 @@ SELECT DISTINCT
 FROM dbo.klassement
 ) AS a;
 
-
--- fill DimDate
+-- Vul DimDate
 DROP SEQUENCE IF EXISTS seq_dd;
 CREATE SEQUENCE seq_dd START WITH 1 INCREMENT BY 1;
 
@@ -62,8 +177,7 @@ FROM (
     FROM dbo.wedstrijden
 ) AS b;
 
-
--- fill DimKans
+-- Vul DimKans
 DROP SEQUENCE IF EXISTS seq_dk;
 CREATE SEQUENCE seq_dk START WITH 1 INCREMENT BY 1;
 
@@ -81,8 +195,7 @@ FROM (
     (3.5)
 ) AS c(OddsWaarde);
 
-
--- fill DimTime
+-- Vul DimTime
 DROP SEQUENCE IF EXISTS seq_dt;
 CREATE SEQUENCE seq_dt START WITH 1 INCREMENT BY 1;
 
@@ -104,10 +217,7 @@ FROM (
     FROM dbo.wedstrijden
 ) AS d;
 
-
-
-
--- fill DimWedstrijd
+-- Vul DimWedstrijd
 DROP SEQUENCE IF EXISTS seq_dw;
 CREATE SEQUENCE seq_dw START WITH 1 INCREMENT BY 1;
 
@@ -124,8 +234,7 @@ FROM (
     FROM dbo.wedstrijden
 ) AS e;
 
-
--- fill FactWedstrijdScore
+-- Vul FactWedstrijdScore
 DROP SEQUENCE IF EXISTS seq_fw;
 CREATE SEQUENCE seq_fw START WITH 1 INCREMENT BY 1;
 
@@ -154,8 +263,7 @@ FROM dbo.wedstrijden w
 	left join dbo.DimTeam uit on w.RoepnaamUitploeg = uit.PloegNaam
 	left join dbo.DimTeam thuis on w.RoepnaamThuisploeg = thuis.PloegNaam
 
-
--- fill FactKlassement
+-- Vul FactKlassement
 DROP SEQUENCE IF EXISTS seq_fk;
 CREATE SEQUENCE seq_fk START WITH 1 INCREMENT BY 1;
 
@@ -164,7 +272,7 @@ GO
 
 -- Insert into FactKlassement
 INSERT INTO dbo.FactKlassement(KlassementKey, BeginDateKey, EindeDateKey, TeamKey, Stand, AantalGespeeld, AantalGewonnen, AantalGelijk, 
-								AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, DoelpuntenSaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn)
+								AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, Doelpuntensaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn)
 SELECT
     NEXT VALUE FOR seq_fk,
 	k.Seizoen,
@@ -184,8 +292,7 @@ SELECT
 FROM dbo.klassement k
 	left join dbo.DimTeam t on t.PloegNaam = k.Ploeg
 
-
--- fill FactWeddenschap
+-- Vul FactWeddenschap
 DROP SEQUENCE IF EXISTS seq_fws;
 CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
 
@@ -193,7 +300,8 @@ DELETE FROM dbo.FactWeddenschap;
 GO
 
 INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
-								OddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+								OddsThuisWint, OddsUitWint, Odds```
+
 SELECT
     NEXT VALUE FOR seq_fws,
     uit.TeamKey AS TeamKeyUit,
