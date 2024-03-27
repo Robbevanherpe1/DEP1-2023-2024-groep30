@@ -72,7 +72,7 @@ CREATE TABLE FactWedstrijdScore (
     ScoreUit INT NOT NULL,
     EindscoreThuis INT NOT NULL,
     EindscoreUit INT NOT NULL,
-    ScorendePloegKey INT NOT NULL,
+    ScorendePloegIndicator NVARCHAR(50) NOT NULL,
     FOREIGN KEY (TeamKeyUit) REFERENCES DimTeam(TeamKey),
     FOREIGN KEY (TeamKeyThuis) REFERENCES DimTeam(TeamKey),
     FOREIGN KEY (WedstrijdKey) REFERENCES DimWedstrijd(WedstrijdKey),

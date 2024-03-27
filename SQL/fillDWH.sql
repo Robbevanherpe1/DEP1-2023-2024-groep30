@@ -133,7 +133,7 @@ DELETE FROM dbo.FactWedstrijdScore;
 GO
 
 INSERT INTO dbo.FactWedstrijdScore(WedstrijdScoreKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, DateKey, TimeKey, ScoreThuis, 
-									ScoreUit, EindscoreThuis, EindscoreUit, ScorendePloegKey)
+									ScoreUit, EindscoreThuis, EindscoreUit, ScorendePloegIndicator)
 SELECT 
    NEXT VALUE FOR seq_fw,  
    uit.TeamKey,
