@@ -66,8 +66,8 @@ CREATE TABLE dbo.bets (
 
 
 -- Bulk insert van de CSV-bestanden
-BULK INSERT dbo.klassement
-FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\klassement.csv'
+BULK INSERT dbo.klassement2
+FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\klassement.csv'
 WITH
 (
     FIELDTERMINATOR = ';',
@@ -75,8 +75,8 @@ WITH
     FIRSTROW = 2
 );
 
-BULK INSERT dbo.doelpunten
-FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\doelpunten.csv'
+BULK INSERT dbo.doelpunten2
+FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\doelpunten.csv'
 WITH
 (
     FIELDTERMINATOR = ';',
@@ -85,7 +85,7 @@ WITH
 );
 
 BULK INSERT dbo.wedstrijden
-FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\wedstrijden.csv'
+FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\wedstrijden.csv'
 WITH
 (
     FIELDTERMINATOR = ';',
@@ -94,7 +94,7 @@ WITH
 );
 
 BULK INSERT dbo.bets
-FROM 'C:\Users\ayman\OneDrive\Bureaublad\HoGENT\Data Engineer\Python DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\bets.csv'
+FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\bets.csv'
 WITH
 (
     FIELDTERMINATOR = ',',
