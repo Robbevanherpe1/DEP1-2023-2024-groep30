@@ -110,8 +110,7 @@ WITH
 
 
 
-SELECT * FROM sys.tables WHERE name = 'wedstrijden';
-SELECT * FROM sys.tables WHERE name = 'klassement';
+
 
 
 
