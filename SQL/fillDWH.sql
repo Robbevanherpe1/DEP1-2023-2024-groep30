@@ -66,7 +66,7 @@ CREATE TABLE dbo.bets (
 
 
 -- Bulk insert van de CSV-bestanden
-BULK INSERT dbo.klassement2
+BULK INSERT dbo.klassement
 FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\klassement.csv'
 WITH
 (
@@ -75,7 +75,7 @@ WITH
     FIRSTROW = 2
 );
 
-BULK INSERT dbo.doelpunten2
+BULK INSERT dbo.doelpunten
 FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\doelpunten.csv'
 WITH
 (
