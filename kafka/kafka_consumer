@@ -1,0 +1,14 @@
+from kafka import KafkaConsumer
+import json
+
+# Kafka-consumer initialiseren
+consumer = KafkaConsumer(
+    'WeddenschapWinstKansen',
+    bootstrap_servers=['localhost:9092'],
+    auto_offset_reset='earliest',  # Begin bij het eerst beschikbare bericht
+    enable_auto_commit=True,
+    value_deserializer=lambda x: json.loads(x.decode('utf-8')))
+
+# Berichten consumeren
+for message in consumer:
+    print(f"Bericht ontvangen: {message.value}")
