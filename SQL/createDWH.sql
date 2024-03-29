@@ -29,20 +29,28 @@ GO
 
 CREATE TABLE DimDate (
     DateKey INT PRIMARY KEY,
-    Datum DATE NOT NULL,
+	Datum DATE NOT NULL,
+    Seizoen INT NOT NULL,
+    Speeldag INT NOT NULL,
     DagVanDeMaand INT NOT NULL,
     DagVanHetJaar INT NOT NULL,
     WeekVanHetJaar INT NOT NULL,
     DagVanDeWeek INT NOT NULL,
     Maand INT NOT NULL,
-	Semester INT NOT NULL,
+    Semester INT NOT NULL,
     Kwartaal INT NOT NULL,
     Jaar INT NOT NULL,
     EngelseDag NVARCHAR(50) NOT NULL,
     EngelseMaand NVARCHAR(50) NOT NULL,
     DDMMJJJJ NVARCHAR(50) NOT NULL,
+    IsWeekend BIT NOT NULL,
+    NaamDagVanDeWeek NVARCHAR(50) NOT NULL,
+    IsSchrikkeljaar BIT NOT NULL,
+    WeekVanDeMaand INT NOT NULL,
+    Tijdvak NVARCHAR(50) NOT NULL
 );
 GO
+
 
 CREATE TABLE DimTime (
     TimeKey INT PRIMARY KEY,
