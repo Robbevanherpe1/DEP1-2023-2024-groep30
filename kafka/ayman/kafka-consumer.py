@@ -1,27 +1,27 @@
 from confluent_kafka import Consumer, KafkaError
-import psycopg2
 import mysql.connector
+import csv
+from io import StringIO
+from datetime import datetime
 
-
-# Configureer de consumer
+# Configueer consumer 
 conf = {'bootstrap.servers': 'localhost:9092', 'group.id': 'mygroup', 'auto.offset.reset': 'earliest'}
 consumer = Consumer(conf)
 
-# Abonneer op het Kafka topic
+# Subscribe to the Kafka topic
 consumer.subscribe(['weddenschap_winstkansen'])
 
-# Configureer de databaseverbinding
+# Configureer database connectie
 config = {
- 'user': 'root',
- 'password': 'root',
- 'host': 'LAPTOP-1HKCQFQU',
- 'database': 'DEP_DWH_G30',
- 'raise_on_warnings': True
+    'user': 'root',
+    'password': 'root',
+    'host': 'LAPTOP-1HKCQFQU',
+    'database': 'DEP_DWH_G30',
+    'raise_on_warnings': True
 }
 
-# Maak een verbinding met de database
+# Connecteer met database
 db_conn = mysql.connector.connect(**config)
-
 db_cursor = db_conn.cursor()
 
 try:
@@ -37,20 +37,35 @@ try:
                 print(msg.error())
                 break
 
-        # Verwerk het bericht en voer de SQL-query uit
+        # processeer het bericht
         data = msg.value().decode("utf-8")
-        print(f'Ontvangen bericht: {data}')
+        print(f'Received message: {data}')
         
-        sql_query = f"INSERT INTO weddenschap_winstkansen (kolom) VALUES ('{data}');"
-        db_cursor.execute(sql_query)
-        db_conn.commit()
+        # Use the csv module to parse the CSV data
+        reader = csv.reader(StringIO(data))
+        for row in reader:
+            id, wedstrijd, starttijd, thuisploeg, uitploeg, vraag, keuze, kans, timestamp_str = row
+            
+            #Converteer startij juist 
+            starttijd = starttijd.replace('T', ' ').replace('Z', '')
+            
+            # Converteer data timestamp juiste formaat
+            timestamp = datetime.strptime(timestamp_str, '%d-%m-%Y %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
+            
+            # Zet data in DWH 
+            sql_query = f"""
+            INSERT INTO weddenschap_winstkansen (ID, Wedstrijd, Starttijd, Thuisploeg, Uitploeg, Vraag, Keuze, Kans, Timestamp)
+            VALUES ('{id}', '{wedstrijd}', '{starttijd}', '{thuisploeg}', '{uitploeg}', '{vraag}', '{keuze}', {kans}, '{timestamp}');
+            """
+            db_cursor.execute(sql_query)
+            db_conn.commit()
 
 except KeyboardInterrupt:
     pass
 
 finally:
-    # Verwijder de consumer
+    # Sluit Consumer
     consumer.close()
-    # Sluit de databaseverbinding
+    # Sluit database connectie
     db_cursor.close()
     db_conn.close()
