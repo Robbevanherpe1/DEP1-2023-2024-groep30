@@ -4,14 +4,14 @@ import csv
 from io import StringIO
 from datetime import datetime
 
-# Configueer consumer 
+# Configure consumer 
 conf = {'bootstrap.servers': 'localhost:9092', 'group.id': 'mygroup', 'auto.offset.reset': 'earliest'}
 consumer = Consumer(conf)
 
 # Subscribe to the Kafka topic
 consumer.subscribe(['weddenschap_winstkansen'])
 
-# Configureer database connectie
+# Configure database connection
 config = {
     'user': 'root',
     'password': 'root',
@@ -20,7 +20,7 @@ config = {
     'raise_on_warnings': True
 }
 
-# Connecteer met database
+# Connect to the database
 db_conn = mysql.connector.connect(**config)
 db_cursor = db_conn.cursor()
 
@@ -37,22 +37,25 @@ try:
                 print(msg.error())
                 break
 
-        # processeer het bericht
+        # Process the message
         data = msg.value().decode("utf-8")
         print(f'Received message: {data}')
         
         # Use the csv module to parse the CSV data
         reader = csv.reader(StringIO(data))
         for row in reader:
-            id, wedstrijd, starttijd, thuisploeg, uitploeg, vraag, keuze, kans, timestamp_str = row
+            id, wedstrijd, starttijd, thuisploeg, uitploeg, vraag, keuze, kans, *timestamp_str = row
             
-            #Converteer startij juist 
+            # Correctly format start time
             starttijd = starttijd.replace('T', ' ').replace('Z', '')
             
-            # Converteer data timestamp juiste formaat
-            timestamp = datetime.strptime(timestamp_str, '%d-%m-%Y %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
+            # If timestamp_str is not empty, parse it; otherwise, use the current timestamp
+            if timestamp_str:
+                timestamp = datetime.strptime(timestamp_str[0], '%d-%m-%Y %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S')
+            else:
+                timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S') # Use current timestamp as default
             
-            # Zet data in DWH 
+            # Insert data into DWH 
             sql_query = f"""
             INSERT INTO weddenschap_winstkansen (ID, Wedstrijd, Starttijd, Thuisploeg, Uitploeg, Vraag, Keuze, Kans, Timestamp)
             VALUES ('{id}', '{wedstrijd}', '{starttijd}', '{thuisploeg}', '{uitploeg}', '{vraag}', '{keuze}', {kans}, '{timestamp}');
@@ -64,8 +67,8 @@ except KeyboardInterrupt:
     pass
 
 finally:
-    # Sluit Consumer
+    # Close Consumer
     consumer.close()
-    # Sluit database connectie
+    # Close database connection
     db_cursor.close()
     db_conn.close()
