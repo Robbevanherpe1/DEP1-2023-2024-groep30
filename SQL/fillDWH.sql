@@ -189,7 +189,7 @@ SELECT
     NEXT VALUE FOR seq_fk,
 	ISNULL(bd.DateKey,0),
     ISNULL(ed.DateKey,0),
-	t.TeamKey,
+	ISNULL(t.TeamKey,0),
 	k.Stand,
 	k.AantalGespeeld,
 	k.AantalGewonnen,
@@ -217,7 +217,6 @@ FROM dbo.klassement k
         ELSE 
             CONCAT('20', SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
     END
-
 
 
 -- Vul FactWeddenschap
