@@ -1,108 +1,6 @@
 USE DEP_DWH_G30;
 
 
--- Aanmaken tabellen voor bulk insert
-CREATE TABLE dbo.klassement (
-    Seizoen INT,
-    Speeldag INT,
-    Stand INT,
-    Stamnummer INT,
-    Ploeg NVARCHAR(255),
-    AantalGespeeld INT,
-    AantalGewonnen INT,
-    AantalGelijk INT,
-    AantalVerloren INT,
-    DoelpuntenVoor INT,
-    DoelpuntenTegen INT,
-    Doelpuntensaldo INT,
-    Links_Tweepuntensysteem INT,
-    Rechts_Tweepuntensysteem INT,
-    Driepuntensysteem INT
-);
-
-CREATE TABLE dbo.doelpunten (
-    Seizoen INT,
-    Speeldag INT,
-    Datum DATE,
-    Tijdstip TIME,
-    Id INT,
-    StamnummerThuisploeg INT,
-    RoepnaamThuisploeg NVARCHAR(255),
-    StamnummerUitploeg INT,
-    RoepnaamUitploeg NVARCHAR(255),
-    MinDoelpunt INT,
-    TijdstipDoelpunt TIME,
-    StamnummerScorendePloeg INT,
-    RoepnaamScorendePloeg NVARCHAR(255),
-    StandThuis INT,
-    StandUit INT
-);
-
-CREATE TABLE dbo.wedstrijden (
-    Seizoen INT,
-    Speeldag INT,
-    Datum DATE,
-    Tijdstip TIME,
-    Id INT,
-    StamnummerThuisploeg INT,
-    RoepnaamThuisploeg NVARCHAR(255),
-    StamnummerUitploeg INT,
-    RoepnaamUitploeg NVARCHAR(255),
-    FinaleStandThuisploeg INT,
-    FinaleStandUitploeg INT
-);
-
-CREATE TABLE dbo.bets (
-    ID NVARCHAR(255),
-    Wedstrijd NVARCHAR(255),
-    Starttijd DATETIME2,
-    Thuisploeg NVARCHAR(255),
-    Uitploeg NVARCHAR(255),
-    Vraag NVARCHAR(255),
-    Keuze NVARCHAR(255),
-    Kans FLOAT,
-    Timestamp DATETIME2
-);
-
-
--- Bulk insert van de CSV-bestanden
-BULK INSERT dbo.klassement
-FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\klassement.csv'
-WITH
-(
-    FIELDTERMINATOR = ';',
-    ROWTERMINATOR = '\n',
-    FIRSTROW = 2
-);
-
-BULK INSERT dbo.doelpunten
-FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\doelpunten.csv'
-WITH
-(
-    FIELDTERMINATOR = ';',
-    ROWTERMINATOR = '\n',
-    FIRSTROW = 2
-);
-
-BULK INSERT dbo.wedstrijden
-FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\wedstrijden.csv'
-WITH
-(
-    FIELDTERMINATOR = ';',
-    ROWTERMINATOR = '\n',
-    FIRSTROW = 2
-);
-
-BULK INSERT dbo.bets
-FROM 'D:\Hogent\Visual Studio Code\DEP\DEP1-2023-2024-groep30\transfermarkt\data\correcte_data\bets.csv'
-WITH
-(
-    FIELDTERMINATOR = ',',
-    ROWTERMINATOR = '\n',
-    FIRSTROW = 1
-);
-
-
 -- Alle tabellen leeg maken
 DELETE FROM dbo.FactKlassement;
 DELETE FROM dbo.FactWeddenschap;
@@ -185,7 +83,6 @@ FROM (
     FROM dbo.wedstrijden
 ) AS b;
 GO
-
 
 
 -- Vul DimKans
@@ -290,8 +187,8 @@ INSERT INTO dbo.FactKlassement(KlassementKey, BeginDateKey, EindeDateKey, TeamKe
 								AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, DoelpuntenSaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn)
 SELECT
     NEXT VALUE FOR seq_fk,
-	k.Seizoen,
-    k.Seizoen + 1,
+	ISNULL(bd.DateKey,0),
+    ISNULL(ed.DateKey,0),
 	t.TeamKey,
 	k.Stand,
 	k.AantalGespeeld,
@@ -305,7 +202,22 @@ SELECT
 	k.Rechts_Tweepuntensysteem,
 	k.Driepuntensysteem
 FROM dbo.klassement k
-	left join dbo.DimTeam t on t.PloegNaam = k.Ploeg
+	LEFT JOIN dbo.DimTeam t on t.PloegNaam = k.Ploeg
+	LEFT JOIN dbo.DimDate bd ON bd.Seizoen = 
+    CASE 
+        WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) >= 60 THEN 
+            CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) < 100 THEN '19' ELSE '20' END, SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
+        ELSE 
+            CONCAT('20', SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
+    END
+	LEFT JOIN dbo.DimDate ed ON ed.Seizoen = 
+    CASE 
+        WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) >= 60 THEN 
+            CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 < 100 THEN '19' ELSE '20' END, SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
+        ELSE 
+            CONCAT('20', SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
+    END
+
 
 
 -- Vul FactWeddenschap

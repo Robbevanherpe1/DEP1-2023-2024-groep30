@@ -30,7 +30,7 @@ GO
 CREATE TABLE DimDate (
     DateKey INT PRIMARY KEY,
 	Datum DATE NOT NULL,
-    Seizoen INT NOT NULL,
+    Seizoen NVARCHAR(50) NOT NULL,
     Speeldag INT NOT NULL,
     DagVanDeMaand INT NOT NULL,
     DagVanHetJaar INT NOT NULL,
