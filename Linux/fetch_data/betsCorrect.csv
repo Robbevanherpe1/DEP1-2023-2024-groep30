@@ -153,8 +153,15 @@ ID,Wedstrijd,Starttijd,Thuisploeg,Uitploeg,Vraag,Keuze,Kans
 1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Wedstrijduitslag,2,3.96,31-03-2024 14:00:02
 1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Totaal Aantal Goals,Meer dan (2.5),1.83,31-03-2024 14:00:02
 1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Totaal Aantal Goals,Onder (2.5),1.97,31-03-2024 14:00:02
-1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Beide teams zullen scoren,Ja,1.65,31-03-2024 14:00:02
-1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Beide teams zullen scoren,Nee,2.24,31-03-2024 14:00:02
+1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Beide teams zullen scoren,Ja,2.85,31-03-2024 20:00:01
+1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Beide teams zullen scoren,Nee,1.35,31-03-2024 20:00:01
+1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Wedstrijduitslag,1,1.17,31-03-2024 20:00:01
+1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Wedstrijduitslag,Gelijkspel,5.4,31-03-2024 20:00:01
+1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Wedstrijduitslag,2,26,31-03-2024 20:00:01
+1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Totaal Aantal Goals,Meer dan (1.5),1.57,31-03-2024 20:00:01
+1-24379531,Sint Truidense VV vs KVC Westerlo,2024-03-31T16:30:00.000000Z,Sint Truidense VV,KVC Westerlo,Totaal Aantal Goals,Onder (1.5),2.3,31-03-2024 20:00:01
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Beide teams zullen scoren,Ja,1.65,31-03-2024 20:00:01
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Beide teams zullen scoren,Nee,2.24,31-03-2024 20:00:01
 1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,1,3.5,30-03-2024 08:00:02
 1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,Gelijkspel,3.55,30-03-2024 08:00:02
 1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,2,2,30-03-2024 08:00:02
@@ -163,12 +170,19 @@ ID,Wedstrijd,Starttijd,Thuisploeg,Uitploeg,Vraag,Keuze,Kans
 1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Totaal Aantal Goals,Meer dan (2.5),1.71,30-03-2024 08:00:02
 1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,1,3.56,31-03-2024 08:00:02
 1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,Gelijkspel,3.63,30-03-2024 14:00:02
-1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,2,2.01,31-03-2024 14:00:02
-1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Totaal Aantal Goals,Meer dan (2.5),1.74,31-03-2024 14:00:02
-1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Totaal Aantal Goals,Onder (2.5),2.09,31-03-2024 14:00:02
-1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,1,3.55,31-03-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,2,2.01,31-03-2024 20:00:01
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Totaal Aantal Goals,Meer dan (2.5),1.74,31-03-2024 20:00:01
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Totaal Aantal Goals,Onder (2.5),2.09,31-03-2024 20:00:01
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,1,3.55,31-03-2024 20:00:01
 1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,Gelijkspel,3.61,31-03-2024 08:00:02
-1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,Gelijkspel,3.62,31-03-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,Gelijkspel,3.62,31-03-2024 20:00:01
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Beide teams zullen scoren,Ja,2.2,01-04-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Beide teams zullen scoren,Nee,1.6,01-04-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,1,3.25,01-04-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,Gelijkspel,3,01-04-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Wedstrijduitslag,2,2.35,01-04-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Totaal Aantal Goals,Meer dan (1.5),1.57,01-04-2024 14:00:02
+1-24384330,Cercle Brugge KSV vs Club Brugge,2024-04-01T11:30:00.000000Z,Cercle Brugge KSV,Club Brugge,Totaal Aantal Goals,Onder (1.5),2.3,01-04-2024 14:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Beide teams zullen scoren,Ja,1.59,27-03-2024 08:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Beide teams zullen scoren,Nee,2.36,27-03-2024 08:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.72,29-03-2024 20:00:01
@@ -176,8 +190,8 @@ ID,Wedstrijd,Starttijd,Thuisploeg,Uitploeg,Vraag,Keuze,Kans
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,2,2.39,29-03-2024 20:00:01
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Meer dan (2.5),1.7,27-03-2024 08:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Onder (2.5),2.15,27-03-2024 08:00:02
-1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Beide teams zullen scoren,Ja,1.6,31-03-2024 14:00:02
-1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Beide teams zullen scoren,Nee,2.34,31-03-2024 14:00:02
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Beide teams zullen scoren,Ja,1.6,31-03-2024 20:00:01
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Beide teams zullen scoren,Nee,2.34,31-03-2024 20:00:01
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Meer dan (2.5),1.71,30-03-2024 08:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Onder (2.5),2.14,30-03-2024 08:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.75,30-03-2024 08:00:02
@@ -191,23 +205,83 @@ ID,Wedstrijd,Starttijd,Thuisploeg,Uitploeg,Vraag,Keuze,Kans
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Meer dan (2.5),1.72,30-03-2024 20:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Onder (2.5),2.12,30-03-2024 20:00:02
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.81,31-03-2024 08:00:02
-1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,Gelijkspel,3.47,31-03-2024 14:00:02
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,Gelijkspel,3.47,31-03-2024 20:00:01
 1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,2,2.43,31-03-2024 08:00:02
-1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Meer dan (2.5),1.74,31-03-2024 14:00:02
-1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Onder (2.5),2.09,31-03-2024 14:00:02
-1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.8,31-03-2024 14:00:02
-1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,2,2.44,31-03-2024 14:00:02
-1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Beide teams zullen scoren,Ja,1.84,31-03-2024 14:00:02
-1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Beide teams zullen scoren,Nee,1.96,31-03-2024 14:00:02
-1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Wedstrijduitslag,1,1.66,31-03-2024 14:00:02
-1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Wedstrijduitslag,Gelijkspel,3.85,31-03-2024 14:00:02
-1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Wedstrijduitslag,2,4.8,31-03-2024 14:00:02
-1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Totaal Aantal Goals,Meer dan (2.5),1.83,31-03-2024 14:00:02
-1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Totaal Aantal Goals,Onder (2.5),1.97,31-03-2024 14:00:02
-1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Beide teams zullen scoren,Ja,1.68,31-03-2024 14:00:02
-1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Beide teams zullen scoren,Nee,2.12,31-03-2024 14:00:02
-1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Wedstrijduitslag,1,1.81,31-03-2024 14:00:02
-1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Wedstrijduitslag,Gelijkspel,3.68,31-03-2024 14:00:02
-1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Wedstrijduitslag,2,4.1,31-03-2024 14:00:02
-1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Totaal Aantal Goals,Meer dan (2.5),1.78,31-03-2024 14:00:02
-1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Totaal Aantal Goals,Onder (2.5),2.04,31-03-2024 14:00:02
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Meer dan (2.5),1.74,31-03-2024 20:00:01
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Totaal Aantal Goals,Onder (2.5),2.09,31-03-2024 20:00:01
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.8,31-03-2024 20:00:01
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,2,2.44,31-03-2024 20:00:01
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.82,01-04-2024 08:00:02
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Beide teams zullen scoren,Ja,1.57,01-04-2024 14:00:02
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.9,01-04-2024 14:00:02
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,2,2.37,01-04-2024 14:00:02
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,1,2.96,01-04-2024 17:30:59
+1-24385817,KRC Genk vs Royale Union Saint-Gilloise,2024-04-01T16:30:00.000000Z,KRC Genk,Royale Union Saint-Gilloise,Wedstrijduitslag,2,2.34,01-04-2024 17:30:59
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Beide teams zullen scoren,Ja,1.75,31-03-2024 20:00:01
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Beide teams zullen scoren,Nee,2.08,31-03-2024 20:00:01
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Wedstrijduitslag,1,2.16,31-03-2024 20:00:01
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Wedstrijduitslag,Gelijkspel,3.35,31-03-2024 20:00:01
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Wedstrijduitslag,2,3.23,31-03-2024 20:00:01
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Totaal Aantal Goals,Meer dan (2.5),1.93,31-03-2024 20:00:01
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Totaal Aantal Goals,Onder (2.5),1.82,31-03-2024 20:00:01
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Beide teams zullen scoren,Ja,1.78,01-04-2024 17:30:59
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Beide teams zullen scoren,Nee,2.04,01-04-2024 17:30:59
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Wedstrijduitslag,1,2.03,01-04-2024 17:30:59
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Wedstrijduitslag,Gelijkspel,3.45,01-04-2024 17:30:59
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Wedstrijduitslag,2,3.5,01-04-2024 17:30:59
+1-24414786,KV Mechelen vs Sint Truidense VV,2024-04-05T18:45:00.000000Z,KV Mechelen,Sint Truidense VV,Totaal Aantal Goals,Meer dan (2.5),1.88,01-04-2024 08:00:02
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Beide teams zullen scoren,Ja,1.84,31-03-2024 20:00:01
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Beide teams zullen scoren,Nee,1.96,31-03-2024 20:00:01
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Wedstrijduitslag,1,1.66,31-03-2024 20:00:01
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Wedstrijduitslag,Gelijkspel,3.85,31-03-2024 20:00:01
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Wedstrijduitslag,2,4.8,31-03-2024 20:00:01
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Totaal Aantal Goals,Meer dan (2.5),1.83,31-03-2024 20:00:01
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Totaal Aantal Goals,Onder (2.5),1.97,31-03-2024 20:00:01
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Beide teams zullen scoren,Ja,1.83,01-04-2024 17:30:59
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Beide teams zullen scoren,Nee,1.97,01-04-2024 17:30:59
+1-24419851,Royal Charleroi SC vs RWD Molenbeek 47,2024-04-06T14:00:00.000000Z,Royal Charleroi SC,RWD Molenbeek 47,Wedstrijduitslag,Gelijkspel,3.84,01-04-2024 17:30:59
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Beide teams zullen scoren,Ja,1.68,31-03-2024 20:00:01
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Beide teams zullen scoren,Nee,2.12,31-03-2024 20:00:01
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Wedstrijduitslag,1,1.81,31-03-2024 20:00:01
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Wedstrijduitslag,Gelijkspel,3.68,31-03-2024 20:00:01
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Wedstrijduitslag,2,4.1,31-03-2024 20:00:01
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Totaal Aantal Goals,Meer dan (2.5),1.78,31-03-2024 20:00:01
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Totaal Aantal Goals,Onder (2.5),2.04,31-03-2024 20:00:01
+1-24420321,Standard Liege vs Oud-Heverlee Leuven,2024-04-06T16:15:00.000000Z,Standard Liege,Oud-Heverlee Leuven,Beide teams zullen scoren,Ja,1.72,01-04-2024 17:30:59
+1-24420663,Royal Antwerp FC vs KRC Genk,2024-04-06T18:45:00.000000Z,Royal Antwerp FC,KRC Genk,Wedstrijduitslag,1,2.62,01-04-2024 17:30:59
+1-24420663,Royal Antwerp FC vs KRC Genk,2024-04-06T18:45:00.000000Z,Royal Antwerp FC,KRC Genk,Wedstrijduitslag,Gelijkspel,3.25,01-04-2024 17:30:59
+1-24420663,Royal Antwerp FC vs KRC Genk,2024-04-06T18:45:00.000000Z,Royal Antwerp FC,KRC Genk,Wedstrijduitslag,2,2.62,01-04-2024 17:30:59
+1-24420663,Royal Antwerp FC vs KRC Genk,2024-04-06T18:45:00.000000Z,Royal Antwerp FC,KRC Genk,Beide teams zullen scoren,Ja,1.68,01-04-2024 17:30:59
+1-24420663,Royal Antwerp FC vs KRC Genk,2024-04-06T18:45:00.000000Z,Royal Antwerp FC,KRC Genk,Beide teams zullen scoren,Nee,2.18,01-04-2024 17:30:59
+1-24420663,Royal Antwerp FC vs KRC Genk,2024-04-06T18:45:00.000000Z,Royal Antwerp FC,KRC Genk,Totaal Aantal Goals,Meer dan (2.5),1.88,01-04-2024 17:30:59
+1-24420663,Royal Antwerp FC vs KRC Genk,2024-04-06T18:45:00.000000Z,Royal Antwerp FC,KRC Genk,Totaal Aantal Goals,Onder (2.5),1.92,01-04-2024 17:30:59
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Beide teams zullen scoren,Ja,1.69,31-03-2024 20:00:01
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Beide teams zullen scoren,Nee,2.17,31-03-2024 20:00:01
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Wedstrijduitslag,1,2.31,31-03-2024 20:00:01
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Wedstrijduitslag,Gelijkspel,3.37,31-03-2024 20:00:01
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Wedstrijduitslag,2,2.93,31-03-2024 20:00:01
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Totaal Aantal Goals,Meer dan (2.5),1.86,31-03-2024 20:00:01
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Totaal Aantal Goals,Onder (2.5),1.94,31-03-2024 20:00:01
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Wedstrijduitslag,1,2.35,01-04-2024 17:30:59
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Wedstrijduitslag,Gelijkspel,3.29,01-04-2024 17:30:59
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Wedstrijduitslag,2,2.94,01-04-2024 17:30:59
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Totaal Aantal Goals,Meer dan (2.5),1.88,01-04-2024 17:30:59
+1-24425703,KAS Eupen vs KV Kortrijk,2024-04-07T14:00:00.000000Z,KAS Eupen,KV Kortrijk,Totaal Aantal Goals,Onder (2.5),1.92,01-04-2024 17:30:59
+1-24426330,Club Brugge vs RSC Anderlecht,2024-04-07T16:30:00.000000Z,Club Brugge,RSC Anderlecht,Beide teams zullen scoren,Ja,1.71,01-04-2024 17:30:59
+1-24426330,Club Brugge vs RSC Anderlecht,2024-04-07T16:30:00.000000Z,Club Brugge,RSC Anderlecht,Beide teams zullen scoren,Nee,2.14,01-04-2024 17:30:59
+1-24426330,Club Brugge vs RSC Anderlecht,2024-04-07T16:30:00.000000Z,Club Brugge,RSC Anderlecht,Wedstrijduitslag,1,1.83,01-04-2024 17:30:59
+1-24426330,Club Brugge vs RSC Anderlecht,2024-04-07T16:30:00.000000Z,Club Brugge,RSC Anderlecht,Wedstrijduitslag,Gelijkspel,3.68,01-04-2024 17:30:59
+1-24426330,Club Brugge vs RSC Anderlecht,2024-04-07T16:30:00.000000Z,Club Brugge,RSC Anderlecht,Wedstrijduitslag,2,4,01-04-2024 17:30:59
+1-24426330,Club Brugge vs RSC Anderlecht,2024-04-07T16:30:00.000000Z,Club Brugge,RSC Anderlecht,Totaal Aantal Goals,Meer dan (2.5),1.77,01-04-2024 17:30:59
+1-24426330,Club Brugge vs RSC Anderlecht,2024-04-07T16:30:00.000000Z,Club Brugge,RSC Anderlecht,Totaal Aantal Goals,Onder (2.5),2.05,01-04-2024 17:30:59
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Beide teams zullen scoren,Ja,1.64,31-03-2024 20:00:01
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Beide teams zullen scoren,Nee,2.25,31-03-2024 20:00:01
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Wedstrijduitslag,1,3.82,31-03-2024 20:00:01
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Wedstrijduitslag,Gelijkspel,3.71,31-03-2024 20:00:01
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Wedstrijduitslag,2,1.86,31-03-2024 20:00:01
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Totaal Aantal Goals,Meer dan (2.5),1.69,31-03-2024 20:00:01
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Totaal Aantal Goals,Onder (2.5),2.17,31-03-2024 20:00:01
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Wedstrijduitslag,1,3.81,01-04-2024 14:00:02
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Wedstrijduitslag,Gelijkspel,3.72,01-04-2024 14:00:02
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Wedstrijduitslag,1,3.83,01-04-2024 17:30:59
+1-24426473,KVC Westerlo vs KAA Gent,2024-04-07T17:15:00.000000Z,KVC Westerlo,KAA Gent,Wedstrijduitslag,2,1.85,01-04-2024 17:30:59
