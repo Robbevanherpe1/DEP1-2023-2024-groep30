@@ -12,6 +12,7 @@ powershell java -version
 
 Je zou de versie van de geïnstalleerde Java moeten zien.
 2. Apache Kafka Installeren
+
 ## 2. Apache Kafka Installeren
 
 1. **Download Apache Kafka**: Ga naar de [Apache Kafka downloadpagina](https://kafka.apache.org/downloads) en download de nieuwste versie.
@@ -21,13 +22,13 @@ Je zou de versie van de geïnstalleerde Java moeten zien.
 3. **Start ZooKeeper**: Apache Kafka gebruikt ZooKeeper voor clustercoördinatie. Start ZooKeeper met het volgende commando:
 powershell .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 
-   Laat dit commando draaien in een venster.
+Laat dit commando draaien in een venster.
 
 4. **Start Kafka Broker**: Open een nieuw Command Prompt of PowerShell-venster en start de Kafka broker met het volgende commando:
 powershell .\bin\windows\kafka-server-start.bat .\config\server.properties
 
 Laat dit commando ook draaien in een venster.
-3. Topics Aanmaken
+
 ## 3. Topics Aanmaken
 
 Nu Kafka en ZooKeeper draaien, kun je topics aanmaken.
@@ -37,7 +38,6 @@ Nu Kafka en ZooKeeper draaien, kun je topics aanmaken.
 2. **Maak de topics aan**: Gebruik het volgende commando om de twee gevraagde topics aan te maken:
 powershell .\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic weddenschap_winstkansen .\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic wedstrijduitslag
 
-4. Controleren van Berichten in een Topic
 ## 4. Controleren van Berichten in een Topic
 
 Om te controleren hoeveel berichten er momenteel in een topic staan, kun je het `kafka-console-consumer` commando gebruiken. Dit commando leest berichten van een topic en toont ze in de terminal.
