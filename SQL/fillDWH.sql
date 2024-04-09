@@ -146,34 +146,20 @@ FROM (
 
 
 -- Vul FactWedstrijdScore
-DROP SEQUENCE IF EXISTS seq_fw;
-CREATE SEQUENCE seq_fw START WITH 1 INCREMENT BY 1;
-
-DELETE FROM dbo.FactWedstrijdScore;
-GO
-
-INSERT INTO dbo.FactWedstrijdScore(WedstrijdScoreKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, DateKey, TimeKey, ScoreThuis, 
-									ScoreUit, EindscoreThuis, EindscoreUit, ScorendePloegIndicator)
-SELECT 
-   NEXT VALUE FOR seq_fw,  
-   uit.TeamKey,
-   thuis.teamkey,
-   we.WedstrijdKey,
-   da.DateKey,
-   t.TimeKey,
-   ISNULL(d.StandThuis, 0),
-   ISNULL(d.StandUit, 0),
-   w.FinaleStandThuisploeg,
-   w.FinaleStandUitploeg,
-   ISNULL(d.RoepnaamScorendePloeg, 0)
-FROM dbo.wedstrijden w
-	left join dbo.doelpunten d on d.Id = w.Id
-	left join dbo.DimDate da on da.Datum = w.datum
-	left join dbo.DimTime t on t.VolledigeTijd = w.Tijdstip
-	left join dbo.DimWedstrijd we on we.MatchID = w.id
-	left join dbo.DimTeam uit on w.RoepnaamUitploeg = uit.PloegNaam
-	left join dbo.DimTeam thuis on w.RoepnaamThuisploeg = thuis.PloegNaam
-
+CREATE TABLE IF NOT EXISTS FactWedstrijdScore (
+    WedstrijdScoreKey INT AUTO_INCREMENT,
+    TeamKeyUit INT,
+    TeamKeyThuis INT,
+    WedstrijdKey INT,
+    DateKey INT,
+    TimeKey INT,
+    ScoreThuis INT,
+    ScoreUit INT,
+    EindscoreThuis INT,
+    EindscoreUit INT,
+    ScorendePloegIndicator INT,
+    PRIMARY KEY (WedstrijdScoreKey)
+);
 
 
 -- Vul FactKlassement
