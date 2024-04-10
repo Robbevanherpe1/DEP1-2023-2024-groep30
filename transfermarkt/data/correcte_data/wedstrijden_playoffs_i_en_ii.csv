@@ -1,0 +1,725 @@
+tf_match_id,seizoen,seizoen_alternatief,datum,datum_key,tijdstip,tf_clubid_thuis,tf_clubnaam_thuis,stamnummer_thuis,roepnaam_thuis,tf_clubid_uit,tf_clubnaam_uit,stamnummer_uit,roepnaam_uit,stand_thuis,stand_uit,type
+1003971,2009,09/10,2010-03-27,20100327,18:30,475,St-Truidense VV,373,Sint-Truidense VV,2282,Club Brugge,3,Club Brugge,0,0,Playoff_1
+1003974,2009,09/10,2010-03-27,20100327,20:30,3057,Standard Luik,16,Standard Luik,172,R Charleroi SC,22,R Charleroi SC,2,0,Playoff_2
+1003972,2009,09/10,2010-03-28,20100328,18:00,601,KV Kortrijk,19,KV Kortrijk,157,KAA Gent,7,KAA Gent,1,2,Playoff_1
+1003973,2009,09/10,2010-03-28,20100328,20:30,58,RSC Anderlecht,35,RSC Anderlecht,3508,Zulte Waregem,5381,SV Zulte Waregem,6,0,Playoff_1
+1003975,2009,09/10,2010-03-30,20100330,20:00,566,Germ. Beerschot,3530,Germinal,1184,KRC Genk,322,KRC Genk,1,3,Playoff_2
+1004210,2009,09/10,2010-03-31,20100331,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,475,St-Truidense VV,373,Sint-Truidense VV,1,2,Playoff_1
+1004211,2009,09/10,2010-03-31,20100331,20:30,2282,Club Brugge,3,Club Brugge,601,KV Kortrijk,19,KV Kortrijk,3,0,Playoff_1
+1004212,2009,09/10,2010-03-31,20100331,20:30,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,1,3,Playoff_1
+1003976,2009,09/10,2010-03-31,20100331,20:30,968,KVC Westerlo,2024,KVC Westerlo,354,KV Mechelen,25,KV Mechelen,0,2,Playoff_2
+1003977,2009,09/10,2010-03-31,20100331,20:30,498,KSC Lokeren,282,KSC Lokeren,520,Cercle Brugge,12,Cercle Brugge,5,3,Playoff_2
+1004487,2009,09/10,2010-04-03,20100403,20:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,2,2,Playoff_1
+1004490,2009,09/10,2010-04-03,20100403,20:00,354,KV Mechelen,25,KV Mechelen,498,KSC Lokeren,282,KSC Lokeren,3,1,Playoff_2
+1004492,2009,09/10,2010-04-03,20100403,20:00,172,R Charleroi SC,22,R Charleroi SC,566,Germ. Beerschot,3530,Germinal,0,1,Playoff_2
+1004491,2009,09/10,2010-04-03,20100403,20:00,520,Cercle Brugge,12,Cercle Brugge,968,KVC Westerlo,2024,KVC Westerlo,2,0,Playoff_2
+1004493,2009,09/10,2010-04-04,20100404,20:30,1184,KRC Genk,322,KRC Genk,3057,Standard Luik,16,Standard Luik,1,0,Playoff_2
+1004488,2009,09/10,2010-04-05,20100405,18:00,601,KV Kortrijk,19,KV Kortrijk,475,St-Truidense VV,373,Sint-Truidense VV,1,2,Playoff_1
+1004489,2009,09/10,2010-04-05,20100405,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,157,KAA Gent,7,KAA Gent,1,2,Playoff_1
+1005315,2009,09/10,2010-04-09,20100409,20:30,475,St-Truidense VV,373,Sint-Truidense VV,58,RSC Anderlecht,35,RSC Anderlecht,1,1,Playoff_1
+1005316,2009,09/10,2010-04-10,20100410,18:00,601,KV Kortrijk,19,KV Kortrijk,3508,Zulte Waregem,5381,SV Zulte Waregem,2,0,Playoff_1
+1005743,2009,09/10,2010-04-10,20100410,20:00,172,R Charleroi SC,22,R Charleroi SC,1184,KRC Genk,322,KRC Genk,1,2,Playoff_2
+1005741,2009,09/10,2010-04-10,20100410,20:00,498,KSC Lokeren,282,KSC Lokeren,968,KVC Westerlo,2024,KVC Westerlo,3,3,Playoff_2
+1005742,2009,09/10,2010-04-10,20100410,20:00,354,KV Mechelen,25,KV Mechelen,520,Cercle Brugge,12,Cercle Brugge,1,0,Playoff_2
+1005317,2009,09/10,2010-04-11,20100411,20:30,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,1,1,Playoff_1
+1005744,2009,09/10,2010-04-11,20100411,18:00,3057,Standard Luik,16,Standard Luik,566,Germ. Beerschot,3530,Germinal,3,0,Playoff_2
+1007353,2009,09/10,2010-04-13,20100413,20:30,1184,KRC Genk,322,KRC Genk,172,R Charleroi SC,22,R Charleroi SC,3,0,Playoff_2
+1008039,2009,09/10,2010-04-14,20100414,20:30,157,KAA Gent,7,KAA Gent,475,St-Truidense VV,373,Sint-Truidense VV,0,0,Playoff_1
+1008038,2009,09/10,2010-04-14,20100414,20:30,58,RSC Anderlecht,35,RSC Anderlecht,601,KV Kortrijk,19,KV Kortrijk,1,0,Playoff_1
+1008040,2009,09/10,2010-04-14,20100414,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,2282,Club Brugge,3,Club Brugge,2,0,Playoff_1
+1007354,2009,09/10,2010-04-14,20100414,20:30,968,KVC Westerlo,2024,KVC Westerlo,498,KSC Lokeren,282,KSC Lokeren,2,0,Playoff_2
+1007355,2009,09/10,2010-04-14,20100414,20:30,520,Cercle Brugge,12,Cercle Brugge,354,KV Mechelen,25,KV Mechelen,2,1,Playoff_2
+1007356,2009,09/10,2010-04-15,20100415,20:30,566,Germ. Beerschot,3530,Germinal,3057,Standard Luik,16,Standard Luik,2,2,Playoff_2
+1008719,2009,09/10,2010-04-17,20100417,20:00,475,St-Truidense VV,373,Sint-Truidense VV,601,KV Kortrijk,19,KV Kortrijk,1,0,Playoff_1
+1008723,2009,09/10,2010-04-17,20100417,20:00,498,KSC Lokeren,282,KSC Lokeren,354,KV Mechelen,25,KV Mechelen,2,2,Playoff_2
+1008722,2009,09/10,2010-04-17,20100417,20:00,968,KVC Westerlo,2024,KVC Westerlo,520,Cercle Brugge,12,Cercle Brugge,4,1,Playoff_2
+1008721,2009,09/10,2010-04-18,20100418,18:00,157,KAA Gent,7,KAA Gent,3508,Zulte Waregem,5381,SV Zulte Waregem,5,0,Playoff_1
+1008720,2009,09/10,2010-04-18,20100418,16:00,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+1008724,2009,09/10,2010-04-18,20100418,20:30,3057,Standard Luik,16,Standard Luik,1184,KRC Genk,322,KRC Genk,1,1,Playoff_2
+1008725,2009,09/10,2010-04-18,20100418,20:30,566,Germ. Beerschot,3530,Germinal,172,R Charleroi SC,22,R Charleroi SC,2,2,Playoff_2
+1012524,2009,09/10,2010-04-23,20100423,20:30,601,KV Kortrijk,19,KV Kortrijk,2282,Club Brugge,3,Club Brugge,2,0,Playoff_1
+1012525,2009,09/10,2010-04-24,20100424,20:00,475,St-Truidense VV,373,Sint-Truidense VV,3508,Zulte Waregem,5381,SV Zulte Waregem,1,2,Playoff_1
+1012528,2009,09/10,2010-04-24,20100424,20:00,520,Cercle Brugge,12,Cercle Brugge,498,KSC Lokeren,282,KSC Lokeren,1,1,Playoff_2
+1012527,2009,09/10,2010-04-24,20100424,20:00,354,KV Mechelen,25,KV Mechelen,968,KVC Westerlo,2024,KVC Westerlo,1,3,Playoff_2
+1012526,2009,09/10,2010-04-25,20100425,20:30,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,4,2,Playoff_1
+1012530,2009,09/10,2010-04-25,20100425,18:00,172,R Charleroi SC,22,R Charleroi SC,3057,Standard Luik,16,Standard Luik,1,0,Playoff_2
+1012529,2009,09/10,2010-04-25,20100425,18:00,1184,KRC Genk,322,KRC Genk,566,Germ. Beerschot,3530,Germinal,2,0,Playoff_2
+1018345,2009,09/10,2010-04-30,20100430,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,58,RSC Anderlecht,35,RSC Anderlecht,0,0,Playoff_1
+1018346,2009,09/10,2010-05-01,20100501,20:00,157,KAA Gent,7,KAA Gent,601,KV Kortrijk,19,KV Kortrijk,0,0,Playoff_1
+1018347,2009,09/10,2010-05-02,20100502,18:00,2282,Club Brugge,3,Club Brugge,475,St-Truidense VV,373,Sint-Truidense VV,2,0,Playoff_1
+1019671,2009,09/10,2010-05-05,20100505,20:30,475,St-Truidense VV,373,Sint-Truidense VV,157,KAA Gent,7,KAA Gent,1,1,Playoff_1
+1019669,2009,09/10,2010-05-05,20100505,20:30,2282,Club Brugge,3,Club Brugge,3508,Zulte Waregem,5381,SV Zulte Waregem,3,0,Playoff_1
+1019670,2009,09/10,2010-05-05,20100505,20:30,601,KV Kortrijk,19,KV Kortrijk,58,RSC Anderlecht,35,RSC Anderlecht,1,3,Playoff_1
+1020667,2009,09/10,2010-05-08,20100508,20:00,58,RSC Anderlecht,35,RSC Anderlecht,475,St-Truidense VV,373,Sint-Truidense VV,2,1,Playoff_1
+1020668,2009,09/10,2010-05-08,20100508,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,601,KV Kortrijk,19,KV Kortrijk,1,2,Playoff_1
+1020666,2009,09/10,2010-05-08,20100508,20:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,6,2,Playoff_1
+1091788,2010,10/11,2011-04-02,20110402,18:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,1,1,Playoff_1
+1091791,2010,10/11,2011-04-02,20110402,20:00,354,KV Mechelen,25,KV Mechelen,475,St-Truidense VV,373,Sint-Truidense VV,1,1,Playoff_2
+1091793,2010,10/11,2011-04-02,20110402,20:00,968,KVC Westerlo,2024,KVC Westerlo,601,KV Kortrijk,19,KV Kortrijk,3,0,Playoff_2
+1091794,2010,10/11,2011-04-02,20110402,20:00,566,Germ. Beerschot,3530,Germinal,3508,Zulte Waregem,5381,SV Zulte Waregem,2,0,Playoff_2
+1091792,2010,10/11,2011-04-02,20110402,20:00,520,Cercle Brugge,12,Cercle Brugge,204,Lierse SK,30,Lierse SK,0,0,Playoff_2
+1091790,2010,10/11,2011-04-03,20110403,20:00,1184,KRC Genk,322,KRC Genk,498,KSC Lokeren,282,KSC Lokeren,2,1,Playoff_1
+1091789,2010,10/11,2011-04-03,20110403,20:00,58,RSC Anderlecht,35,RSC Anderlecht,3057,Standard Luik,16,Standard Luik,1,3,Playoff_1
+1092581,2010,10/11,2011-04-08,20110408,20:30,204,Lierse SK,30,Lierse SK,354,KV Mechelen,25,KV Mechelen,1,2,Playoff_2
+1092995,2010,10/11,2011-04-09,20110409,20:00,498,KSC Lokeren,282,KSC Lokeren,157,KAA Gent,7,KAA Gent,1,1,Playoff_1
+1092583,2010,10/11,2011-04-09,20110409,20:00,601,KV Kortrijk,19,KV Kortrijk,566,Germ. Beerschot,3530,Germinal,1,1,Playoff_2
+1092582,2010,10/11,2011-04-09,20110409,20:00,475,St-Truidense VV,373,Sint-Truidense VV,520,Cercle Brugge,12,Cercle Brugge,1,1,Playoff_2
+1092997,2010,10/11,2011-04-10,20110410,20:30,3057,Standard Luik,16,Standard Luik,1184,KRC Genk,322,KRC Genk,2,1,Playoff_1
+1092996,2010,10/11,2011-04-10,20110410,18:00,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,3,0,Playoff_1
+1092584,2010,10/11,2011-04-10,20110410,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,968,KVC Westerlo,2024,KVC Westerlo,1,1,Playoff_2
+1093509,2010,10/11,2011-04-15,20110415,20:30,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,2,0,Playoff_1
+1093510,2010,10/11,2011-04-16,20110416,18:00,157,KAA Gent,7,KAA Gent,3057,Standard Luik,16,Standard Luik,1,3,Playoff_1
+1093515,2010,10/11,2011-04-16,20110416,20:00,601,KV Kortrijk,19,KV Kortrijk,3508,Zulte Waregem,5381,SV Zulte Waregem,0,1,Playoff_2
+1093513,2010,10/11,2011-04-16,20110416,20:00,566,Germ. Beerschot,3530,Germinal,968,KVC Westerlo,2024,KVC Westerlo,3,3,Playoff_2
+1093514,2010,10/11,2011-04-16,20110416,20:00,475,St-Truidense VV,373,Sint-Truidense VV,204,Lierse SK,30,Lierse SK,1,2,Playoff_2
+1093516,2010,10/11,2011-04-16,20110416,20:00,354,KV Mechelen,25,KV Mechelen,520,Cercle Brugge,12,Cercle Brugge,0,0,Playoff_2
+1093511,2010,10/11,2011-04-17,20110417,20:30,2282,Club Brugge,3,Club Brugge,498,KSC Lokeren,282,KSC Lokeren,0,0,Playoff_1
+1097308,2010,10/11,2011-04-20,20110420,20:30,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,3,1,Playoff_1
+1097309,2010,10/11,2011-04-20,20110420,20:30,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,1,1,Playoff_1
+1097310,2010,10/11,2011-04-21,20110421,20:30,3057,Standard Luik,16,Standard Luik,498,KSC Lokeren,282,KSC Lokeren,3,0,Playoff_1
+1097493,2010,10/11,2011-04-22,20110422,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,601,KV Kortrijk,19,KV Kortrijk,2,0,Playoff_2
+1097651,2010,10/11,2011-04-23,20110423,20:00,1184,KRC Genk,322,KRC Genk,157,KAA Gent,7,KAA Gent,3,0,Playoff_1
+1097495,2010,10/11,2011-04-23,20110423,20:00,204,Lierse SK,30,Lierse SK,475,St-Truidense VV,373,Sint-Truidense VV,1,1,Playoff_2
+1097496,2010,10/11,2011-04-23,20110423,20:00,968,KVC Westerlo,2024,KVC Westerlo,566,Germ. Beerschot,3530,Germinal,1,0,Playoff_2
+1097494,2010,10/11,2011-04-23,20110423,20:00,520,Cercle Brugge,12,Cercle Brugge,354,KV Mechelen,25,KV Mechelen,3,1,Playoff_2
+1097652,2010,10/11,2011-04-24,20110424,18:00,498,KSC Lokeren,282,KSC Lokeren,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+1097653,2010,10/11,2011-04-25,20110425,18:00,2282,Club Brugge,3,Club Brugge,3057,Standard Luik,16,Standard Luik,1,1,Playoff_1
+1098116,2010,10/11,2011-04-29,20110429,20:30,3057,Standard Luik,16,Standard Luik,157,KAA Gent,7,KAA Gent,1,0,Playoff_1
+1098165,2010,10/11,2011-04-30,20110430,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,566,Germ. Beerschot,3530,Germinal,1,0,Playoff_2
+1098164,2010,10/11,2011-04-30,20110430,20:00,601,KV Kortrijk,19,KV Kortrijk,968,KVC Westerlo,2024,KVC Westerlo,1,1,Playoff_2
+1098162,2010,10/11,2011-04-30,20110430,20:00,475,St-Truidense VV,373,Sint-Truidense VV,354,KV Mechelen,25,KV Mechelen,2,1,Playoff_2
+1098163,2010,10/11,2011-04-30,20110430,20:00,204,Lierse SK,30,Lierse SK,520,Cercle Brugge,12,Cercle Brugge,3,0,Playoff_2
+1098117,2010,10/11,2011-05-01,20110501,18:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,0,0,Playoff_1
+1098118,2010,10/11,2011-05-01,20110501,20:30,498,KSC Lokeren,282,KSC Lokeren,1184,KRC Genk,322,KRC Genk,0,2,Playoff_1
+1098150,2010,10/11,2011-05-06,20110506,20:30,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,1,0,Playoff_1
+1098152,2010,10/11,2011-05-07,20110507,20:00,3057,Standard Luik,16,Standard Luik,2282,Club Brugge,3,Club Brugge,1,0,Playoff_1
+1098151,2010,10/11,2011-05-07,20110507,18:00,157,KAA Gent,7,KAA Gent,498,KSC Lokeren,282,KSC Lokeren,2,2,Playoff_1
+1098167,2010,10/11,2011-05-07,20110507,20:00,520,Cercle Brugge,12,Cercle Brugge,475,St-Truidense VV,373,Sint-Truidense VV,1,0,Playoff_2
+1098169,2010,10/11,2011-05-07,20110507,20:00,566,Germ. Beerschot,3530,Germinal,601,KV Kortrijk,19,KV Kortrijk,0,0,Playoff_2
+1098168,2010,10/11,2011-05-07,20110507,20:00,968,KVC Westerlo,2024,KVC Westerlo,3508,Zulte Waregem,5381,SV Zulte Waregem,7,1,Playoff_2
+1098166,2010,10/11,2011-05-07,20110507,20:00,354,KV Mechelen,25,KV Mechelen,204,Lierse SK,30,Lierse SK,4,3,Playoff_2
+1098153,2010,10/11,2011-05-10,20110510,20:30,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,3,0,Playoff_1
+1098154,2010,10/11,2011-05-11,20110511,20:30,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,4,1,Playoff_1
+1098155,2010,10/11,2011-05-11,20110511,20:30,498,KSC Lokeren,282,KSC Lokeren,3057,Standard Luik,16,Standard Luik,0,1,Playoff_1
+1102153,2010,10/11,2011-05-13,20110513,20:30,968,KVC Westerlo,2024,KVC Westerlo,520,Cercle Brugge,12,Cercle Brugge,3,0,Playoff_2
+1098157,2010,10/11,2011-05-14,20110514,20:00,498,KSC Lokeren,282,KSC Lokeren,2282,Club Brugge,3,Club Brugge,0,1,Playoff_1
+1098156,2010,10/11,2011-05-14,20110514,20:00,157,KAA Gent,7,KAA Gent,1184,KRC Genk,322,KRC Genk,2,3,Playoff_1
+1098158,2010,10/11,2011-05-14,20110514,20:00,3057,Standard Luik,16,Standard Luik,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+1102154,2010,10/11,2011-05-16,20110516,20:30,520,Cercle Brugge,12,Cercle Brugge,968,KVC Westerlo,2024,KVC Westerlo,2,2,Playoff_2
+1098161,2010,10/11,2011-05-17,20110517,20:00,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,3,0,Playoff_1
+1098160,2010,10/11,2011-05-17,20110517,20:00,58,RSC Anderlecht,35,RSC Anderlecht,498,KSC Lokeren,282,KSC Lokeren,3,4,Playoff_1
+1098159,2010,10/11,2011-05-17,20110517,20:00,1184,KRC Genk,322,KRC Genk,3057,Standard Luik,16,Standard Luik,1,1,Playoff_1
+2194295,2011,11/12,2012-03-30,20120330,20:30,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,2,0,Playoff_1
+2194296,2011,11/12,2012-03-31,20120331,18:00,157,KAA Gent,7,KAA Gent,3057,Standard Luik,16,Standard Luik,3,0,Playoff_1
+2194300,2011,11/12,2012-03-31,20120331,20:00,498,KSC Lokeren,282,KSC Lokeren,3508,Zulte Waregem,5381,SV Zulte Waregem,1,1,Playoff_2
+2194301,2011,11/12,2012-03-31,20120331,20:00,1411,RAEC Mons,44,RAEC Mons,566,Beerschot AC,3530,Germinal,2,0,Playoff_2
+2194298,2011,11/12,2012-03-31,20120331,20:00,2727,OH Leuven,18,Oud-Heverlee Leuven,204,Lierse SK,30,Lierse SK,1,1,Playoff_2
+2194299,2011,11/12,2012-03-31,20120331,20:00,354,KV Mechelen,25,KV Mechelen,520,Cercle Brugge,12,Cercle Brugge,0,3,Playoff_2
+2194297,2011,11/12,2012-04-01,20120401,18:00,58,RSC Anderlecht,35,RSC Anderlecht,601,KV Kortrijk,19,KV Kortrijk,1,1,Playoff_1
+2195210,2011,11/12,2012-04-06,20120406,20:30,3057,Standard Luik,16,Standard Luik,58,RSC Anderlecht,35,RSC Anderlecht,0,0,Playoff_1
+2195213,2011,11/12,2012-04-06,20120406,20:30,566,Beerschot AC,3530,Germinal,498,KSC Lokeren,282,KSC Lokeren,4,1,Playoff_2
+2195211,2011,11/12,2012-04-07,20120407,18:00,1184,KRC Genk,322,KRC Genk,157,KAA Gent,7,KAA Gent,2,0,Playoff_1
+2195215,2011,11/12,2012-04-07,20120407,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,1411,RAEC Mons,44,RAEC Mons,0,2,Playoff_2
+2195214,2011,11/12,2012-04-07,20120407,20:00,520,Cercle Brugge,12,Cercle Brugge,2727,OH Leuven,18,Oud-Heverlee Leuven,6,4,Playoff_2
+2195212,2011,11/12,2012-04-08,20120408,18:00,601,KV Kortrijk,19,KV Kortrijk,2282,Club Brugge,3,Club Brugge,3,1,Playoff_1
+2195216,2011,11/12,2012-04-09,20120409,18:00,204,Lierse SK,30,Lierse SK,354,KV Mechelen,25,KV Mechelen,2,1,Playoff_2
+2197419,2011,11/12,2012-04-11,20120411,20:30,1184,KRC Genk,322,KRC Genk,601,KV Kortrijk,19,KV Kortrijk,2,0,Playoff_1
+2197418,2011,11/12,2012-04-11,20120411,20:30,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,1,4,Playoff_1
+2197420,2011,11/12,2012-04-12,20120412,20:30,3057,Standard Luik,16,Standard Luik,2282,Club Brugge,3,Club Brugge,1,1,Playoff_1
+2204473,2011,11/12,2012-04-13,20120413,20:30,520,Cercle Brugge,12,Cercle Brugge,204,Lierse SK,30,Lierse SK,0,0,Playoff_2
+2197421,2011,11/12,2012-04-14,20120414,20:00,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,1,3,Playoff_1
+2204475,2011,11/12,2012-04-14,20120414,20:00,1411,RAEC Mons,44,RAEC Mons,498,KSC Lokeren,282,KSC Lokeren,1,1,Playoff_2
+2204476,2011,11/12,2012-04-14,20120414,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,566,Beerschot AC,3530,Germinal,2,0,Playoff_2
+2204474,2011,11/12,2012-04-14,20120414,20:00,354,KV Mechelen,25,KV Mechelen,2727,OH Leuven,18,Oud-Heverlee Leuven,2,1,Playoff_2
+2197422,2011,11/12,2012-04-15,20120415,18:00,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,1,0,Playoff_1
+2197423,2011,11/12,2012-04-15,20120415,20:30,601,KV Kortrijk,19,KV Kortrijk,3057,Standard Luik,16,Standard Luik,1,1,Playoff_1
+2197424,2011,11/12,2012-04-21,20120421,20:00,601,KV Kortrijk,19,KV Kortrijk,157,KAA Gent,7,KAA Gent,1,4,Playoff_1
+2207556,2011,11/12,2012-04-21,20120421,20:00,566,Beerschot AC,3530,Germinal,3508,Zulte Waregem,5381,SV Zulte Waregem,3,1,Playoff_2
+2207555,2011,11/12,2012-04-21,20120421,20:00,498,KSC Lokeren,282,KSC Lokeren,1411,RAEC Mons,44,RAEC Mons,1,2,Playoff_2
+2207557,2011,11/12,2012-04-21,20120421,17:30,2727,OH Leuven,18,Oud-Heverlee Leuven,354,KV Mechelen,25,KV Mechelen,4,2,Playoff_2
+2207558,2011,11/12,2012-04-21,20120421,20:00,204,Lierse SK,30,Lierse SK,520,Cercle Brugge,12,Cercle Brugge,2,2,Playoff_2
+2197426,2011,11/12,2012-04-22,20120422,20:30,1184,KRC Genk,322,KRC Genk,3057,Standard Luik,16,Standard Luik,3,2,Playoff_1
+2197425,2011,11/12,2012-04-22,20120422,18:00,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,0,1,Playoff_1
+2197427,2011,11/12,2012-04-27,20120427,20:30,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,0,4,Playoff_1
+2197429,2011,11/12,2012-04-28,20120428,20:30,3057,Standard Luik,16,Standard Luik,601,KV Kortrijk,19,KV Kortrijk,2,0,Playoff_1
+2197428,2011,11/12,2012-04-28,20120428,18:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,2,1,Playoff_1
+2207742,2011,11/12,2012-04-28,20120428,20:00,1411,RAEC Mons,44,RAEC Mons,3508,Zulte Waregem,5381,SV Zulte Waregem,0,1,Playoff_2
+2207741,2011,11/12,2012-04-28,20120428,20:00,498,KSC Lokeren,282,KSC Lokeren,566,Beerschot AC,3530,Germinal,3,1,Playoff_2
+2207740,2011,11/12,2012-04-28,20120428,20:00,354,KV Mechelen,25,KV Mechelen,204,Lierse SK,30,Lierse SK,1,1,Playoff_2
+2207739,2011,11/12,2012-04-28,20120428,20:00,2727,OH Leuven,18,Oud-Heverlee Leuven,520,Cercle Brugge,12,Cercle Brugge,3,2,Playoff_2
+2197430,2011,11/12,2012-05-01,20120501,14:30,2282,Club Brugge,3,Club Brugge,3057,Standard Luik,16,Standard Luik,2,0,Playoff_1
+2197431,2011,11/12,2012-05-02,20120502,20:00,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,1,0,Playoff_1
+2197432,2011,11/12,2012-05-02,20120502,20:30,601,KV Kortrijk,19,KV Kortrijk,1184,KRC Genk,322,KRC Genk,3,4,Playoff_1
+2197433,2011,11/12,2012-05-05,20120505,18:00,157,KAA Gent,7,KAA Gent,601,KV Kortrijk,19,KV Kortrijk,2,3,Playoff_1
+2207746,2011,11/12,2012-05-05,20120505,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,498,KSC Lokeren,282,KSC Lokeren,2,2,Playoff_2
+2207745,2011,11/12,2012-05-05,20120505,20:00,566,Beerschot AC,3530,Germinal,1411,RAEC Mons,44,RAEC Mons,1,1,Playoff_2
+2207743,2011,11/12,2012-05-05,20120505,20:00,520,Cercle Brugge,12,Cercle Brugge,354,KV Mechelen,25,KV Mechelen,3,1,Playoff_2
+2207744,2011,11/12,2012-05-05,20120505,20:00,204,Lierse SK,30,Lierse SK,2727,OH Leuven,18,Oud-Heverlee Leuven,1,2,Playoff_2
+2197434,2011,11/12,2012-05-06,20120506,14:30,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,1,1,Playoff_1
+2197435,2011,11/12,2012-05-06,20120506,18:00,3057,Standard Luik,16,Standard Luik,1184,KRC Genk,322,KRC Genk,2,3,Playoff_1
+2197438,2011,11/12,2012-05-10,20120510,20:30,3057,Standard Luik,16,Standard Luik,157,KAA Gent,7,KAA Gent,2,1,Playoff_1
+2197436,2011,11/12,2012-05-10,20120510,20:30,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,1,2,Playoff_1
+2197437,2011,11/12,2012-05-10,20120510,20:30,601,KV Kortrijk,19,KV Kortrijk,58,RSC Anderlecht,35,RSC Anderlecht,2,0,Playoff_1
+2197439,2011,11/12,2012-05-13,20120513,14:30,2282,Club Brugge,3,Club Brugge,601,KV Kortrijk,19,KV Kortrijk,3,2,Playoff_1
+2197440,2011,11/12,2012-05-13,20120513,14:30,157,KAA Gent,7,KAA Gent,1184,KRC Genk,322,KRC Genk,3,1,Playoff_1
+2197441,2011,11/12,2012-05-13,20120513,14:30,58,RSC Anderlecht,35,RSC Anderlecht,3057,Standard Luik,16,Standard Luik,3,0,Playoff_1
+2305819,2012,12/13,2013-03-30,20130330,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,498,KSC Lokeren,282,KSC Lokeren,1,1,Playoff_1
+2305906,2012,12/13,2013-03-30,20130330,20:00,204,Lierse SK,30,Lierse SK,601,KV Kortrijk,19,KV Kortrijk,0,0,Playoff_2
+2305908,2012,12/13,2013-03-30,20130330,20:00,354,KV Mechelen,25,KV Mechelen,172,R Charleroi SC,22,R Charleroi SC,0,0,Playoff_2
+2305905,2012,12/13,2013-03-30,20130330,18:00,157,KAA Gent,7,KAA Gent,1411,RAEC Mons,44,RAEC Mons,2,1,Playoff_2
+2305907,2012,12/13,2013-03-30,20130330,20:00,2727,OH Leuven,18,Oud-Heverlee Leuven,28643,Waasland-Beveren,4068,Waasland-Beveren,3,1,Playoff_2
+2305821,2012,12/13,2013-04-01,20130401,18:00,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,1,2,Playoff_1
+2305820,2012,12/13,2013-04-01,20130401,14:30,2282,Club Brugge,3,Club Brugge,3057,Standard Luik,16,Standard Luik,0,2,Playoff_1
+2305822,2012,12/13,2013-04-05,20130405,20:30,498,KSC Lokeren,282,KSC Lokeren,2282,Club Brugge,3,Club Brugge,1,4,Playoff_1
+2305823,2012,12/13,2013-04-06,20130406,18:00,3057,Standard Luik,16,Standard Luik,58,RSC Anderlecht,35,RSC Anderlecht,0,0,Playoff_1
+2305909,2012,12/13,2013-04-06,20130406,20:00,601,KV Kortrijk,19,KV Kortrijk,157,KAA Gent,7,KAA Gent,0,0,Playoff_2
+2305912,2012,12/13,2013-04-06,20130406,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,354,KV Mechelen,25,KV Mechelen,1,0,Playoff_2
+2305910,2012,12/13,2013-04-06,20130406,20:00,1411,RAEC Mons,44,RAEC Mons,204,Lierse SK,30,Lierse SK,2,1,Playoff_2
+2305911,2012,12/13,2013-04-06,20130406,20:00,172,R Charleroi SC,22,R Charleroi SC,2727,OH Leuven,18,Oud-Heverlee Leuven,3,0,Playoff_2
+2305824,2012,12/13,2013-04-07,20130407,18:00,1184,KRC Genk,322,KRC Genk,3508,Zulte Waregem,5381,SV Zulte Waregem,1,1,Playoff_1
+2305825,2012,12/13,2013-04-12,20130412,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,3057,Standard Luik,16,Standard Luik,3,4,Playoff_1
+2305826,2012,12/13,2013-04-13,20130413,20:00,1184,KRC Genk,322,KRC Genk,498,KSC Lokeren,282,KSC Lokeren,2,1,Playoff_1
+2305913,2012,12/13,2013-04-13,20130413,18:00,204,Lierse SK,30,Lierse SK,157,KAA Gent,7,KAA Gent,1,2,Playoff_2
+2305914,2012,12/13,2013-04-13,20130413,20:00,601,KV Kortrijk,19,KV Kortrijk,1411,RAEC Mons,44,RAEC Mons,3,0,Playoff_2
+2305916,2012,12/13,2013-04-13,20130413,20:00,172,R Charleroi SC,22,R Charleroi SC,28643,Waasland-Beveren,4068,Waasland-Beveren,1,1,Playoff_2
+2305915,2012,12/13,2013-04-13,20130413,20:00,2727,OH Leuven,18,Oud-Heverlee Leuven,354,KV Mechelen,25,KV Mechelen,0,3,Playoff_2
+2305827,2012,12/13,2013-04-14,20130414,18:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,1,1,Playoff_1
+2305828,2012,12/13,2013-04-16,20130416,20:30,3057,Standard Luik,16,Standard Luik,1184,KRC Genk,322,KRC Genk,3,0,Playoff_1
+2305829,2012,12/13,2013-04-17,20130417,20:00,58,RSC Anderlecht,35,RSC Anderlecht,498,KSC Lokeren,282,KSC Lokeren,3,0,Playoff_1
+2305830,2012,12/13,2013-04-18,20130418,20:30,2282,Club Brugge,3,Club Brugge,3508,Zulte Waregem,5381,SV Zulte Waregem,3,4,Playoff_1
+2305831,2012,12/13,2013-04-20,20130420,18:00,498,KSC Lokeren,282,KSC Lokeren,3057,Standard Luik,16,Standard Luik,4,1,Playoff_1
+2305918,2012,12/13,2013-04-20,20130420,20:00,1411,RAEC Mons,44,RAEC Mons,601,KV Kortrijk,19,KV Kortrijk,2,1,Playoff_2
+2305919,2012,12/13,2013-04-20,20130420,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,172,R Charleroi SC,22,R Charleroi SC,0,0,Playoff_2
+2305917,2012,12/13,2013-04-20,20130420,20:00,157,KAA Gent,7,KAA Gent,204,Lierse SK,30,Lierse SK,3,0,Playoff_2
+2305920,2012,12/13,2013-04-20,20130420,20:00,354,KV Mechelen,25,KV Mechelen,2727,OH Leuven,18,Oud-Heverlee Leuven,1,5,Playoff_2
+2305832,2012,12/13,2013-04-21,20130421,18:00,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,0,2,Playoff_1
+2305833,2012,12/13,2013-04-21,20130421,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+2305834,2012,12/13,2013-04-27,20130427,20:00,498,KSC Lokeren,282,KSC Lokeren,1184,KRC Genk,322,KRC Genk,0,0,Playoff_1
+2305922,2012,12/13,2013-04-27,20130427,20:00,157,KAA Gent,7,KAA Gent,601,KV Kortrijk,19,KV Kortrijk,1,0,Playoff_2
+2305923,2012,12/13,2013-04-27,20130427,20:00,2727,OH Leuven,18,Oud-Heverlee Leuven,172,R Charleroi SC,22,R Charleroi SC,0,0,Playoff_2
+2305921,2012,12/13,2013-04-27,20130427,20:00,204,Lierse SK,30,Lierse SK,1411,RAEC Mons,44,RAEC Mons,0,1,Playoff_2
+2305924,2012,12/13,2013-04-27,20130427,20:00,354,KV Mechelen,25,KV Mechelen,28643,Waasland-Beveren,4068,Waasland-Beveren,2,0,Playoff_2
+2305836,2012,12/13,2013-04-28,20130428,18:00,3057,Standard Luik,16,Standard Luik,3508,Zulte Waregem,5381,SV Zulte Waregem,1,0,Playoff_1
+2305835,2012,12/13,2013-04-28,20130428,14:30,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+2305837,2012,12/13,2013-05-03,20130503,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,1184,KRC Genk,322,KRC Genk,0,4,Playoff_1
+2305926,2012,12/13,2013-05-04,20130504,20:00,1411,RAEC Mons,44,RAEC Mons,157,KAA Gent,7,KAA Gent,1,1,Playoff_2
+2305927,2012,12/13,2013-05-04,20130504,20:00,172,R Charleroi SC,22,R Charleroi SC,354,KV Mechelen,25,KV Mechelen,1,2,Playoff_2
+2305925,2012,12/13,2013-05-04,20130504,20:00,601,KV Kortrijk,19,KV Kortrijk,204,Lierse SK,30,Lierse SK,0,3,Playoff_2
+2305928,2012,12/13,2013-05-04,20130504,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,2727,OH Leuven,18,Oud-Heverlee Leuven,0,1,Playoff_2
+2305839,2012,12/13,2013-05-05,20130505,18:00,2282,Club Brugge,3,Club Brugge,498,KSC Lokeren,282,KSC Lokeren,2,1,Playoff_1
+2305838,2012,12/13,2013-05-05,20130505,14:30,58,RSC Anderlecht,35,RSC Anderlecht,3057,Standard Luik,16,Standard Luik,2,0,Playoff_1
+2305840,2012,12/13,2013-05-11,20130511,20:00,498,KSC Lokeren,282,KSC Lokeren,3508,Zulte Waregem,5381,SV Zulte Waregem,2,3,Playoff_1
+2305841,2012,12/13,2013-05-12,20130512,14:30,3057,Standard Luik,16,Standard Luik,2282,Club Brugge,3,Club Brugge,2,4,Playoff_1
+2305842,2012,12/13,2013-05-12,20130512,18:00,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+2305845,2012,12/13,2013-05-16,20130516,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,2282,Club Brugge,3,Club Brugge,5,2,Playoff_1
+2305843,2012,12/13,2013-05-16,20130516,20:30,1184,KRC Genk,322,KRC Genk,3057,Standard Luik,16,Standard Luik,1,1,Playoff_1
+2305844,2012,12/13,2013-05-16,20130516,20:30,498,KSC Lokeren,282,KSC Lokeren,58,RSC Anderlecht,35,RSC Anderlecht,2,4,Playoff_1
+2305850,2012,12/13,2013-05-19,20130519,14:30,58,RSC Anderlecht,35,RSC Anderlecht,3508,Zulte Waregem,5381,SV Zulte Waregem,1,1,Playoff_1
+2305851,2012,12/13,2013-05-19,20130519,14:30,3057,Standard Luik,16,Standard Luik,498,KSC Lokeren,282,KSC Lokeren,4,3,Playoff_1
+2305849,2012,12/13,2013-05-19,20130519,14:30,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,1,0,Playoff_1
+2451224,2013,13/14,2014-03-28,20140328,20:30,2282,Club Brugge,3,Club Brugge,498,KSC Lokeren,282,KSC Lokeren,5,1,Playoff_1
+2451225,2013,13/14,2014-03-29,20140329,20:00,1184,KRC Genk,322,KRC Genk,3508,Zulte Waregem,5381,SV Zulte Waregem,0,3,Playoff_1
+2451458,2013,13/14,2014-03-29,20140329,20:00,157,KAA Gent,7,KAA Gent,2861,KV Oostende,31,KV Oostende,0,1,Playoff_2
+2451459,2013,13/14,2014-03-29,20140329,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,204,Lierse SK,30,Lierse SK,2,0,Playoff_2
+2451460,2013,13/14,2014-03-29,20140329,20:00,601,KV Kortrijk,19,KV Kortrijk,520,Cercle Brugge,12,Cercle Brugge,4,0,Playoff_2
+2451226,2013,13/14,2014-03-30,20140330,18:00,3057,Standard Luik,16,Standard Luik,58,RSC Anderlecht,35,RSC Anderlecht,1,0,Playoff_1
+2451461,2013,13/14,2014-03-30,20140330,20:30,354,KV Mechelen,25,KV Mechelen,172,R Charleroi SC,22,R Charleroi SC,0,2,Playoff_2
+2451227,2013,13/14,2014-04-04,20140404,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,3057,Standard Luik,16,Standard Luik,2,0,Playoff_1
+2451228,2013,13/14,2014-04-05,20140405,20:00,498,KSC Lokeren,282,KSC Lokeren,1184,KRC Genk,322,KRC Genk,1,1,Playoff_1
+2451463,2013,13/14,2014-04-05,20140405,20:00,204,Lierse SK,30,Lierse SK,157,KAA Gent,7,KAA Gent,1,0,Playoff_2
+2451465,2013,13/14,2014-04-05,20140405,20:00,172,R Charleroi SC,22,R Charleroi SC,601,KV Kortrijk,19,KV Kortrijk,1,1,Playoff_2
+2451462,2013,13/14,2014-04-05,20140405,20:00,2861,KV Oostende,31,KV Oostende,28643,Waasland-Beveren,4068,Waasland-Beveren,0,0,Playoff_2
+2451464,2013,13/14,2014-04-05,20140405,20:00,520,Cercle Brugge,12,Cercle Brugge,354,KV Mechelen,25,KV Mechelen,0,1,Playoff_2
+2451229,2013,13/14,2014-04-06,20140406,20:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,3,0,Playoff_1
+2451230,2013,13/14,2014-04-11,20140411,20:30,498,KSC Lokeren,282,KSC Lokeren,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+2451231,2013,13/14,2014-04-12,20140412,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,2282,Club Brugge,3,Club Brugge,2,1,Playoff_1
+2451468,2013,13/14,2014-04-12,20140412,20:00,520,Cercle Brugge,12,Cercle Brugge,172,R Charleroi SC,22,R Charleroi SC,2,4,Playoff_2
+2451467,2013,13/14,2014-04-12,20140412,20:00,157,KAA Gent,7,KAA Gent,28643,Waasland-Beveren,4068,Waasland-Beveren,2,1,Playoff_2
+2451469,2013,13/14,2014-04-12,20140412,20:00,601,KV Kortrijk,19,KV Kortrijk,354,KV Mechelen,25,KV Mechelen,4,1,Playoff_2
+2451466,2013,13/14,2014-04-12,20140412,20:00,2861,KV Oostende,31,KV Oostende,204,Lierse SK,30,Lierse SK,2,0,Playoff_2
+2451232,2013,13/14,2014-04-13,20140413,18:00,1184,KRC Genk,322,KRC Genk,3057,Standard Luik,16,Standard Luik,2,2,Playoff_1
+2451233,2013,13/14,2014-04-15,20140415,20:30,58,RSC Anderlecht,35,RSC Anderlecht,3508,Zulte Waregem,5381,SV Zulte Waregem,0,0,Playoff_1
+2451234,2013,13/14,2014-04-16,20140416,20:30,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,2,0,Playoff_1
+2451235,2013,13/14,2014-04-17,20140417,20:30,3057,Standard Luik,16,Standard Luik,498,KSC Lokeren,282,KSC Lokeren,2,2,Playoff_1
+2451471,2013,13/14,2014-04-19,20140419,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,157,KAA Gent,7,KAA Gent,2,4,Playoff_2
+2451473,2013,13/14,2014-04-19,20140419,20:00,354,KV Mechelen,25,KV Mechelen,601,KV Kortrijk,19,KV Kortrijk,2,1,Playoff_2
+2451470,2013,13/14,2014-04-19,20140419,20:00,204,Lierse SK,30,Lierse SK,2861,KV Oostende,31,KV Oostende,0,2,Playoff_2
+2451472,2013,13/14,2014-04-19,20140419,20:00,172,R Charleroi SC,22,R Charleroi SC,520,Cercle Brugge,12,Cercle Brugge,2,0,Playoff_2
+2451236,2013,13/14,2014-04-20,20140420,20:00,498,KSC Lokeren,282,KSC Lokeren,3508,Zulte Waregem,5381,SV Zulte Waregem,3,2,Playoff_1
+2451237,2013,13/14,2014-04-21,20140421,14:30,2282,Club Brugge,3,Club Brugge,3057,Standard Luik,16,Standard Luik,0,0,Playoff_1
+2451238,2013,13/14,2014-04-21,20140421,18:00,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,1,0,Playoff_1
+2451239,2013,13/14,2014-04-25,20140425,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,1184,KRC Genk,322,KRC Genk,2,2,Playoff_1
+2451240,2013,13/14,2014-04-26,20140426,18:00,498,KSC Lokeren,282,KSC Lokeren,2282,Club Brugge,3,Club Brugge,1,3,Playoff_1
+2451474,2013,13/14,2014-04-26,20140426,20:00,2861,KV Oostende,31,KV Oostende,157,KAA Gent,7,KAA Gent,1,1,Playoff_2
+2451476,2013,13/14,2014-04-26,20140426,20:00,520,Cercle Brugge,12,Cercle Brugge,601,KV Kortrijk,19,KV Kortrijk,0,4,Playoff_2
+2451475,2013,13/14,2014-04-26,20140426,20:00,204,Lierse SK,30,Lierse SK,28643,Waasland-Beveren,4068,Waasland-Beveren,4,2,Playoff_2
+2451477,2013,13/14,2014-04-26,20140426,20:00,172,R Charleroi SC,22,R Charleroi SC,354,KV Mechelen,25,KV Mechelen,3,0,Playoff_2
+2451241,2013,13/14,2014-04-27,20140427,18:00,58,RSC Anderlecht,35,RSC Anderlecht,3057,Standard Luik,16,Standard Luik,2,1,Playoff_1
+2451242,2013,13/14,2014-05-02,20140502,20:30,3057,Standard Luik,16,Standard Luik,3508,Zulte Waregem,5381,SV Zulte Waregem,4,1,Playoff_1
+2451243,2013,13/14,2014-05-03,20140503,18:00,1184,KRC Genk,322,KRC Genk,498,KSC Lokeren,282,KSC Lokeren,1,2,Playoff_1
+2451480,2013,13/14,2014-05-03,20140503,20:00,601,KV Kortrijk,19,KV Kortrijk,172,R Charleroi SC,22,R Charleroi SC,2,1,Playoff_2
+2451479,2013,13/14,2014-05-03,20140503,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,2861,KV Oostende,31,KV Oostende,0,1,Playoff_2
+2451478,2013,13/14,2014-05-03,20140503,20:00,157,KAA Gent,7,KAA Gent,204,Lierse SK,30,Lierse SK,4,0,Playoff_2
+2451481,2013,13/14,2014-05-03,20140503,20:00,354,KV Mechelen,25,KV Mechelen,520,Cercle Brugge,12,Cercle Brugge,2,0,Playoff_2
+2451244,2013,13/14,2014-05-04,20140504,18:00,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,0,1,Playoff_1
+2457250,2013,13/14,2014-05-09,20140509,20:30,601,KV Kortrijk,19,KV Kortrijk,2861,KV Oostende,31,KV Oostende,2,2,Playoff_2
+2451245,2013,13/14,2014-05-10,20140510,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,498,KSC Lokeren,282,KSC Lokeren,3,1,Playoff_1
+2451246,2013,13/14,2014-05-11,20140511,14:30,3057,Standard Luik,16,Standard Luik,2282,Club Brugge,3,Club Brugge,0,1,Playoff_1
+2451247,2013,13/14,2014-05-11,20140511,18:00,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,4,0,Playoff_1
+2451249,2013,13/14,2014-05-15,20140515,20:30,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,3,2,Playoff_1
+2451250,2013,13/14,2014-05-15,20140515,20:30,498,KSC Lokeren,282,KSC Lokeren,3057,Standard Luik,16,Standard Luik,1,3,Playoff_1
+2451248,2013,13/14,2014-05-15,20140515,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+2457252,2013,13/14,2014-05-17,20140517,20:00,2861,KV Oostende,31,KV Oostende,601,KV Kortrijk,19,KV Kortrijk,9,8,Playoff_2
+2451251,2013,13/14,2014-05-18,20140518,14:30,2282,Club Brugge,3,Club Brugge,3508,Zulte Waregem,5381,SV Zulte Waregem,2,0,Playoff_1
+2451252,2013,13/14,2014-05-18,20140518,14:30,58,RSC Anderlecht,35,RSC Anderlecht,498,KSC Lokeren,282,KSC Lokeren,3,1,Playoff_1
+2451253,2013,13/14,2014-05-18,20140518,14:30,3057,Standard Luik,16,Standard Luik,1184,KRC Genk,322,KRC Genk,1,0,Playoff_1
+2550476,2014,14/15,2015-04-03,20150403,20:30,1184,KRC Genk,322,KRC Genk,3508,Zulte Waregem,5381,SV Zulte Waregem,1,0,Playoff_2
+2550478,2014,14/15,2015-04-04,20150404,18:00,2861,KV Oostende,31,KV Oostende,498,KSC Lokeren,282,KSC Lokeren,1,2,Playoff_2
+2550479,2014,14/15,2015-04-04,20150404,20:00,968,KVC Westerlo,2024,KVC Westerlo,29228,Moeskroen,216,Moeskroen,0,3,Playoff_2
+2550481,2014,14/15,2015-04-05,20150405,20:00,157,KAA Gent,7,KAA Gent,601,KV Kortrijk,19,KV Kortrijk,2,0,Playoff_1
+2550477,2014,14/15,2015-04-05,20150405,18:00,354,KV Mechelen,25,KV Mechelen,28643,Waasland-Beveren,4068,Waasland-Beveren,4,1,Playoff_2
+2550482,2014,14/15,2015-04-06,20150406,14:30,2282,Club Brugge,3,Club Brugge,3057,Standard Luik,16,Standard Luik,2,1,Playoff_1
+2550483,2014,14/15,2015-04-06,20150406,18:00,58,RSC Anderlecht,35,RSC Anderlecht,172,R Charleroi SC,22,R Charleroi SC,1,0,Playoff_1
+2550911,2014,14/15,2015-04-11,20150411,20:30,172,R Charleroi SC,22,R Charleroi SC,157,KAA Gent,7,KAA Gent,2,1,Playoff_1
+2550910,2014,14/15,2015-04-11,20150411,18:00,601,KV Kortrijk,19,KV Kortrijk,2282,Club Brugge,3,Club Brugge,2,0,Playoff_1
+2550947,2014,14/15,2015-04-11,20150411,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,1184,KRC Genk,322,KRC Genk,0,2,Playoff_2
+2550949,2014,14/15,2015-04-11,20150411,20:00,29228,Moeskroen,216,Moeskroen,2861,KV Oostende,31,KV Oostende,2,0,Playoff_2
+2550948,2014,14/15,2015-04-11,20150411,20:00,498,KSC Lokeren,282,KSC Lokeren,968,KVC Westerlo,2024,KVC Westerlo,1,1,Playoff_2
+2550912,2014,14/15,2015-04-12,20150412,18:00,3057,Standard Luik,16,Standard Luik,58,RSC Anderlecht,35,RSC Anderlecht,3,1,Playoff_1
+2550950,2014,14/15,2015-04-12,20150412,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,354,KV Mechelen,25,KV Mechelen,0,1,Playoff_2
+2550913,2014,14/15,2015-04-17,20150417,20:30,3057,Standard Luik,16,Standard Luik,157,KAA Gent,7,KAA Gent,1,3,Playoff_1
+2550954,2014,14/15,2015-04-18,20150418,20:00,29228,Moeskroen,216,Moeskroen,498,KSC Lokeren,282,KSC Lokeren,1,5,Playoff_2
+2550951,2014,14/15,2015-04-18,20150418,18:00,354,KV Mechelen,25,KV Mechelen,1184,KRC Genk,322,KRC Genk,4,0,Playoff_2
+2550953,2014,14/15,2015-04-18,20150418,20:00,2861,KV Oostende,31,KV Oostende,968,KVC Westerlo,2024,KVC Westerlo,2,0,Playoff_2
+2550952,2014,14/15,2015-04-18,20150418,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,28643,Waasland-Beveren,4068,Waasland-Beveren,2,2,Playoff_2
+2550915,2014,14/15,2015-04-19,20150419,20:30,601,KV Kortrijk,19,KV Kortrijk,172,R Charleroi SC,22,R Charleroi SC,1,1,Playoff_1
+2550914,2014,14/15,2015-04-19,20150419,18:00,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+2550955,2014,14/15,2015-04-24,20150424,20:30,1184,KRC Genk,322,KRC Genk,354,KV Mechelen,25,KV Mechelen,1,0,Playoff_2
+2550917,2014,14/15,2015-04-25,20150425,20:30,58,RSC Anderlecht,35,RSC Anderlecht,601,KV Kortrijk,19,KV Kortrijk,5,1,Playoff_1
+2550916,2014,14/15,2015-04-25,20150425,18:00,172,R Charleroi SC,22,R Charleroi SC,3057,Standard Luik,16,Standard Luik,1,0,Playoff_1
+2550956,2014,14/15,2015-04-25,20150425,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,3508,Zulte Waregem,5381,SV Zulte Waregem,0,2,Playoff_2
+2550958,2014,14/15,2015-04-25,20150425,20:00,968,KVC Westerlo,2024,KVC Westerlo,2861,KV Oostende,31,KV Oostende,1,2,Playoff_2
+2550957,2014,14/15,2015-04-25,20150425,20:00,498,KSC Lokeren,282,KSC Lokeren,29228,Moeskroen,216,Moeskroen,2,1,Playoff_2
+2550918,2014,14/15,2015-04-26,20150426,18:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,2,2,Playoff_1
+2550919,2014,14/15,2015-04-28,20150428,20:30,601,KV Kortrijk,19,KV Kortrijk,3057,Standard Luik,16,Standard Luik,3,1,Playoff_1
+2550920,2014,14/15,2015-04-29,20150429,20:30,2282,Club Brugge,3,Club Brugge,172,R Charleroi SC,22,R Charleroi SC,3,1,Playoff_1
+2550921,2014,14/15,2015-04-30,20150430,20:30,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+2550960,2014,14/15,2015-05-01,20150501,20:30,968,KVC Westerlo,2024,KVC Westerlo,498,KSC Lokeren,282,KSC Lokeren,4,3,Playoff_2
+2550959,2014,14/15,2015-05-01,20150501,20:30,2861,KV Oostende,31,KV Oostende,29228,Moeskroen,216,Moeskroen,0,1,Playoff_2
+2550925,2014,14/15,2015-05-02,20150502,18:00,3057,Standard Luik,16,Standard Luik,2282,Club Brugge,3,Club Brugge,1,0,Playoff_1
+2550961,2014,14/15,2015-05-02,20150502,20:00,354,KV Mechelen,25,KV Mechelen,3508,Zulte Waregem,5381,SV Zulte Waregem,3,0,Playoff_2
+2550962,2014,14/15,2015-05-02,20150502,20:00,1184,KRC Genk,322,KRC Genk,28643,Waasland-Beveren,4068,Waasland-Beveren,7,1,Playoff_2
+2550926,2014,14/15,2015-05-03,20150503,14:30,601,KV Kortrijk,19,KV Kortrijk,157,KAA Gent,7,KAA Gent,0,1,Playoff_1
+2550927,2014,14/15,2015-05-03,20150503,18:00,172,R Charleroi SC,22,R Charleroi SC,58,RSC Anderlecht,35,RSC Anderlecht,0,1,Playoff_1
+2550935,2014,14/15,2015-05-08,20150508,20:30,157,KAA Gent,7,KAA Gent,172,R Charleroi SC,22,R Charleroi SC,1,1,Playoff_1
+2550964,2014,14/15,2015-05-09,20150509,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,1184,KRC Genk,322,KRC Genk,2,3,Playoff_2
+2550966,2014,14/15,2015-05-09,20150509,20:00,498,KSC Lokeren,282,KSC Lokeren,2861,KV Oostende,31,KV Oostende,6,1,Playoff_2
+2550965,2014,14/15,2015-05-09,20150509,20:00,29228,Moeskroen,216,Moeskroen,968,KVC Westerlo,2024,KVC Westerlo,1,1,Playoff_2
+2550963,2014,14/15,2015-05-09,20150509,18:00,28643,Waasland-Beveren,4068,Waasland-Beveren,354,KV Mechelen,25,KV Mechelen,1,2,Playoff_2
+2550937,2014,14/15,2015-05-10,20150510,18:00,3057,Standard Luik,16,Standard Luik,601,KV Kortrijk,19,KV Kortrijk,4,0,Playoff_1
+2550936,2014,14/15,2015-05-10,20150510,14:30,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,3,1,Playoff_1
+2550938,2014,14/15,2015-05-17,20150517,14:30,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,2,3,Playoff_1
+2550940,2014,14/15,2015-05-17,20150517,20:30,172,R Charleroi SC,22,R Charleroi SC,601,KV Kortrijk,19,KV Kortrijk,5,2,Playoff_1
+2550939,2014,14/15,2015-05-17,20150517,18:00,58,RSC Anderlecht,35,RSC Anderlecht,3057,Standard Luik,16,Standard Luik,1,1,Playoff_1
+2550941,2014,14/15,2015-05-21,20150521,20:30,172,R Charleroi SC,22,R Charleroi SC,2282,Club Brugge,3,Club Brugge,2,3,Playoff_1
+2550942,2014,14/15,2015-05-21,20150521,20:30,157,KAA Gent,7,KAA Gent,3057,Standard Luik,16,Standard Luik,2,0,Playoff_1
+2550943,2014,14/15,2015-05-21,20150521,20:30,601,KV Kortrijk,19,KV Kortrijk,58,RSC Anderlecht,35,RSC Anderlecht,2,2,Playoff_1
+2550945,2014,14/15,2015-05-24,20150524,14:30,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,2,1,Playoff_1
+2550944,2014,14/15,2015-05-24,20150524,14:30,2282,Club Brugge,3,Club Brugge,601,KV Kortrijk,19,KV Kortrijk,1,0,Playoff_1
+2550946,2014,14/15,2015-05-24,20150524,14:30,3057,Standard Luik,16,Standard Luik,172,R Charleroi SC,22,R Charleroi SC,2,0,Playoff_1
+2673769,2015,15/16,2016-04-01,20160401,20:30,157,KAA Gent,7,KAA Gent,3508,Zulte Waregem,5381,SV Zulte Waregem,1,1,Playoff_1
+2673770,2015,15/16,2016-04-02,20160402,18:00,2861,KV Oostende,31,KV Oostende,2282,Club Brugge,3,Club Brugge,0,1,Playoff_1
+2674027,2015,15/16,2016-04-02,20160402,20:30,498,KSC Lokeren,282,KSC Lokeren,172,R Charleroi SC,22,R Charleroi SC,1,0,Playoff_2
+2674026,2015,15/16,2016-04-02,20160402,20:00,475,St-Truidense VV,373,Sint-Truidense VV,354,KV Mechelen,25,KV Mechelen,0,1,Playoff_2
+2674024,2015,15/16,2016-04-02,20160402,20:00,601,KV Kortrijk,19,KV Kortrijk,29228,Moeskroen,216,Moeskroen,0,0,Playoff_2
+2673771,2015,15/16,2016-04-03,20160403,18:00,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,1,0,Playoff_1
+2674025,2015,15/16,2016-04-03,20160403,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,3057,Standard Luik,16,Standard Luik,0,1,Playoff_2
+2673772,2015,15/16,2016-04-08,20160408,20:30,1184,KRC Genk,322,KRC Genk,2861,KV Oostende,31,KV Oostende,4,0,Playoff_1
+2673773,2015,15/16,2016-04-09,20160409,18:00,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,2,0,Playoff_1
+2674031,2015,15/16,2016-04-09,20160409,20:30,172,R Charleroi SC,22,R Charleroi SC,475,St-Truidense VV,373,Sint-Truidense VV,1,1,Playoff_2
+2674030,2015,15/16,2016-04-09,20160409,20:00,354,KV Mechelen,25,KV Mechelen,498,KSC Lokeren,282,KSC Lokeren,2,1,Playoff_2
+2674028,2015,15/16,2016-04-09,20160409,20:00,29228,Moeskroen,216,Moeskroen,28643,Waasland-Beveren,4068,Waasland-Beveren,0,0,Playoff_2
+2673774,2015,15/16,2016-04-10,20160410,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+2674029,2015,15/16,2016-04-10,20160410,20:00,3057,Standard Luik,16,Standard Luik,601,KV Kortrijk,19,KV Kortrijk,1,1,Playoff_2
+2674048,2015,15/16,2016-04-15,20160415,20:30,157,KAA Gent,7,KAA Gent,2861,KV Oostende,31,KV Oostende,2,0,Playoff_1
+2674049,2015,15/16,2016-04-16,20160416,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,1184,KRC Genk,322,KRC Genk,1,2,Playoff_1
+2674034,2015,15/16,2016-04-16,20160416,20:00,498,KSC Lokeren,282,KSC Lokeren,475,St-Truidense VV,373,Sint-Truidense VV,1,0,Playoff_2
+2674032,2015,15/16,2016-04-16,20160416,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,601,KV Kortrijk,19,KV Kortrijk,2,3,Playoff_2
+2674035,2015,15/16,2016-04-16,20160416,20:30,354,KV Mechelen,25,KV Mechelen,172,R Charleroi SC,22,R Charleroi SC,2,3,Playoff_2
+2674050,2015,15/16,2016-04-17,20160417,18:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,1,0,Playoff_1
+2674033,2015,15/16,2016-04-17,20160417,20:00,29228,Moeskroen,216,Moeskroen,3057,Standard Luik,16,Standard Luik,2,0,Playoff_2
+2674051,2015,15/16,2016-04-19,20160419,20:30,2861,KV Oostende,31,KV Oostende,3508,Zulte Waregem,5381,SV Zulte Waregem,3,3,Playoff_1
+2674052,2015,15/16,2016-04-20,20160420,20:30,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,4,2,Playoff_1
+2674053,2015,15/16,2016-04-21,20160421,20:30,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,1,1,Playoff_1
+2674036,2015,15/16,2016-04-22,20160422,20:30,3057,Standard Luik,16,Standard Luik,29228,Moeskroen,216,Moeskroen,4,1,Playoff_2
+2674054,2015,15/16,2016-04-23,20160423,18:00,2282,Club Brugge,3,Club Brugge,3508,Zulte Waregem,5381,SV Zulte Waregem,5,0,Playoff_1
+2674038,2015,15/16,2016-04-23,20160423,20:00,475,St-Truidense VV,373,Sint-Truidense VV,498,KSC Lokeren,282,KSC Lokeren,2,2,Playoff_2
+2674037,2015,15/16,2016-04-23,20160423,20:00,601,KV Kortrijk,19,KV Kortrijk,28643,Waasland-Beveren,4068,Waasland-Beveren,5,0,Playoff_2
+2674039,2015,15/16,2016-04-23,20160423,20:30,172,R Charleroi SC,22,R Charleroi SC,354,KV Mechelen,25,KV Mechelen,4,0,Playoff_2
+2674056,2015,15/16,2016-04-24,20160424,20:30,1184,KRC Genk,322,KRC Genk,157,KAA Gent,7,KAA Gent,1,2,Playoff_1
+2674055,2015,15/16,2016-04-24,20160424,18:00,2861,KV Oostende,31,KV Oostende,58,RSC Anderlecht,35,RSC Anderlecht,4,2,Playoff_1
+2674057,2015,15/16,2016-04-29,20160429,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,2861,KV Oostende,31,KV Oostende,1,2,Playoff_1
+2674043,2015,15/16,2016-04-30,20160430,18:00,354,KV Mechelen,25,KV Mechelen,475,St-Truidense VV,373,Sint-Truidense VV,1,1,Playoff_2
+2674042,2015,15/16,2016-04-30,20160430,18:00,172,R Charleroi SC,22,R Charleroi SC,498,KSC Lokeren,282,KSC Lokeren,2,2,Playoff_2
+2674040,2015,15/16,2016-04-30,20160430,20:30,601,KV Kortrijk,19,KV Kortrijk,3057,Standard Luik,16,Standard Luik,1,0,Playoff_2
+2674041,2015,15/16,2016-04-30,20160430,20:30,28643,Waasland-Beveren,4068,Waasland-Beveren,29228,Moeskroen,216,Moeskroen,1,0,Playoff_2
+2674058,2015,15/16,2016-05-01,20160501,14:30,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,2,0,Playoff_1
+2674059,2015,15/16,2016-05-01,20160501,18:00,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,3,1,Playoff_1
+2674060,2015,15/16,2016-05-06,20160506,20:30,1184,KRC Genk,322,KRC Genk,3508,Zulte Waregem,5381,SV Zulte Waregem,2,0,Playoff_1
+2674045,2015,15/16,2016-05-07,20160507,18:00,29228,Moeskroen,216,Moeskroen,601,KV Kortrijk,19,KV Kortrijk,2,3,Playoff_2
+2674047,2015,15/16,2016-05-07,20160507,20:30,475,St-Truidense VV,373,Sint-Truidense VV,172,R Charleroi SC,22,R Charleroi SC,0,3,Playoff_2
+2674044,2015,15/16,2016-05-07,20160507,18:00,3057,Standard Luik,16,Standard Luik,28643,Waasland-Beveren,4068,Waasland-Beveren,2,0,Playoff_2
+2674046,2015,15/16,2016-05-07,20160507,20:30,498,KSC Lokeren,282,KSC Lokeren,354,KV Mechelen,25,KV Mechelen,5,1,Playoff_2
+2674062,2015,15/16,2016-05-08,20160508,18:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,1,4,Playoff_1
+2674061,2015,15/16,2016-05-08,20160508,14:30,58,RSC Anderlecht,35,RSC Anderlecht,2861,KV Oostende,31,KV Oostende,2,1,Playoff_1
+2674063,2015,15/16,2016-05-14,20160514,20:00,2861,KV Oostende,31,KV Oostende,1184,KRC Genk,322,KRC Genk,2,1,Playoff_1
+2674065,2015,15/16,2016-05-15,20160515,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,157,KAA Gent,7,KAA Gent,4,2,Playoff_1
+2674064,2015,15/16,2016-05-15,20160515,14:30,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,4,0,Playoff_1
+2674068,2015,15/16,2016-05-19,20160519,20:30,2861,KV Oostende,31,KV Oostende,157,KAA Gent,7,KAA Gent,0,1,Playoff_1
+2674067,2015,15/16,2016-05-19,20160519,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,2282,Club Brugge,3,Club Brugge,0,2,Playoff_1
+2674066,2015,15/16,2016-05-19,20160519,20:30,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,5,2,Playoff_1
+2674071,2015,15/16,2016-05-22,20160522,14:30,58,RSC Anderlecht,35,RSC Anderlecht,3508,Zulte Waregem,5381,SV Zulte Waregem,2,0,Playoff_1
+2674070,2015,15/16,2016-05-22,20160522,14:30,157,KAA Gent,7,KAA Gent,1184,KRC Genk,322,KRC Genk,0,0,Playoff_1
+2674069,2015,15/16,2016-05-22,20160522,14:30,2282,Club Brugge,3,Club Brugge,2861,KV Oostende,31,KV Oostende,2,2,Playoff_1
+2839834,2016,16/17,2017-03-31,20170331,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+2839835,2016,16/17,2017-04-01,20170401,18:00,172,R Charleroi SC,22,R Charleroi SC,2861,KV Oostende,31,KV Oostende,1,1,Playoff_1
+2839844,2016,16/17,2017-04-01,20170401,20:30,1184,KRC Genk,322,KRC Genk,498,KSC Lokeren,282,KSC Lokeren,4,0,Playoff_2
+2839840,2016,16/17,2017-04-01,20170401,20:00,475,St-Truidense VV,373,Sint-Truidense VV,28643,Waasland-Beveren,4068,Waasland-Beveren,3,0,Playoff_2
+2839841,2016,16/17,2017-04-01,20170401,20:00,3948,Union SG,10,Union Saint-Gilloise,354,KV Mechelen,25,KV Mechelen,3,0,Playoff_2
+2839842,2016,16/17,2017-04-01,20170401,20:00,601,KV Kortrijk,19,KV Kortrijk,29228,Moeskroen,216,Moeskroen,2,1,Playoff_2
+2839843,2016,16/17,2017-04-01,20170401,20:00,1245,KAS Eupen,4276,KAS Eupen,2977,KSV Roeselare,134,KSV Roeselare,2,2,Playoff_2
+2839836,2016,16/17,2017-04-02,20170402,18:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,2,1,Playoff_1
+2839845,2016,16/17,2017-04-02,20170402,20:00,204,Lierse SK,30,Lierse SK,3057,Standard Luik,16,Standard Luik,1,0,Playoff_2
+2839837,2016,16/17,2017-04-07,20170407,20:30,2861,KV Oostende,31,KV Oostende,3508,Zulte Waregem,5381,SV Zulte Waregem,1,1,Playoff_1
+2839838,2016,16/17,2017-04-08,20170408,18:00,2282,Club Brugge,3,Club Brugge,172,R Charleroi SC,22,R Charleroi SC,1,1,Playoff_1
+2839850,2016,16/17,2017-04-08,20170408,20:30,3057,Standard Luik,16,Standard Luik,475,St-Truidense VV,373,Sint-Truidense VV,2,2,Playoff_2
+2839848,2016,16/17,2017-04-08,20170408,20:00,498,KSC Lokeren,282,KSC Lokeren,601,KV Kortrijk,19,KV Kortrijk,0,0,Playoff_2
+2839847,2016,16/17,2017-04-08,20170408,20:00,2977,KSV Roeselare,134,KSV Roeselare,1184,KRC Genk,322,KRC Genk,0,1,Playoff_2
+2839846,2016,16/17,2017-04-08,20170408,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,3948,Union SG,10,Union Saint-Gilloise,1,4,Playoff_2
+2839849,2016,16/17,2017-04-08,20170408,20:00,29228,Moeskroen,216,Moeskroen,1245,KAS Eupen,4276,KAS Eupen,0,2,Playoff_2
+2839839,2016,16/17,2017-04-09,20170409,18:00,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,0,0,Playoff_1
+2839851,2016,16/17,2017-04-09,20170409,20:00,354,KV Mechelen,25,KV Mechelen,204,Lierse SK,30,Lierse SK,1,0,Playoff_2
+2843085,2016,16/17,2017-04-14,20170414,20:30,3948,Union SG,10,Union Saint-Gilloise,3057,Standard Luik,16,Standard Luik,2,2,Playoff_2
+2843088,2016,16/17,2017-04-15,20170415,20:00,1245,KAS Eupen,4276,KAS Eupen,498,KSC Lokeren,282,KSC Lokeren,3,3,Playoff_2
+2843086,2016,16/17,2017-04-15,20170415,18:00,28643,Waasland-Beveren,4068,Waasland-Beveren,354,KV Mechelen,25,KV Mechelen,1,2,Playoff_2
+2843087,2016,16/17,2017-04-15,20170415,20:30,475,St-Truidense VV,373,Sint-Truidense VV,204,Lierse SK,30,Lierse SK,2,1,Playoff_2
+2843089,2016,16/17,2017-04-15,20170415,20:00,2977,KSV Roeselare,134,KSV Roeselare,29228,Moeskroen,216,Moeskroen,3,5,Playoff_2
+2842766,2016,16/17,2017-04-16,20170416,18:00,2861,KV Oostende,31,KV Oostende,58,RSC Anderlecht,35,RSC Anderlecht,0,1,Playoff_1
+2843090,2016,16/17,2017-04-16,20170416,20:00,601,KV Kortrijk,19,KV Kortrijk,1184,KRC Genk,322,KRC Genk,0,3,Playoff_2
+2842768,2016,16/17,2017-04-17,20170417,18:00,172,R Charleroi SC,22,R Charleroi SC,157,KAA Gent,7,KAA Gent,0,1,Playoff_1
+2842767,2016,16/17,2017-04-17,20170417,14:30,3508,Zulte Waregem,5381,SV Zulte Waregem,2282,Club Brugge,3,Club Brugge,2,2,Playoff_1
+2842769,2016,16/17,2017-04-21,20170421,20:30,157,KAA Gent,7,KAA Gent,2861,KV Oostende,31,KV Oostende,1,1,Playoff_1
+2842770,2016,16/17,2017-04-22,20170422,18:00,172,R Charleroi SC,22,R Charleroi SC,3508,Zulte Waregem,5381,SV Zulte Waregem,2,0,Playoff_1
+2843096,2016,16/17,2017-04-22,20170422,20:30,354,KV Mechelen,25,KV Mechelen,3057,Standard Luik,16,Standard Luik,1,0,Playoff_2
+2843095,2016,16/17,2017-04-22,20170422,20:00,475,St-Truidense VV,373,Sint-Truidense VV,3948,Union SG,10,Union Saint-Gilloise,0,1,Playoff_2
+2843094,2016,16/17,2017-04-22,20170422,20:00,204,Lierse SK,30,Lierse SK,28643,Waasland-Beveren,4068,Waasland-Beveren,2,3,Playoff_2
+2843091,2016,16/17,2017-04-22,20170422,20:00,498,KSC Lokeren,282,KSC Lokeren,2977,KSV Roeselare,134,KSV Roeselare,2,1,Playoff_2
+2843092,2016,16/17,2017-04-22,20170422,20:00,601,KV Kortrijk,19,KV Kortrijk,1245,KAS Eupen,4276,KAS Eupen,3,3,Playoff_2
+2842771,2016,16/17,2017-04-23,20170423,18:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,2,0,Playoff_1
+2843093,2016,16/17,2017-04-23,20170423,20:00,1184,KRC Genk,322,KRC Genk,29228,Moeskroen,216,Moeskroen,6,0,Playoff_2
+2842772,2016,16/17,2017-04-25,20170425,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,157,KAA Gent,7,KAA Gent,0,2,Playoff_1
+2843100,2016,16/17,2017-04-25,20170425,20:30,2977,KSV Roeselare,134,KSV Roeselare,601,KV Kortrijk,19,KV Kortrijk,2,3,Playoff_2
+2843098,2016,16/17,2017-04-25,20170425,20:30,3057,Standard Luik,16,Standard Luik,28643,Waasland-Beveren,4068,Waasland-Beveren,0,2,Playoff_2
+2843097,2016,16/17,2017-04-25,20170425,20:30,3948,Union SG,10,Union Saint-Gilloise,204,Lierse SK,30,Lierse SK,1,3,Playoff_2
+2842773,2016,16/17,2017-04-26,20170426,20:30,2282,Club Brugge,3,Club Brugge,2861,KV Oostende,31,KV Oostende,3,1,Playoff_1
+2843099,2016,16/17,2017-04-26,20170426,20:30,354,KV Mechelen,25,KV Mechelen,475,St-Truidense VV,373,Sint-Truidense VV,1,0,Playoff_2
+2843101,2016,16/17,2017-04-26,20170426,20:30,29228,Moeskroen,216,Moeskroen,498,KSC Lokeren,282,KSC Lokeren,2,2,Playoff_2
+2843102,2016,16/17,2017-04-26,20170426,20:30,1245,KAS Eupen,4276,KAS Eupen,1184,KRC Genk,322,KRC Genk,1,1,Playoff_2
+2842774,2016,16/17,2017-04-27,20170427,20:30,58,RSC Anderlecht,35,RSC Anderlecht,172,R Charleroi SC,22,R Charleroi SC,0,1,Playoff_1
+2843106,2016,16/17,2017-04-28,20170428,20:30,3057,Standard Luik,16,Standard Luik,3948,Union SG,10,Union Saint-Gilloise,3,1,Playoff_2
+2843107,2016,16/17,2017-04-29,20170429,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,475,St-Truidense VV,373,Sint-Truidense VV,0,1,Playoff_2
+2843103,2016,16/17,2017-04-29,20170429,18:00,1184,KRC Genk,322,KRC Genk,601,KV Kortrijk,19,KV Kortrijk,3,0,Playoff_2
+2843108,2016,16/17,2017-04-29,20170429,20:30,204,Lierse SK,30,Lierse SK,354,KV Mechelen,25,KV Mechelen,0,0,Playoff_2
+2843104,2016,16/17,2017-04-29,20170429,20:00,498,KSC Lokeren,282,KSC Lokeren,1245,KAS Eupen,4276,KAS Eupen,4,1,Playoff_2
+2842776,2016,16/17,2017-04-30,20170430,18:00,2861,KV Oostende,31,KV Oostende,172,R Charleroi SC,22,R Charleroi SC,1,0,Playoff_1
+2842775,2016,16/17,2017-04-30,20170430,14:30,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,0,0,Playoff_1
+2843105,2016,16/17,2017-04-30,20170430,20:00,29228,Moeskroen,216,Moeskroen,2977,KSV Roeselare,134,KSV Roeselare,1,0,Playoff_2
+2842777,2016,16/17,2017-05-01,20170501,18:00,2282,Club Brugge,3,Club Brugge,3508,Zulte Waregem,5381,SV Zulte Waregem,2,1,Playoff_1
+2842778,2016,16/17,2017-05-05,20170505,20:30,172,R Charleroi SC,22,R Charleroi SC,2282,Club Brugge,3,Club Brugge,1,3,Playoff_1
+2843114,2016,16/17,2017-05-06,20170506,20:30,475,St-Truidense VV,373,Sint-Truidense VV,3057,Standard Luik,16,Standard Luik,1,0,Playoff_2
+2843113,2016,16/17,2017-05-06,20170506,20:00,204,Lierse SK,30,Lierse SK,3948,Union SG,10,Union Saint-Gilloise,2,1,Playoff_2
+2843112,2016,16/17,2017-05-06,20170506,18:00,354,KV Mechelen,25,KV Mechelen,28643,Waasland-Beveren,4068,Waasland-Beveren,1,3,Playoff_2
+2843109,2016,16/17,2017-05-06,20170506,20:00,498,KSC Lokeren,282,KSC Lokeren,29228,Moeskroen,216,Moeskroen,2,2,Playoff_2
+2843110,2016,16/17,2017-05-06,20170506,20:00,601,KV Kortrijk,19,KV Kortrijk,2977,KSV Roeselare,134,KSV Roeselare,0,3,Playoff_2
+2842779,2016,16/17,2017-05-07,20170507,14:30,2861,KV Oostende,31,KV Oostende,157,KAA Gent,7,KAA Gent,4,3,Playoff_1
+2842780,2016,16/17,2017-05-07,20170507,18:00,58,RSC Anderlecht,35,RSC Anderlecht,3508,Zulte Waregem,5381,SV Zulte Waregem,2,0,Playoff_1
+2843111,2016,16/17,2017-05-07,20170507,20:00,1184,KRC Genk,322,KRC Genk,1245,KAS Eupen,4276,KAS Eupen,2,1,Playoff_2
+2843115,2016,16/17,2017-05-12,20170512,20:30,3057,Standard Luik,16,Standard Luik,354,KV Mechelen,25,KV Mechelen,2,0,Playoff_2
+2842781,2016,16/17,2017-05-13,20170513,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,2861,KV Oostende,31,KV Oostende,3,1,Playoff_1
+2843116,2016,16/17,2017-05-13,20170513,20:00,3948,Union SG,10,Union Saint-Gilloise,475,St-Truidense VV,373,Sint-Truidense VV,1,4,Playoff_2
+2843118,2016,16/17,2017-05-13,20170513,20:00,1245,KAS Eupen,4276,KAS Eupen,601,KV Kortrijk,19,KV Kortrijk,3,2,Playoff_2
+2843119,2016,16/17,2017-05-13,20170513,20:00,2977,KSV Roeselare,134,KSV Roeselare,498,KSC Lokeren,282,KSC Lokeren,2,3,Playoff_2
+2843117,2016,16/17,2017-05-13,20170513,20:30,28643,Waasland-Beveren,4068,Waasland-Beveren,204,Lierse SK,30,Lierse SK,3,2,Playoff_2
+2842782,2016,16/17,2017-05-14,20170514,14:30,157,KAA Gent,7,KAA Gent,172,R Charleroi SC,22,R Charleroi SC,1,1,Playoff_1
+2842783,2016,16/17,2017-05-14,20170514,18:00,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,1,1,Playoff_1
+2843120,2016,16/17,2017-05-14,20170514,20:00,29228,Moeskroen,216,Moeskroen,1184,KRC Genk,322,KRC Genk,0,2,Playoff_2
+2843126,2016,16/17,2017-05-16,20170516,20:30,204,Lierse SK,30,Lierse SK,475,St-Truidense VV,373,Sint-Truidense VV,1,3,Playoff_2
+2843124,2016,16/17,2017-05-16,20170516,20:30,28643,Waasland-Beveren,4068,Waasland-Beveren,3057,Standard Luik,16,Standard Luik,1,3,Playoff_2
+2843125,2016,16/17,2017-05-16,20170516,20:30,354,KV Mechelen,25,KV Mechelen,3948,Union SG,10,Union Saint-Gilloise,1,0,Playoff_2
+2843122,2016,16/17,2017-05-17,20170517,20:30,601,KV Kortrijk,19,KV Kortrijk,498,KSC Lokeren,282,KSC Lokeren,4,4,Playoff_2
+2843123,2016,16/17,2017-05-17,20170517,20:30,1245,KAS Eupen,4276,KAS Eupen,29228,Moeskroen,216,Moeskroen,2,0,Playoff_2
+2843121,2016,16/17,2017-05-17,20170517,20:30,1184,KRC Genk,322,KRC Genk,2977,KSV Roeselare,134,KSV Roeselare,3,1,Playoff_2
+2842788,2016,16/17,2017-05-18,20170518,20:30,2861,KV Oostende,31,KV Oostende,2282,Club Brugge,3,Club Brugge,2,1,Playoff_1
+2842786,2016,16/17,2017-05-18,20170518,20:30,157,KAA Gent,7,KAA Gent,3508,Zulte Waregem,5381,SV Zulte Waregem,5,2,Playoff_1
+2842787,2016,16/17,2017-05-18,20170518,20:30,172,R Charleroi SC,22,R Charleroi SC,58,RSC Anderlecht,35,RSC Anderlecht,1,3,Playoff_1
+2843129,2016,16/17,2017-05-19,20170519,20:30,3948,Union SG,10,Union Saint-Gilloise,28643,Waasland-Beveren,4068,Waasland-Beveren,1,3,Playoff_2
+2843128,2016,16/17,2017-05-19,20170519,20:30,475,St-Truidense VV,373,Sint-Truidense VV,354,KV Mechelen,25,KV Mechelen,7,0,Playoff_2
+2843127,2016,16/17,2017-05-19,20170519,20:30,3057,Standard Luik,16,Standard Luik,204,Lierse SK,30,Lierse SK,2,0,Playoff_2
+2843131,2016,16/17,2017-05-20,20170520,20:00,29228,Moeskroen,216,Moeskroen,601,KV Kortrijk,19,KV Kortrijk,0,1,Playoff_2
+2843130,2016,16/17,2017-05-20,20170520,20:00,498,KSC Lokeren,282,KSC Lokeren,1184,KRC Genk,322,KRC Genk,1,1,Playoff_2
+2843132,2016,16/17,2017-05-20,20170520,20:00,2977,KSV Roeselare,134,KSV Roeselare,1245,KAS Eupen,4276,KAS Eupen,3,2,Playoff_2
+2842789,2016,16/17,2017-05-21,20170521,14:30,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,2,1,Playoff_1
+2842791,2016,16/17,2017-05-21,20170521,14:30,3508,Zulte Waregem,5381,SV Zulte Waregem,172,R Charleroi SC,22,R Charleroi SC,2,2,Playoff_1
+2842790,2016,16/17,2017-05-21,20170521,14:30,58,RSC Anderlecht,35,RSC Anderlecht,2861,KV Oostende,31,KV Oostende,3,2,Playoff_1
+3018188,2017,17/18,2018-03-30,20180330,20:30,3057,Standard Luik,16,Standard Luik,172,R Charleroi SC,22,R Charleroi SC,1,0,Playoff_1
+3018259,2017,17/18,2018-03-31,20180331,20:00,498,KSC Lokeren,282,KSC Lokeren,475,St-Truidense VV,373,Sint-Truidense VV,1,0,Playoff_2
+3018256,2017,17/18,2018-03-31,20180331,18:00,601,KV Kortrijk,19,KV Kortrijk,28643,Waasland-Beveren,4068,Waasland-Beveren,4,1,Playoff_2
+3018257,2017,17/18,2018-03-31,20180331,20:00,204,Lierse SK,30,Lierse SK,29228,Moeskroen,216,Moeskroen,0,3,Playoff_2
+3018260,2017,17/18,2018-03-31,20180331,20:30,1245,KAS Eupen,4276,KAS Eupen,41274,KFCO Beerschot,13,Beerschot,2,2,Playoff_2
+3018189,2017,17/18,2018-04-01,20180401,18:00,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,0,2,Playoff_1
+3018258,2017,17/18,2018-04-01,20180401,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,2727,OH Leuven,18,Oud-Heverlee Leuven,2,2,Playoff_2
+3018190,2017,17/18,2018-04-02,20180402,18:00,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,1,0,Playoff_1
+3018261,2017,17/18,2018-04-02,20180402,14:30,1096,Antwerp FC,1,Royal Antwerp FC,2861,KV Oostende,31,KV Oostende,3,3,Playoff_2
+3018191,2017,17/18,2018-04-06,20180406,20:30,172,R Charleroi SC,22,R Charleroi SC,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+3018192,2017,17/18,2018-04-07,20180407,20:30,1184,KRC Genk,322,KRC Genk,3057,Standard Luik,16,Standard Luik,1,0,Playoff_1
+3018262,2017,17/18,2018-04-07,20180407,18:00,41274,KFCO Beerschot,13,Beerschot,498,KSC Lokeren,282,KSC Lokeren,2,2,Playoff_2
+3018264,2017,17/18,2018-04-07,20180407,20:00,475,St-Truidense VV,373,Sint-Truidense VV,1096,Antwerp FC,1,Royal Antwerp FC,4,0,Playoff_2
+3018265,2017,17/18,2018-04-07,20180407,20:00,2727,OH Leuven,18,Oud-Heverlee Leuven,204,Lierse SK,30,Lierse SK,1,2,Playoff_2
+3018263,2017,17/18,2018-04-07,20180407,20:00,2861,KV Oostende,31,KV Oostende,1245,KAS Eupen,4276,KAS Eupen,1,1,Playoff_2
+3018193,2017,17/18,2018-04-08,20180408,18:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,1,0,Playoff_1
+3018267,2017,17/18,2018-04-08,20180408,20:00,29228,Moeskroen,216,Moeskroen,601,KV Kortrijk,19,KV Kortrijk,2,1,Playoff_2
+3018266,2017,17/18,2018-04-08,20180408,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,3508,Zulte Waregem,5381,SV Zulte Waregem,1,2,Playoff_2
+3018194,2017,17/18,2018-04-13,20180413,20:30,172,R Charleroi SC,22,R Charleroi SC,1184,KRC Genk,322,KRC Genk,2,2,Playoff_1
+3018195,2017,17/18,2018-04-14,20180414,20:30,3057,Standard Luik,16,Standard Luik,157,KAA Gent,7,KAA Gent,1,0,Playoff_1
+3018269,2017,17/18,2018-04-14,20180414,20:00,204,Lierse SK,30,Lierse SK,601,KV Kortrijk,19,KV Kortrijk,0,2,Playoff_2
+3018268,2017,17/18,2018-04-14,20180414,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,29228,Moeskroen,216,Moeskroen,5,1,Playoff_2
+3018270,2017,17/18,2018-04-14,20180414,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,2727,OH Leuven,18,Oud-Heverlee Leuven,0,2,Playoff_2
+3018271,2017,17/18,2018-04-14,20180414,20:00,498,KSC Lokeren,282,KSC Lokeren,1245,KAS Eupen,4276,KAS Eupen,3,0,Playoff_2
+3018196,2017,17/18,2018-04-15,20180415,18:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,1,0,Playoff_1
+3018273,2017,17/18,2018-04-15,20180415,20:00,2861,KV Oostende,31,KV Oostende,475,St-Truidense VV,373,Sint-Truidense VV,2,2,Playoff_2
+3018272,2017,17/18,2018-04-15,20180415,14:30,1096,Antwerp FC,1,Royal Antwerp FC,41274,KFCO Beerschot,13,Beerschot,2,0,Playoff_2
+3018197,2017,17/18,2018-04-17,20180417,20:30,157,KAA Gent,7,KAA Gent,1184,KRC Genk,322,KRC Genk,0,0,Playoff_1
+3018279,2017,17/18,2018-04-17,20180417,20:30,204,Lierse SK,30,Lierse SK,3508,Zulte Waregem,5381,SV Zulte Waregem,1,4,Playoff_2
+3018277,2017,17/18,2018-04-17,20180417,20:30,29228,Moeskroen,216,Moeskroen,28643,Waasland-Beveren,4068,Waasland-Beveren,1,1,Playoff_2
+3018278,2017,17/18,2018-04-17,20180417,20:30,601,KV Kortrijk,19,KV Kortrijk,2727,OH Leuven,18,Oud-Heverlee Leuven,2,1,Playoff_2
+3018198,2017,17/18,2018-04-18,20180418,20:30,3057,Standard Luik,16,Standard Luik,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+3018276,2017,17/18,2018-04-18,20180418,20:30,41274,KFCO Beerschot,13,Beerschot,475,St-Truidense VV,373,Sint-Truidense VV,1,3,Playoff_2
+3018274,2017,17/18,2018-04-18,20180418,20:30,498,KSC Lokeren,282,KSC Lokeren,2861,KV Oostende,31,KV Oostende,2,2,Playoff_2
+3018275,2017,17/18,2018-04-18,20180418,20:30,1245,KAS Eupen,4276,KAS Eupen,1096,Antwerp FC,1,Royal Antwerp FC,0,1,Playoff_2
+3018199,2017,17/18,2018-04-19,20180419,20:30,2282,Club Brugge,3,Club Brugge,172,R Charleroi SC,22,R Charleroi SC,6,0,Playoff_1
+3018280,2017,17/18,2018-04-20,20180420,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,601,KV Kortrijk,19,KV Kortrijk,3,0,Playoff_2
+3018200,2017,17/18,2018-04-21,20180421,20:30,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+3018282,2017,17/18,2018-04-21,20180421,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,204,Lierse SK,30,Lierse SK,0,1,Playoff_2
+3018281,2017,17/18,2018-04-21,20180421,18:00,2727,OH Leuven,18,Oud-Heverlee Leuven,29228,Moeskroen,216,Moeskroen,3,1,Playoff_2
+3018283,2017,17/18,2018-04-21,20180421,20:00,475,St-Truidense VV,373,Sint-Truidense VV,1245,KAS Eupen,4276,KAS Eupen,2,3,Playoff_2
+3018202,2017,17/18,2018-04-22,20180422,20:30,172,R Charleroi SC,22,R Charleroi SC,157,KAA Gent,7,KAA Gent,2,1,Playoff_1
+3018201,2017,17/18,2018-04-22,20180422,18:00,2282,Club Brugge,3,Club Brugge,3057,Standard Luik,16,Standard Luik,4,4,Playoff_1
+3018284,2017,17/18,2018-04-22,20180422,20:00,2861,KV Oostende,31,KV Oostende,41274,KFCO Beerschot,13,Beerschot,2,2,Playoff_2
+3018285,2017,17/18,2018-04-23,20180423,20:30,1096,Antwerp FC,1,Royal Antwerp FC,498,KSC Lokeren,282,KSC Lokeren,1,2,Playoff_2
+3018203,2017,17/18,2018-04-27,20180427,20:30,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,1,1,Playoff_1
+3018289,2017,17/18,2018-04-28,20180428,18:00,29228,Moeskroen,216,Moeskroen,3508,Zulte Waregem,5381,SV Zulte Waregem,1,2,Playoff_2
+3018286,2017,17/18,2018-04-28,20180428,20:00,1245,KAS Eupen,4276,KAS Eupen,498,KSC Lokeren,282,KSC Lokeren,0,2,Playoff_2
+3018287,2017,17/18,2018-04-28,20180428,20:30,475,St-Truidense VV,373,Sint-Truidense VV,2861,KV Oostende,31,KV Oostende,4,1,Playoff_2
+3018291,2017,17/18,2018-04-28,20180428,20:00,2727,OH Leuven,18,Oud-Heverlee Leuven,28643,Waasland-Beveren,4068,Waasland-Beveren,0,0,Playoff_2
+3018290,2017,17/18,2018-04-28,20180428,20:00,601,KV Kortrijk,19,KV Kortrijk,204,Lierse SK,30,Lierse SK,2,1,Playoff_2
+3018205,2017,17/18,2018-04-29,20180429,20:30,157,KAA Gent,7,KAA Gent,3057,Standard Luik,16,Standard Luik,1,3,Playoff_1
+3018204,2017,17/18,2018-04-29,20180429,18:00,58,RSC Anderlecht,35,RSC Anderlecht,172,R Charleroi SC,22,R Charleroi SC,3,1,Playoff_1
+3018288,2017,17/18,2018-04-29,20180429,14:30,41274,KFCO Beerschot,13,Beerschot,1096,Antwerp FC,1,Royal Antwerp FC,0,0,Playoff_2
+3018206,2017,17/18,2018-05-04,20180504,20:30,157,KAA Gent,7,KAA Gent,172,R Charleroi SC,22,R Charleroi SC,0,1,Playoff_1
+3018295,2017,17/18,2018-05-05,20180505,20:00,1245,KAS Eupen,4276,KAS Eupen,475,St-Truidense VV,373,Sint-Truidense VV,3,1,Playoff_2
+3018292,2017,17/18,2018-05-05,20180505,18:00,601,KV Kortrijk,19,KV Kortrijk,3508,Zulte Waregem,5381,SV Zulte Waregem,1,2,Playoff_2
+3018296,2017,17/18,2018-05-05,20180505,20:30,498,KSC Lokeren,282,KSC Lokeren,1096,Antwerp FC,1,Royal Antwerp FC,1,2,Playoff_2
+3018293,2017,17/18,2018-05-05,20180505,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,29228,Moeskroen,216,Moeskroen,3,2,Playoff_2
+3018294,2017,17/18,2018-05-05,20180505,20:00,204,Lierse SK,30,Lierse SK,2727,OH Leuven,18,Oud-Heverlee Leuven,2,2,Playoff_2
+3018208,2017,17/18,2018-05-06,20180506,18:00,3057,Standard Luik,16,Standard Luik,1184,KRC Genk,322,KRC Genk,5,0,Playoff_1
+3018207,2017,17/18,2018-05-06,20180506,14:30,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,1,2,Playoff_1
+3018297,2017,17/18,2018-05-06,20180506,20:00,41274,KFCO Beerschot,13,Beerschot,2861,KV Oostende,31,KV Oostende,0,2,Playoff_2
+3018303,2017,17/18,2018-05-08,20180508,20:30,2727,OH Leuven,18,Oud-Heverlee Leuven,601,KV Kortrijk,19,KV Kortrijk,0,2,Playoff_2
+3018301,2017,17/18,2018-05-08,20180508,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,28643,Waasland-Beveren,4068,Waasland-Beveren,8,0,Playoff_2
+3018302,2017,17/18,2018-05-08,20180508,20:30,29228,Moeskroen,216,Moeskroen,204,Lierse SK,30,Lierse SK,1,0,Playoff_2
+3018299,2017,17/18,2018-05-09,20180509,20:30,2861,KV Oostende,31,KV Oostende,498,KSC Lokeren,282,KSC Lokeren,1,3,Playoff_2
+3018300,2017,17/18,2018-05-09,20180509,20:30,1096,Antwerp FC,1,Royal Antwerp FC,1245,KAS Eupen,4276,KAS Eupen,2,1,Playoff_2
+3018298,2017,17/18,2018-05-09,20180509,20:30,475,St-Truidense VV,373,Sint-Truidense VV,41274,KFCO Beerschot,13,Beerschot,3,2,Playoff_2
+3018211,2017,17/18,2018-05-10,20180510,20:30,1184,KRC Genk,322,KRC Genk,157,KAA Gent,7,KAA Gent,1,1,Playoff_1
+3018210,2017,17/18,2018-05-10,20180510,18:00,172,R Charleroi SC,22,R Charleroi SC,2282,Club Brugge,3,Club Brugge,1,3,Playoff_1
+3018209,2017,17/18,2018-05-10,20180510,14:30,58,RSC Anderlecht,35,RSC Anderlecht,3057,Standard Luik,16,Standard Luik,1,3,Playoff_1
+3018306,2017,17/18,2018-05-11,20180511,20:30,2727,OH Leuven,18,Oud-Heverlee Leuven,3508,Zulte Waregem,5381,SV Zulte Waregem,1,2,Playoff_2
+3018305,2017,17/18,2018-05-11,20180511,20:30,204,Lierse SK,30,Lierse SK,28643,Waasland-Beveren,4068,Waasland-Beveren,0,5,Playoff_2
+3018304,2017,17/18,2018-05-11,20180511,20:30,601,KV Kortrijk,19,KV Kortrijk,29228,Moeskroen,216,Moeskroen,1,1,Playoff_2
+3018308,2017,17/18,2018-05-12,20180512,20:00,1096,Antwerp FC,1,Royal Antwerp FC,475,St-Truidense VV,373,Sint-Truidense VV,1,2,Playoff_2
+3018309,2017,17/18,2018-05-12,20180512,20:00,1245,KAS Eupen,4276,KAS Eupen,2861,KV Oostende,31,KV Oostende,0,4,Playoff_2
+3018307,2017,17/18,2018-05-12,20180512,20:00,498,KSC Lokeren,282,KSC Lokeren,41274,KFCO Beerschot,13,Beerschot,4,2,Playoff_2
+3018213,2017,17/18,2018-05-13,20180513,18:00,3057,Standard Luik,16,Standard Luik,2282,Club Brugge,3,Club Brugge,1,1,Playoff_1
+3018214,2017,17/18,2018-05-13,20180513,18:00,1184,KRC Genk,322,KRC Genk,172,R Charleroi SC,22,R Charleroi SC,4,1,Playoff_1
+3018212,2017,17/18,2018-05-13,20180513,18:00,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,1,0,Playoff_1
+3018313,2017,17/18,2018-05-18,20180518,20:30,28643,Waasland-Beveren,4068,Waasland-Beveren,601,KV Kortrijk,19,KV Kortrijk,1,3,Playoff_2
+3018314,2017,17/18,2018-05-18,20180518,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,204,Lierse SK,30,Lierse SK,5,0,Playoff_2
+3018315,2017,17/18,2018-05-18,20180518,20:30,29228,Moeskroen,216,Moeskroen,2727,OH Leuven,18,Oud-Heverlee Leuven,5,0,Playoff_2
+3018310,2017,17/18,2018-05-19,20180519,20:00,475,St-Truidense VV,373,Sint-Truidense VV,498,KSC Lokeren,282,KSC Lokeren,1,1,Playoff_2
+3018311,2017,17/18,2018-05-19,20180519,20:00,2861,KV Oostende,31,KV Oostende,1096,Antwerp FC,1,Royal Antwerp FC,3,1,Playoff_2
+3018312,2017,17/18,2018-05-19,20180519,20:00,41274,KFCO Beerschot,13,Beerschot,1245,KAS Eupen,4276,KAS Eupen,3,1,Playoff_2
+3018215,2017,17/18,2018-05-20,20180520,18:00,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,0,1,Playoff_1
+3018217,2017,17/18,2018-05-20,20180520,18:00,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,1,2,Playoff_1
+3018216,2017,17/18,2018-05-20,20180520,18:00,172,R Charleroi SC,22,R Charleroi SC,3057,Standard Luik,16,Standard Luik,0,0,Playoff_1
+3169908,2018,18/19,2019-03-29,20190329,20:30,3057,Standard Luik,16,Standard Luik,1096,Antwerp FC,1,Royal Antwerp FC,3,1,Playoff_1
+3169909,2018,18/19,2019-03-30,20190330,20:30,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,3,0,Playoff_1
+3169853,2018,18/19,2019-03-30,20190330,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,28643,Waasland-Beveren,4068,Waasland-Beveren,0,0,Playoff_2
+3169851,2018,18/19,2019-03-30,20190330,18:00,601,KV Kortrijk,19,KV Kortrijk,29228,Moeskroen,216,Moeskroen,3,1,Playoff_2
+3169852,2018,18/19,2019-03-30,20190330,20:00,3948,Union SG,10,Union Saint-Gilloise,520,Cercle Brugge,12,Cercle Brugge,3,1,Playoff_2
+3169848,2018,18/19,2019-03-30,20190330,20:00,2861,KV Oostende,31,KV Oostende,1245,KAS Eupen,4276,KAS Eupen,1,2,Playoff_2
+3169910,2018,18/19,2019-03-31,20190331,18:00,2282,Club Brugge,3,Club Brugge,157,KAA Gent,7,KAA Gent,3,0,Playoff_1
+3169849,2018,18/19,2019-03-31,20190331,14:30,475,St-Truidense VV,373,Sint-Truidense VV,172,R Charleroi SC,22,R Charleroi SC,3,1,Playoff_2
+3169850,2018,18/19,2019-03-31,20190331,20:00,968,KVC Westerlo,2024,KVC Westerlo,41274,KFCO Beerschot,13,Beerschot,1,1,Playoff_2
+3169911,2018,18/19,2019-04-02,20190402,20:30,1096,Antwerp FC,1,Royal Antwerp FC,1184,KRC Genk,322,KRC Genk,1,0,Playoff_1
+3169859,2018,18/19,2019-04-02,20190402,20:30,28643,Waasland-Beveren,4068,Waasland-Beveren,601,KV Kortrijk,19,KV Kortrijk,2,3,Playoff_2
+3169857,2018,18/19,2019-04-02,20190402,20:30,520,Cercle Brugge,12,Cercle Brugge,3508,Zulte Waregem,5381,SV Zulte Waregem,3,3,Playoff_2
+3169858,2018,18/19,2019-04-02,20190402,20:30,29228,Moeskroen,216,Moeskroen,3948,Union SG,10,Union Saint-Gilloise,0,2,Playoff_2
+3169912,2018,18/19,2019-04-03,20190403,20:30,157,KAA Gent,7,KAA Gent,3057,Standard Luik,16,Standard Luik,1,2,Playoff_1
+3169855,2018,18/19,2019-04-03,20190403,20:30,41274,KFCO Beerschot,13,Beerschot,475,St-Truidense VV,373,Sint-Truidense VV,1,2,Playoff_2
+3169854,2018,18/19,2019-04-03,20190403,20:30,172,R Charleroi SC,22,R Charleroi SC,2861,KV Oostende,31,KV Oostende,1,2,Playoff_2
+3169856,2018,18/19,2019-04-03,20190403,20:30,1245,KAS Eupen,4276,KAS Eupen,968,KVC Westerlo,2024,KVC Westerlo,0,3,Playoff_2
+3169913,2018,18/19,2019-04-04,20190404,20:30,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,2,3,Playoff_1
+3169863,2018,18/19,2019-04-05,20190405,20:30,601,KV Kortrijk,19,KV Kortrijk,3508,Zulte Waregem,5381,SV Zulte Waregem,4,2,Playoff_2
+3169914,2018,18/19,2019-04-06,20190406,20:30,1184,KRC Genk,322,KRC Genk,157,KAA Gent,7,KAA Gent,2,1,Playoff_1
+3169861,2018,18/19,2019-04-06,20190406,20:00,968,KVC Westerlo,2024,KVC Westerlo,475,St-Truidense VV,373,Sint-Truidense VV,2,2,Playoff_2
+3169864,2018,18/19,2019-04-06,20190406,20:00,3948,Union SG,10,Union Saint-Gilloise,28643,Waasland-Beveren,4068,Waasland-Beveren,5,1,Playoff_2
+3169865,2018,18/19,2019-04-06,20190406,20:00,29228,Moeskroen,216,Moeskroen,520,Cercle Brugge,12,Cercle Brugge,2,3,Playoff_2
+3169860,2018,18/19,2019-04-06,20190406,18:00,2861,KV Oostende,31,KV Oostende,41274,KFCO Beerschot,13,Beerschot,2,1,Playoff_2
+3169915,2018,18/19,2019-04-07,20190407,18:00,58,RSC Anderlecht,35,RSC Anderlecht,1096,Antwerp FC,1,Royal Antwerp FC,1,2,Playoff_1
+3169862,2018,18/19,2019-04-07,20190407,20:00,1245,KAS Eupen,4276,KAS Eupen,172,R Charleroi SC,22,R Charleroi SC,0,1,Playoff_2
+3169916,2018,18/19,2019-04-08,20190408,20:30,2282,Club Brugge,3,Club Brugge,3057,Standard Luik,16,Standard Luik,4,0,Playoff_1
+3169917,2018,18/19,2019-04-12,20190412,20:30,3057,Standard Luik,16,Standard Luik,58,RSC Anderlecht,35,RSC Anderlecht,5,0,Playoff_1
+3169918,2018,18/19,2019-04-13,20190413,20:30,157,KAA Gent,7,KAA Gent,1096,Antwerp FC,1,Royal Antwerp FC,1,2,Playoff_1
+3169867,2018,18/19,2019-04-13,20190413,20:00,475,St-Truidense VV,373,Sint-Truidense VV,2861,KV Oostende,31,KV Oostende,1,0,Playoff_2
+3169871,2018,18/19,2019-04-13,20190413,20:00,601,KV Kortrijk,19,KV Kortrijk,3948,Union SG,10,Union Saint-Gilloise,0,1,Playoff_2
+3169870,2018,18/19,2019-04-13,20190413,20:00,520,Cercle Brugge,12,Cercle Brugge,28643,Waasland-Beveren,4068,Waasland-Beveren,3,2,Playoff_2
+3169869,2018,18/19,2019-04-13,20190413,18:00,3508,Zulte Waregem,5381,SV Zulte Waregem,29228,Moeskroen,216,Moeskroen,2,2,Playoff_2
+3169866,2018,18/19,2019-04-13,20190413,18:00,41274,KFCO Beerschot,13,Beerschot,1245,KAS Eupen,4276,KAS Eupen,2,0,Playoff_2
+3169919,2018,18/19,2019-04-14,20190414,18:00,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,3,1,Playoff_1
+3169868,2018,18/19,2019-04-14,20190414,20:00,172,R Charleroi SC,22,R Charleroi SC,968,KVC Westerlo,2024,KVC Westerlo,2,0,Playoff_2
+3169920,2018,18/19,2019-04-19,20190419,20:30,3057,Standard Luik,16,Standard Luik,1184,KRC Genk,322,KRC Genk,1,3,Playoff_1
+3169873,2018,18/19,2019-04-20,20190420,20:30,1245,KAS Eupen,4276,KAS Eupen,475,St-Truidense VV,373,Sint-Truidense VV,1,1,Playoff_2
+3169876,2018,18/19,2019-04-20,20190420,20:00,520,Cercle Brugge,12,Cercle Brugge,601,KV Kortrijk,19,KV Kortrijk,1,2,Playoff_2
+3169875,2018,18/19,2019-04-20,20190420,18:00,3948,Union SG,10,Union Saint-Gilloise,3508,Zulte Waregem,5381,SV Zulte Waregem,2,2,Playoff_2
+3169872,2018,18/19,2019-04-20,20190420,20:00,968,KVC Westerlo,2024,KVC Westerlo,2861,KV Oostende,31,KV Oostende,0,0,Playoff_2
+3169921,2018,18/19,2019-04-21,20190421,18:00,58,RSC Anderlecht,35,RSC Anderlecht,157,KAA Gent,7,KAA Gent,0,0,Playoff_1
+3169877,2018,18/19,2019-04-21,20190421,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,29228,Moeskroen,216,Moeskroen,2,1,Playoff_2
+3169922,2018,18/19,2019-04-22,20190422,14:30,1096,Antwerp FC,1,Royal Antwerp FC,2282,Club Brugge,3,Club Brugge,0,0,Playoff_1
+3169874,2018,18/19,2019-04-22,20190422,18:00,172,R Charleroi SC,22,R Charleroi SC,41274,KFCO Beerschot,13,Beerschot,4,0,Playoff_2
+3169923,2018,18/19,2019-04-26,20190426,20:30,1096,Antwerp FC,1,Royal Antwerp FC,3057,Standard Luik,16,Standard Luik,2,1,Playoff_1
+3169924,2018,18/19,2019-04-27,20190427,20:30,157,KAA Gent,7,KAA Gent,1184,KRC Genk,322,KRC Genk,0,1,Playoff_1
+3169881,2018,18/19,2019-04-27,20190427,20:00,29228,Moeskroen,216,Moeskroen,601,KV Kortrijk,19,KV Kortrijk,2,3,Playoff_2
+3169878,2018,18/19,2019-04-27,20190427,18:00,2861,KV Oostende,31,KV Oostende,172,R Charleroi SC,22,R Charleroi SC,2,2,Playoff_2
+3169882,2018,18/19,2019-04-27,20190427,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,3948,Union SG,10,Union Saint-Gilloise,3,2,Playoff_2
+3169883,2018,18/19,2019-04-27,20190427,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,520,Cercle Brugge,12,Cercle Brugge,6,2,Playoff_2
+3169879,2018,18/19,2019-04-27,20190427,20:00,968,KVC Westerlo,2024,KVC Westerlo,1245,KAS Eupen,4276,KAS Eupen,1,0,Playoff_2
+3169925,2018,18/19,2019-04-28,20190428,18:00,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,1,0,Playoff_1
+3169880,2018,18/19,2019-04-28,20190428,20:00,475,St-Truidense VV,373,Sint-Truidense VV,41274,KFCO Beerschot,13,Beerschot,2,2,Playoff_2
+3169926,2018,18/19,2019-05-03,20190503,20:30,1184,KRC Genk,322,KRC Genk,1096,Antwerp FC,1,Royal Antwerp FC,4,0,Playoff_1
+3169884,2018,18/19,2019-05-04,20190504,18:00,172,R Charleroi SC,22,R Charleroi SC,475,St-Truidense VV,373,Sint-Truidense VV,2,0,Playoff_2
+3169885,2018,18/19,2019-05-04,20190504,20:00,1245,KAS Eupen,4276,KAS Eupen,2861,KV Oostende,31,KV Oostende,3,2,Playoff_2
+3169887,2018,18/19,2019-05-04,20190504,20:00,520,Cercle Brugge,12,Cercle Brugge,3948,Union SG,10,Union Saint-Gilloise,2,3,Playoff_2
+3169886,2018,18/19,2019-05-04,20190504,20:30,41274,KFCO Beerschot,13,Beerschot,968,KVC Westerlo,2024,KVC Westerlo,3,2,Playoff_2
+3169888,2018,18/19,2019-05-04,20190504,20:00,601,KV Kortrijk,19,KV Kortrijk,28643,Waasland-Beveren,4068,Waasland-Beveren,2,1,Playoff_2
+3169928,2018,18/19,2019-05-05,20190505,18:00,157,KAA Gent,7,KAA Gent,2282,Club Brugge,3,Club Brugge,0,1,Playoff_1
+3169927,2018,18/19,2019-05-05,20190505,14:30,58,RSC Anderlecht,35,RSC Anderlecht,3057,Standard Luik,16,Standard Luik,2,1,Playoff_1
+3169889,2018,18/19,2019-05-05,20190505,20:00,29228,Moeskroen,216,Moeskroen,3508,Zulte Waregem,5381,SV Zulte Waregem,3,0,Playoff_2
+3169929,2018,18/19,2019-05-10,20190510,20:30,3057,Standard Luik,16,Standard Luik,157,KAA Gent,7,KAA Gent,2,3,Playoff_1
+3169894,2018,18/19,2019-05-11,20190511,20:00,3508,Zulte Waregem,5381,SV Zulte Waregem,601,KV Kortrijk,19,KV Kortrijk,0,5,Playoff_2
+3169890,2018,18/19,2019-05-11,20190511,18:00,41274,KFCO Beerschot,13,Beerschot,172,R Charleroi SC,22,R Charleroi SC,0,3,Playoff_2
+3169891,2018,18/19,2019-05-11,20190511,20:00,2861,KV Oostende,31,KV Oostende,968,KVC Westerlo,2024,KVC Westerlo,0,3,Playoff_2
+3169895,2018,18/19,2019-05-11,20190511,20:30,3948,Union SG,10,Union Saint-Gilloise,29228,Moeskroen,216,Moeskroen,3,3,Playoff_2
+3169893,2018,18/19,2019-05-11,20190511,20:00,28643,Waasland-Beveren,4068,Waasland-Beveren,520,Cercle Brugge,12,Cercle Brugge,2,1,Playoff_2
+3169931,2018,18/19,2019-05-12,20190512,18:00,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,3,2,Playoff_1
+3169930,2018,18/19,2019-05-12,20190512,14:30,1096,Antwerp FC,1,Royal Antwerp FC,58,RSC Anderlecht,35,RSC Anderlecht,1,1,Playoff_1
+3169892,2018,18/19,2019-05-12,20190512,20:00,475,St-Truidense VV,373,Sint-Truidense VV,1245,KAS Eupen,4276,KAS Eupen,2,2,Playoff_2
+3169899,2018,18/19,2019-05-14,20190514,20:30,3948,Union SG,10,Union Saint-Gilloise,601,KV Kortrijk,19,KV Kortrijk,2,0,Playoff_2
+3169901,2018,18/19,2019-05-14,20190514,20:30,28643,Waasland-Beveren,4068,Waasland-Beveren,3508,Zulte Waregem,5381,SV Zulte Waregem,0,5,Playoff_2
+3169900,2018,18/19,2019-05-14,20190514,20:30,520,Cercle Brugge,12,Cercle Brugge,29228,Moeskroen,216,Moeskroen,0,3,Playoff_2
+3169896,2018,18/19,2019-05-15,20190515,20:30,2861,KV Oostende,31,KV Oostende,475,St-Truidense VV,373,Sint-Truidense VV,1,1,Playoff_2
+3169897,2018,18/19,2019-05-15,20190515,20:30,968,KVC Westerlo,2024,KVC Westerlo,172,R Charleroi SC,22,R Charleroi SC,0,2,Playoff_2
+3169898,2018,18/19,2019-05-15,20190515,20:30,1245,KAS Eupen,4276,KAS Eupen,41274,KFCO Beerschot,13,Beerschot,1,0,Playoff_2
+3169934,2018,18/19,2019-05-16,20190516,20:30,1096,Antwerp FC,1,Royal Antwerp FC,157,KAA Gent,7,KAA Gent,1,2,Playoff_1
+3169933,2018,18/19,2019-05-16,20190516,20:30,3057,Standard Luik,16,Standard Luik,2282,Club Brugge,3,Club Brugge,2,0,Playoff_1
+3169932,2018,18/19,2019-05-16,20190516,20:30,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,1,1,Playoff_1
+3169907,2018,18/19,2019-05-17,20190517,20:30,3508,Zulte Waregem,5381,SV Zulte Waregem,3948,Union SG,10,Union Saint-Gilloise,2,1,Playoff_2
+3169906,2018,18/19,2019-05-17,20190517,20:30,29228,Moeskroen,216,Moeskroen,28643,Waasland-Beveren,4068,Waasland-Beveren,2,4,Playoff_2
+3169905,2018,18/19,2019-05-17,20190517,20:30,601,KV Kortrijk,19,KV Kortrijk,520,Cercle Brugge,12,Cercle Brugge,4,0,Playoff_2
+3169903,2018,18/19,2019-05-18,20190518,20:00,41274,KFCO Beerschot,13,Beerschot,2861,KV Oostende,31,KV Oostende,1,2,Playoff_2
+3169904,2018,18/19,2019-05-18,20190518,20:00,475,St-Truidense VV,373,Sint-Truidense VV,968,KVC Westerlo,2024,KVC Westerlo,2,1,Playoff_2
+3169902,2018,18/19,2019-05-18,20190518,20:00,172,R Charleroi SC,22,R Charleroi SC,1245,KAS Eupen,4276,KAS Eupen,2,0,Playoff_2
+3169937,2018,18/19,2019-05-19,20190519,18:00,1184,KRC Genk,322,KRC Genk,3057,Standard Luik,16,Standard Luik,0,0,Playoff_1
+3169935,2018,18/19,2019-05-19,20190519,18:00,2282,Club Brugge,3,Club Brugge,1096,Antwerp FC,1,Royal Antwerp FC,3,2,Playoff_1
+3169936,2018,18/19,2019-05-19,20190519,18:00,157,KAA Gent,7,KAA Gent,58,RSC Anderlecht,35,RSC Anderlecht,2,1,Playoff_1
+3554833,2020,20/21,2021-04-30,20210430,20:45,1096,Antwerp FC,1,Royal Antwerp FC,1184,KRC Genk,322,KRC Genk,2,3,Playoff_1
+3554845,2020,20/21,2021-05-01,20210501,20:45,2861,KV Oostende,31,KV Oostende,3057,Standard Luik,16,Standard Luik,6,2,Playoff_2
+3554834,2020,20/21,2021-05-02,20210502,18:30,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,2,2,Playoff_1
+3554846,2020,20/21,2021-05-02,20210502,16:00,157,KAA Gent,7,KAA Gent,354,KV Mechelen,25,KV Mechelen,2,2,Playoff_2
+3554835,2020,20/21,2021-05-07,20210507,20:45,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,3,0,Playoff_1
+3554836,2020,20/21,2021-05-08,20210508,20:45,58,RSC Anderlecht,35,RSC Anderlecht,1096,Antwerp FC,1,Royal Antwerp FC,2,2,Playoff_1
+3554847,2020,20/21,2021-05-08,20210508,18:30,3057,Standard Luik,16,Standard Luik,157,KAA Gent,7,KAA Gent,2,1,Playoff_2
+3554848,2020,20/21,2021-05-09,20210509,16:00,354,KV Mechelen,25,KV Mechelen,2861,KV Oostende,31,KV Oostende,5,3,Playoff_2
+3554837,2020,20/21,2021-05-12,20210512,20:45,1184,KRC Genk,322,KRC Genk,58,RSC Anderlecht,35,RSC Anderlecht,1,1,Playoff_1
+3554838,2020,20/21,2021-05-13,20210513,18:30,1096,Antwerp FC,1,Royal Antwerp FC,2282,Club Brugge,3,Club Brugge,0,0,Playoff_1
+3554849,2020,20/21,2021-05-13,20210513,13:30,157,KAA Gent,7,KAA Gent,2861,KV Oostende,31,KV Oostende,2,1,Playoff_2
+3554850,2020,20/21,2021-05-13,20210513,16:00,3057,Standard Luik,16,Standard Luik,354,KV Mechelen,25,KV Mechelen,1,2,Playoff_2
+3554839,2020,20/21,2021-05-15,20210515,20:45,58,RSC Anderlecht,35,RSC Anderlecht,1184,KRC Genk,322,KRC Genk,1,2,Playoff_1
+3554840,2020,20/21,2021-05-16,20210516,18:30,2282,Club Brugge,3,Club Brugge,1096,Antwerp FC,1,Royal Antwerp FC,2,1,Playoff_1
+3554851,2020,20/21,2021-05-16,20210516,13:30,2861,KV Oostende,31,KV Oostende,157,KAA Gent,7,KAA Gent,0,4,Playoff_2
+3554852,2020,20/21,2021-05-16,20210516,16:00,354,KV Mechelen,25,KV Mechelen,3057,Standard Luik,16,Standard Luik,3,1,Playoff_2
+3554854,2020,20/21,2021-05-19,20210519,21:00,157,KAA Gent,7,KAA Gent,3057,Standard Luik,16,Standard Luik,2,0,Playoff_2
+3554853,2020,20/21,2021-05-19,20210519,18:30,2861,KV Oostende,31,KV Oostende,354,KV Mechelen,25,KV Mechelen,2,2,Playoff_2
+3554842,2020,20/21,2021-05-20,20210520,21:00,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,3,3,Playoff_1
+3554841,2020,20/21,2021-05-20,20210520,18:30,1184,KRC Genk,322,KRC Genk,1096,Antwerp FC,1,Royal Antwerp FC,4,0,Playoff_1
+3554855,2020,20/21,2021-05-22,20210522,20:00,354,KV Mechelen,25,KV Mechelen,157,KAA Gent,7,KAA Gent,1,2,Playoff_2
+3554856,2020,20/21,2021-05-22,20210522,20:00,3057,Standard Luik,16,Standard Luik,2861,KV Oostende,31,KV Oostende,1,3,Playoff_2
+3554844,2020,20/21,2021-05-23,20210523,18:30,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,1,2,Playoff_1
+3554843,2020,20/21,2021-05-23,20210523,18:30,1096,Antwerp FC,1,Royal Antwerp FC,58,RSC Anderlecht,35,RSC Anderlecht,1,0,Playoff_1
+3795500,2021,21/22,2022-04-23,20220423,20:45,354,KV Mechelen,25,KV Mechelen,172,R Charleroi SC,22,R Charleroi SC,1,0,Playoff_2
+3795512,2021,21/22,2022-04-24,20220424,13:30,2282,Club Brugge,3,Club Brugge,1096,Antwerp FC,1,Royal Antwerp FC,1,0,Playoff_1
+3795513,2021,21/22,2022-04-24,20220424,18:30,3948,Union SG,10,Union Saint-Gilloise,58,RSC Anderlecht,35,RSC Anderlecht,3,1,Playoff_1
+3795501,2021,21/22,2022-04-24,20220424,16:00,157,KAA Gent,7,KAA Gent,1184,KRC Genk,322,KRC Genk,0,1,Playoff_2
+3795536,2021,21/22,2022-04-29,20220429,20:45,1184,KRC Genk,322,KRC Genk,354,KV Mechelen,25,KV Mechelen,4,2,Playoff_2
+3795537,2021,21/22,2022-04-30,20220430,18:30,172,R Charleroi SC,22,R Charleroi SC,157,KAA Gent,7,KAA Gent,1,3,Playoff_2
+3795527,2021,21/22,2022-05-01,20220501,18:30,58,RSC Anderlecht,35,RSC Anderlecht,2282,Club Brugge,3,Club Brugge,0,0,Playoff_1
+3795526,2021,21/22,2022-05-01,20220501,13:30,1096,Antwerp FC,1,Royal Antwerp FC,3948,Union SG,10,Union Saint-Gilloise,0,0,Playoff_1
+3795538,2021,21/22,2022-05-06,20220506,20:45,172,R Charleroi SC,22,R Charleroi SC,1184,KRC Genk,322,KRC Genk,2,2,Playoff_2
+3795539,2021,21/22,2022-05-07,20220507,20:45,157,KAA Gent,7,KAA Gent,354,KV Mechelen,25,KV Mechelen,1,0,Playoff_2
+3795528,2021,21/22,2022-05-08,20220508,13:30,3948,Union SG,10,Union Saint-Gilloise,2282,Club Brugge,3,Club Brugge,0,2,Playoff_1
+3795529,2021,21/22,2022-05-08,20220508,18:30,1096,Antwerp FC,1,Royal Antwerp FC,58,RSC Anderlecht,35,RSC Anderlecht,0,4,Playoff_1
+3795540,2021,21/22,2022-05-10,20220510,18:45,354,KV Mechelen,25,KV Mechelen,157,KAA Gent,7,KAA Gent,1,2,Playoff_2
+3795541,2021,21/22,2022-05-10,20220510,21:00,1184,KRC Genk,322,KRC Genk,172,R Charleroi SC,22,R Charleroi SC,3,2,Playoff_2
+3795530,2021,21/22,2022-05-11,20220511,20:30,2282,Club Brugge,3,Club Brugge,3948,Union SG,10,Union Saint-Gilloise,1,0,Playoff_1
+3795531,2021,21/22,2022-05-12,20220512,20:30,58,RSC Anderlecht,35,RSC Anderlecht,1096,Antwerp FC,1,Royal Antwerp FC,2,1,Playoff_1
+3795542,2021,21/22,2022-05-14,20220514,20:45,172,R Charleroi SC,22,R Charleroi SC,354,KV Mechelen,25,KV Mechelen,3,2,Playoff_2
+3795532,2021,21/22,2022-05-15,20220515,13:30,1096,Antwerp FC,1,Royal Antwerp FC,2282,Club Brugge,3,Club Brugge,1,3,Playoff_1
+3795533,2021,21/22,2022-05-15,20220515,18:30,58,RSC Anderlecht,35,RSC Anderlecht,3948,Union SG,10,Union Saint-Gilloise,0,2,Playoff_1
+3795543,2021,21/22,2022-05-15,20220515,16:00,1184,KRC Genk,322,KRC Genk,157,KAA Gent,7,KAA Gent,0,2,Playoff_2
+3795545,2021,21/22,2022-05-21,20220521,20:45,354,KV Mechelen,25,KV Mechelen,1184,KRC Genk,322,KRC Genk,0,0,Playoff_2
+3795544,2021,21/22,2022-05-21,20220521,20:45,157,KAA Gent,7,KAA Gent,172,R Charleroi SC,22,R Charleroi SC,1,2,Playoff_2
+3795535,2021,21/22,2022-05-22,20220522,16:00,3948,Union SG,10,Union Saint-Gilloise,1096,Antwerp FC,1,Royal Antwerp FC,0,1,Playoff_1
+3795534,2021,21/22,2022-05-22,20220522,18:30,2282,Club Brugge,3,Club Brugge,58,RSC Anderlecht,35,RSC Anderlecht,1,1,Playoff_1
+4066123,2022,22/23,2023-04-28,20230428,20:45,157,KAA Gent,7,KAA Gent,968,KVC Westerlo,2024,KVC Westerlo,3,1,Playoff_2
+4066124,2022,22/23,2023-04-29,20230429,18:15,520,Cercle Brugge,12,Cercle Brugge,3057,Standard Luik,16,Standard Luik,0,0,Playoff_2
+4066121,2022,22/23,2023-04-30,20230430,18:30,1184,KRC Genk,322,KRC Genk,2282,Club Brugge,3,Club Brugge,3,1,Playoff_1
+4066122,2022,22/23,2023-05-03,20230503,20:30,3948,Union SG,10,Union Saint-Gilloise,1096,Antwerp FC,1,Royal Antwerp FC,0,2,Playoff_1
+4066146,2022,22/23,2023-05-06,20230506,18:15,2282,Club Brugge,3,Club Brugge,3948,Union SG,10,Union Saint-Gilloise,1,2,Playoff_1
+4066164,2022,22/23,2023-05-06,20230506,20:45,3057,Standard Luik,16,Standard Luik,157,KAA Gent,7,KAA Gent,1,2,Playoff_2
+4066147,2022,22/23,2023-05-07,20230507,18:30,1096,Antwerp FC,1,Royal Antwerp FC,1184,KRC Genk,322,KRC Genk,2,1,Playoff_1
+4066165,2022,22/23,2023-05-07,20230507,13:30,968,KVC Westerlo,2024,KVC Westerlo,520,Cercle Brugge,12,Cercle Brugge,3,5,Playoff_2
+4066166,2022,22/23,2023-05-13,20230513,18:15,520,Cercle Brugge,12,Cercle Brugge,157,KAA Gent,7,KAA Gent,0,4,Playoff_2
+4066167,2022,22/23,2023-05-13,20230513,20:45,3057,Standard Luik,16,Standard Luik,968,KVC Westerlo,2024,KVC Westerlo,2,2,Playoff_2
+4066148,2022,22/23,2023-05-14,20230514,13:30,1096,Antwerp FC,1,Royal Antwerp FC,2282,Club Brugge,3,Club Brugge,3,2,Playoff_1
+4066149,2022,22/23,2023-05-14,20230514,18:30,3948,Union SG,10,Union Saint-Gilloise,1184,KRC Genk,322,KRC Genk,3,0,Playoff_1
+4066168,2022,22/23,2023-05-20,20230520,18:15,968,KVC Westerlo,2024,KVC Westerlo,3057,Standard Luik,16,Standard Luik,3,0,Playoff_2
+4066169,2022,22/23,2023-05-20,20230520,20:45,157,KAA Gent,7,KAA Gent,520,Cercle Brugge,12,Cercle Brugge,2,2,Playoff_2
+4066150,2022,22/23,2023-05-21,20230521,13:30,2282,Club Brugge,3,Club Brugge,1096,Antwerp FC,1,Royal Antwerp FC,2,0,Playoff_1
+4066151,2022,22/23,2023-05-21,20230521,18:30,1184,KRC Genk,322,KRC Genk,3948,Union SG,10,Union Saint-Gilloise,1,1,Playoff_1
+4066170,2022,22/23,2023-05-27,20230527,18:15,968,KVC Westerlo,2024,KVC Westerlo,157,KAA Gent,7,KAA Gent,1,3,Playoff_2
+4066171,2022,22/23,2023-05-27,20230527,20:45,3057,Standard Luik,16,Standard Luik,520,Cercle Brugge,12,Cercle Brugge,0,4,Playoff_2
+4066153,2022,22/23,2023-05-28,20230528,18:30,2282,Club Brugge,3,Club Brugge,1184,KRC Genk,322,KRC Genk,1,3,Playoff_1
+4066152,2022,22/23,2023-05-28,20230528,13:30,1096,Antwerp FC,1,Royal Antwerp FC,3948,Union SG,10,Union Saint-Gilloise,1,1,Playoff_1
+4066173,2022,22/23,2023-06-03,20230603,20:30,157,KAA Gent,7,KAA Gent,3057,Standard Luik,16,Standard Luik,3,1,Playoff_2
+4066172,2022,22/23,2023-06-03,20230603,20:30,520,Cercle Brugge,12,Cercle Brugge,968,KVC Westerlo,2024,KVC Westerlo,2,0,Playoff_2
+4066155,2022,22/23,2023-06-04,20230604,18:30,3948,Union SG,10,Union Saint-Gilloise,2282,Club Brugge,3,Club Brugge,1,3,Playoff_1
+4066154,2022,22/23,2023-06-04,20230604,18:30,1184,KRC Genk,322,KRC Genk,1096,Antwerp FC,1,Royal Antwerp FC,2,2,Playoff_1
