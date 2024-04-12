@@ -10,7 +10,7 @@ try:
 
     with open(r'DEP\DEP1-2023-2024-groep30\bet777\data\bets.csv', 'w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(['ID', 'Wedstrijd', 'Starttijd', 'Thuisploeg', 'Uitploeg', 'Vraag', 'Keuze', 'Kans'])
+        writer.writerow(['ID', 'Wedstrijd', 'Starttijd', 'Thuisploeg', 'Uitploeg', 'ThuisPloegWint', 'Gelijk', 'UitPloegWint', 'OnderXGoals', 'OverXGoals', 'BeideTeamsScoren', 'NietBeideTeamsScoren'])
 
         for sport in data.get('tree', []):
             for competition in sport.get('competitions', []):
@@ -21,12 +21,39 @@ try:
                     home_team = event.get('home_team')
                     away_team = event.get('away_team')
 
+                    odds_dict = {
+                        'ThuisPloegWint': None,
+                        'Gelijk': None,
+                        'UitPloegWint': None,
+                        'OnderXGoals': None,
+                        'OverXGoals': None,
+                        'BeideTeamsScoren': None,
+                        'NietBeideTeamsScoren': None
+                    }
+
                     for market in event.get('markets', []):
                         market_name = market.get('name')
                         for outcome in market.get('outcomes', []):
-                            outcome_name = outcome.get('name')
                             odds = outcome.get('odds')
-                            writer.writerow([event_id, event_name, start_time, home_team, away_team, market_name, outcome_name, odds])
+                            if market_name == "Wedstrijduitslag":
+                                if outcome.get('name') == "1":
+                                    odds_dict['ThuisPloegWint'] = odds
+                                elif outcome.get('name') == "Gelijkspel":
+                                    odds_dict['Gelijk'] = odds
+                                elif outcome.get('name') == "2":
+                                    odds_dict['UitPloegWint'] = odds
+                            elif market_name == "Totaal Aantal Goals":
+                                if outcome.get('name') == "Meer dan (2.5)":
+                                    odds_dict['OverXGoals'] = odds
+                                elif outcome.get('name') == "Onder (2.5)":
+                                    odds_dict['OnderXGoals'] = odds
+                            elif market_name == "Beide teams zullen scoren":
+                                if outcome.get('name') == "Ja":
+                                    odds_dict['BeideTeamsScoren'] = odds
+                                elif outcome.get('name') == "Nee":
+                                    odds_dict['NietBeideTeamsScoren'] = odds
+
+                    writer.writerow([event_id, event_name, start_time, home_team, away_team] + list(odds_dict.values()))
 
     print("Data has been successfully written to bets.csv.")
 
