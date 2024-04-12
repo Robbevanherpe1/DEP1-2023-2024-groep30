@@ -44,9 +44,9 @@ try:
                                     odds_dict['UitPloegWint'] = odds
                             elif market_name == "Totaal Aantal Goals":
                                 if outcome.get('name') == "Meer dan (2.5)":
-                                    odds_dict['OverXGoals'] = odds
+                                    odds_dict['OnderXGoals'] = odds  # Omwisselen van de waarden
                                 elif outcome.get('name') == "Onder (2.5)":
-                                    odds_dict['OnderXGoals'] = odds
+                                    odds_dict['OverXGoals'] = odds  # Omwisselen van de waarden
                             elif market_name == "Beide teams zullen scoren":
                                 if outcome.get('name') == "Ja":
                                     odds_dict['BeideTeamsScoren'] = odds
