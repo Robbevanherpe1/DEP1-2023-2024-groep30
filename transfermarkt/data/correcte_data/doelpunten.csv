@@ -1,4 +1,3 @@
-Seizoen;Speeldag;Datum;Tijdstip;Id;StamnummerThuisploeg;RoepnaamThuisploeg;StamnummerUitploeg;RoepnaamUitploeg;MinDoelpunt;TijdstipDoelpunt;StamnummerScorendePloeg;RoepnaamScorendePloeg;StandThuis;StandUit
 1960;1;1960-09-04;15:00;4008203;373;Sint-Truidense VV;16;Standard Luik;14;15:14;16;Standard Luik;0;1
 1960;1;1960-09-04;15:00;4008203;373;Sint-Truidense VV;16;Standard Luik;79;16:34;16;Standard Luik;0;2
 1960;1;1960-09-04;15:00;4008204;90;Eendracht Aalst;1;Royal Antwerp FC;18;15:18;90;Eendracht Aalst;1;1
@@ -41776,3 +41775,25 @@ Seizoen;Speeldag;Datum;Tijdstip;Id;StamnummerThuisploeg;RoepnaamThuisploeg;Stamn
 2023;29;2024-03-10;18:30;4098839;10;Union Saint-Gilloise;7;KAA Gent;53;19:38;7;KAA Gent;0;1
 2023;29;2024-03-10;18:30;4098839;10;Union Saint-Gilloise;7;KAA Gent;65;19:50;10;Union Saint-Gilloise;1;1
 2023;29;2024-03-10;19:15;4098842;4276;KAS Eupen;373;Sint-Truidense VV;10;19:25;4276;KAS Eupen;1;0
+2023;30;2024-03-16;18:15;4098844;16;Standard Luik;4276;KAS Eupen;9;18:24;16;Standard Luik;1;0
+2023;30;2024-03-16;18:15;4098844;16;Standard Luik;4276;KAS Eupen;40;18:55;16;Standard Luik;2;0
+2023;30;2024-03-16;18:15;4098844;16;Standard Luik;4276;KAS Eupen;82;19:52;16;Standard Luik;3;0
+2023;30;2024-03-16;18:15;4098844;16;Standard Luik;4276;KAS Eupen;89;19:59;16;Standard Luik;4;0
+2023;30;2024-03-16;20:45;4098843;35;RSC Anderlecht;19;KV Kortrijk;79;22:19;19;KV Kortrijk;0;1
+2023;30;2024-03-17;13:30;4098849;373;Sint-Truidense VV;3;Club Brugge;6;13:36;3;Club Brugge;0;1
+2023;30;2024-03-17;13:30;4098849;373;Sint-Truidense VV;3;Club Brugge;59;14:34;373;Sint-Truidense VV;1;1
+2023;30;2024-03-17;13:30;4098849;373;Sint-Truidense VV;3;Club Brugge;85;15:10;373;Sint-Truidense VV;2;1
+2023;30;2024-03-17;16:00;4098846;1;Royal Antwerp FC;10;Union Saint-Gilloise;84;17:39;10;Union Saint-Gilloise;0;1
+2023;30;2024-03-17;16:00;4098846;1;Royal Antwerp FC;10;Union Saint-Gilloise;92;17:47;1;Royal Antwerp FC;1;1
+2023;30;2024-03-17;18:30;4098845;7;KAA Gent;22;R Charleroi SC;38;19:08;7;KAA Gent;1;0
+2023;30;2024-03-17;18:30;4098845;7;KAA Gent;22;R Charleroi SC;41;19:11;7;KAA Gent;2;0
+2023;30;2024-03-17;18:30;4098845;7;KAA Gent;22;R Charleroi SC;48;19:33;7;KAA Gent;3;0
+2023;30;2024-03-17;18:30;4098845;7;KAA Gent;22;R Charleroi SC;55;19:40;7;KAA Gent;4;0
+2023;30;2024-03-17;18:30;4098845;7;KAA Gent;22;R Charleroi SC;67;19:57;7;KAA Gent;5;0
+2023;30;2024-03-17;18:30;4098847;18;Oud-Heverlee Leuven;25;KV Mechelen;92;20:17;18;Oud-Heverlee Leuven;1;0
+2023;30;2024-03-17;18:30;4098848;12;Cercle Brugge;5479;RWDM;4;18:34;12;Cercle Brugge;1;0
+2023;30;2024-03-17;18:30;4098848;12;Cercle Brugge;5479;RWDM;22;18:52;12;Cercle Brugge;2;0
+2023;30;2024-03-17;18:30;4098848;12;Cercle Brugge;5479;RWDM;47;19:32;12;Cercle Brugge;3;0
+2023;30;2024-03-17;18:30;4098848;12;Cercle Brugge;5479;RWDM;84;20:09;12;Cercle Brugge;4;0
+2023;30;2024-03-17;18:30;4098850;2024;KVC Westerlo;322;KRC Genk;79;20:04;2024;KVC Westerlo;1;0
+2023;30;2024-03-17;18:30;4098850;2024;KVC Westerlo;322;KRC Genk;86;20:11;322;KRC Genk;1;1
