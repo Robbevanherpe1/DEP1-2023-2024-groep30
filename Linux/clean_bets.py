@@ -19,15 +19,15 @@ try:
             unique_key = tuple(row[:-1])  # Use all fields except the timestamp to create a unique key
             timestamp = row[-1]  # Store the timestamp
 
-            # Check if unique_key exists in unique_rows; if not, or if existing timestamp is older, store the new row
-            if unique_key not in unique_rows or unique_rows[unique_key][-1] > timestamp:
-                unique_rows[unique_key] = row  # Store the entire row, updating the timestamp if earlier
+            # Check if unique_key exists in unique_rows; if not, or if existing timestamp is older, update the stored row
+            if unique_key not in unique_rows or unique_rows[unique_key][-1] < timestamp:
+                unique_rows[unique_key] = row  # Store the entire row, updating the timestamp if the new one is later
 
     with open(output_filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(header)  # Write the header row first
         for row in sorted(unique_rows.values(), key=lambda x: (x[0], x[2])):  # Sort by ID and start time (adjust according to actual column indices)
-            writer.writerow(row)  # Write each row, including the earliest timestamp found
+            writer.writerow(row)  # Write each row, including the latest timestamp found
 
     logging.info(f'{len(unique_rows)} unique rows have been written to {output_filename}.')
 except Exception as e:
