@@ -124,8 +124,11 @@ GO
 ## Het schedulen van de scripts
 
 ### De weddenschappen
-- nano fetch_bets.py
-- chmod +x fetch_bets.py
+- nano scratch_bets.py
+- chmod +x scratch_bets.py
+
+- nano clean_bets.py
+- chmod +x clean_bets.py
 
 ### De wedstrijduitslagen
 - nano fetch_wedstrijden.py
@@ -140,5 +143,6 @@ GO
 - crontab < c.txt
 - crontab -l
 
-0 8,14,20 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_bets.py
+0 8,14,20 * * * /usr/bin/python3 /home/vicuser/data_fetch/scratch_bets.py
+0 9,15,21 * * * /usr/bin/python3 /home/vicuser/data_fetch/clean_bets.py
 0 8,14,20 * * * /usr/bin/python3 /home/vicuser/data_fetch/fetch_wedstrijden.py
