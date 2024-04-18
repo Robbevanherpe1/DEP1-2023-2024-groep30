@@ -1,6 +1,5 @@
 USE DEP_DWH_G30;
 
-
 -- Alle tabellen leeg maken
 DELETE FROM dbo.FactKlassement;
 DELETE FROM dbo.FactWeddenschap;
@@ -10,7 +9,29 @@ DELETE FROM dbo.DimKans;
 DELETE FROM dbo.DimTime;
 DELETE FROM dbo.DimDate;
 DELETE FROM dbo.DimWedstrijd;
+DELETE FROM dbo.DimBetSite;
 GO
+
+-- Vul DimBetSite
+DROP SEQUENCE IF EXISTS seq_bs;
+CREATE SEQUENCE seq_bs START WITH 1 INCREMENT BY 1;
+
+DELETE FROM dbo.DimBetSite;
+GO
+
+INSERT INTO dbo.DimBetSite(BetSiteKey, SiteNaam)
+SELECT 
+    NEXT VALUE FOR seq_bs, 
+    SiteNaam
+FROM (
+    VALUES 
+    ('B365'),
+    ('BS'),
+    ('BW'),
+	('IW'),
+	('WH'),
+	('VC')
+) AS g(SiteNaam);
 
 
 -- Vul DimTeam
@@ -173,6 +194,7 @@ FROM dbo.wedstrijden w
 	left join dbo.DimWedstrijd we on we.MatchID = w.id
 	left join dbo.DimTeam uit on w.RoepnaamUitploeg = uit.PloegNaam
 	left join dbo.DimTeam thuis on w.RoepnaamThuisploeg = thuis.PloegNaam
+
 
 
 -- Vul FactKlassement
