@@ -4,14 +4,19 @@ BEGIN
 END;
 GO
 
-
 USE DEP_DWH_G30
 GO
-
 
 DROP TABLE IF EXISTS FactWedstrijdScore, FactWeddenschap, FactKlassement;
 DROP TABLE IF EXISTS DimKans, DimTeam, DimTime, DimWedstrijd;
 DROP TABLE IF EXISTS DimDate;
+DROP TABLE IF EXISTS DimBetSite;
+GO
+
+CREATE TABLE DimBetSite (
+    BetSiteKey INT PRIMARY KEY,
+    SiteNaam NVARCHAR(50) NOT NULL
+);
 GO
 
 CREATE TABLE DimKans (

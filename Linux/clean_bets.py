@@ -10,25 +10,42 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 input_filename = '/home/vicuser/data/bets.csv'
 output_filename = '/home/vicuser/data/betsCorrect.csv'
 
-try:
+def read_and_filter_data(input_filename):
+    # reads data from input CSV file and filters out rows based on ID field
+    # keep the row with the earliest timestamp if there are duplicates
+
     unique_rows = {}
-    with open(input_filename, 'r', newline='', encoding='utf-8') as csvfile:
-        reader = csv.reader(csvfile)
-        header = next(reader)  # Retrieve the header row
+    with open(input_filename, mode='r', newline='', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
         for row in reader:
-            unique_key = tuple(row[:-1])  # Use all fields except the timestamp to create a unique key
-            timestamp = row[-1]  # Store the timestamp
+            # Use ID as the unique key
+            key = row['ID']
+            # Check if the key exists and compare timestamps
+            if key in unique_rows:
+                if unique_rows[key]['Timestamp'] > row['Timestamp']:
+                    unique_rows[key] = row
+            else:
+                unique_rows[key] = row
+    
+    return unique_rows
 
-            # Check if unique_key exists in unique_rows; if not, or if existing timestamp is older, update the stored row
-            if unique_key not in unique_rows or unique_rows[unique_key][-1] < timestamp:
-                unique_rows[unique_key] = row  # Store the entire row, updating the timestamp if the new one is later
+def write_filtered_data(output_filename, unique_rows):
+    # Writes the filtered data to output CSV file.
+    
+    fieldnames = ['ID', 'Wedstrijd', 'Starttijd', 'Thuisploeg', 'Uitploeg', 'ThuisPloegWint', 'Gelijk',
+                  'UitPloegWint', 'OnderXGoals', 'OverXGoals', 'BeideTeamsScoren', 'NietBeideTeamsScoren', 'Timestamp']
+    with open(output_filename, mode='w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in unique_rows.values():
+            writer.writerow(row)
 
-    with open(output_filename, 'w', newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(header)  # Write the header row first
-        for row in sorted(unique_rows.values(), key=lambda x: (x[0], x[2])):  # Sort by ID and start time (adjust according to actual column indices)
-            writer.writerow(row)  # Write each row, including the latest timestamp found
+def main():
+    logging.info("Starting the process to filter unique rows based on 'ID'.")
+    unique_rows = read_and_filter_data(input_filename)
+    logging.info(f"Found {len(unique_rows)} unique entries by 'ID'. Writing to output file.")
+    write_filtered_data(output_filename, unique_rows)
+    logging.info("Finished writing the filtered data.")
 
-    logging.info(f'{len(unique_rows)} unique rows have been written to {output_filename}.')
-except Exception as e:
-    logging.error(f"Failed to write to {output_filename}: {e}")
+if __name__ == "__main__":
+    main()

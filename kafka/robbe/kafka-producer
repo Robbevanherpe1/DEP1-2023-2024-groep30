@@ -1,0 +1,32 @@
+import csv
+from confluent_kafka import Producer
+import hashlib
+
+def configureer_producer():
+    conf = {'bootstrap.servers': 'localhost:9092'}
+    return Producer(conf)
+
+def leveringsrapport(err, msg):
+    if err is not None:
+        print(f'Fout bij het verzenden van bericht: {err}')
+    else:
+        print(f'Bericht succesvol verzonden naar {msg.topic()} op partitie {msg.partition()}')
+
+def verwerk_csv_bestand(producer, csv_file_path):
+    with open(csv_file_path, 'r') as file:
+        reader = csv.reader(file)
+        for row in reader:
+            # Gebruik de eerste kolom als sleutel of een hash ervan voor een gelijkmatige verdeling
+            key = hashlib.sha256(row[0].encode()).hexdigest()
+            row_str = ','.join(row)
+            producer.produce('weddenschap_winstkansen', key=key, value=row_str, callback=leveringsrapport)
+            producer.poll(0)  
+            
+def hoofdfunctie():
+    producer = configureer_producer()
+    csv_file_path = 'bets.csv'
+    verwerk_csv_bestand(producer, csv_file_path)
+    producer.flush()
+
+if __name__ == "__main__":
+    hoofdfunctie()
