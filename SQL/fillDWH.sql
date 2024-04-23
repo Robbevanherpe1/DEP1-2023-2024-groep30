@@ -247,7 +247,7 @@ CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
 DELETE FROM dbo.FactWeddenschap;
 GO
 
-INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, BetSiteKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
 								OddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
 SELECT
 	NEXT VALUE FOR seq_fws,
@@ -255,6 +255,7 @@ SELECT
     ISNULL(thuis.TeamKey, 0),
     '0' AS WedstrijdKey,
     2 AS KansKey,
+	'tijdelijk' AS BetSiteKey,
 	ISNULL(d.datekey, 0),
 	ISNULL(t.timekey, 0),
 	ISNULL(d2.datekey, 0),
