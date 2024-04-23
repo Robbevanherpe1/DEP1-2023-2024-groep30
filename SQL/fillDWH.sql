@@ -30,7 +30,8 @@ FROM (
     ('BW'),
 	('IW'),
 	('WH'),
-	('VC')
+	('VC'),
+	('Bet777')
 ) AS g(SiteNaam);
 
 
@@ -61,25 +62,28 @@ CREATE SEQUENCE seq_dd START WITH 1 INCREMENT BY 1;
 DELETE FROM dbo.DimDate;
 GO
 
-INSERT INTO dbo.DimDate (DateKey, Datum, Seizoen, Speeldag, DagVanDeMaand, DagVanHetJaar, WeekVanHetJaar, DagVanDeWeek, Maand, Semester, Kwartaal, Jaar, 
-							EngelseDag, EngelseMaand, DDMMJJJJ, IsWeekend, NaamDagVanDeWeek, IsSchrikkeljaar, WeekVanDeMaand, Tijdvak)
+INSERT INTO dbo.DimDate (
+    DateKey, Datum, Seizoen, Speeldag, DagVanDeMaand, DagVanHetJaar, WeekVanHetJaar, 
+    DagVanDeWeek, Maand, Semester, Kwartaal, Jaar, EngelseDag, EngelseMaand, 
+    DDMMJJJJ, IsWeekend, NaamDagVanDeWeek, IsSchrikkeljaar, WeekVanDeMaand, Tijdvak
+)
 SELECT
     NEXT VALUE FOR seq_dd,
-    Datum,
+    datum AS Datum,
     Seizoen,
     Speeldag,
     DAY(datum) AS DagVanDeMaand,
     DATEPART(DAYOFYEAR, datum) AS DagVanHetJaar,
     DATEPART(WEEK, datum) AS WeekVanHetJaar,
-    (DATEPART(WEEKDAY, datum) + @@DATEFIRST + 5) % 7 AS DagVanDeWeek, -- maandag = 0 tot zondag = 6
+    (DATEPART(WEEKDAY, datum) + @@DATEFIRST + 5) % 7 AS DagVanDeWeek, -- Adjust to start week with Monday (0) through Sunday (6)
     MONTH(datum) AS Maand,
     CASE WHEN DATEPART(QUARTER, datum) IN (1, 2) THEN 1 ELSE 2 END AS Semester,
     DATEPART(QUARTER, datum) AS Kwartaal,
     YEAR(datum) AS Jaar,
     DATENAME(WEEKDAY, datum) AS EngelseDag,
     DATENAME(MONTH, datum) AS EngelseMaand,
-    RIGHT('0' + CONVERT(VARCHAR, DAY(datum)), 2) + RIGHT('0' + CONVERT(VARCHAR, MONTH(datum)), 2) + CONVERT(VARCHAR, YEAR(datum)) AS DDMMJJJJ,
-    CASE WHEN ((DATEPART(WEEKDAY, datum) + @@DATEFIRST - 1) % 7) IN (0, 6) THEN 1 ELSE 0 END AS IsWeekend,
+    REPLACE(CONVERT(VARCHAR, datum, 104), '.', '') AS DDMMJJJJ, -- Format as DDMMYYYY
+    CASE WHEN ((DATEPART(WEEKDAY, datum) + @@DATEFIRST - 1) % 7) IN (0, 6) THEN 1 ELSE 0 END AS IsWeekend, -- Check for weekends
     CASE DATENAME(WEEKDAY, datum) 
         WHEN 'Sunday' THEN 'Zondag'
         WHEN 'Monday' THEN 'Maandag'
@@ -92,18 +96,14 @@ SELECT
     CASE WHEN (YEAR(datum) % 4 = 0 AND YEAR(datum) % 100 != 0) OR (YEAR(datum) % 400 = 0) THEN 1 ELSE 0 END AS IsSchrikkeljaar,
     (DAY(datum) + DATEPART(WEEKDAY, DATEADD(DAY, 1-DAY(datum), datum)) - 2) / 7 + 1 AS WeekVanDeMaand,
     CASE 
-		WHEN MONTH(datum) IN (12, 1, 2) THEN 'Winter'
-		WHEN MONTH(datum) IN (3, 4, 5) THEN 'Lente' 
-		WHEN MONTH(datum) IN (6, 7, 8) THEN 'Zomer' 
-	ELSE 'Herfst' END AS Tijdvak
-FROM (
-    SELECT DISTINCT 
-        Seizoen,
-        Speeldag,
-        datum
-    FROM dbo.wedstrijden
-) AS b;
+        WHEN MONTH(datum) IN (12, 1, 2) THEN 'Winter'
+        WHEN MONTH(datum) IN (3, 4, 5) THEN 'Lente' 
+        WHEN MONTH(datum) IN (6, 7, 8) THEN 'Zomer' 
+        ELSE 'Herfst'
+    END AS Tijdvak
+FROM dbo.theoretische_speeldagen;
 GO
+
 
 
 -- Vul DimKans
