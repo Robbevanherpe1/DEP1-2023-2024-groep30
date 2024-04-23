@@ -105,7 +105,6 @@ FROM dbo.theoretische_speeldagen;
 GO
 
 
-
 -- Vul DimKans
 DROP SEQUENCE IF EXISTS seq_dk;
 CREATE SEQUENCE seq_dk START WITH 1 INCREMENT BY 1;
@@ -165,6 +164,15 @@ FROM (
     FROM dbo.wedstrijden
 ) AS e;
 
+INSERT INTO dbo.DimWedstrijd(WedstrijdKey, MatchID)
+SELECT
+    NEXT VALUE FOR seq_dw,
+    tf_match_id
+FROM (
+    SELECT DISTINCT 
+		tf_match_id
+    FROM dbo.wedstrijden_playoffs_i_en_ii
+) AS e;
 
 -- Vul FactWedstrijdScore
 DROP SEQUENCE IF EXISTS seq_fw;
@@ -180,7 +188,7 @@ SELECT
    uit.TeamKey,
    thuis.teamkey,
    we.WedstrijdKey,
-   da.DateKey,
+   ISNULL(da.DateKey, 9999999),
    t.TimeKey,
    ISNULL(d.StandThuis, 0),
    ISNULL(d.StandUit, 0),
@@ -195,7 +203,7 @@ FROM dbo.wedstrijden w
 	left join dbo.DimTeam uit on w.RoepnaamUitploeg = uit.PloegNaam
 	left join dbo.DimTeam thuis on w.RoepnaamThuisploeg = thuis.PloegNaam
 
-
+update dbo.FactWedstrijdScore set DateKey = (???) where DateKey=9999999;
 
 -- Vul FactKlassement
 DROP SEQUENCE IF EXISTS seq_fk;
