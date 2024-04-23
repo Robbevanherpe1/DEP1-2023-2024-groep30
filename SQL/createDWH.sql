@@ -56,7 +56,6 @@ CREATE TABLE DimDate (
 );
 GO
 
-
 CREATE TABLE DimTime (
     TimeKey INT PRIMARY KEY,
     Uur INT NOT NULL,
@@ -116,7 +115,7 @@ CREATE TABLE FactWeddenschap (
     FOREIGN KEY (TeamKeyThuis) REFERENCES DimTeam(TeamKey),
     FOREIGN KEY (WedstrijdKey) REFERENCES DimWedstrijd(WedstrijdKey),
     FOREIGN KEY (KansKey) REFERENCES DimKans(KansKey),
-		FOREIGN KEY (BetSiteKey) REFERENCES DimBetSite(BetSiteKey),
+	FOREIGN KEY (BetSiteKey) REFERENCES DimBetSite(BetSiteKey),
     FOREIGN KEY (DateKeyScrape) REFERENCES DimDate(DateKey),
     FOREIGN KEY (TimeKeyScrape) REFERENCES DimTime(TimeKey),
     FOREIGN KEY (DateKeySpeeldatum) REFERENCES DimDate(DateKey),
