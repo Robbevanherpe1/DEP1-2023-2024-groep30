@@ -180,7 +180,7 @@ DROP SEQUENCE IF EXISTS seq_fw;
 CREATE SEQUENCE seq_fw START WITH 1 INCREMENT BY 1;
 
 DELETE FROM dbo.FactWedstrijdScore;
-GO;
+GO
 
 WITH ClosestDates AS (
     SELECT
@@ -224,6 +224,53 @@ FROM dbo.wedstrijden w
 	LEFT JOIN dbo.DimWedstrijd we ON we.MatchID = w.id
 	LEFT JOIN dbo.DimTeam uit ON w.RoepnaamUitploeg = uit.PloegNaam
 	LEFT JOIN dbo.DimTeam thuis ON w.RoepnaamThuisploeg = thuis.PloegNaam;
+GO
+
+WITH ClosestDates AS (
+    SELECT
+        wp.tf_match_id AS Id,
+        wp.datum AS OriginalDate,
+        MIN(dd.Datum) AS ClosestDate
+    FROM dbo.wedstrijden_playoffs_i_en_ii wp
+    LEFT JOIN dbo.DimDate dd ON dd.Datum >= wp.datum
+    GROUP BY wp.tf_match_id, wp.datum
+)
+INSERT INTO dbo.FactWedstrijdScore(
+    WedstrijdScoreKey, 
+    TeamKeyUit, 
+    TeamKeyThuis, 
+    WedstrijdKey, 
+    DateKey, 
+    TimeKey, 
+    ScoreThuis, 
+    ScoreUit, 
+    EindscoreThuis, 
+    EindscoreUit, 
+    ScorendePloegIndicator
+)
+SELECT 
+    NEXT VALUE FOR seq_fw,  
+    uit.TeamKey,
+    thuis.TeamKey,
+    we.WedstrijdKey,
+    ISNULL(da.DateKey, 9999999),
+    t.TimeKey,
+    ISNULL(wp.stand_thuis, 0),
+    ISNULL(wp.stand_uit, 0),
+    wp.stand_thuis,
+    wp.stand_uit,
+    CASE 
+        WHEN wp.stand_thuis > wp.stand_uit THEN thuis.TeamKey
+        WHEN wp.stand_thuis < wp.stand_uit THEN uit.TeamKey
+        ELSE 0
+    END
+FROM dbo.wedstrijden_playoffs_i_en_ii wp
+    LEFT JOIN ClosestDates cd ON cd.Id = wp.tf_match_id
+    LEFT JOIN dbo.DimDate da ON da.Datum = cd.ClosestDate
+    LEFT JOIN dbo.DimTime t ON t.VolledigeTijd = wp.tijdstip
+    LEFT JOIN dbo.DimWedstrijd we ON we.MatchID = wp.tf_match_id
+    LEFT JOIN dbo.DimTeam uit ON uit.PloegNaam = wp.roepnaam_uit
+    LEFT JOIN dbo.DimTeam thuis ON thuis.PloegNaam = wp.roepnaam_thuis;
 GO
 
 
