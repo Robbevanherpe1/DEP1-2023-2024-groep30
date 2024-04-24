@@ -1,5 +1,7 @@
 use DEP_DWH_G30
 
+DROP TABLE IF EXISTS allbets;
+
 SELECT 
     datum, 
     betkey, 
@@ -9,7 +11,7 @@ SELECT
     OddsUitWint, 
     OddsGelijk
 INTO 
-    allbets
+    dbo.allbets
 FROM (
     SELECT 
         datum, 
@@ -83,4 +85,17 @@ FROM (
         dbo.bets_historische_data
     WHERE 
         VCThuisWint != ''
+
+	UNION ALL
+
+	SELECT 
+		Starttijd,
+		'BET777',
+		'0',
+		'0',
+		ThuisPloegWint,
+		Gelijk,
+		UitPloegWint
+	FROM 
+		dbo.bets
 ) AS combined_data;
