@@ -234,40 +234,43 @@ CREATE SEQUENCE seq_fk START WITH 1 INCREMENT BY 1;
 DELETE FROM dbo.FactKlassement;
 GO
 
-INSERT INTO dbo.FactKlassement(KlassementKey, BeginDateKey, EindeDateKey, TeamKey, Stand, AantalGespeeld, AantalGewonnen, AantalGelijk, 
-								AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, DoelpuntenSaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn)
+INSERT INTO dbo.FactKlassement(
+    KlassementKey, BeginDateKey, EindeDateKey, TeamKey, Stand, AantalGespeeld, AantalGewonnen, AantalGelijk, 
+    AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, DoelpuntenSaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn
+)
 SELECT
     NEXT VALUE FOR seq_fk,
-	ISNULL(bd.DateKey,0),
-    ISNULL(ed.DateKey,0),
-	ISNULL(t.TeamKey,0),
-	k.Stand,
-	k.AantalGespeeld,
-	k.AantalGewonnen,
-	k.AantalGelijk,
-	k.AantalVerloren,
-	k.DoelpuntenVoor,
-	k.DoelpuntenTegen,
-	k.Doelpuntensaldo,
-	k.Links_Tweepuntensysteem,
-	k.Rechts_Tweepuntensysteem,
-	k.Driepuntensysteem
+    ISNULL(bd.DateKey, (SELECT MIN(DateKey) FROM dbo.DimDate)), -- Adjusted to select the earliest date available if not found
+    ISNULL(ed.DateKey, (SELECT MAX(DateKey) FROM dbo.DimDate)), -- Adjusted to select the latest date available if not found
+    ISNULL(t.TeamKey,0),
+    k.Stand,
+    k.AantalGespeeld,
+    k.AantalGewonnen,
+    k.AantalGelijk,
+    k.AantalVerloren,
+    k.DoelpuntenVoor,
+    k.DoelpuntenTegen,
+    k.Doelpuntensaldo,
+    k.Links_Tweepuntensysteem,
+    k.Rechts_Tweepuntensysteem,
+    k.Driepuntensysteem
 FROM dbo.klassement k
-	LEFT JOIN dbo.DimTeam t on t.PloegNaam = k.Ploeg
-	LEFT JOIN dbo.DimDate bd ON bd.Seizoen = 
+LEFT JOIN dbo.DimTeam t ON t.PloegNaam = k.Ploeg
+LEFT JOIN dbo.DimDate bd ON bd.Seizoen = 
     CASE 
         WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) >= 60 THEN 
             CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) < 100 THEN '19' ELSE '20' END, SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
         ELSE 
             CONCAT('20', SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
     END
-	LEFT JOIN dbo.DimDate ed ON ed.Seizoen = 
+LEFT JOIN dbo.DimDate ed ON ed.Seizoen = 
     CASE 
         WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) >= 60 THEN 
             CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 < 100 THEN '19' ELSE '20' END, SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
         ELSE 
             CONCAT('20', SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
-    END
+    END;
+GO
 
 
 -- Vul FactWeddenschap
