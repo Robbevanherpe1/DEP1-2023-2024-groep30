@@ -259,12 +259,9 @@ SELECT
     ISNULL(wp.stand_uit, 0),
     wp.stand_thuis,
     wp.stand_uit,
-    CASE 
-        WHEN wp.stand_thuis > wp.stand_uit THEN thuis.TeamKey
-        WHEN wp.stand_thuis < wp.stand_uit THEN uit.TeamKey
-        ELSE 0
-    END
+    ISNULL(d.roepnaam_scorende_ploeg, 0)
 FROM dbo.wedstrijden_playoffs_i_en_ii wp
+	LEFT JOIN dbo.doelpunten_playoffs_i_en_ii d ON d.tf_match_id = wp.tf_match_id
     LEFT JOIN ClosestDates cd ON cd.Id = wp.tf_match_id
     LEFT JOIN dbo.DimDate da ON da.Datum = cd.ClosestDate
     LEFT JOIN dbo.DimTime t ON t.VolledigeTijd = wp.tijdstip
