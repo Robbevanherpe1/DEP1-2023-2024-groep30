@@ -174,36 +174,58 @@ FROM (
     FROM dbo.wedstrijden_playoffs_i_en_ii
 ) AS e;
 
+
 -- Vul FactWedstrijdScore
 DROP SEQUENCE IF EXISTS seq_fw;
 CREATE SEQUENCE seq_fw START WITH 1 INCREMENT BY 1;
 
 DELETE FROM dbo.FactWedstrijdScore;
+GO;
+
+WITH ClosestDates AS (
+    SELECT
+        w.Id,
+        w.datum AS OriginalDate,
+        MIN(dd.Datum) AS ClosestDate
+    FROM dbo.wedstrijden w
+    LEFT JOIN dbo.DimDate dd ON dd.Datum >= w.datum
+    GROUP BY w.Id, w.datum
+)
+INSERT INTO dbo.FactWedstrijdScore(
+    WedstrijdScoreKey, 
+    TeamKeyUit, 
+    TeamKeyThuis, 
+    WedstrijdKey, 
+    DateKey, 
+    TimeKey, 
+    ScoreThuis, 
+    ScoreUit, 
+    EindscoreThuis, 
+    EindscoreUit, 
+    ScorendePloegIndicator
+)
+SELECT 
+    NEXT VALUE FOR seq_fw,  
+    uit.TeamKey,
+    thuis.teamkey,
+    we.WedstrijdKey,
+    ISNULL(da.DateKey, 9999999),
+    t.TimeKey,
+    ISNULL(d.StandThuis, 0),
+    ISNULL(d.StandUit, 0),
+    w.FinaleStandThuisploeg,
+    w.FinaleStandUitploeg,
+    ISNULL(d.RoepnaamScorendePloeg, 0)
+FROM dbo.wedstrijden w
+	LEFT JOIN dbo.doelpunten d ON d.Id = w.Id
+	LEFT JOIN ClosestDates cd ON cd.Id = w.Id
+	LEFT JOIN dbo.DimDate da ON da.Datum = cd.ClosestDate
+	LEFT JOIN dbo.DimTime t ON t.VolledigeTijd = w.Tijdstip
+	LEFT JOIN dbo.DimWedstrijd we ON we.MatchID = w.id
+	LEFT JOIN dbo.DimTeam uit ON w.RoepnaamUitploeg = uit.PloegNaam
+	LEFT JOIN dbo.DimTeam thuis ON w.RoepnaamThuisploeg = thuis.PloegNaam;
 GO
 
-INSERT INTO dbo.FactWedstrijdScore(WedstrijdScoreKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, DateKey, TimeKey, ScoreThuis, 
-									ScoreUit, EindscoreThuis, EindscoreUit, ScorendePloegIndicator)
-SELECT 
-   NEXT VALUE FOR seq_fw,  
-   uit.TeamKey,
-   thuis.teamkey,
-   we.WedstrijdKey,
-   ISNULL(da.DateKey, 9999999),
-   t.TimeKey,
-   ISNULL(d.StandThuis, 0),
-   ISNULL(d.StandUit, 0),
-   w.FinaleStandThuisploeg,
-   w.FinaleStandUitploeg,
-   ISNULL(d.RoepnaamScorendePloeg, 0)
-FROM dbo.wedstrijden w
-	left join dbo.doelpunten d on d.Id = w.Id
-	left join dbo.DimDate da on da.Datum = w.datum
-	left join dbo.DimTime t on t.VolledigeTijd = w.Tijdstip
-	left join dbo.DimWedstrijd we on we.MatchID = w.id
-	left join dbo.DimTeam uit on w.RoepnaamUitploeg = uit.PloegNaam
-	left join dbo.DimTeam thuis on w.RoepnaamThuisploeg = thuis.PloegNaam
-
-update dbo.FactWedstrijdScore set DateKey = (???) where DateKey=9999999;
 
 -- Vul FactKlassement
 DROP SEQUENCE IF EXISTS seq_fk;
