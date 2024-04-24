@@ -4,25 +4,35 @@ DROP TABLE IF EXISTS allbets;
 
 SELECT 
     datum, 
-    betkey, 
+    BetSiteKey, 
     StamnummerThuis, 
     StamnummerUit, 
     OddsThuisWint, 
     OddsUitWint, 
-    OddsGelijk
+    OddsGelijk,
+	OddsBeideTeamsScoren,
+	OddsNietBeideTeamsScoren,
+	OddsMeerDanXGoals,
+	OddsMinderDanXGoals
 INTO 
     dbo.allbets
 FROM (
     SELECT 
         datum, 
-        'B365' AS betkey, 
+        d.BetSiteKey,
         StamnummerThuis, 
         StamnummerUit, 
         B365ThuisWint AS OddsThuisWint, 
         B365UitWint AS OddsUitWint, 
-        B365Gelijkspel AS OddsGelijk
+        B365Gelijkspel AS OddsGelijk,
+		0,
+		0,
+		0,
+		0
     FROM 
         dbo.bets_historische_data
+	INNER JOIN 
+		dbo.DimBetSite d ON d.SiteNaam = 'B365'
     WHERE 
         B365ThuisWint != ''
 
@@ -30,14 +40,20 @@ FROM (
 
     SELECT 
         datum, 
-        'BW' AS betkey, 
+        d.BetSiteKey,
         StamnummerThuis, 
         StamnummerUit, 
         BWThuisWint AS OddsThuisWint, 
         BWUitWint AS OddsUitWint, 
-        BWGelijkspel AS OddsGelijk
+        BWGelijkspel AS OddsGelijk,
+		0,
+		0,
+		0,
+		0
     FROM 
         dbo.bets_historische_data
+INNER JOIN 
+		dbo.DimBetSite d ON d.SiteNaam = 'BW'
     WHERE 
         BWThuisWint != ''
 
@@ -45,14 +61,20 @@ FROM (
 
     SELECT 
         datum, 
-        'IW' AS betkey, 
+        d.BetSiteKey,
         StamnummerThuis, 
         StamnummerUit, 
         IWThuisWint AS OddsThuisWint, 
         IWUitWint AS OddsUitWint, 
-        IWGelijkspel AS OddsGelijk
+        IWGelijkspel AS OddsGelijk,
+		0,
+		0,
+		0,
+		0
     FROM 
         dbo.bets_historische_data
+INNER JOIN 
+		dbo.DimBetSite d ON d.SiteNaam = 'IW'
     WHERE 
         IWThuisWint != ''
 
@@ -60,14 +82,20 @@ FROM (
 
     SELECT 
         datum, 
-        'WH' AS betkey, 
+        d.BetSiteKey,
         StamnummerThuis, 
         StamnummerUit, 
         WHThuisWint AS OddsThuisWint, 
         WHUitWint AS OddsUitWint, 
-        WHGelijkspel AS OddsGelijk
+        WHGelijkspel AS OddsGelijk,
+		0,
+		0,
+		0,
+		0
     FROM 
         dbo.bets_historische_data
+INNER JOIN 
+		dbo.DimBetSite d ON d.SiteNaam = 'WH'
     WHERE 
         WHThuisWint != ''
 
@@ -75,14 +103,20 @@ FROM (
 
     SELECT 
         datum, 
-        'VC' AS betkey, 
+        d.BetSiteKey, 
         StamnummerThuis, 
         StamnummerUit, 
         VCThuisWint AS OddsThuisWint, 
         VCUitWint AS OddsUitWint, 
-        VCGelijkspel AS OddsGelijk
+        VCGelijkspel AS OddsGelijk,
+		0,
+		0,
+		0,
+		0
     FROM 
         dbo.bets_historische_data
+INNER JOIN 
+		dbo.DimBetSite d ON d.SiteNaam = 'VC'
     WHERE 
         VCThuisWint != ''
 
@@ -90,12 +124,18 @@ FROM (
 
 	SELECT 
 		Starttijd,
-		'BET777',
+		d.BetSiteKey, 
 		'0',
 		'0',
 		ThuisPloegWint,
 		Gelijk,
-		UitPloegWint
+		UitPloegWint,
+		BeideTeamsScoren,
+		NietBeideTeamsScoren,
+		OverXGoals,
+		OnderXGoals
 	FROM 
 		dbo.bets
+INNER JOIN 
+		dbo.DimBetSite d ON d.SiteNaam = 'VC777'
 ) AS combined_data;
