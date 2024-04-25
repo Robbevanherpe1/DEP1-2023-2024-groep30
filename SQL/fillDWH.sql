@@ -303,21 +303,21 @@ SELECT
     k.Rechts_Tweepuntensysteem,
     k.Driepuntensysteem
 FROM dbo.klassement k
-LEFT JOIN dbo.DimTeam t ON t.PloegNaam = k.Ploeg
-LEFT JOIN dbo.DimDate bd ON bd.Seizoen = 
-    CASE 
-        WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) >= 60 THEN 
-            CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) < 100 THEN '19' ELSE '20' END, SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
-        ELSE 
-            CONCAT('20', SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
+	JOIN dbo.DimTeam t ON t.PloegNaam = k.Ploeg
+	JOIN dbo.DimDate bd ON bd.Seizoen = 
+		CASE 
+			WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) >= 60 THEN 
+				CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) < 100 THEN '19' ELSE '20' END, SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
+			ELSE 
+				CONCAT('20', SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
     END
-LEFT JOIN dbo.DimDate ed ON ed.Seizoen = 
-    CASE 
-        WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) >= 60 THEN 
-            CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 < 100 THEN '19' ELSE '20' END, SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
-        ELSE 
-            CONCAT('20', SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
-    END;
+	JOIN dbo.DimDate ed ON ed.Seizoen = 
+		CASE 
+			WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) >= 60 THEN 
+				CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 < 100 THEN '19' ELSE '20' END, SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
+			ELSE 
+				CONCAT('20', SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
+		END;
 GO
 
 
