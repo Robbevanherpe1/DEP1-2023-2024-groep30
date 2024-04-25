@@ -286,11 +286,11 @@ INSERT INTO dbo.FactKlassement(
     KlassementKey, BeginDateKey, EindeDateKey, TeamKey, Stand, AantalGespeeld, AantalGewonnen, AantalGelijk, 
     AantalVerloren, DoelpuntenVoor, DoelpuntenTegen, DoelpuntenSaldo, PuntenVoor2ptn, PuntenTegen2ptn, PuntenVoor3ptn
 )
-SELECT
+SELECT 
     NEXT VALUE FOR seq_fk,
-    ISNULL(bd.DateKey, (SELECT MIN(DateKey) FROM dbo.DimDate)), -- Adjusted to select the earliest date available if not found
-    ISNULL(ed.DateKey, (SELECT MAX(DateKey) FROM dbo.DimDate)), -- Adjusted to select the latest date available if not found
-    ISNULL(t.TeamKey,0),
+    ISNULL(bd.DateKey, (SELECT MIN(DateKey) FROM dbo.DimDate)),
+    ISNULL(ed.DateKey, (SELECT MAX(DateKey) FROM dbo.DimDate)),
+    ISNULL(t.TeamKey, 0),
     k.Stand,
     k.AantalGespeeld,
     k.AantalGewonnen,
@@ -303,22 +303,9 @@ SELECT
     k.Rechts_Tweepuntensysteem,
     k.Driepuntensysteem
 FROM dbo.klassement k
-	JOIN dbo.DimTeam t ON t.PloegNaam = k.Ploeg
-	JOIN dbo.DimDate bd ON bd.Seizoen = 
-		CASE 
-			WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) >= 60 THEN 
-				CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 0, 2)) < 100 THEN '19' ELSE '20' END, SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
-			ELSE 
-				CONCAT('20', SUBSTRING(k.Seizoen, 0, 2), '/', SUBSTRING(k.Seizoen, 3, 2))
-    END
-	JOIN dbo.DimDate ed ON ed.Seizoen = 
-		CASE 
-			WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) >= 60 THEN 
-				CONCAT(CASE WHEN CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 < 100 THEN '19' ELSE '20' END, SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
-			ELSE 
-				CONCAT('20', SUBSTRING(CAST(CONVERT(int, SUBSTRING(k.Seizoen, 3, 2)) + 1 AS varchar), 2, 2))
-		END;
-GO
+	LEFT JOIN dbo.DimTeam t ON t.PloegNaam = k.Ploeg
+	LEFT JOIN dbo.DimDate bd ON bd.Datum = (SELECT MIN(Datum) FROM DimDate WHERE Speeldag= k.Speeldag AND Seizoen = k.Seizoen)
+	LEFT JOIN dbo.DimDate ed ON ed.Datum = (SELECT MIN(Datum) FROM DimDate WHERE Speeldag= k.Speeldag AND Seizoen = k.Seizoen)
 
 
 -- VUL FACTWEDDENSCHAP
