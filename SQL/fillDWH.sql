@@ -12,7 +12,7 @@ DELETE FROM dbo.DimWedstrijd;
 DELETE FROM dbo.DimBetSite;
 GO
 
--- Vul DimBetSite
+-- VUL DIMBETSITE
 DROP SEQUENCE IF EXISTS seq_bs;
 CREATE SEQUENCE seq_bs START WITH 1 INCREMENT BY 1;
 
@@ -35,7 +35,7 @@ FROM (
 ) AS g(SiteNaam);
 
 
--- Vul DimTeam
+-- VUL DIMKANS
 DROP SEQUENCE IF EXISTS seq_dt;
 CREATE SEQUENCE seq_dt START WITH 1 INCREMENT BY 1;
 
@@ -55,57 +55,7 @@ FROM dbo.klassement
 ) AS a;
 
 
--- Vul DimDate
-DROP SEQUENCE IF EXISTS seq_dd;
-CREATE SEQUENCE seq_dd START WITH 1 INCREMENT BY 1;
-
-DELETE FROM dbo.DimDate;
-GO
-
-INSERT INTO dbo.DimDate (
-    DateKey, Datum, Seizoen, Speeldag, DagVanDeMaand, DagVanHetJaar, WeekVanHetJaar, 
-    DagVanDeWeek, Maand, Semester, Kwartaal, Jaar, EngelseDag, EngelseMaand, 
-    DDMMJJJJ, IsWeekend, NaamDagVanDeWeek, IsSchrikkeljaar, WeekVanDeMaand, Tijdvak
-)
-SELECT
-    NEXT VALUE FOR seq_dd,
-    datum AS Datum,
-    Seizoen,
-    Speeldag,
-    DAY(datum) AS DagVanDeMaand,
-    DATEPART(DAYOFYEAR, datum) AS DagVanHetJaar,
-    DATEPART(WEEK, datum) AS WeekVanHetJaar,
-    (DATEPART(WEEKDAY, datum) + @@DATEFIRST + 5) % 7 AS DagVanDeWeek, -- Adjust to start week with Monday (0) through Sunday (6)
-    MONTH(datum) AS Maand,
-    CASE WHEN DATEPART(QUARTER, datum) IN (1, 2) THEN 1 ELSE 2 END AS Semester,
-    DATEPART(QUARTER, datum) AS Kwartaal,
-    YEAR(datum) AS Jaar,
-    DATENAME(WEEKDAY, datum) AS EngelseDag,
-    DATENAME(MONTH, datum) AS EngelseMaand,
-    REPLACE(CONVERT(VARCHAR, datum, 104), '.', '') AS DDMMJJJJ, -- Format as DDMMYYYY
-    CASE WHEN ((DATEPART(WEEKDAY, datum) + @@DATEFIRST - 1) % 7) IN (0, 6) THEN 1 ELSE 0 END AS IsWeekend, -- Check for weekends
-    CASE DATENAME(WEEKDAY, datum) 
-        WHEN 'Sunday' THEN 'Zondag'
-        WHEN 'Monday' THEN 'Maandag'
-        WHEN 'Tuesday' THEN 'Dinsdag'
-        WHEN 'Wednesday' THEN 'Woensdag'
-        WHEN 'Thursday' THEN 'Donderdag'
-        WHEN 'Friday' THEN 'Vrijdag'
-        WHEN 'Saturday' THEN 'Zaterdag'
-    END AS NaamDagVanDeWeek,
-    CASE WHEN (YEAR(datum) % 4 = 0 AND YEAR(datum) % 100 != 0) OR (YEAR(datum) % 400 = 0) THEN 1 ELSE 0 END AS IsSchrikkeljaar,
-    (DAY(datum) + DATEPART(WEEKDAY, DATEADD(DAY, 1-DAY(datum), datum)) - 2) / 7 + 1 AS WeekVanDeMaand,
-    CASE 
-        WHEN MONTH(datum) IN (12, 1, 2) THEN 'Winter'
-        WHEN MONTH(datum) IN (3, 4, 5) THEN 'Lente' 
-        WHEN MONTH(datum) IN (6, 7, 8) THEN 'Zomer' 
-        ELSE 'Herfst'
-    END AS Tijdvak
-FROM dbo.theoretische_speeldagen;
-GO
-
-
--- Vul DimKans
+-- VUL DIMKANS
 DROP SEQUENCE IF EXISTS seq_dk;
 CREATE SEQUENCE seq_dk START WITH 1 INCREMENT BY 1;
 
@@ -124,30 +74,7 @@ FROM (
 ) AS c(OddsWaarde);
 
 
--- Vul DimTime
-DROP SEQUENCE IF EXISTS seq_dt;
-CREATE SEQUENCE seq_dt START WITH 1 INCREMENT BY 1;
-
-DELETE FROM dbo.DimTime;
-GO
-
-INSERT INTO dbo.DimTime(TimeKey, Uur, Minuten, VolledigeTijd, AMPMIndicator, UurVanDeDagInMinuten, UurVanDeDagInSeconden)
-SELECT 
-    NEXT VALUE FOR seq_dt,
-    CAST(LEFT(tijdstip, CHARINDEX(':', tijdstip) - 1) AS INT),
-    CAST(SUBSTRING(tijdstip, CHARINDEX(':', tijdstip) + 1, 2) AS INT), 
-    Tijdstip,
-    CASE WHEN CAST(LEFT(tijdstip, CHARINDEX(':', tijdstip) - 1) AS INT) < 12 THEN 'AM' ELSE 'PM' END AS AMPMIndicator,
-    (CAST(LEFT(tijdstip, CHARINDEX(':', tijdstip) - 1) AS INT) * 60) + CAST(SUBSTRING(tijdstip, CHARINDEX(':', tijdstip) + 1, 2) AS INT) AS UurVanDeDagInMinuten,
-    ((CAST(LEFT(tijdstip, CHARINDEX(':', tijdstip) - 1) AS INT) * 60) + CAST(SUBSTRING(tijdstip, CHARINDEX(':', tijdstip) + 1, 2) AS INT)) * 60 AS UurVanDeDagInSeconden
-FROM (
-    SELECT DISTINCT 
-        tijdstip
-    FROM dbo.wedstrijden
-) AS d;
-
-
--- Vul DimWedstrijd
+-- VUL DIMWEDSTRIJD
 DROP SEQUENCE IF EXISTS seq_dw;
 CREATE SEQUENCE seq_dw START WITH 1 INCREMENT BY 1;
 
@@ -175,22 +102,110 @@ FROM (
 ) AS e;
 
 
--- Vul FactWedstrijdScore
+-- VUL DIMDATE
+DROP SEQUENCE IF EXISTS seq_dd;
+CREATE SEQUENCE seq_dd START WITH 1 INCREMENT BY 1;
+
+DELETE FROM dbo.DimDate;
+GO
+
+;WITH DateRange AS (
+    SELECT CAST('1960-09-04' AS DATETIME) AS Datum
+    UNION ALL
+    SELECT DATEADD(DAY, 1, Datum)
+    FROM DateRange
+    WHERE Datum < CAST(GETDATE() AS DATE)
+),
+TheorDates AS (
+    SELECT
+        Seizoen,
+        Speeldag,
+        CAST(datum AS DATETIME) AS Datum,
+        LEAD(CAST(datum AS DATETIME), 1, GETDATE()) OVER (ORDER BY CAST(datum AS DATETIME)) AS NextDate
+    FROM dbo.theoretische_speeldagen
+)
+INSERT INTO dbo.DimDate (
+    DateKey, Datum, Seizoen, Speeldag, DagVanDeMaand, DagVanHetJaar, WeekVanHetJaar,
+    DagVanDeWeek, Maand, Semester, Kwartaal, Jaar, EngelseDag, EngelseMaand,
+    DDMMJJJJ, IsWeekend, NaamDagVanDeWeek, IsSchrikkeljaar, WeekVanDeMaand, Tijdvak
+)
+SELECT
+    NEXT VALUE FOR seq_dd,
+    dr.Datum,
+    ISNULL(td.Seizoen, 'Onbekend') AS Seizoen,
+    ISNULL(td.Speeldag, 0) AS Speeldag,  -- Standaardwaarde hier ingesteld als 0
+    DAY(dr.Datum) AS DagVanDeMaand,
+    DATEPART(DAYOFYEAR, dr.Datum) AS DagVanHetJaar,
+    DATEPART(WEEK, dr.Datum) AS WeekVanHetJaar,
+    (DATEPART(WEEKDAY, dr.Datum) + @@DATEFIRST + 5) % 7 AS DagVanDeWeek,
+    MONTH(dr.Datum) AS Maand,
+    CASE WHEN DATEPART(QUARTER, dr.Datum) IN (1, 2) THEN 1 ELSE 2 END AS Semester,
+    DATEPART(QUARTER, dr.Datum) AS Kwartaal,
+    YEAR(dr.Datum) AS Jaar,
+    DATENAME(WEEKDAY, dr.Datum) AS EngelseDag,
+    DATENAME(MONTH, dr.Datum) AS EngelseMaand,
+    REPLACE(CONVERT(VARCHAR, dr.Datum, 104), '.', '') AS DDMMJJJJ,
+    CASE WHEN ((DATEPART(WEEKDAY, dr.Datum) + @@DATEFIRST - 1) % 7) IN (0, 6) THEN 1 ELSE 0 END AS IsWeekend,
+    CASE DATENAME(WEEKDAY, dr.Datum) 
+        WHEN 'Sunday' THEN 'Zondag'
+        WHEN 'Monday' THEN 'Maandag'
+        WHEN 'Tuesday' THEN 'Dinsdag'
+        WHEN 'Wednesday' THEN 'Woensdag'
+        WHEN 'Thursday' THEN 'Donderdag'
+        WHEN 'Friday' THEN 'Vrijdag'
+        WHEN 'Saturday' THEN 'Zaterdag'
+    END AS NaamDagVanDeWeek,
+    CASE WHEN (YEAR(dr.Datum) % 4 = 0 AND YEAR(dr.Datum) % 100 != 0) OR (YEAR(dr.Datum) % 400 = 0) THEN 1 ELSE 0 END AS IsSchrikkeljaar,
+    (DAY(dr.Datum) + DATEPART(WEEKDAY, DATEADD(DAY, 1-DAY(dr.Datum), dr.Datum)) - 2) / 7 + 1 AS WeekVanDeMaand,
+    CASE 
+        WHEN MONTH(dr.Datum) IN (12, 1, 2) THEN 'Winter'
+        WHEN MONTH(dr.Datum) IN (3, 4, 5) THEN 'Lente' 
+        WHEN MONTH(dr.Datum) IN (6, 7, 8) THEN 'Zomer' 
+        ELSE 'Herfst'
+    END AS Tijdvak
+FROM DateRange dr
+LEFT JOIN TheorDates td ON dr.Datum >= td.Datum AND dr.Datum < td.NextDate
+OPTION (MAXRECURSION 0);
+GO
+
+
+-- VUL DIMTIME
+DROP SEQUENCE IF EXISTS seq_dt;
+CREATE SEQUENCE seq_dt START WITH 1 INCREMENT BY 1;
+
+DELETE FROM dbo.DimTime;
+GO
+
+;WITH TimeCTE AS (
+    SELECT 0 AS Hour, 0 AS Minute
+    UNION ALL
+    SELECT CASE WHEN Minute = 59 THEN Hour + 1 ELSE Hour END,
+           CASE WHEN Minute = 59 THEN 0 ELSE Minute + 1 END
+    FROM TimeCTE
+    WHERE Hour < 24 AND (Hour < 23 OR (Hour = 23 AND Minute < 59))
+)
+INSERT INTO dbo.DimTime(TimeKey, Uur, Minuten, VolledigeTijd, AMPMIndicator, UurVanDeDagInMinuten, UurVanDeDagInSeconden)
+SELECT
+    NEXT VALUE FOR seq_dt,
+    Hour,
+    Minute,
+    FORMAT(DATEADD(MINUTE, (Hour * 60) + Minute, 0), 'HH:mm') AS VolledigeTijd,
+    CASE WHEN Hour < 12 THEN 'AM' ELSE 'PM' END AS AMPMIndicator,
+    (Hour * 60) + Minute AS UurVanDeDagInMinuten,
+    ((Hour * 60) + Minute) * 60 AS UurVanDeDagInSeconden
+FROM TimeCTE
+OPTION (MAXRECURSION 32767);
+
+GO
+
+
+-- Vul FACTWEDSTRIJDSCORE
 DROP SEQUENCE IF EXISTS seq_fw;
 CREATE SEQUENCE seq_fw START WITH 1 INCREMENT BY 1;
 
 DELETE FROM dbo.FactWedstrijdScore;
 GO
 
-WITH ClosestDates AS (
-    SELECT
-        w.Id,
-        w.datum AS OriginalDate,
-        MIN(dd.Datum) AS ClosestDate
-    FROM dbo.wedstrijden w
-    LEFT JOIN dbo.DimDate dd ON dd.Datum >= w.datum
-    GROUP BY w.Id, w.datum
-)
 INSERT INTO dbo.FactWedstrijdScore(
     WedstrijdScoreKey, 
     TeamKeyUit, 
@@ -205,7 +220,7 @@ INSERT INTO dbo.FactWedstrijdScore(
     ScorendePloegIndicator
 )
 SELECT 
-    NEXT VALUE FOR seq_fw,  
+    NEXT VALUE FOR seq_fw, 
     uit.TeamKey,
     thuis.teamkey,
     we.WedstrijdKey,
@@ -218,23 +233,13 @@ SELECT
     ISNULL(d.RoepnaamScorendePloeg, 0)
 FROM dbo.wedstrijden w
 	LEFT JOIN dbo.doelpunten d ON d.Id = w.Id
-	LEFT JOIN ClosestDates cd ON cd.Id = w.Id
-	LEFT JOIN dbo.DimDate da ON da.Datum = cd.ClosestDate
+	LEFT JOIN dbo.DimDate da ON da.Datum = w.Datum
 	LEFT JOIN dbo.DimTime t ON t.VolledigeTijd = w.Tijdstip
 	LEFT JOIN dbo.DimWedstrijd we ON we.MatchID = w.id
 	LEFT JOIN dbo.DimTeam uit ON w.RoepnaamUitploeg = uit.PloegNaam
 	LEFT JOIN dbo.DimTeam thuis ON w.RoepnaamThuisploeg = thuis.PloegNaam;
 GO
 
-WITH ClosestDates AS (
-    SELECT
-        wp.tf_match_id AS Id,
-        wp.datum AS OriginalDate,
-        MIN(dd.Datum) AS ClosestDate
-    FROM dbo.wedstrijden_playoffs_i_en_ii wp
-    LEFT JOIN dbo.DimDate dd ON dd.Datum >= wp.datum
-    GROUP BY wp.tf_match_id, wp.datum
-)
 INSERT INTO dbo.FactWedstrijdScore(
     WedstrijdScoreKey, 
     TeamKeyUit, 
@@ -262,8 +267,7 @@ SELECT
     ISNULL(d.roepnaam_scorende_ploeg, 0)
 FROM dbo.wedstrijden_playoffs_i_en_ii wp
 	LEFT JOIN dbo.doelpunten_playoffs_i_en_ii d ON d.tf_match_id = wp.tf_match_id
-    LEFT JOIN ClosestDates cd ON cd.Id = wp.tf_match_id
-    LEFT JOIN dbo.DimDate da ON da.Datum = cd.ClosestDate
+    LEFT JOIN dbo.DimDate da ON da.Datum = wp.datum
     LEFT JOIN dbo.DimTime t ON t.VolledigeTijd = wp.tijdstip
     LEFT JOIN dbo.DimWedstrijd we ON we.MatchID = wp.tf_match_id
     LEFT JOIN dbo.DimTeam uit ON uit.PloegNaam = wp.roepnaam_uit
@@ -271,7 +275,7 @@ FROM dbo.wedstrijden_playoffs_i_en_ii wp
 GO
 
 
--- Vul FactKlassement
+-- VUL KLASSSEMENT
 DROP SEQUENCE IF EXISTS seq_fk;
 CREATE SEQUENCE seq_fk START WITH 1 INCREMENT BY 1;
 
@@ -317,45 +321,20 @@ LEFT JOIN dbo.DimDate ed ON ed.Seizoen =
 GO
 
 
--- Vul FactWeddenschap
+-- VUL FACTWEDDENSCHAP
 DROP SEQUENCE IF EXISTS seq_fws;
 CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
 
 DELETE FROM dbo.FactWeddenschap;
 GO
 
-INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, BetSiteKey, DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,
-								OddsThuisWint, OddsUitWint, OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, BetSiteKey, 
+		DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,OddsThuisWint, OddsUitWint, 
+		OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
 SELECT
 	NEXT VALUE FOR seq_fws,
-	ISNULL(uit.TeamKey, 0),
-    ISNULL(thuis.TeamKey, 0),
-    '0' AS WedstrijdKey,
-    2 AS KansKey,
-	'tijdelijk' AS BetSiteKey,
-	ISNULL(d.datekey, 0),
-	ISNULL(t.timekey, 0),
-	ISNULL(d2.datekey, 0),
-	ISNULL(t2.timekey, 0),
-	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Wedstrijduitslag' AND b.Keuze = '1' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
-	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsThuisWint,
-	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Wedstrijduitslag' AND b.Keuze = '2' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
-	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsUitWint,
-	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Wedstrijduitslag' AND b.Keuze = '2' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
-	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsGelijk,
-	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Beide teams zullen scoren' AND b.Keuze = 'Ja' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
-	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsBeideTeamsScoren,
-	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Beide teams zullen scoren' AND b.Keuze = 'Nee' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
-	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsNietBeideTeamsScoren,
-	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Totaal aantal goals' AND b.Keuze LIKE 'Meer dan%' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
-	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsMeerDanXGoals,
-	(SELECT b.Kans FROM dbo.bets WHERE Vraag = 'Totaal aantal goals' AND  b.Keuze LIKE 'Onder%' AND uit.PloegNaam = b.Uitploeg AND thuis.PloegNaam = b.Thuisploeg AND t2.UurVanDeDagInMinuten = DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) 
-	AND FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ) AS OddsMinderDanXGoals
+	...
 FROM
     dbo.bets b
     LEFT JOIN dbo.DimTeam uit ON uit.PloegNaam = b.Uitploeg
     LEFT JOIN dbo.DimTeam thuis ON thuis.PloegNaam = b.Thuisploeg
-	LEFT JOIN dbo.DimDate d ON RIGHT('0' + CONVERT(VARCHAR, DAY(b.starttijd)), 2) + RIGHT('0' + CONVERT(VARCHAR, MONTH(b.starttijd)), 2) + CONVERT(VARCHAR, YEAR(b.starttijd)) = d.DDMMJJJJ
-	LEFT JOIN dbo.DimTime t ON DATEDIFF(MINUTE, CAST(b.starttijd AS DATE), b.starttijd) = t.UurVanDeDagInMinuten
-	LEFT JOIN dbo.DimDate d2 ON FORMAT(CONVERT(datetime, b.timestamp, 105), 'ddMMyy') = d2.DDMMJJJJ
-	LEFT JOIN dbo.DimTime t2 ON DATEDIFF(MINUTE, CAST(CONVERT(DATETIME, LEFT(b.timestamp, 10), 105) AS DATETIME), CONVERT(DATETIME, b.timestamp, 105)) = t2.UurVanDeDagInMinuten
