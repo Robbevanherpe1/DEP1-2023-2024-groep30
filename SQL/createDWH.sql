@@ -70,6 +70,7 @@ GO
 CREATE TABLE DimWedstrijd (
     WedstrijdKey INT PRIMARY KEY,
     MatchID INT NOT NULL,
+	PlayOffsIndicator INT NOT NULL
 );
 GO
 
@@ -142,5 +143,21 @@ CREATE TABLE FactKlassement (
     FOREIGN KEY (BeginDateKey) REFERENCES DimDate(DateKey),
     FOREIGN KEY (EindeDateKey) REFERENCES DimDate(DateKey),
     FOREIGN KEY (TeamKey) REFERENCES DimTeam(TeamKey)
+);
+GO
+
+-- allBets
+CREATE TABLE allbets (
+    Datum DATE NOT NULL,
+    BetSiteKey INT NOT NULL,
+    StamnummerThuis INT NOT NULL,
+    StamnummerUit INT NOT NULL,
+    OddsThuisWint DECIMAL(10,2),
+    OddsUitWint DECIMAL(10,2),
+    OddsGelijk DECIMAL(10,2),
+    OddsBeideTeamsScoren DECIMAL(10,2),
+    OddsNietBeideTeamsScoren DECIMAL(10,2),
+    OddsMeerDanXGoals DECIMAL(10,2),
+    OddsMinderDanXGoals DECIMAL(10,2),
 );
 GO
