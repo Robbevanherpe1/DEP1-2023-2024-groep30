@@ -226,7 +226,7 @@ SELECT
     uit.TeamKey,
     thuis.teamkey,
     we.WedstrijdKey,
-    ISNULL(da.DateKey, 9999999),
+    ISNULL(da.DateKey, 0),
     t.TimeKey,
     ISNULL(d.StandThuis, 0),
     ISNULL(d.StandUit, 0),
@@ -260,7 +260,7 @@ SELECT
     uit.TeamKey,
     thuis.TeamKey,
     we.WedstrijdKey,
-    ISNULL(da.DateKey, 9999999),
+    ISNULL(da.DateKey, 0),
     t.TimeKey,
     ISNULL(wp.stand_thuis, 0),
     ISNULL(wp.stand_uit, 0),
@@ -290,8 +290,8 @@ INSERT INTO dbo.FactKlassement(
 )
 SELECT 
     NEXT VALUE FOR seq_fk,
-    ISNULL(bd.DateKey, (SELECT MIN(DateKey) FROM dbo.DimDate)),
-    ISNULL(ed.DateKey, (SELECT MAX(DateKey) FROM dbo.DimDate)),
+    ISNULL(bd.DateKey, 0),
+    ISNULL(ed.DateKey, 0),
     ISNULL(t.TeamKey, 0),
     k.Stand,
     k.AantalGespeeld,
@@ -307,23 +307,39 @@ SELECT
 FROM dbo.klassement k
 	LEFT JOIN dbo.DimTeam t ON t.PloegNaam = k.Ploeg
 	LEFT JOIN dbo.DimDate bd ON bd.Datum = (SELECT MIN(Datum) FROM DimDate WHERE Speeldag= k.Speeldag AND Seizoen = k.Seizoen)
-	LEFT JOIN dbo.DimDate ed ON ed.Datum = (SELECT MIN(Datum) FROM DimDate WHERE Speeldag= k.Speeldag AND Seizoen = k.Seizoen)
+	LEFT JOIN dbo.DimDate ed ON ed.Datum = (SELECT MAX(Datum) FROM DimDate WHERE Speeldag= k.Speeldag AND Seizoen = k.Seizoen)
 
 
 -- VUL FACTWEDDENSCHAP
-DROP SEQUENCE IF EXISTS seq_fws;
-CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
-
-DELETE FROM dbo.FactWeddenschap;
-GO
-
 INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, BetSiteKey, 
-		DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum,OddsThuisWint, OddsUitWint, 
-		OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+        DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum, OddsThuisWint, OddsUitWint, 
+        OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
 SELECT
-	NEXT VALUE FOR seq_fws,
-	...
+    NEXT VALUE FOR seq_fws,
+    ISNULL(uit.TeamKey, 999999),
+    ISNULL(thuis.TeamKey, 999999),
+	0,
+    k.KansKey,
+    bs.BetSiteKey,
+    0,
+    0,
+    0,
+    0,
+    b.ThuisPloegWint,
+    b.UitPloegWint,
+    b.Gelijk,
+    b.BeideTeamsScoren,
+    b.NietBeideTeamsScoren,
+    b.OverXGoals,
+    b.OnderXGoals
 FROM
     dbo.bets b
     LEFT JOIN dbo.DimTeam uit ON uit.PloegNaam = b.Uitploeg
     LEFT JOIN dbo.DimTeam thuis ON thuis.PloegNaam = b.Thuisploeg
+    LEFT JOIN dbo.DimKans k ON k.OddsWaarde = 1.5
+    LEFT JOIN dbo.DimBetSite bs ON bs.SiteNaam = 'Bet777'
+    LEFT JOIN dbo.DimDate sd ON sd.Datum = (
+        SELECT Datum
+        FROM DimDate 
+        WHERE Datum = CONVERT(varchar(50), CONVERT(date, b.starttijd, 126), 23)
+    );
