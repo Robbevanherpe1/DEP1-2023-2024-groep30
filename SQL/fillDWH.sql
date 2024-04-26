@@ -35,7 +35,7 @@ FROM (
 ) AS g(SiteNaam);
 
 
--- VUL DIMKANS
+-- VUL DIMTEAM
 DROP SEQUENCE IF EXISTS seq_dt;
 CREATE SEQUENCE seq_dt START WITH 1 INCREMENT BY 1;
 
@@ -81,20 +81,22 @@ CREATE SEQUENCE seq_dw START WITH 1 INCREMENT BY 1;
 DELETE FROM dbo.DimWedstrijd;
 GO
  
-INSERT INTO dbo.DimWedstrijd(WedstrijdKey, MatchID)
+INSERT INTO dbo.DimWedstrijd(WedstrijdKey, MatchID, PlayOffsIndicator)
 SELECT
     NEXT VALUE FOR seq_dw,
-    Id
+    Id,
+	0
 FROM (
     SELECT DISTINCT 
 		Id
     FROM dbo.wedstrijden
 ) AS e;
 
-INSERT INTO dbo.DimWedstrijd(WedstrijdKey, MatchID)
+INSERT INTO dbo.DimWedstrijd(WedstrijdKey, MatchID, PlayOffsIndicator)
 SELECT
     NEXT VALUE FOR seq_dw,
-    tf_match_id
+    tf_match_id,
+	1
 FROM (
     SELECT DISTINCT 
 		tf_match_id
