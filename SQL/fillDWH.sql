@@ -335,7 +335,7 @@ SELECT
 FROM
     dbo.bets b
     LEFT JOIN dbo.DimTeam uit ON uit.PloegNaam = b.Uitploeg
-    LEFT JOIN dbo.DimTeam thuis ON thuis.PloegNaam = b.Thuisploeg
+	LEFT JOIN dbo.DimTeam thuis ON thuis.PloegNaam = b.Thuisploeg
     LEFT JOIN dbo.DimKans k ON k.OddsWaarde = 1.5
     LEFT JOIN dbo.DimBetSite bs ON bs.SiteNaam = 'Bet777'
     LEFT JOIN dbo.DimDate sd ON sd.Datum = (
