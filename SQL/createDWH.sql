@@ -99,12 +99,8 @@ CREATE TABLE FactWeddenschap (
     TeamKeyUit INT NOT NULL,
     TeamKeyThuis INT NOT NULL,
     WedstrijdKey INT NOT NULL,
-    KansKey INT NOT NULL,
 	BetSiteKey INT NOT NULL,
-    DateKeyScrape INT NOT NULL,
-    TimeKeyScrape INT NOT NULL,
     DateKeySpeeldatum INT NOT NULL,
-    TimeKeySpeeldatum INT NOT NULL,
     OddsThuisWint DECIMAL(5,2),
     OddsUitWint DECIMAL(5,2),
     OddsGelijk DECIMAL(5,2),
@@ -114,13 +110,8 @@ CREATE TABLE FactWeddenschap (
     OddsMinderDanXGoals DECIMAL(5,2),
     FOREIGN KEY (TeamKeyUit) REFERENCES DimTeam(TeamKey),
     FOREIGN KEY (TeamKeyThuis) REFERENCES DimTeam(TeamKey),
-    FOREIGN KEY (WedstrijdKey) REFERENCES DimWedstrijd(WedstrijdKey),
-    FOREIGN KEY (KansKey) REFERENCES DimKans(KansKey),
 	FOREIGN KEY (BetSiteKey) REFERENCES DimBetSite(BetSiteKey),
-    FOREIGN KEY (DateKeyScrape) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (TimeKeyScrape) REFERENCES DimTime(TimeKey),
     FOREIGN KEY (DateKeySpeeldatum) REFERENCES DimDate(DateKey),
-    FOREIGN KEY (TimeKeySpeeldatum) REFERENCES DimTime(TimeKey)
 );
 GO
 
@@ -143,21 +134,5 @@ CREATE TABLE FactKlassement (
     FOREIGN KEY (BeginDateKey) REFERENCES DimDate(DateKey),
     FOREIGN KEY (EindeDateKey) REFERENCES DimDate(DateKey),
     FOREIGN KEY (TeamKey) REFERENCES DimTeam(TeamKey)
-);
-GO
-
--- allBets
-CREATE TABLE allbets (
-    Datum DATE NOT NULL,
-    BetSiteKey INT NOT NULL,
-    StamnummerThuis INT NOT NULL,
-    StamnummerUit INT NOT NULL,
-    OddsThuisWint DECIMAL(10,2),
-    OddsUitWint DECIMAL(10,2),
-    OddsGelijk DECIMAL(10,2),
-    OddsBeideTeamsScoren DECIMAL(10,2),
-    OddsNietBeideTeamsScoren DECIMAL(10,2),
-    OddsMeerDanXGoals DECIMAL(10,2),
-    OddsMinderDanXGoals DECIMAL(10,2),
 );
 GO

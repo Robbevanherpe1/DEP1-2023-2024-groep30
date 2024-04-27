@@ -311,34 +311,175 @@ FROM dbo.klassement k
 
 
 -- VUL FACTWEDDENSCHAP
-INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, KansKey, BetSiteKey, 
-        DateKeyScrape, TimeKeyScrape, DateKeySpeeldatum, TimeKeySpeeldatum, OddsThuisWint, OddsUitWint, 
+DROP SEQUENCE IF EXISTS seq_fws;
+CREATE SEQUENCE seq_fws START WITH 1 INCREMENT BY 1;
+
+DELETE FROM dbo.FactWeddenschap;
+GO
+
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, BetSiteKey, DateKeySpeeldatum, OddsThuisWint, OddsUitWint, 
         OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
-SELECT
+
+ SELECT 
+		NEXT VALUE FOR seq_fws,
+		uit.TeamKey,
+		thuis.TeamKey,
+		0,
+		b.BetSiteKey,
+		d.DateKey,
+		h.B365ThuisWint,
+		h.B365UitWint,
+		h.B365Gelijkspel,
+		0,
+		0,
+		0,
+		0
+FROM 
+    dbo.bets_historische_data h
+
+	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'B365'
+	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
+	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
+	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
+
+	WHERE h.B365ThuisWint != '';
+GO
+
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, BetSiteKey, DateKeySpeeldatum, OddsThuisWint, OddsUitWint, 
+        OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+
+ SELECT 
+		NEXT VALUE FOR seq_fws,
+		uit.TeamKey,
+		thuis.TeamKey,
+		0,
+		b.BetSiteKey,
+		d.DateKey,
+		h.BWThuisWint,
+		h.BWUitWint,
+		h.BWGelijkspel,
+		0,
+		0,
+		0,
+		0
+FROM 
+    dbo.bets_historische_data h
+
+	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'BW'
+	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
+	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
+	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
+
+	WHERE h.BWThuisWint != '';
+GO
+
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, BetSiteKey, DateKeySpeeldatum, OddsThuisWint, OddsUitWint, 
+        OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+
+ SELECT 
+		NEXT VALUE FOR seq_fws,
+		uit.TeamKey,
+		thuis.TeamKey,
+		0,
+		b.BetSiteKey,
+		d.DateKey,
+		h.IWThuisWint,
+		h.IWUitWint,
+		h.IWGelijkspel,
+		0,
+		0,
+		0,
+		0
+FROM 
+    dbo.bets_historische_data h
+
+	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'IW'
+	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
+	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
+	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
+
+	WHERE h.IWThuisWint != '';
+GO
+
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, BetSiteKey, DateKeySpeeldatum, OddsThuisWint, OddsUitWint, 
+        OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+
+ SELECT 
+		NEXT VALUE FOR seq_fws,
+		uit.TeamKey,
+		thuis.TeamKey,
+		0,
+		b.BetSiteKey,
+		d.DateKey,
+		h.VCThuisWint,
+		h.VCUitWint,
+		h.VCGelijkspel,
+		0,
+		0,
+		0,
+		0
+FROM 
+    dbo.bets_historische_data h
+
+	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'VC'
+	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
+	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
+	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
+
+	WHERE h.VCThuisWint != '';
+GO
+
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, BetSiteKey, DateKeySpeeldatum, OddsThuisWint, OddsUitWint, 
+        OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+
+ SELECT 
+		NEXT VALUE FOR seq_fws,
+		uit.TeamKey,
+		thuis.TeamKey,
+		0,
+		b.BetSiteKey,
+		d.DateKey,
+		h.WHThuisWint,
+		h.WHUitWint,
+		h.WHGelijkspel,
+		0,
+		0,
+		0,
+		0
+FROM 
+    dbo.bets_historische_data h
+
+	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'WH'
+	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
+	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
+	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
+
+	WHERE h.WHThuisWint != '';
+GO
+
+INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, WedstrijdKey, BetSiteKey, DateKeySpeeldatum, OddsThuisWint, OddsUitWint, 
+        OddsGelijk, OddsBeideTeamsScoren, OddsNietBeideTeamsScoren, OddsMeerDanXGoals, OddsMinderDanXGoals)
+ SELECT 
     NEXT VALUE FOR seq_fws,
     ISNULL(uit.TeamKey, 999999),
     ISNULL(thuis.TeamKey, 999999),
 	0,
-    k.KansKey,
-    bs.BetSiteKey,
-    0,
-    0,
-    0,
-    0,
-    b.ThuisPloegWint,
-    b.UitPloegWint,
-    b.Gelijk,
-    b.BeideTeamsScoren,
-    b.NietBeideTeamsScoren,
-    b.OverXGoals,
-    b.OnderXGoals
+	bs.BetSiteKey,
+	d.DateKey,
+	b.ThuisPloegWint,
+	b.UitPloegWint,
+	b.Gelijk,
+	b.BeideTeamsScoren,
+	b.NietBeideTeamsScoren,
+	b.OverXGoals,
+	b.OnderXGoals
+
 FROM
     dbo.bets b
-    LEFT JOIN dbo.DimTeam uit ON uit.PloegNaam = b.Uitploeg
-	LEFT JOIN dbo.DimTeam thuis ON thuis.PloegNaam = b.Thuisploeg
-    LEFT JOIN dbo.DimKans k ON k.OddsWaarde = 1.5
-    LEFT JOIN dbo.DimBetSite bs ON bs.SiteNaam = 'Bet777'
-    LEFT JOIN dbo.DimDate sd ON sd.Datum = (
+    JOIN dbo.DimTeam uit ON uit.PloegNaam = b.Uitploeg
+	JOIN dbo.DimTeam thuis ON thuis.PloegNaam = b.Thuisploeg
+	LEFT JOIN dbo.DimBetSite bs ON bs.SiteNaam = 'Bet777'
+    LEFT JOIN dbo.DimDate d ON d.Datum = (
         SELECT Datum
         FROM DimDate 
         WHERE Datum = CONVERT(varchar(50), CONVERT(date, b.starttijd, 126), 23)
