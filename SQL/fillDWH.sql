@@ -324,7 +324,7 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		NEXT VALUE FOR seq_fws,
 		uit.TeamKey,
 		thuis.TeamKey,
-		0,
+		ISNULL(w.Id, 0),
 		b.BetSiteKey,
 		d.DateKey,
 		h.B365ThuisWint,
@@ -338,6 +338,11 @@ FROM
     dbo.bets_historische_data h
 
 	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'B365'
+	LEFT JOIN dbo.wedstrijden w ON w.id = 
+										(		SELECT Id 
+												FROM dbo.wedstrijden w 
+												WHERE w.StamnummerThuisploeg = h.StamnummerThuis AND w.StamnummerUitploeg = h.StamnummerUit AND w.Datum = h.Datum
+										)
 	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
 	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
 	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
@@ -352,7 +357,7 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		NEXT VALUE FOR seq_fws,
 		uit.TeamKey,
 		thuis.TeamKey,
-		0,
+		ISNULL(w.Id, 0),
 		b.BetSiteKey,
 		d.DateKey,
 		h.BWThuisWint,
@@ -366,6 +371,11 @@ FROM
     dbo.bets_historische_data h
 
 	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'BW'
+	LEFT JOIN dbo.wedstrijden w ON w.id = 
+										(		SELECT Id 
+												FROM dbo.wedstrijden w 
+												WHERE w.StamnummerThuisploeg = h.StamnummerThuis AND w.StamnummerUitploeg = h.StamnummerUit AND w.Datum = h.Datum
+										)
 	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
 	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
 	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
@@ -380,7 +390,7 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		NEXT VALUE FOR seq_fws,
 		uit.TeamKey,
 		thuis.TeamKey,
-		0,
+		ISNULL(w.Id, 0),
 		b.BetSiteKey,
 		d.DateKey,
 		h.IWThuisWint,
@@ -394,6 +404,11 @@ FROM
     dbo.bets_historische_data h
 
 	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'IW'
+	LEFT JOIN dbo.wedstrijden w ON w.id = 
+										(		SELECT Id 
+												FROM dbo.wedstrijden w 
+												WHERE w.StamnummerThuisploeg = h.StamnummerThuis AND w.StamnummerUitploeg = h.StamnummerUit AND w.Datum = h.Datum
+										)
 	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
 	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
 	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
@@ -408,7 +423,7 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		NEXT VALUE FOR seq_fws,
 		uit.TeamKey,
 		thuis.TeamKey,
-		0,
+		ISNULL(w.Id, 0),
 		b.BetSiteKey,
 		d.DateKey,
 		h.VCThuisWint,
@@ -422,6 +437,11 @@ FROM
     dbo.bets_historische_data h
 
 	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'VC'
+	LEFT JOIN dbo.wedstrijden w ON w.id = 
+										(		SELECT Id 
+												FROM dbo.wedstrijden w 
+												WHERE w.StamnummerThuisploeg = h.StamnummerThuis AND w.StamnummerUitploeg = h.StamnummerUit AND w.Datum = h.Datum
+										)
 	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
 	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
 	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
@@ -436,7 +456,7 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		NEXT VALUE FOR seq_fws,
 		uit.TeamKey,
 		thuis.TeamKey,
-		0,
+		ISNULL(w.Id, 0),
 		b.BetSiteKey,
 		d.DateKey,
 		h.WHThuisWint,
@@ -450,6 +470,11 @@ FROM
     dbo.bets_historische_data h
 
 	LEFT JOIN dbo.DimBetSite b ON b.SiteNaam = 'WH'
+	LEFT JOIN dbo.wedstrijden w ON w.id = 
+										(		SELECT Id 
+												FROM dbo.wedstrijden w 
+												WHERE w.StamnummerThuisploeg = h.StamnummerThuis AND w.StamnummerUitploeg = h.StamnummerUit AND w.Datum = h.Datum
+										)
 	LEFT JOIN dbo.DimTeam uit ON uit.Stamnummer = h.StamnummerUit
 	LEFT JOIN dbo.DimTeam thuis ON thuis.Stamnummer = h.StamnummerThuis
 	LEFT JOIN dbo.DimDate d ON d.Datum = h.Datum
