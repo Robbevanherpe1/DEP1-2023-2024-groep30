@@ -1,4 +1,4 @@
-Seizoen,Speeldag,Datum,Tijdstip,Id,StamnummerThuisploeg,RoepnaamThuisploeg,StamnummerUitploeg,RoepnaamUitploeg,MinDoelpunt,TijdstipDoelpunt,StamnummerScorendePloeg,RoepnaamScorendePloeg,StandThuis,StandUit
+Seizoen;Speeldag;Datum;Tijdstip;Id;StamnummerThuisploeg;RoepnaamThuisploeg;StamnummerUitploeg;RoepnaamUitploeg;MinDoelpunt;TijdstipDoelpunt;StamnummerScorendePloeg;RoepnaamScorendePloeg;StandThuis;StandUit
 1960;1;1960-09-04;15:00;4008203;373;Sint-Truidense VV;16;Standard Luik;14;15:14;16;Standard Luik;0;1
 1960;1;1960-09-04;15:00;4008203;373;Sint-Truidense VV;16;Standard Luik;79;16:34;16;Standard Luik;0;2
 1960;1;1960-09-04;15:00;4008204;90;Eendracht Aalst;1;Royal Antwerp FC;18;15:18;90;Eendracht Aalst;1;1
