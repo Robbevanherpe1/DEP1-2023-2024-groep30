@@ -332,8 +332,8 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		h.B365Gelijkspel,
 		0,
 		0,
-		0,
-		0
+		CAST(ISNULL(NULLIF(h.[MeerDoelpunten>2 5], ''), 0) AS decimal(5,2)),
+		CAST(ISNULL(NULLIF(h.[MinderDoelpunten<2 5], ''), 0) AS decimal(5,2))
 FROM 
     dbo.bets_historische_data h
 
@@ -365,8 +365,8 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		h.BWGelijkspel,
 		0,
 		0,
-		0,
-		0
+		CAST(ISNULL(NULLIF(h.[MeerDoelpunten>2 5], ''), 0) AS decimal(5,2)),
+		CAST(ISNULL(NULLIF(h.[MinderDoelpunten<2 5], ''), 0) AS decimal(5,2))
 FROM 
     dbo.bets_historische_data h
 
@@ -398,8 +398,8 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		h.IWGelijkspel,
 		0,
 		0,
-		0,
-		0
+		CAST(ISNULL(NULLIF(h.[MeerDoelpunten>2 5], ''), 0) AS decimal(5,2)),
+		CAST(ISNULL(NULLIF(h.[MinderDoelpunten<2 5], ''), 0) AS decimal(5,2))
 FROM 
     dbo.bets_historische_data h
 
@@ -431,8 +431,8 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		h.VCGelijkspel,
 		0,
 		0,
-		0,
-		0
+		CAST(ISNULL(NULLIF(h.[MeerDoelpunten>2 5], ''), 0) AS decimal(5,2)),
+		CAST(ISNULL(NULLIF(h.[MinderDoelpunten<2 5], ''), 0) AS decimal(5,2))
 FROM 
     dbo.bets_historische_data h
 
@@ -464,8 +464,8 @@ INSERT INTO dbo.FactWeddenschap(WeddenschapKey, TeamKeyUit, TeamKeyThuis, Wedstr
 		h.WHGelijkspel,
 		0,
 		0,
-		0,
-		0
+		CAST(ISNULL(NULLIF(h.[MeerDoelpunten>2 5], ''), 0) AS decimal(5,2)),
+		CAST(ISNULL(NULLIF(h.[MinderDoelpunten<2 5], ''), 0) AS decimal(5,2))
 FROM 
     dbo.bets_historische_data h
 
